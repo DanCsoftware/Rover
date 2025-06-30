@@ -112,6 +112,15 @@ const gamingChannels: Channel[] = [
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '🎮', count: 234 }, { emoji: '📅', count: 67 }]
+      },
+      {
+        id: 4,
+        user: 'EsportsNews',
+        time: '4:45 PM',
+        content: '📺 **WORLDS 2024 WATCH PARTY!**\n\nJoin us this weekend to watch the League of Legends World Championship finals!\n\n🕒 Saturday 2 PM EST\n📍 #watch-party voice channel\n🍕 Pizza delivery sponsored by @GuildMaster!\n\nWho do you think will win? React with your predictions!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏆', count: 89 }, { emoji: '🍕', count: 156 }, { emoji: '📺', count: 234 }]
       }
     ]
   },
@@ -155,6 +164,24 @@ const gamingChannels: Channel[] = [
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '🎯', count: 15 }, { emoji: '💥', count: 9 }]
+      },
+      {
+        id: 5,
+        user: 'RetroGamer',
+        time: '2:30 PM',
+        content: 'Anyone else excited for the new Zelda announcement? Nintendo Direct was mind-blowing! 🎮✨',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎮', count: 34 }, { emoji: '✨', count: 28 }]
+      },
+      {
+        id: 6,
+        user: 'PCMasterRace',
+        time: '2:35 PM',
+        content: 'Finally upgraded to RTX 4090! Cyberpunk 2077 at 4K Ultra with ray tracing is absolutely gorgeous 😍',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💻', count: 45 }, { emoji: '😍', count: 67 }]
       }
     ]
   },
@@ -188,6 +215,22 @@ const gamingChannels: Channel[] = [
         time: '3:50 PM',
         content: 'Sage main here! Gold 3, can play support. Add me: SageMain#VAL',
         isBot: false
+      },
+      {
+        id: 4,
+        user: 'JettOnly',
+        time: '4:00 PM',
+        content: 'LF1M Plat ranked, need a good IGL. I can entry frag all day 💪',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💪', count: 8 }]
+      },
+      {
+        id: 5,
+        user: 'ClutchKing',
+        time: '4:15 PM',
+        content: 'Anyone up for some customs? Trying to practice my Omen smokes on Bind',
+        isBot: false
       }
     ]
   },
@@ -213,6 +256,50 @@ const gamingChannels: Channel[] = [
         time: '12:15 PM',
         content: 'Working on an automatic farm design. Anyone know how to optimize hopper timing?',
         isBot: false
+      },
+      {
+        id: 3,
+        user: 'PixelArtist',
+        time: '1:20 PM',
+        content: 'Made a pixel art of the Mona Lisa using wool blocks! 256x256 blocks, took forever but so worth it 🎨',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎨', count: 67 }, { emoji: '🤯', count: 45 }]
+      }
+    ]
+  },
+  {
+    id: 'esports-news',
+    name: '📺-esports-news',
+    type: 'text',
+    serverId: 2,
+    description: 'Latest esports updates and discussions',
+    messages: [
+      {
+        id: 1,
+        user: 'EsportsBot',
+        time: '8:00 AM',
+        content: 'Welcome to esports news! Stay updated with the latest competitive gaming updates! 📺',
+        isBot: true,
+        isWelcome: true
+      },
+      {
+        id: 2,
+        user: 'TournamentTracker',
+        time: '10:30 AM',
+        content: '🏆 **VCT Masters Results!**\n\nSentinels defeated FNATIC 3-1 in an incredible series!\n\nTenZ was absolutely on fire with 87 kills across 4 maps! 🔥',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏆', count: 234 }, { emoji: '🔥', count: 156 }]
+      },
+      {
+        id: 3,
+        user: 'LeagueExpert',
+        time: '1:45 PM',
+        content: 'T1 vs JDG final is going to be legendary! Faker looking for his 4th worlds title 👑',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👑', count: 89 }, { emoji: '⚔️', count: 67 }]
       }
     ]
   }
@@ -252,6 +339,15 @@ const musicChannels: Channel[] = [
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '📀', count: 67 }, { emoji: '🎼', count: 45 }]
+      },
+      {
+        id: 4,
+        user: 'ConcertAlert',
+        time: '6:00 PM',
+        content: '🎤 **CONCERT ALERT!**\n\nTaylor Swift just announced surprise dates for her Eras Tour!\n\n📍 Cities: LA, NYC, Chicago\n🎫 Presale starts tomorrow 10 AM\n💳 Use code SWIFTIE24\n\nWho\'s trying to get tickets? Good luck everyone! 🍀',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎤', count: 423 }, { emoji: '🍀', count: 234 }, { emoji: '😭', count: 156 }]
       }
     ]
   },
@@ -288,6 +384,24 @@ const musicChannels: Channel[] = [
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '🎛️', count: 34 }, { emoji: '🎵', count: 56 }]
+      },
+      {
+        id: 4,
+        user: 'JazzCat',
+        time: '2:45 PM',
+        content: 'Smooth jazz recommendation for today: **Miles Davis - "Kind of Blue"** 🎺\n\nThis entire album is a masterpiece. Perfect Sunday afternoon vibes 🌅',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎺', count: 45 }, { emoji: '🌅', count: 67 }]
+      },
+      {
+        id: 5,
+        user: 'KPopStan',
+        time: '3:15 PM',
+        content: 'OMG the new BLACKPINK track is FIRE! 🔥\n\n**"Shut Down"** is on repeat all day! The choreography in the MV is incredible too 💃',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🔥', count: 234 }, { emoji: '💃', count: 156 }, { emoji: '🖤', count: 89 }]
       }
     ]
   },
@@ -324,6 +438,24 @@ const musicChannels: Channel[] = [
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '🌆', count: 25 }, { emoji: '✨', count: 19 }]
+      },
+      {
+        id: 4,
+        user: 'GuitarRecording',
+        time: '2:20 PM',
+        content: 'Question: What\'s your favorite guitar amp simulation? I\'ve been using Amplitube but thinking of trying Neural DSP 🎸',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎸', count: 23 }]
+      },
+      {
+        id: 5,
+        user: 'VocalCoach',
+        time: '4:30 PM',
+        content: 'Pro tip for recording vocals: Always record multiple takes and comp the best parts together. Don\'t rely on pitch correction to fix everything! 🎤✨',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎤', count: 34 }, { emoji: '✨', count: 28 }, { emoji: '💯', count: 45 }]
       }
     ]
   },
@@ -342,6 +474,51 @@ const musicChannels: Channel[] = [
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '🎶', count: 67 }, { emoji: '🌙', count: 45 }]
+      },
+      {
+        id: 2,
+        user: 'AlbumExpert',
+        time: '4:05 PM',
+        content: 'This album is a journey! Make sure you have good headphones on 🎧',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎧', count: 34 }]
+      },
+      {
+        id: 3,
+        user: 'FirstTimeListener',
+        time: '4:10 PM',
+        content: 'Never listened to this before! Super excited 😄',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😄', count: 15 }, { emoji: '🤩', count: 12 }]
+      }
+    ]
+  },
+  {
+    id: 'concert-reviews',
+    name: '🎤-concert-reviews',
+    type: 'text',
+    serverId: 3,
+    description: 'Share your live music experiences',
+    messages: [
+      {
+        id: 1,
+        user: 'ConcertGoer',
+        time: '2:00 PM',
+        content: 'Just got back from Coachella! 🌴\n\nHighlights:\n• Bad Bunny\'s energy was INSANE\n• Rosalía\'s vocals were perfection\n• The Coachella sunset during Billie Eilish was magical\n\nBest festival experience ever! 🎪✨',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌴', count: 89 }, { emoji: '🎪', count: 67 }, { emoji: '✨', count: 145 }]
+      },
+      {
+        id: 2,
+        user: 'MetalHead',
+        time: '3:30 PM',
+        content: 'Metallica at MetLife Stadium was LEGENDARY! 🤘\n\nThey played Master of Puppets in full! James\'s voice is still incredible after all these years 🎸🔥',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤘', count: 156 }, { emoji: '🎸', count: 89 }, { emoji: '🔥', count: 234 }]
       }
     ]
   }
