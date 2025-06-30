@@ -5,6 +5,7 @@ import { Message } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
+import { extractLinksFromText, generateSafetyReport, LinkSafetyReport } from "@/utils/linkSafetyAnalyzer";
 
 interface DiscordChatProps {
   channelName: string;
@@ -97,6 +98,64 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
     </div>;
   };
 
+  const scanRecentMessagesForLinks = (): string[] => {
+    const recentMessages = chatMessages.slice(-15); // Last 15 messages
+    const allLinks: string[] = [];
+
+    recentMessages.forEach(msg => {
+      // Extract links from message content
+      const textLinks = extractLinksFromText(msg.content);
+      allLinks.push(...textLinks);
+
+      // Add existing links from message data
+      if (msg.links) {
+        allLinks.push(...msg.links);
+      }
+    });
+
+    // Remove duplicates
+    return [...new Set(allLinks)];
+  };
+
+  const isLinkSafetyQuery = (userMessage: string): boolean => {
+    const lowerMessage = userMessage.toLowerCase();
+    const keywords = ['safe', 'links', 'check', 'scan', 'secure', 'malicious', 'dangerous'];
+    return keywords.some(keyword => lowerMessage.includes(keyword));
+  };
+
+  const generateLinkSafetyResponse = (report: LinkSafetyReport): string => {
+    if (report.totalLinks === 0) {
+      return "I didn't find any links in the recent messages to analyze. If you're seeing links, try asking me again or mention the specific links you'd like me to check.";
+    }
+
+    let response = `🔍 **Link Safety Analysis Complete**\n\n`;
+    response += `📊 **Summary:** Found ${report.totalLinks} link(s)\n`;
+    response += `✅ Safe: ${report.safeLinks} | ⚠️ Suspicious: ${report.suspiciousLinks} | 🚨 Dangerous: ${report.dangerousLinks}\n\n`;
+
+    if (report.dangerousLinks > 0) {
+      response += `🚨 **WARNING: ${report.dangerousLinks} dangerous link(s) detected!**\n\n`;
+    }
+
+    response += `📋 **Detailed Analysis:**\n`;
+    
+    report.results.forEach((result, index) => {
+      const statusIcon = result.status === 'safe' ? '✅' : result.status === 'suspicious' ? '⚠️' : '🚨';
+      response += `${index + 1}. ${statusIcon} ${result.url}\n`;
+      response += `   Status: ${result.status.toUpperCase()}\n`;
+      response += `   Reason: ${result.reasons.join(', ')}\n`;
+      if (result.status === 'dangerous') {
+        response += `   ⚠️ **DO NOT VISIT THIS LINK**\n`;
+      }
+      response += `\n`;
+    });
+
+    if (report.suspiciousLinks > 0 || report.dangerousLinks > 0) {
+      response += `🛡️ **Safety Tip:** Always verify links before clicking, especially from unknown sources!`;
+    }
+
+    return response;
+  };
+
   const renderMessageContent = (msg: Message) => {
     let content = msg.content;
     
@@ -161,10 +220,15 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
       const cleanMessage = userMessage.replace('@rover', '').trim().toLowerCase();
       let response = "I'm ROVER, your AI assistant! I'm here to help you with various tasks.";
       
-      if (cleanMessage.includes('help')) {
-        response = "Here are some things I can help you with:\n• Answer questions\n• Provide information\n• Assist with creative tasks\n• And much more!";
+      // Check if this is a link safety query
+      if (isLinkSafetyQuery(cleanMessage)) {
+        const foundLinks = scanRecentMessagesForLinks();
+        const safetyReport = generateSafetyReport(foundLinks);
+        response = generateLinkSafetyResponse(safetyReport);
+      } else if (cleanMessage.includes('help')) {
+        response = "Here are some things I can help you with:\n• Answer questions\n• Check link safety (just ask 'are these links safe?')\n• Provide information\n• Assist with creative tasks\n• And much more!";
       } else if (cleanMessage.includes('hello') || cleanMessage.includes('hi')) {
-        response = "Hello there! How can I assist you today?";
+        response = "Hello there! How can I assist you today? I can help check link safety, answer questions, and more!";
       } else if (cleanMessage.includes('what') || cleanMessage.includes('how')) {
         response = "That's a great question! Let me help you with that. Feel free to be more specific about what you'd like to know.";
       }
@@ -342,7 +406,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @rover)`}
+              placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @rover are these links safe?)`}
               className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none"
             />
             <div className="flex items-center space-x-2 ml-3">
@@ -361,11 +425,11 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
             </div>
           </div>
           
-          {/* Hint for @rover */}
+          {/* Enhanced hint for @rover */}
           {message.toLowerCase().includes('@rover') && (
             <div className="mt-2 text-xs text-gray-400 flex items-center space-x-1">
               <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-              <span>ROVER AI will respond to your message</span>
+              <span>ROVER AI will respond - try asking about link safety!</span>
             </div>
           )}
         </div>
