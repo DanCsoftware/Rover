@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from "react";
 import { Send, Plus, Gift, Smile, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,14 @@ import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
 import { extractLinksFromText, generateSafetyReport, LinkSafetyReport, generateSmartLinkResponse } from "@/utils/linkSafetyAnalyzer";
+import { 
+  parseSummaryRequest, 
+  generateSummary, 
+  filterMessagesByTime, 
+  filterMessagesByUser, 
+  parseTimeExpression,
+  ConversationSummary 
+} from "@/utils/conversationAnalyzer";
 
 interface DiscordChatProps {
   channelName: string;
@@ -131,6 +138,16 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
     return [...new Set(allLinks)];
   };
 
+  const isSummaryQuery = (userMessage: string): boolean => {
+    const lowerMessage = userMessage.toLowerCase();
+    const summaryKeywords = [
+      'summarize', 'summary', 'recap', 'overview', 'what happened', 
+      'what did', 'conversation', 'discussion', 'timeline', 'key points',
+      'brief', 'detailed', 'activity', 'past', 'last', 'recent'
+    ];
+    return summaryKeywords.some(keyword => lowerMessage.includes(keyword));
+  };
+
   const isLinkSafetyQuery = (userMessage: string): boolean => {
     const lowerMessage = userMessage.toLowerCase();
     const keywords = ['safe', 'links', 'check', 'scan', 'secure', 'malicious', 'dangerous'];
@@ -178,6 +195,46 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
       response += `🛡️ **Safety Tip:** Always verify links before clicking, especially from unknown sources!`;
     }
 
+    return response;
+  };
+
+  const generateConversationSummaryResponse = (userMessage: string): string => {
+    const summaryRequest = parseSummaryRequest(userMessage);
+    const allMessages = [...messages, ...chatMessages];
+    
+    // Filter messages based on request
+    let filteredMessages = allMessages;
+    
+    if (summaryRequest.timeRange) {
+      const minutes = parseTimeExpression(summaryRequest.timeRange);
+      filteredMessages = filterMessagesByTime(filteredMessages, minutes);
+    }
+    
+    if (summaryRequest.targetUser) {
+      filteredMessages = filterMessagesByUser(filteredMessages, summaryRequest.targetUser);
+    }
+    
+    if (filteredMessages.length === 0) {
+      return "I couldn't find any messages matching your criteria. Try adjusting the time range or user specification.";
+    }
+    
+    const summary = generateSummary(filteredMessages, summaryRequest);
+    
+    let response = summary.summary;
+    
+    // Add metadata footer
+    response += `\n\n---\n📊 **Analysis Metadata:**\n`;
+    response += `• **Duration:** ${summary.metadata.duration}\n`;
+    response += `• **Time Range:** ${summary.timeRange}\n`;
+    response += `• **Messages Analyzed:** ${summary.messageCount}\n`;
+    
+    if (summary.keyTopics.length > 0) {
+      response += `• **Key Topics:** ${summary.keyTopics.join(', ')}\n`;
+    }
+    
+    // Add helpful suggestions
+    response += `\n💡 **Try asking:** "summarize the past hour" or "what did [username] say about [topic]"`;
+    
     return response;
   };
 
@@ -257,8 +314,10 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
       const cleanMessage = userMessage.replace('@rover', '').trim().toLowerCase();
       let response = "I'm ROVER, your AI assistant! I'm here to help you with various tasks.";
       
-      // Check if this is a smart link query (prioritize over safety)
-      if (isSmartLinkQuery(cleanMessage)) {
+      // Prioritize summary queries first
+      if (isSummaryQuery(cleanMessage)) {
+        response = generateConversationSummaryResponse(userMessage);
+      } else if (isSmartLinkQuery(cleanMessage)) {
         const foundLinks = scanRecentMessagesForLinks();
         response = generateSmartLinkResponse(cleanMessage, foundLinks);
       } else if (isLinkSafetyQuery(cleanMessage)) {
@@ -266,11 +325,19 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
         const safetyReport = generateSafetyReport(foundLinks);
         response = generateLinkSafetyResponse(safetyReport);
       } else if (cleanMessage.includes('help')) {
-        response = "Here are some things I can help you with:\n• Answer questions about links ('which link should I use to register?')\n• Check link safety ('are these links safe?')\n• Provide information and recommendations\n• Assist with creative tasks\n• And much more!";
+        response = `Here are some things I can help you with:
+• **Conversation Summaries:** "summarize the past 20 minutes", "recap today's discussion"
+• **User Activity:** "what did Sarah say?", "summarize Mike's activity"
+• **Topic Analysis:** "summarize discussion about project", "timeline of events"
+• **Link Safety:** "are these links safe?", "check link security"
+• **Smart Recommendations:** "which link should I use to register?"
+• **Time-based Queries:** "what happened while I was away?", "brief recap of last hour"
+
+Try: "@rover summarize the past 30 minutes" or "@rover what did [username] discuss?"`;
       } else if (cleanMessage.includes('hello') || cleanMessage.includes('hi')) {
-        response = "Hello there! How can I assist you today? I can help you find the right links, check link safety, answer questions, and more!";
+        response = "Hello there! How can I assist you today? I can help you summarize conversations, check link safety, analyze user activity, and much more!";
       } else if (cleanMessage.includes('what') || cleanMessage.includes('how')) {
-        response = "That's a great question! Let me help you with that. Feel free to be more specific about what you'd like to know. I can analyze links and provide smart recommendations!";
+        response = "That's a great question! I can help you with conversation summaries, user activity analysis, and link safety checks. Try asking me to summarize recent messages or analyze specific topics!";
       }
 
       const aiMessage: Message = {
@@ -446,7 +513,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @rover are these links safe?)`}
+              placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @rover summarize the past 20 minutes)`}
               className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none"
             />
             <div className="flex items-center space-x-2 ml-3">
@@ -469,7 +536,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
           {message.toLowerCase().includes('@rover') && (
             <div className="mt-2 text-xs text-gray-400 flex items-center space-x-1">
               <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-              <span>ROVER AI will respond - try asking about link safety!</span>
+              <span>ROVER AI will respond - try asking for conversation summaries!</span>
             </div>
           )}
         </div>
