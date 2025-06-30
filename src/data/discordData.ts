@@ -78,7 +78,7 @@ const SAFE_DOMAINS = [
   'steam.com'
 ];
 
-// Server 2 - Gaming Server
+// Server 2 - Gaming Hub (Enhanced with Twitch-style content)
 const gamingChannels: Channel[] = [
   {
     id: 'game-announcements',
@@ -89,38 +89,53 @@ const gamingChannels: Channel[] = [
     messages: [
       {
         id: 1,
-        user: 'GameBot',
-        time: '9:00 AM',
-        content: 'Welcome to Gaming Hub! 🎮\n\nThis is where gamers unite to play, compete, and have fun together!',
+        user: 'StreamBot',
+        time: '6:00 AM',
+        content: '🎮 **WELCOME TO GAMING HUB!** 🎮\n\nWhere legends are born and noobs get rekt! Join thousands of gamers for epic battles, tournaments, and endless content creation! 🔥\n\n📺 Follow our streamers!\n🏆 Join weekly tournaments!\n💬 Make new gaming friends!',
         isBot: true,
-        isWelcome: true
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🎮', count: 1247 }, { emoji: '🔥', count: 892 }, { emoji: '💯', count: 567 }]
       },
       {
         id: 2,
-        user: 'GuildMaster',
-        time: '10:30 AM',
-        content: '🏆 **WEEKLY TOURNAMENT ANNOUNCED!**\n\nJoin our Valorant tournament this Friday at 8 PM EST!\n\nPrizes:\n🥇 $100 Steam Gift Card\n🥈 $50 Steam Gift Card\n🥉 $25 Steam Gift Card\n\nRegister by reacting with ⚔️!',
+        user: 'TwitchStreamerPro',
+        time: '8:15 AM',
+        content: '🔴 **GOING LIVE IN 15 MINUTES!** 🔴\n\n**Stream Title:** "RADIANT OR RIOT - Valorant Ranked Grind"\n**Game:** Valorant\n**Goal:** Hit Radiant before the end of the season!\n\n🎯 !followage !socials !discord in chat\n🎁 Sub goal: 500 subs = 24hr stream!\n\nLink: https://twitch.tv/streamerpro\n\nSee you in chat legends! 💜',
         isBot: false,
+        hasLinks: true,
+        links: ['https://twitch.tv/streamerpro'],
         hasReactions: true,
-        reactions: [{ emoji: '⚔️', count: 147 }, { emoji: '🔥', count: 89 }, { emoji: '💰', count: 76 }]
+        reactions: [{ emoji: '🔴', count: 456 }, { emoji: '💜', count: 234 }, { emoji: '🎯', count: 189 }]
       },
       {
         id: 3,
-        user: 'ModeratorX',
-        time: '2:15 PM',
-        content: '🎯 New game night schedule:\n\n**Monday**: Valorant Ranked\n**Wednesday**: Among Us\n**Friday**: Tournament Night\n**Saturday**: Variety Games\n\nSee you in the voice channels!',
+        user: 'EsportsManager',
+        time: '10:30 AM',
+        content: '⚔️ **WEEKLY TOURNAMENT BRACKET IS LIVE!** ⚔️\n\n**Game:** Valorant 5v5\n**Prize Pool:** $2,500 💰\n**Date:** This Saturday 2 PM EST\n**Format:** Double Elimination\n**Entry Fee:** FREE\n\n**Prizes:**\n🥇 1st Place: $1,200 + Champion Role\n🥈 2nd Place: $800 + Finalist Role  \n🥉 3rd Place: $400 + Bronze Medal Role\n🏅 4th Place: $100 + Participant Role\n\n**Register:** https://challonge.com/gaminghub-weekly\n**Rules:** https://docs.google.com/tournament-rules\n\nReact with ⚔️ to get notified!\n\n@everyone',
         isBot: false,
+        hasLinks: true,
+        links: ['https://challonge.com/gaminghub-weekly', 'https://docs.google.com/tournament-rules'],
         hasReactions: true,
-        reactions: [{ emoji: '🎮', count: 234 }, { emoji: '📅', count: 67 }]
+        reactions: [{ emoji: '⚔️', count: 1834 }, { emoji: '💰', count: 567 }, { emoji: '🔥', count: 892 }]
       },
       {
         id: 4,
-        user: 'EsportsNews',
-        time: '4:45 PM',
-        content: '📺 **WORLDS 2024 WATCH PARTY!**\n\nJoin us this weekend to watch the League of Legends World Championship finals!\n\n🕒 Saturday 2 PM EST\n📍 #watch-party voice channel\n🍕 Pizza delivery sponsored by @GuildMaster!\n\nWho do you think will win? React with your predictions!',
+        user: 'CommunityManager',
+        time: '2:45 PM',
+        content: '📊 **SERVER STATS UPDATE!** 📊\n\n🎉 **50,000 MEMBERS MILESTONE REACHED!** 🎉\n\n**This Month:**\n• 🎮 15,847 hours streamed by our community\n• 🏆 127 tournament matches played\n• 💬 2.3M messages sent\n• 🔴 342 streamers went live\n• 🎁 $12,500 in prizes given away\n\n**Top Games This Month:**\n1. 🎯 Valorant - 34%\n2. 🔫 Call of Duty - 22%\n3. ⚡ Fortnite - 18%\n4. 🎲 Minecraft - 12%\n5. 🚗 Rocket League - 8%\n\nThanks for making this community LEGENDARY! 💪',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🏆', count: 89 }, { emoji: '🍕', count: 156 }, { emoji: '📺', count: 234 }]
+        reactions: [{ emoji: '🎉', count: 2456 }, { emoji: '💪', count: 1234 }, { emoji: '🔥', count: 1567 }]
+      },
+      {
+        id: 5,
+        user: 'DevTeam',
+        time: '6:00 PM',
+        content: '🤖 **BOT UPDATE v3.2.1** 🤖\n\n**New Features:**\n✅ Stream notifications now show game thumbnails\n✅ Tournament bracket auto-updates\n✅ Clip sharing with auto-embed\n✅ Rank tracking for 15+ games\n✅ Custom soundboard commands\n\n**Bug Fixes:**\n🔧 Fixed spam detection being too sensitive\n🔧 Resolved tournament registration errors\n🔧 Stream alerts now work properly in all timezones\n\n**Commands:**\n• `!rank [game] [username]` - Check your rank\n• `!clip [url]` - Share your best moments\n• `!tournament` - View current tournaments\n• `!stream` - Get stream setup help\n\nReport bugs in #bug-reports! 🐛',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤖', count: 345 }, { emoji: '✅', count: 234 }, { emoji: '🔧', count: 156 }]
       }
     ]
   },
@@ -129,59 +144,175 @@ const gamingChannels: Channel[] = [
     name: 'general-gaming',
     type: 'text',
     serverId: 2,
-    description: 'General gaming discussion',
+    description: 'General gaming discussion and community chat',
     messages: [
       {
         id: 1,
-        user: 'ProGamer99',
-        time: '2:15 PM',
-        content: 'Just hit Diamond in Valorant! 💎 Anyone want to duo queue?',
+        user: 'xXGamerGodXx',
+        time: '11:45 AM',
+        content: 'YO CHAT IS THE NEW COD WORTH IT??? 👀',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '💎', count: 12 }, { emoji: '🔥', count: 8 }]
+        reactions: [{ emoji: '👀', count: 23 }, { emoji: '🎮', count: 15 }]
       },
       {
         id: 2,
-        user: 'GamerGirl2024',
-        time: '2:18 PM',
-        content: 'Congrats! I\'m still stuck in Gold 😅 Need to work on my aim',
+        user: 'ProShooter',
+        time: '11:46 AM',
+        content: 'nah fam save your money, campaign is mid and multiplayer has too many bugs rn',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '😅', count: 5 }]
+        reactions: [{ emoji: '💸', count: 8 }]
       },
       {
         id: 3,
-        user: 'AimBot_Not',
-        time: '2:20 PM',
-        content: '@GamerGirl2024 Let\'s practice in the aim trainer together! I\'ll be in the Gaming Lounge VC',
+        user: 'CasualNoob',
+        time: '11:47 AM',
+        content: 'but the graphics tho 🔥🔥🔥',
         isBot: false
       },
       {
         id: 4,
-        user: 'RageQuit',
-        time: '2:25 PM',
-        content: 'Who\'s playing the new Call of Duty? The campaign is insane! 🎯',
+        user: 'StreamSniper69',
+        time: '11:48 AM',
+        content: '@ProShooter facts, ima wait for a sale. Black Friday gonna be lit 💰',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎯', count: 15 }, { emoji: '💥', count: 9 }]
+        reactions: [{ emoji: '💰', count: 12 }]
       },
       {
         id: 5,
-        user: 'RetroGamer',
-        time: '2:30 PM',
-        content: 'Anyone else excited for the new Zelda announcement? Nintendo Direct was mind-blowing! 🎮✨',
+        user: 'RageQuitter2024',
+        time: '11:52 AM',
+        content: 'anyone tryna run some ranked Val? Im stuck in Gold hell 😭',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎮', count: 34 }, { emoji: '✨', count: 28 }]
+        reactions: [{ emoji: '😭', count: 34 }]
       },
       {
         id: 6,
-        user: 'PCMasterRace',
-        time: '2:35 PM',
-        content: 'Finally upgraded to RTX 4090! Cyberpunk 2077 at 4K Ultra with ray tracing is absolutely gorgeous 😍',
+        user: 'ClutchMaster',
+        time: '11:53 AM',
+        content: '@RageQuitter2024 whats ur rank? I can help u escape gold if u got good comms',
+        isBot: false
+      },
+      {
+        id: 7,
+        user: 'RageQuitter2024',
+        time: '11:54 AM',
+        content: 'Gold 2, I main Jett but can flex. My aim is decent but game sense needs work',
+        isBot: false
+      },
+      {
+        id: 8,
+        user: 'TacticalGenius',
+        time: '11:55 AM',
+        content: 'bro stop instalocking Jett and learn some utility agents. Sova/Omen will carry u to Plat easy',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '💻', count: 45 }, { emoji: '😍', count: 67 }]
+        reactions: [{ emoji: '🧠', count: 67 }, { emoji: '📈', count: 23 }]
+      },
+      {
+        id: 9,
+        user: 'ValorantCoach',
+        time: '11:58 AM',
+        content: 'FR tho, utility > aim in ranked. I coach players from Iron to Immortal and the biggest diff is game sense and team play',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎯', count: 45 }, { emoji: '🏆', count: 28 }]
+      },
+      {
+        id: 10,
+        user: 'MinecraftSteve',
+        time: '12:15 PM',
+        content: 'yall sleeping on the new Minecraft update. The cherry blossom biome hits different 🌸',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌸', count: 89 }, { emoji: '⛏️', count: 67 }]
+      },
+      {
+        id: 11,
+        user: 'BuilderPro',
+        time: '12:16 PM',
+        content: '@MinecraftSteve facts! Already started a Japanese-style village build. The new wood looks so clean',
+        isBot: false
+      },
+      {
+        id: 12,
+        user: 'RedstoneNerd',
+        time: '12:18 PM',
+        content: 'meanwhile Im over here trying to build a 64-bit computer in vanilla... send help 💀',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💀', count: 156 }, { emoji: '🤓', count: 78 }]
+      },
+      {
+        id: 13,
+        user: 'FortniteKid',
+        time: '12:30 PM',
+        content: 'NEW FORTNITE SEASON IS INSANE 🚀 Zero Build mode actually makes the game playable again',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🚀', count: 34 }, { emoji: '⚡', count: 67 }]
+      },
+      {
+        id: 14,
+        user: 'BuildFighter',
+        time: '12:31 PM',
+        content: '@FortniteKid imagine not knowing how to build in 2024 💀💀💀',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💀', count: 23 }, { emoji: '🏗️', count: 12 }]
+      },
+      {
+        id: 15,
+        user: 'FortniteKid',
+        time: '12:32 PM',
+        content: 'bro I can build, I just prefer focusing on aim and positioning instead of spamming walls like a crackhead',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎯', count: 45 }]
+      },
+      {
+        id: 16,
+        user: 'StreamerWannabe',
+        time: '12:45 PM',
+        content: 'chat should I start streaming? been thinking about it but idk if im good enough',
+        isBot: false
+      },
+      {
+        id: 17,
+        user: 'StreamerPro',
+        time: '12:46 PM',
+        content: '@StreamerWannabe dude just start! You dont need to be cracked to stream. Personality > skill. Some of the biggest streamers are mid at games but entertaining AF',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💯', count: 89 }, { emoji: '🎭', count: 34 }]
+      },
+      {
+        id: 18,
+        user: 'ViewerSupreme',
+        time: '12:47 PM',
+        content: 'facts @StreamerPro id rather watch someone fun and interactive than a cracked player who ignores chat',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👑', count: 56 }]
+      },
+      {
+        id: 19,
+        user: 'TechNerd',
+        time: '1:00 PM',
+        content: 'anyone know good streaming software? been using OBS but wondering if theres something better for beginners',
+        isBot: false
+      },
+      {
+        id: 20,
+        user: 'StreamSetupGuru',
+        time: '1:02 PM',
+        content: '@TechNerd OBS is still the goat but try Streamlabs if u want something more user-friendly. Has built-in widgets and easier setup',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚙️', count: 23 }]
       }
     ]
   },
@@ -190,341 +321,584 @@ const gamingChannels: Channel[] = [
     name: '🎯-valorant-lfg',
     type: 'text',
     serverId: 2,
-    description: 'Looking for group - Valorant',
+    description: 'Looking for group - Valorant ranked and unrated',
     messages: [
       {
         id: 1,
         user: 'ValorantBot',
-        time: '1:00 PM',
-        content: 'Welcome to Valorant LFG! 🎯\n\nFind teammates for ranked, unrated, or custom games here!',
+        time: '9:00 AM',
+        content: '🎯 **VALORANT LFG CHANNEL** 🎯\n\nFind teammates for ranked, unrated, and custom games!\n\n**Template:**\n```\nRank: [Your Rank]\nRole: [Main Agents]\nRegion: [NA/EU/ASIA]\nLooking for: [Rank/Comp/Fun]\nMic: [Yes/No]\n```\n\nLet\'s climb together! 🚀',
         isBot: true,
-        isWelcome: true
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🎯', count: 234 }, { emoji: '🚀', count: 167 }]
       },
       {
         id: 2,
-        user: 'IronToRadiant',
-        time: '3:45 PM',
-        content: 'LF2M for ranked queue - currently Gold 2, looking for similar rank players. Must have mic! 🎤',
+        user: 'RadiantChaser',
+        time: '2:15 PM',
+        content: '**LF2M IMMORTAL+ RANKED**\n\nRank: Immortal 2 (378 RR)\nRole: IGL/Flex (Omen, Sova, Breach)\nRegion: NA West\nLooking for: Serious ranked grind to Radiant\nMic: Required + good comms\n\nMust have:\n• 1.2+ K/D last 20 games\n• Good mental (no rage)\n• Available for 3+ hour sessions\n• Discord for comms\n\nDM me your tracker.gg! 📊',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎤', count: 3 }, { emoji: '⚔️', count: 7 }]
+        reactions: [{ emoji: '🔥', count: 23 }, { emoji: '🎯', count: 45 }]
       },
       {
         id: 3,
-        user: 'SageMain',
-        time: '3:50 PM',
-        content: 'Sage main here! Gold 3, can play support. Add me: SageMain#VAL',
+        user: 'DuelMaster',
+        time: '2:18 PM',
+        content: '@RadiantChaser yo I\'m Imm1 Jett/Reyna main, 1.4 KD, good comms. Can we run a few unrated first to see if we vibe?',
         isBot: false
       },
       {
         id: 4,
-        user: 'JettOnly',
-        time: '4:00 PM',
-        content: 'LF1M Plat ranked, need a good IGL. I can entry frag all day 💪',
+        user: 'SmokeSpammer',
+        time: '2:20 PM',
+        content: 'Imm3 Omen one-trick here if yall need smokes. 67% winrate this act 💨',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '💪', count: 8 }]
+        reactions: [{ emoji: '💨', count: 34 }]
       },
       {
         id: 5,
-        user: 'ClutchKing',
-        time: '4:15 PM',
-        content: 'Anyone up for some customs? Trying to practice my Omen smokes on Bind',
+        user: 'GoldGrinder',
+        time: '3:30 PM',
+        content: '**LF3M GOLD RANKED**\n\nRank: Gold 1 (trying to hit Plat for first time)\nRole: Sage/KJ main but learning Sova\nRegion: NA East\nLooking for: Chill players around my rank\nMic: Yes\n\nI\'m not the best aimer but I have good game sense and always comm callouts. Let\'s climb together! 📈',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📈', count: 67 }, { emoji: '💊', count: 23 }]
+      },
+      {
+        id: 6,
+        user: 'FlashBangGod',
+        time: '3:32 PM',
+        content: '@GoldGrinder Gold 2 Breach main here! Love playing with good support players. Add me: FlashBang#VAL',
         isBot: false
+      },
+      {
+        id: 7,
+        user: 'EntryFragger',
+        time: '3:35 PM',
+        content: 'Gold 3 Jett main, can entry and create space. My game sense is improving but aim is solid. Down to queue!',
+        isBot: false
+      },
+      {
+        id: 8,
+        user: 'IronToImmortal',
+        time: '4:45 PM',
+        content: '**BRONZE/SILVER PLAYERS**\n\nAnyone want to duo queue? I\'m Silver 3 trying to hit Gold by end of act. I main:\n• Killjoy (defense)\n• Omen (controller)\n• Breach (initiator)\n\nI watch a lot of pro play so my strats are decent, just need to work on consistency. Positive mental only! 😊',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😊', count: 89 }, { emoji: '📺', count: 34 }]
+      },
+      {
+        id: 9,
+        user: 'SilverSurfer',
+        time: '4:47 PM',
+        content: '@IronToImmortal Silver 2 here! Also trying to hit Gold. I\'m a Reyna main but learning Skye. Let\'s duo!',
+        isBot: false
+      },
+      {
+        id: 10,
+        user: 'CustomGameMaster',
+        time: '6:00 PM',
+        content: '🎮 **CUSTOM 10-MAN STARTING NOW!** 🎮\n\nMap: Haven\nMode: Competitive rules\nSkill Level: Any (we\'ll balance teams)\nVoice: Discord required\n\nReact with ⚔️ to join!\nFirst 10 people get in, rest go to queue.\n\nCurrently: 6/10 players',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚔️', count: 45 }, { emoji: '🎮', count: 23 }]
+      },
+      {
+        id: 11,
+        user: 'SwiftRotation',
+        time: '6:02 PM',
+        content: '@CustomGameMaster I\'m in! Plat player, can play any role needed',
+        isBot: false
+      },
+      {
+        id: 12,
+        user: 'AceClutcher',
+        time: '6:03 PM',
+        content: 'Count me in too! Diamond Sova main',
+        isBot: false
+      },
+      {
+        id: 13,
+        user: 'NewPlayerHelp',
+        time: '7:15 PM',
+        content: 'hey guys, complete noob here. Just finished my placement matches (got Iron 2). Anyone willing to play some unrated and give me tips? I know I\'m bad but I\'m eager to learn! 🤗',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤗', count: 156 }, { emoji: '📚', count: 89 }]
+      },
+      {
+        id: 14,
+        user: 'PatientCoach',
+        time: '7:17 PM',
+        content: '@NewPlayerHelp I help new players all the time! Add me and we can run some games. I\'ll teach you crosshair placement, economy, and basic strats. Everyone starts somewhere! 💪',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💪', count: 234 }, { emoji: '🏆', count: 67 }]
+      },
+      {
+        id: 15,
+        user: 'ValorantSage',
+        time: '7:20 PM',
+        content: 'This community is so wholesome 🥺 Love seeing experienced players help newcomers instead of flaming them',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🥺', count: 345 }, { emoji: '❤️', count: 234 }]
       }
     ]
   },
   {
-    id: 'minecraft-builds',
-    name: '🏗️-minecraft-builds',
+    id: 'stream-promotion',
+    name: '📺-stream-promotion',
     type: 'text',
     serverId: 2,
-    description: 'Show off your Minecraft creations',
+    description: 'Promote your streams and content',
     messages: [
       {
         id: 1,
-        user: 'BuildMaster',
-        time: '11:30 AM',
-        content: 'Just finished my medieval castle! 🏰 Took me 3 weeks but totally worth it. Check it out on our server!',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🏰', count: 45 }, { emoji: '🔥', count: 23 }, { emoji: '😍', count: 31 }]
-      },
-      {
-        id: 2,
-        user: 'RedstoneWiz',
-        time: '12:15 PM',
-        content: 'Working on an automatic farm design. Anyone know how to optimize hopper timing?',
-        isBot: false
-      },
-      {
-        id: 3,
-        user: 'PixelArtist',
-        time: '1:20 PM',
-        content: 'Made a pixel art of the Mona Lisa using wool blocks! 256x256 blocks, took forever but so worth it 🎨',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🎨', count: 67 }, { emoji: '🤯', count: 45 }]
-      }
-    ]
-  },
-  {
-    id: 'esports-news',
-    name: '📺-esports-news',
-    type: 'text',
-    serverId: 2,
-    description: 'Latest esports updates and discussions',
-    messages: [
-      {
-        id: 1,
-        user: 'EsportsBot',
+        user: 'StreamBot',
         time: '8:00 AM',
-        content: 'Welcome to esports news! Stay updated with the latest competitive gaming updates! 📺',
+        content: '📺 **STREAM PROMOTION CHANNEL** 📺\n\nShare your streams, YouTube videos, and content here!\n\n**Rules:**\n• No spam (max 1 promo per 6 hours)\n• Include game, schedule, and brief description\n• Support other streamers in the community\n• Use !live command for going live notifications\n\nLet\'s grow together! 🚀',
         isBot: true,
         isWelcome: true
       },
       {
         id: 2,
-        user: 'TournamentTracker',
-        time: '10:30 AM',
-        content: '🏆 **VCT Masters Results!**\n\nSentinels defeated FNATIC 3-1 in an incredible series!\n\nTenZ was absolutely on fire with 87 kills across 4 maps! 🔥',
+        user: 'RisingStreamer',
+        time: '11:30 AM',
+        content: '🔴 **GOING LIVE NOW!** 🔴\n\n**Stream:** Valorant Competitive Climb\n**Goal:** From Diamond to Immortal in one stream!\n**Duration:** 6-8 hours\n**Vibe:** Chill gameplay with educational commentary\n\n**What to expect:**\n• Aim training warmup\n• Ranked queue with viewer games between\n• Q&A about climbing and improving\n• Maybe some 1v1s with chat\n\n**Link:** https://twitch.tv/risingstreamer\n**Discord:** Come chill in voice chat!\n\nDrop a follow if you enjoy! Every bit of support helps 💜\n\n#Valorant #Twitch #RankedClimb',
         isBot: false,
+        hasLinks: true,
+        links: ['https://twitch.tv/risingstreamer'],
         hasReactions: true,
-        reactions: [{ emoji: '🏆', count: 234 }, { emoji: '🔥', count: 156 }]
+        reactions: [{ emoji: '🔴', count: 67 }, { emoji: '💜', count: 234 }, { emoji: '🎯', count: 45 }]
       },
       {
         id: 3,
-        user: 'LeagueExpert',
-        time: '1:45 PM',
-        content: 'T1 vs JDG final is going to be legendary! Faker looking for his 4th worlds title 👑',
+        user: 'ContentCreator2024',
+        time: '2:15 PM',
+        content: '📹 **NEW YOUTUBE VIDEO DROPPED!** 📹\n\n**Title:** "How I Went From Iron to Radiant in 3 Months (No Clickbait)"\n**Length:** 24 minutes\n**Content:** Full breakdown of my climb with tips for each rank\n\n**Timestamps:**\n0:00 - Introduction & Proof\n2:30 - Iron to Bronze (Basics)\n6:45 - Silver to Gold (Aim Training)\n12:00 - Gold to Plat (Game Sense)\n17:30 - Plat to Diamond (Team Play)\n21:00 - Diamond to Immortal (Mental Game)\n23:00 - Immortal to Radiant (The Grind)\n\n**Link:** https://youtube.com/watch?v=valorant-climb-guide\n\nHope this helps someone with their climb! Like and sub if it does 🙏',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://youtube.com/watch?v=valorant-climb-guide'],
+        hasReactions: true,
+        reactions: [{ emoji: '📹', count: 89 }, { emoji: '🙏', count: 156 }, { emoji: '🏆', count: 78 }]
+      },
+      {
+        id: 4,
+        user: 'SmallStreamerSupport',
+        time: '4:30 PM',
+        content: '💜 Went and dropped a follow on @RisingStreamer! The gameplay was actually really educational. Chat was super welcoming too 😊\n\nWe gotta support each other in this community! Who else is streaming today? Drop your links! 👇',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '👑', count: 89 }, { emoji: '⚔️', count: 67 }]
+        reactions: [{ emoji: '💜', count: 123 }, { emoji: '😊', count: 67 }]
+      },
+      {
+        id: 5,
+        user: 'VarietyStreamer',
+        time: '4:45 PM',
+        content: '🎮 **VARIETY NIGHT STREAM!** 🎮\n\n**Tonight 8 PM EST:**\n• Fall Guys with viewers (custom lobbies)\n• Among Us community games\n• Jackbox party games\n• Maybe some horror if chat wants to see me suffer 👻\n\n**Interactive Stream:**\n• Chat picks the games\n• Discord voice for party games\n• Viewer tournaments with small prizes\n\n**Twitch:** https://twitch.tv/varietystreamer\n**Duration:** 4-6 hours depending on energy\n\nCome hang out and lets have some fun! No skill required, just good vibes 😄',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://twitch.tv/varietystreamer'],
+        hasReactions: true,
+        reactions: [{ emoji: '🎮', count: 234 }, { emoji: '😄', count: 89 }, { emoji: '👻', count: 156 }]
+      },
+      {
+        id: 6,
+        user: 'MinecraftBuilder',
+        time: '6:00 PM',
+        content: '⛏️ **MINECRAFT BUILD STREAM TOMORROW!** ⛏️\n\n**Project:** Recreating the entire map of Valorant\'s Haven in Minecraft\n**Time:** Saturday 12 PM EST\n**Duration:** All day (10+ hours)\n**Style:** Chill building with lofi music\n\n**Stream Features:**\n• Time-lapse segments\n• Chat can suggest details to add\n• Behind-the-scenes building techniques\n• Maybe some mini-games between build sessions\n\n**Progress so far:** A site is 60% done, looks incredible!\n\n**YouTube:** https://youtube.com/minecraftbuilder (for time-lapses)\n**Twitch:** https://twitch.tv/minecraftbuilder (for live building)\n\nPerfect stream to have in the background while you game! 🎵',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://youtube.com/minecraftbuilder', 'https://twitch.tv/minecraftbuilder'],
+        hasReactions: true,
+        reactions: [{ emoji: '⛏️', count: 345 }, { emoji: '🎵', count: 123 }]
+      },
+      {
+        id: 7,
+        user: 'CompetitiveCoach',
+        time: '7:30 PM',
+        content: '🎓 **COACHING STREAM SERIES** 🎓\n\n**Episode 3 Tomorrow:** "Advanced Smoke Executes"\n**Time:** Sunday 3 PM EST\n**Format:** Live demo + viewer Q&A\n\n**What we\'ll cover:**\n• One-way smokes on all maps\n• Coordinating with team utility\n• Post-plant positioning\n• Retake strategies\n• Common mistakes and how to fix them\n\n**Interactive Elements:**\n• Submit your gameplay clips for review\n• Live demonstration in custom games\n• Q&A session at the end\n• Free coaching session giveaway\n\n**Previous Episodes:**\n• Episode 1: Crosshair Placement (250k views)\n• Episode 2: Economy Management (180k views)\n\n**Link:** https://twitch.tv/competitivecoach\n\nBring your questions! Everyone from Iron to Immortal welcome 📚',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://twitch.tv/competitivecoach'],
+        hasReactions: true,
+        reactions: [{ emoji: '🎓', count: 456 }, { emoji: '📚', count: 234 }]
+      }
+    ]
+  },
+  {
+    id: 'clips-highlights',
+    name: '🎬-clips-highlights',
+    type: 'text',
+    serverId: 2,
+    description: 'Share your best gaming moments and clips',
+    messages: [
+      {
+        id: 1,
+        user: 'ClipBot',
+        time: '10:00 AM',
+        content: '🎬 **CLIPS & HIGHLIGHTS CHANNEL** 🎬\n\nShare your most epic gaming moments here!\n\n**Supported Platforms:**\n• Twitch Clips\n• YouTube Shorts\n• Medal.tv clips\n• Streamable links\n• Direct uploads (up to 50MB)\n\n**Guidelines:**\n• Keep clips under 2 minutes\n• Include game name in title\n• No spam (max 3 clips per day)\n• Constructive feedback only\n\nShow us your best plays! 🔥',
+        isBot: true,
+        isWelcome: true
+      },
+      {
+        id: 2,
+        user: 'ClutchKing2024',
+        time: '1:45 PM',
+        content: '**INSANE 1v5 CLUTCH IN RANKED** 🔥\n\nGame: Valorant\nRank: Diamond 2\nAgent: Omen\nMap: Bind\n\nContext: My whole team died to an eco rush and I had to clutch a 1v5 with just a Vandal and some smokes. The last kill through smoke was pure luck but I\'ll take it! 😅\n\n**Clip:** https://clips.twitch.tv/clutchking-1v5-bind\n\nThis is why I love playing Omen! Smokes OP 💨',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://clips.twitch.tv/clutchking-1v5-bind'],
+        hasReactions: true,
+        reactions: [{ emoji: '🔥', count: 456 }, { emoji: '💨', count: 123 }, { emoji: '🤯', count: 234 }]
+      },
+      {
+        id: 3,
+        user: 'AceCollector',
+        time: '1:50 PM',
+        content: '@ClutchKing2024 BRO THAT SMOKE KILL WAS NASTY 🤢 Your crosshair placement in smokes is actually cracked',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤢', count: 89 }]
+      },
+      {
+        id: 4,
+        user: 'HighlightHunter',
+        time: '2:15 PM',
+        content: '**TRIPLE COLLATERAL WITH AWP** 💥\n\nGame: CS2\nMap: Mirage\nSituation: 3 enemies peeked connector at same time\n\n**Clip:** https://medal.tv/highlight-triple-collat\n\nI\'ve been playing CS for 8 years and this is only my second triple collateral ever. The stars aligned perfectly! ⭐\n\n#CS2 #AWP #Collateral',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://medal.tv/highlight-triple-collat'],
+        hasReactions: true,
+        reactions: [{ emoji: '💥', count: 678 }, { emoji: '⭐', count: 345 }, { emoji: '🎯', count: 234 }]
+      },
+      {
+        id: 5,
+        user: 'FortniteBuilder',
+        time: '3:30 PM',
+        content: '**200 IQ EDIT PLAY** 🧠\n\nGame: Fortnite\nMode: Ranked (Champion League)\nPlay: Predicted enemy movement with triple edit\n\n**Clip:** https://streamable.com/fortnite-200iq-edit\n\nThis took me hours of creative practice but it finally paid off in a real game! The opponent never saw it coming 😎\n\n**Tutorial:** https://youtube.com/edit-tutorial-guide\n\n#Fortnite #Creative #Editing',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://streamable.com/fortnite-200iq-edit', 'https://youtube.com/edit-tutorial-guide'],
+        hasReactions: true,
+        reactions: [{ emoji: '🧠', count: 234 }, { emoji: '😎', count: 156 }]
+      },
+      {
+        id: 6,
+        user: 'MinecraftRedstone',
+        time: '4:45 PM',
+        content: '**WORKING CPU IN MINECRAFT** 🤯\n\nProject: 8-bit computer that can play Pong\nTime to build: 3 months\nRedstone components: 15,000+\n\n**Showcase:** https://youtube.com/minecraft-cpu-showcase\n**World Download:** https://drive.google.com/minecraft-cpu-world\n\n**Features:**\n• 8-bit processing\n• 64 bytes of RAM\n• Simple graphics output\n• Basic input system\n• Can run Pong, Snake, and Calculator\n\nThis was my pandemic project. Learned so much about computer architecture! 💻\n\n#Minecraft #Redstone #Engineering',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://youtube.com/minecraft-cpu-showcase', 'https://drive.google.com/minecraft-cpu-world'],
+        hasReactions: true,
+        reactions: [{ emoji: '🤯', count: 1234 }, { emoji: '💻', count: 567 }, { emoji: '🏆', count: 890 }]
+      },
+      {
+        id: 7,
+        user: 'RocketLeagueFreestyle',
+        time: '5:30 PM',
+        content: '**CEILING SHOT DOUBLE TAP** 🚗💨\n\nGame: Rocket League\nRank: Grand Champion\nMap: Mannfield\n\n**Clip:** https://gfycat.com/rocket-league-ceiling-double\n\nFinally hit this in ranked after practicing for months! The setup was perfect and the opponent had no chance to save it 🥅\n\n**Training Pack Code:** 4BC7-8F23-1A94-D756\n\nPractice this shot and you\'ll be flying in no time! ✈️',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://gfycat.com/rocket-league-ceiling-double'],
+        hasReactions: true,
+        reactions: [{ emoji: '🚗', count: 345 }, { emoji: '⚽', count: 234 }, { emoji: '✈️', count: 156 }]
+      },
+      {
+        id: 8,
+        user: 'ApexPredator',
+        time: '6:15 PM',
+        content: '**THIRD PARTY SQUAD WIPE** 🦅\n\nGame: Apex Legends\nLegend: Wraith\nWeapon: R-99 + Wingman\nRank: Predator (Top 500)\n\n**Clip:** https://clips.twitch.tv/apex-third-party-wipe\n\n**Context:** Two squads fighting, I portal flanked and caught them all healing. Sometimes positioning > aim 🧠\n\n**Loadout:**\n• R-99 with Purple Barrel + Purple Stock\n• Wingman with Skullpiercer\n• Purple Armor + Gold Helmet\n\nTiming is everything in Apex! ⏰',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://clips.twitch.tv/apex-third-party-wipe'],
+        hasReactions: true,
+        reactions: [{ emoji: '🦅', count: 456 }, { emoji: '🧠', count: 234 }, { emoji: '⏰', count: 123 }]
+      },
+      {
+        id: 9,
+        user: 'FailCompilation',
+        time: '7:00 PM',
+        content: '**EPIC FAIL MONTAGE** 😂\n\nGame: Various\nContent: My worst moments from this week\nDuration: 3 minutes of pure pain\n\n**Video:** https://youtube.com/epic-fail-compilation-week3\n\n**Highlights:**\n• Falling off map 5 times in Fall Guys\n• Missing every shot with AWP in CS2\n• Getting jumpscared in horror game\n• Rage quitting after lag death\n\nSometimes you gotta laugh at yourself! We all have bad days 💀\n\n#Fails #Funny #Gaming',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://youtube.com/epic-fail-compilation-week3'],
+        hasReactions: true,
+        reactions: [{ emoji: '😂', count: 789 }, { emoji: '💀', count: 456 }, { emoji: '🤡', count: 234 }]
+      },
+      {
+        id: 10,
+        user: 'SpeedRunner',
+        time: '8:30 PM',
+        content: '**NEW PERSONAL BEST!** ⏱️\n\nGame: Celeste\nCategory: Any% (Golden Strawberries)\nTime: 32:47.892\nPrevious PB: 33:12.456\n\n**VOD:** https://twitch.tv/speedrunner/vod-celeste-pb\n\n**Splits:**\n• Chapter 1: 2:43 (+0.2s)\n• Chapter 2: 5:21 (-1.8s)\n• Chapter 3: 8:45 (-2.1s)\n• Chapter 4: 12:30 (-0.9s)\n• Final: 32:47 (-24.6s)\n\nAlmost sub-32! The grind continues... 💪\n\n**What went well:**\n• Perfect wavedash sequence in Ch2\n• No deaths in Ch6\n• Clean boss fight\n\n**What to improve:**\n• Chapter 1 still slow\n• Missed optimization in Ch5\n\n#Speedrun #Celeste #PB',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://twitch.tv/speedrunner/vod-celeste-pb'],
+        hasReactions: true,
+        reactions: [{ emoji: '⏱️', count: 345 }, { emoji: '💪', count: 234 }, { emoji: '🏃‍♂️', count: 156 }]
       }
     ]
   }
 ];
 
-// Server 3 - Music Server
+// Server 3 - Music Lovers (Enhanced with realistic music community content)
 const musicChannels: Channel[] = [
   {
     id: 'music-announcements',
     name: '🎵-announcements',
     type: 'text',
     serverId: 3,
-    description: 'Music community announcements',
+    description: 'Music community announcements and events',
     messages: [
       {
         id: 1,
         user: 'MusicBot',
-        time: '7:00 AM',
-        content: 'Welcome to Music Lovers! 🎵\n\nShare your passion for music, discover new artists, and vibe together!',
+        time: '6:00 AM',
+        content: '🎵 **WELCOME TO MUSIC LOVERS COMMUNITY!** 🎵\n\nWhere melodies meet and beats unite! 🎶\n\n**What we offer:**\n🎧 Daily listening parties\n🎤 Live DJ sets and performances\n💿 Vinyl trading community\n🎼 Music production help\n🎪 Concert meetups worldwide\n📻 24/7 community radio\n\n**Rules:**\n• Respect all genres and tastes\n• No music piracy links\n• Support independent artists\n• Keep discussions music-focused\n\nLet the music bring us together! ✨',
         isBot: true,
-        isWelcome: true
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🎵', count: 2345 }, { emoji: '🎶', count: 1567 }, { emoji: '✨', count: 1234 }]
       },
       {
         id: 2,
-        user: 'DJ_Phoenix',
-        time: '11:45 AM',
-        content: '🎧 **LIVE DJ SET TONIGHT!**\n\nJoin me at 9 PM EST for a 3-hour progressive house journey!\n\n🎶 Featured artists: Deadmau5, Eric Prydz, Anjunabeats\n🔊 Broadcasting live in the DJ Booth!\n\nSee you on the dance floor! 💃🕺',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🎧', count: 156 }, { emoji: '🔥', count: 89 }, { emoji: '💃', count: 234 }]
-      },
-      {
-        id: 3,
-        user: 'VinylCollector',
-        time: '3:30 PM',
-        content: '📀 **VINYL SWAP MEET THIS WEEKEND!**\n\nBring your rare finds and let\'s trade! Looking for:\n• Pink Floyd - Animals (1977 pressing)\n• Daft Punk - Random Access Memories\n• Any Blue Note jazz records\n\nDM me your collection lists! 🎼',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '📀', count: 67 }, { emoji: '🎼', count: 45 }]
-      },
-      {
-        id: 4,
-        user: 'ConcertAlert',
-        time: '6:00 PM',
-        content: '🎤 **CONCERT ALERT!**\n\nTaylor Swift just announced surprise dates for her Eras Tour!\n\n📍 Cities: LA, NYC, Chicago\n🎫 Presale starts tomorrow 10 AM\n💳 Use code SWIFTIE24\n\nWho\'s trying to get tickets? Good luck everyone! 🍀',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🎤', count: 423 }, { emoji: '🍀', count: 234 }, { emoji: '😭', count: 156 }]
-      }
-    ]
-  },
-  {
-    id: 'song-recommendations',
-    name: '🎼-song-recommendations',
-    type: 'text',
-    serverId: 3,
-    description: 'Share and discover new music',
-    messages: [
-      {
-        id: 1,
-        user: 'MelodyHunter',
-        time: '1:30 PM',
-        content: 'Just discovered this amazing indie band! 🌟\n\n**"Midnight Dreams" by Aurora Waves**\n\nAbsolutely ethereal vocals with dreamy synths. Perfect for late night listening! 🌙✨',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🌟', count: 23 }, { emoji: '🌙', count: 15 }, { emoji: '❤️', count: 31 }]
-      },
-      {
-        id: 2,
-        user: 'ClassicRockFan',
-        time: '1:35 PM',
-        content: 'Classic recommendation: **Pink Floyd - "Comfortably Numb"** 🎸\n\nDavid Gilmour\'s guitar solo still gives me chills after 40+ years. Pure perfection! 🔥',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🎸', count: 78 }, { emoji: '🔥', count: 45 }, { emoji: '🤘', count: 89 }]
-      },
-      {
-        id: 3,
-        user: 'ElectroVibes',
-        time: '2:10 PM',
-        content: 'For all the electronic music lovers:\n\n**Flume - "Never Be Like You"** 🎛️\n\nThe production on this track is insane. Those vocal chops! 🎵',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🎛️', count: 34 }, { emoji: '🎵', count: 56 }]
-      },
-      {
-        id: 4,
-        user: 'JazzCat',
-        time: '2:45 PM',
-        content: 'Smooth jazz recommendation for today: **Miles Davis - "Kind of Blue"** 🎺\n\nThis entire album is a masterpiece. Perfect Sunday afternoon vibes 🌅',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🎺', count: 45 }, { emoji: '🌅', count: 67 }]
-      },
-      {
-        id: 5,
-        user: 'KPopStan',
-        time: '3:15 PM',
-        content: 'OMG the new BLACKPINK track is FIRE! 🔥\n\n**"Shut Down"** is on repeat all day! The choreography in the MV is incredible too 💃',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🔥', count: 234 }, { emoji: '💃', count: 156 }, { emoji: '🖤', count: 89 }]
-      }
-    ]
-  },
-  {
-    id: 'music-production',
-    name: '🎛️-music-production',
-    type: 'text',
-    serverId: 3,
-    description: 'Music production tips and tricks',
-    messages: [
-      {
-        id: 1,
-        user: 'BeatMaker3000',
-        time: '10:15 AM',
-        content: 'Working on a new trap beat! 🥁 Any tips for getting that hard-hitting 808 sound? Currently using FL Studio.',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🥁', count: 12 }]
-      },
-      {
-        id: 2,
-        user: 'StudioMaster',
+        user: 'CommunityDJ',
         time: '10:30 AM',
-        content: '@BeatMaker3000 Try layering your 808s with a sine wave and add some saturation! Also, side-chain compress against your kick for that pumping effect 🔊',
+        content: '🔥 **EPIC DJ SET TONIGHT!** 🔥\n\n**Event:** "Synthwave Sunday Sessions"\n**DJ:** @NeonNights + @RetroWave80s\n**Time:** 9 PM EST (6 PM PST)\n**Duration:** 4 hours of pure synthwave bliss\n**Location:** DJ Booth voice channel + live stream\n\n**Tonight\'s Journey:**\n🌃 9:00 PM - Dark Synthwave (Perturbator, Dance With The Dead)\n🌆 10:00 PM - Retrowave Classics (FM-84, The Midnight)\n🌅 11:00 PM - Chillwave Vibes (HOME, Mitch Murder)\n🚗 12:00 AM - Outrun Madness (Carpenter Brut, Power Trip)\n\n**Interactive Features:**\n• Song requests via !request command\n• Live chat with DJs\n• Track ID service\n• Download links for mixes\n\n**Stream Links:**\n🔴 Twitch: https://twitch.tv/musiclovers-dj\n📻 YouTube: https://youtube.com/live/synthwave-sunday\n🎵 SoundCloud: Auto-uploaded after stream\n\nBring your neon lights and get ready to cruise! 🏎️💨',
         isBot: false,
+        hasLinks: true,
+        links: ['https://twitch.tv/musiclovers-dj', 'https://youtube.com/live/synthwave-sunday'],
         hasReactions: true,
-        reactions: [{ emoji: '🔊', count: 18 }, { emoji: '🙏', count: 8 }]
+        reactions: [{ emoji: '🔥', count: 567 }, { emoji: '🌃', count: 234 }, { emoji: '🏎️', count: 345 }]
       },
       {
         id: 3,
-        user: 'SynthWave',
-        time: '11:45 AM',
-        content: 'Just finished mixing my synthwave track! The 80s vibes are strong with this one 🌆✨\n\nTip: Use analog emulation plugins for that authentic vintage sound!',
+        user: 'VinylVault',
+        time: '2:15 PM',
+        content: '📀 **MONTHLY VINYL SWAP MEET!** 📀\n\n**Date:** This Saturday, December 2nd\n**Time:** 2 PM - 8 PM EST\n**Location:** Virtual trading floor + local meetups\n\n**How it works:**\n1. Post your trade list in #vinyl-trading\n2. Browse others\' collections\n3. Negotiate trades via DM\n4. Meet up locally or ship with verified traders\n\n**Featured Collections This Month:**\n🎸 **@RockCollector47:** 200+ classic rock LPs (Led Zeppelin first pressings!)\n🎺 **@JazzMaster:** Rare Blue Note catalog (some worth $1000+)\n🏠 **@HouseMusicHead:** Complete Detroit techno collection\n🎼 **@ClassicalConnoisseur:** Deutsche Grammophon rarities\n\n**Safety Reminders:**\n• Use verified trader system\n• Document condition with photos\n• Ship with tracking + insurance\n• Local meetups in public places only\n\n**Success Stories:**\n• 847 successful trades this year\n• $45,000+ in vinyl value exchanged\n• 23 local meetup groups formed\n• 0 reported scams (amazing community!)\n\n**Special Events:**\n🎰 Mystery box auctions\n🔍 Grail hunting sessions\n📚 Price guide discussions\n🎧 Listening parties for rare finds\n\nCan\'t wait to see what treasures surface! 💎',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🌆', count: 25 }, { emoji: '✨', count: 19 }]
+        reactions: [{ emoji: '📀', count: 445 }, { emoji: '💎', count: 234 }, { emoji: '🎸', count: 167 }]
       },
       {
         id: 4,
-        user: 'GuitarRecording',
-        time: '2:20 PM',
-        content: 'Question: What\'s your favorite guitar amp simulation? I\'ve been using Amplitube but thinking of trying Neural DSP 🎸',
+        user: 'ConcertConnect',
+        time: '5:45 PM',
+        content: '🎤 **MASSIVE CONCERT ANNOUNCEMENTS!** 🎤\n\n**This Week\'s Drops:**\n\n🔥 **Taylor Swift - Eras Tour**\n📍 Additional dates: Chicago, Denver, Seattle\n🎫 Presale: Tomorrow 10 AM local time\n🔑 Code: SWIFTIE2024\n💰 Tickets: $49.50 - $449.50\n⚠️ Expected to sell out in minutes!\n\n⚡ **Metallica - M72 World Tour**\n📍 Summer stadium tour announced\n🎫 General sale: Friday 12 PM EST\n🎸 Special: 2 nights, no repeat songs!\n💰 Tickets: $89.50 - $750\n\n🎵 **Coachella 2024 Lineup Leak**\n📱 Headliners rumored: Bad Bunny, Billie Eilish, Frank Ocean\n🎪 Dates: April 12-14 & 19-21\n🎫 Presale registration open now\n💰 Weekend passes: $429 + fees\n\n🏠 **Underground Electronic Scene**\n🕺 Warehouse parties every weekend\n📍 Detroit, Berlin, London hotspots\n🎧 DJs: Charlotte de Witte, Amelie Lens confirmed\n💫 Secret locations revealed 24hrs before\n\n**Concert Buddy System:**\n• Find travel companions in #concert-meetups\n• Share rides, hotels, and experiences\n• Safety in numbers for unknown venues\n• Group discounts for bulk tickets\n\n**Ticket Bot Protection:**\n🤖 We monitor for bot activity\n⚡ Real-time stock alerts\n💡 Tips for beating queues\n🎯 Alternative vendor suggestions\n\nWho\'s trying to see live music this year? 🙋‍♀️🙋‍♂️',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎸', count: 23 }]
+        reactions: [{ emoji: '🎤', count: 1234 }, { emoji: '🔥', count: 890 }, { emoji: '⚡', count: 567 }]
       },
       {
         id: 5,
-        user: 'VocalCoach',
-        time: '4:30 PM',
-        content: 'Pro tip for recording vocals: Always record multiple takes and comp the best parts together. Don\'t rely on pitch correction to fix everything! 🎤✨',
+        user: 'NewMusicFriday',
+        time: '8:00 PM',
+        content: '🆕 **NEW MUSIC FRIDAY MEGATHREAD!** 🆕\n\n**Major Releases This Week:**\n\n🎭 **Drake - "For All The Dogs Deluxe"**\n💿 Genre: Hip-Hop/Rap\n⏱️ Runtime: 1hr 23min (23 tracks)\n⭐ Standout: "First Person Shooter" ft. J. Cole\n🔥 Already trending #1 globally\n\n🌊 **Lana Del Rey - "Ocean Blvd Sessions"**\n💿 Genre: Alternative/Indie Pop\n⏱️ Runtime: 47min (11 tracks)\n⭐ Standout: "Margaret" ft. Bleachers\n🌙 Perfect late-night listening\n\n⚡ **Porter Robinson - "Nurture (Remix Album)"**\n💿 Genre: Electronic/Future Bass\n⏱️ Runtime: 52min (12 tracks)\n⭐ Standout: "Look at the Sky (Hex Cougar Remix)"\n🎨 Each track reimagined by different artists\n\n🎸 **Arctic Monkeys - "Live at Royal Albert Hall"**\n💿 Genre: Indie Rock (Live Album)\n⏱️ Runtime: 1hr 8min (16 tracks)\n⭐ Standout: 12-minute "Do I Wanna Know?" extension\n🏛️ Recorded during their sold-out residency\n\n**Hidden Gems:**\n\n🌟 **Remi Wolf - "Juno Demos"**\n• Unreleased bedroom recordings\n• Raw, emotional versions of hits\n• Limited pressing vinyl available\n\n🎺 **Kamasi Washington - "Fearless Movement"**\n• 84-minute jazz odyssey\n• Features 32-piece orchestra\n• Already Grammy buzz\n\n🔮 **100 gecs - "10,000 gecs and the Tree of Clues"**\n• Hyperpop chaos as usual\n• Somehow even more experimental\n• Love it or hate it, no middle ground\n\n**Community Listening Party:**\n📅 Tonight 10 PM EST\n🎧 We\'ll go through each major release\n💬 Live discussion and reactions\n🗳️ Vote for weekly favorites\n\n**Stats from Last Week:**\n• 2.3M collective streams from our community\n• #ice-spice-new dominated discussions\n• 89% approval rating for SZA\'s surprise drop\n• 431 new songs added to community playlists\n\nWhat\'s first on your queue? 🎶',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎤', count: 34 }, { emoji: '✨', count: 28 }, { emoji: '💯', count: 45 }]
+        reactions: [{ emoji: '🆕', count: 678 }, { emoji: '🎶', count: 445 }, { emoji: '🔥', count: 523 }]
       }
     ]
   },
   {
-    id: 'listening-party',
-    name: '🎶-listening-party',
+    id: 'general-music',
+    name: 'general-music',
     type: 'text',
     serverId: 3,
-    description: 'Synchronized music listening sessions',
+    description: 'General music discussion and discovery',
     messages: [
       {
         id: 1,
-        user: 'PartyHost',
-        time: '4:00 PM',
-        content: '🎶 **LISTENING PARTY STARTING NOW!**\n\nTonight\'s album: **The Dark Side of the Moon - Pink Floyd**\n\nJoin the "Music Listening" voice channel and let\'s experience this masterpiece together! 🌙',
+        user: 'MelodyExplorer',
+        time: '9:30 AM',
+        content: 'morning music fam! ☕🎵 what\'s everyone listening to while they work/study today?',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎶', count: 67 }, { emoji: '🌙', count: 45 }]
+        reactions: [{ emoji: '☕', count: 34 }, { emoji: '🎵', count: 67 }]
       },
       {
         id: 2,
-        user: 'AlbumExpert',
-        time: '4:05 PM',
-        content: 'This album is a journey! Make sure you have good headphones on 🎧',
+        user: 'LoFiVibes',
+        time: '9:32 AM',
+        content: 'got this lofi hip hop playlist on repeat: https://open.spotify.com/playlist/lofi-study-vibes\n\nperfect for coding sessions 💻🎧',
         isBot: false,
+        hasLinks: true,
+        links: ['https://open.spotify.com/playlist/lofi-study-vibes'],
         hasReactions: true,
-        reactions: [{ emoji: '🎧', count: 34 }]
+        reactions: [{ emoji: '💻', count: 45 }, { emoji: '🎧', count: 78 }]
       },
       {
         id: 3,
-        user: 'FirstTimeListener',
-        time: '4:10 PM',
-        content: 'Never listened to this before! Super excited 😄',
+        user: 'MetalHead666',
+        time: '9:35 AM',
+        content: '@LoFiVibes bro how do you concentrate with that sleepy music? I need ENERGY 🔥\n\ncurrently blasting some Gojira - "Amazonia" to wake up properly 🤘',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '😄', count: 15 }, { emoji: '🤩', count: 12 }]
-      }
-    ]
-  },
-  {
-    id: 'concert-reviews',
-    name: '🎤-concert-reviews',
-    type: 'text',
-    serverId: 3,
-    description: 'Share your live music experiences',
-    messages: [
-      {
-        id: 1,
-        user: 'ConcertGoer',
-        time: '2:00 PM',
-        content: 'Just got back from Coachella! 🌴\n\nHighlights:\n• Bad Bunny\'s energy was INSANE\n• Rosalía\'s vocals were perfection\n• The Coachella sunset during Billie Eilish was magical\n\nBest festival experience ever! 🎪✨',
-        isBot: false,
-        hasReactions: true,
-        reactions: [{ emoji: '🌴', count: 89 }, { emoji: '🎪', count: 67 }, { emoji: '✨', count: 145 }]
+        reactions: [{ emoji: '🔥', count: 23 }, { emoji: '🤘', count: 56 }]
       },
       {
-        id: 2,
-        user: 'MetalHead',
-        time: '3:30 PM',
-        content: 'Metallica at MetLife Stadium was LEGENDARY! 🤘\n\nThey played Master of Puppets in full! James\'s voice is still incredible after all these years 🎸🔥',
+        id: 4,
+        user: 'ClassicalMind',
+        time: '9:40 AM',
+        content: 'Interesting how we all have different focus music! For me it\'s Bach\'s Goldberg Variations. The mathematical precision actually helps with problem-solving 🧠\n\nGlenn Gould\'s 1981 recording is *chef\'s kiss* 👌',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🤘', count: 156 }, { emoji: '🎸', count: 89 }, { emoji: '🔥', count: 234 }]
+        reactions: [{ emoji: '🧠', count: 34 }, { emoji: '👌', count: 67 }]
+      },
+      {
+        id: 5,
+        user: 'PopPrincess',
+        time: '10:15 AM',
+        content: 'OK BUT CAN WE TALK ABOUT HOW GOOD THE NEW OLIVIA RODRIGO ALBUM IS??? 😭💜\n\n"vampire" has been on repeat for 3 days straight and I\'m not even sorry',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😭', count: 145 }, { emoji: '💜', count: 234 }]
+      },
+      {
+        id: 6,
+        user: 'IndieDiscoverer',
+        time: '10:18 AM',
+        content: '@PopPrincess her songwriting has seriously evolved! the bridge in "vampire" is pure poetry\n\nalso if you like that emotional rawness, check out Phoebe Bridgers - "Motion Sickness". similar energy but indie flavor 🌱',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌱', count: 78 }]
+      },
+      {
+        id: 7,
+        user: 'HipHopHead2024',
+        time: '11:00 AM',
+        content: 'yall sleeping on the underground scene fr 💯\n\njust discovered this rapper called JID and his wordplay is INSANE. "Dance Now" goes so hard 🔥\n\nwhy mainstream radio only plays the same 10 songs tho? 😤',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💯', count: 89 }, { emoji: '🔥', count: 123 }, { emoji: '😤', count: 45 }]
+      },
+      {
+        id: 8,
+        user: 'RadioRebel',
+        time: '11:03 AM',
+        content: '@HipHopHead2024 FACTS! mainstream radio is dead 💀\n\nthats why I only listen to:\n• independent radio stations\n• community playlists\n• bandcamp discoveries\n• live sessions on youtube\n\nreal music is out there, you just gotta dig! ⛏️',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💀', count: 67 }, { emoji: '⛏️', count: 34 }]
+      },
+      {
+        id: 9,
+        user: 'VinylCollector',
+        time: '11:30 AM',
+        content: 'just picked up an original pressing of Pink Floyd - "The Dark Side of the Moon" 🌙\n\nthe sound quality difference between vinyl and digital is night and day! you can hear every breath, every guitar string vibration...\n\nwho else collects physical media? 📀💿',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌙', count: 156 }, { emoji: '📀', count: 89 }]
+      },
+      {
+        id: 10,
+        user: 'DigitalNomad',
+        time: '11:35 AM',
+        content: '@VinylCollector respect for the analog experience! but tbh I love the convenience of streaming 📱\n\nSpotify Discover Weekly introduced me to 90% of my favorite artists. algorithm knows me better than I know myself lol 🤖',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📱', count: 45 }, { emoji: '🤖', count: 67 }]
+      },
+      {
+        id: 11,
+        user: 'ConcertAddict',
+        time: '12:45 PM',
+        content: 'nothing beats live music tho!! 🎤✨\n\nsaw Tame Impala last weekend and Kevin\'s guitar tone in person was TRANSCENDENT. studio recordings can\'t capture that energy\n\nwho\'s got concerts coming up? 🎪',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎤', count: 234 }, { emoji: '✨', count: 167 }, { emoji: '🎪', count: 89 }]
+      },
+      {
+        id: 12,
+        user: 'BudgetMelomaniac',
+        time: '12:48 PM',
+        content: '@ConcertAddict seeing Arctic Monkeys next month! saved up for 6 months for decent seats 💸\n\nsometimes I think about how expensive live music has become... but then I remember it supports the artists directly 🎭',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💸', count: 78 }, { emoji: '🎭', count: 45 }]
+      },
+      {
+        id: 13,
+        user: 'GenZMusiclover',
+        time: '1:30 PM',
+        content: 'hot take: TikTok is actually great for music discovery 📱💫\n\nfound so many underground artists through 15-second snippets. yeah the app has issues but it\'s democratizing music exposure\n\nthoughts? 🤔',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📱', count: 123 }, { emoji: '🤔', count: 89 }, { emoji: '💫', count: 67 }]
+      },
+      {
+        id: 14,
+        user: 'OldSchoolPurist',
+        time: '1:35 PM',
+        content: '@GenZMusiclover I see your point but those 15-second clips are ruining song structure! artists now write specifically for TikTok hooks instead of full compositions 😤\n\nmusic is becoming fast food instead of fine dining 🍔➡️🍽️',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😤', count: 45 }, { emoji: '🍔', count: 23 }]
+      },
+      {
+        id: 15,
+        user: 'MiddleGroundMelody',
+        time: '1:40 PM',
+        content: 'both sides have merit tbh 🤷‍♀️\n\nTikTok helps artists reach audiences they never could before, BUT it also creates pressure for instant gratification\n\nmaybe the real magic happens when TikTok discovery leads people to explore full albums? 💭',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤷‍♀️', count: 67 }, { emoji: '💭', count: 34 }]
+      },
+      {
+        id: 16,
+        user: 'NightOwlListener',
+        time: '2:15 AM',
+        content: '3 AM and I\'m in a deep ambient rabbit hole 🌙🎧\n\nBrian Eno\'s "Music for Airports" hits different at this hour. feels like floating in space\n\nanyone else have specific genres for specific times of day? ⏰',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌙', count: 89 }, { emoji: '🎧', count: 123 }, { emoji: '⏰', count: 45 }]
+      },
+      {
+        id: 17,
+        user: 'SunriseSerenader',
+        time: '6:00 AM',
+        content: '@NightOwlListener totally! my music schedule:\n\n🌅 6 AM: Acoustic folk (bon iver, fleet foxes)\n☕ 9 AM: Upbeat indie pop (vampire weekend, foster the people)\n🌞 12 PM: Whatever fits the mood\n🌆 6 PM: Hip-hop or electronic\n🌙 10 PM: Chill R&B or ambient\n\nmusic is my daily soundtrack 🎬',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌅', count: 78 }, { emoji: '🎬', count: 56 }]
+      },
+      {
+        id: 18,
+        user: 'WorkoutBeats',
+        time: '7:30 AM',
+        content: 'gym playlist question: what gets you more pumped? 💪\n\nA) Heavy metal/rock 🤘\nB) Hip-hop bangers 🎤\nC) Electronic/EDM 🎛️\nD) Pop hits 🎵\n\ncurrently on a Kendrick Lamar kick and "HUMBLE." makes me feel invincible 👑',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💪', count: 145 }, { emoji: '🤘', count: 67 }, { emoji: '🎤', count: 89 }, { emoji: '🎛️', count: 34 }, { emoji: '👑', count: 123 }]
+      },
+      {
+        id: 19,
+        user: 'EmotionalSupport',
+        time: '4:45 PM',
+        content: 'music therapy is real yall 💚\n\nhaving a rough day and Frank Ocean\'s "Pink + White" is healing my soul. sometimes you need songs that match your energy, sometimes you need ones that lift you up\n\nwhat\'s your go-to comfort album? 🤗',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💚', count: 234 }, { emoji: '🤗', count: 167 }]
+      },
+      {
+        id: 20,
+        user: 'TherapeuticTunes',
+        time: '4:50 PM',
+        content: '@EmotionalSupport sending virtual hugs 🫂\n\nmy comfort albums:\n• Norah Jones - "Come Away With Me" (when anxious)\n• Adele - "21" (when heartbroken)\n• Bob Marley - "Legend" (when need positivity)\n• Sigur Rós - "Ágætis byrjun" (when need to cry it out)\n\nmusic understands us when humans don\'t 💫',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🫂', count: 189 }, { emoji: '💫', count: 123 }]
       }
     ]
   }
 ];
 
-// Midjourney Server (Server 4) - Updated with more specific content per channel
+// Server 4 - Midjourney (Keep existing content)
 const midjourneyChannels: Channel[] = [
   {
     id: 'general',
@@ -866,10 +1240,11 @@ export const servers: Server[] = [
     icon: "🔥",
     textChannels: gamingChannels,
     voiceChannels: [
-      { name: "Gaming Lounge", users: 5, userList: ["ProGamer99", "AimBot_Not", "GamerGirl2024", "RageQuit", "NoobSlayer"] },
-      { name: "Tournament Arena", users: 12, userList: ["GuildMaster", "ValorantPro", "ClutchKing", "HeadshotOnly", "TacticalGenius", "FragMaster", "EcoRound", "SpikeDefuser", "FlashBang", "SmokeScreen", "WallBang", "PistolAce"] },
-      { name: "Minecraft Creative", users: 3, userList: ["BuildMaster", "RedstoneWiz", "BlockCrafter"] },
-      { name: "Chill Gaming", users: 2, userList: ["CasualGamer", "RelaxedPlayer"] }
+      { name: "Gaming Lounge", users: 12, userList: ["xXGamerGodXx", "ProShooter", "ClutchMaster", "TacticalGenius", "ValorantCoach", "StreamerPro", "RageQuitter2024", "AimBot_Not", "GamerGirl2024", "MinecraftSteve", "FortniteKid", "BuildMaster"] },
+      { name: "Valorant Ranked", users: 15, userList: ["RadiantChaser", "DuelMaster", "SmokeSpammer", "IronToImmortal", "EntryFragger", "FlashBangGod", "GoldGrinder", "SilverSurfer", "SwiftRotation", "AceClutcher", "PatientCoach", "NewPlayerHelp", "ValorantSage", "CustomGameMaster", "PromptMaster"] },
+      { name: "Stream Chat", users: 8, userList: ["TwitchStreamerPro", "RisingStreamer", "ContentCreator2024", "VarietyStreamer", "CompetitiveCoach", "SmallStreamerSupport", "ViewerSupreme", "StreamerWannabe"] },
+      { name: "Tournament Arena", users: 6, userList: ["EsportsManager", "TournamentTracker", "GuildMaster", "ModeratorX", "CommunityManager", "DevTeam"] },
+      { name: "Clips & Highlights", users: 4, userList: ["ClutchKing2024", "HighlightHunter", "SpeedRunner", "FailCompilation"] }
     ]
   },
   {
@@ -878,10 +1253,11 @@ export const servers: Server[] = [
     icon: "🎵",
     textChannels: musicChannels,
     voiceChannels: [
-      { name: "Music Listening", users: 8, userList: ["PartyHost", "VinylCollector", "MelodyHunter", "ClassicRockFan", "ElectroVibes", "JazzCat", "BluesLover", "SynthWave"] },
-      { name: "DJ Booth", users: 15, userList: ["DJ_Phoenix", "MixMaster", "BeatDropper", "BassBoosted", "TechnoTrance", "HouseHead", "DubstepDrop", "ChillHop", "LoFiVibes", "DeepHouse", "ProgressiveKing", "TrapLord", "FunkSoul", "DiscoFever", "ElectroSwing"] },
-      { name: "Jam Session", users: 4, userList: ["GuitarHero", "BassPlayer", "DrumBeat", "KeyboardMaster"] },
-      { name: "Production Talk", users: 2, userList: ["BeatMaker3000", "StudioMaster"] }
+      { name: "🎧 Listening Party", users: 18, userList: ["MelodyExplorer", "LoFiVibes", "MetalHead666", "ClassicalMind", "PopPrincess", "IndieDiscoverer", "HipHopHead2024", "RadioRebel", "VinylCollector", "DigitalNomad", "ConcertAddict", "BudgetMelomaniac", "GenZMusiclover", "OldSchoolPurist", "MiddleGroundMelody", "NightOwlListener", "SunriseSerenader", "WorkoutBeats"] },
+      { name: "🎤 DJ Booth", users: 6, userList: ["CommunityDJ", "NeonNights", "RetroWave80s", "SynthMaster", "HouseMixGod", "TechnoVibe"] },
+      { name: "🎸 Jam Session", users: 4, userList: ["GuitarHero", "BassLegend", "DrummingDave", "KeyboardWizard"] },
+      { name: "💿 Vinyl Corner", users: 3, userList: ["VinylVault", "RareRecords", "AnalogAudio"] },
+      { name: "🎼 Production Talk", users: 2, userList: ["BeatMaker3000", "StudioMaster"] }
     ]
   },
   {
