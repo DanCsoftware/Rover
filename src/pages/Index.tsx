@@ -11,9 +11,11 @@ const Index = () => {
     activeChannelType, 
     activeUser,
     isDMView,
+    activeServer,
     switchToChannel,
     switchToDM,
     switchToDMView,
+    switchToServer,
     getCurrentMessages,
     getCurrentChannelName
   } = useDiscordState();
@@ -26,9 +28,11 @@ const Index = () => {
             onChannelClick={switchToChannel}
             onDMClick={switchToDM}
             onDMViewClick={switchToDMView}
+            onServerClick={switchToServer}
             activeChannel={activeChannel}
             activeChannelType={activeChannelType}
             isDMView={isDMView}
+            activeServer={activeServer}
           />
         </ResizablePanel>
         

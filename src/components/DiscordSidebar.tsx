@@ -1,4 +1,3 @@
-
 import { Bot, Hash, Volume2, Settings, Headphones, Mic, ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -6,18 +5,29 @@ interface DiscordSidebarProps {
   onChannelClick: (channelId: string) => void;
   onDMClick: (userId: string) => void;
   onDMViewClick: () => void;
+  onServerClick: (serverId: number) => void;
   activeChannel: string;
   activeChannelType: 'text' | 'dm';
   isDMView: boolean;
+  activeServer: number;
 }
 
-const DiscordSidebar = ({ onChannelClick, onDMClick, onDMViewClick, activeChannel, activeChannelType, isDMView }: DiscordSidebarProps) => {
+const DiscordSidebar = ({ 
+  onChannelClick, 
+  onDMClick, 
+  onDMViewClick, 
+  onServerClick,
+  activeChannel, 
+  activeChannelType, 
+  isDMView,
+  activeServer 
+}: DiscordSidebarProps) => {
   const [expandedGroups, setExpandedGroups] = useState<string[]>(["text", "voice"]);
   
   const servers = [
     { id: 2, name: "Server 1", icon: "🔥", active: false },
     { id: 3, name: "Server 2", icon: "🎵", active: false },
-    { id: 4, name: "Midjourney", icon: "/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png", active: !isDMView },
+    { id: 4, name: "Midjourney", icon: "/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png", active: false },
   ];
 
   const dmChannels = [
@@ -58,6 +68,10 @@ const DiscordSidebar = ({ onChannelClick, onDMClick, onDMViewClick, activeChanne
     return activeChannel === channelId && activeChannelType === channelType;
   };
 
+  const isServerActive = (serverId: number) => {
+    return activeServer === serverId && !isDMView;
+  };
+
   return (
     <div className="flex h-full bg-gray-800">
       {/* Server List */}
@@ -88,8 +102,9 @@ const DiscordSidebar = ({ onChannelClick, onDMClick, onDMViewClick, activeChanne
         {servers.map((server) => (
           <div
             key={server.id}
+            onClick={() => onServerClick(server.id)}
             className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all ${
-              server.active ? "bg-indigo-600" : "bg-gray-700 hover:bg-indigo-600 hover:rounded-xl"
+              isServerActive(server.id) ? "bg-indigo-600" : "bg-gray-700 hover:bg-indigo-600 hover:rounded-xl"
             }`}
           >
             {server.icon.startsWith("/") ? (
@@ -109,7 +124,7 @@ const DiscordSidebar = ({ onChannelClick, onDMClick, onDMViewClick, activeChanne
       <div className="flex-1 bg-gray-800 flex flex-col min-w-0">
         <div className="h-12 border-b border-gray-700 flex items-center px-4 flex-shrink-0">
           <span className="text-white font-semibold truncate">
-            {isDMView ? "Direct Messages" : "Midjourney Official"}
+            {isDMView ? "Direct Messages" : getServerName(activeServer)}
           </span>
         </div>
         
@@ -243,6 +258,11 @@ const DiscordSidebar = ({ onChannelClick, onDMClick, onDMViewClick, activeChanne
       </div>
     </div>
   );
+
+  function getServerName(serverId: number): string {
+    const server = servers.find(s => s.id === serverId);
+    return server?.name || "Midjourney Official";
+  }
 };
 
 export default DiscordSidebar;
