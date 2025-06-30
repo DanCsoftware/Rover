@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import { Send, Plus, Gift, Smile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Message } from "@/data/discordData";
+import { AIAssistant } from "./AIAssistant";
 
 interface DiscordChatProps {
   channelName: string;
@@ -13,6 +13,8 @@ interface DiscordChatProps {
 
 const DiscordChat = ({ channelName, messages, activeUser, channelType }: DiscordChatProps) => {
   const [message, setMessage] = useState("");
+  const [chatMessages, setChatMessages] = useState<Message[]>(messages);
+  const [showAIAssistant, setShowAIAssistant] = useState(false);
 
   const getChannelIcon = () => {
     if (channelType === 'dm' && activeUser.avatar) {
@@ -61,6 +63,65 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
         ))}
       </div>
     );
+  };
+
+  const handleSendMessage = () => {
+    if (!message.trim()) return;
+
+    const newMessage: Message = {
+      id: Date.now(),
+      user: 'You',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      content: message,
+      isBot: false
+    };
+
+    setChatMessages(prev => [...prev, newMessage]);
+
+    // Check if message mentions @rover
+    if (message.toLowerCase().includes('@rover')) {
+      setShowAIAssistant(true);
+      // Process AI request after a short delay
+      setTimeout(() => {
+        handleAIResponse(message);
+      }, 500);
+    }
+
+    setMessage("");
+  };
+
+  const handleAIResponse = (userMessage: string) => {
+    // Simulate AI processing
+    setTimeout(() => {
+      const cleanMessage = userMessage.replace('@rover', '').trim().toLowerCase();
+      let response = "I'm ROVER, your AI assistant! I'm here to help you with various tasks.";
+      
+      if (cleanMessage.includes('help')) {
+        response = "Here are some things I can help you with:\n• Answer questions\n• Provide information\n• Assist with creative tasks\n• And much more!";
+      } else if (cleanMessage.includes('hello') || cleanMessage.includes('hi')) {
+        response = "Hello there! How can I assist you today?";
+      } else if (cleanMessage.includes('what') || cleanMessage.includes('how')) {
+        response = "That's a great question! Let me help you with that. Feel free to be more specific about what you'd like to know.";
+      }
+
+      const aiMessage: Message = {
+        id: Date.now() + 1,
+        user: 'ROVER',
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        content: response,
+        isBot: true
+      };
+
+      setChatMessages(prev => [...prev, aiMessage]);
+      setShowAIAssistant(false);
+    }, 1500);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
   };
 
   return (
@@ -118,15 +179,26 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
           )}
 
           {/* Messages */}
-          {messages.map((msg) => (
+          {chatMessages.map((msg) => (
             <div key={msg.id} className="flex items-start space-x-3">
               <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center flex-shrink-0">
-                {getMessageAvatar(msg.user, msg.isBot)}
+                {msg.user === 'ROVER' ? (
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">R</span>
+                  </div>
+                ) : (
+                  getMessageAvatar(msg.user, msg.isBot)
+                )}
               </div>
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-1">
                   <span className="text-white font-medium">{msg.user}</span>
-                  {msg.isBot && <span className="bg-indigo-600 text-white text-xs px-1.5 py-0.5 rounded">BOT</span>}
+                  {msg.user === 'ROVER' && (
+                    <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1.5 py-0.5 rounded">AI</span>
+                  )}
+                  {msg.isBot && msg.user !== 'ROVER' && (
+                    <span className="bg-indigo-600 text-white text-xs px-1.5 py-0.5 rounded">BOT</span>
+                  )}
                   {msg.time && <span className="text-gray-500 text-xs">{msg.time}</span>}
                 </div>
                 
@@ -172,6 +244,24 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
               </div>
             </div>
           ))}
+
+          {/* AI Assistant Processing */}
+          {showAIAssistant && (
+            <AIAssistant 
+              message={message} 
+              onResponse={(response) => {
+                const aiMessage: Message = {
+                  id: Date.now(),
+                  user: 'ROVER',
+                  time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                  content: response,
+                  isBot: true
+                };
+                setChatMessages(prev => [...prev, aiMessage]);
+                setShowAIAssistant(false);
+              }} 
+            />
+          )}
         </div>
       </div>
 
@@ -185,7 +275,8 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName}`}
+            onKeyPress={handleKeyPress}
+            placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @rover)`}
             className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none"
           />
           <div className="flex items-center space-x-2 ml-3">
@@ -195,8 +286,22 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
             <button className="p-1 hover:bg-gray-500 rounded">
               <Smile className="w-5 h-5 text-gray-400" />
             </button>
+            <button 
+              onClick={handleSendMessage}
+              className="p-1 hover:bg-gray-500 rounded"
+            >
+              <Send className="w-5 h-5 text-gray-400" />
+            </button>
           </div>
         </div>
+        
+        {/* Hint for @rover */}
+        {message.toLowerCase().includes('@rover') && (
+          <div className="mt-2 text-xs text-gray-400 flex items-center space-x-1">
+            <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+            <span>ROVER AI will respond to your message</span>
+          </div>
+        )}
       </div>
     </div>
   );
