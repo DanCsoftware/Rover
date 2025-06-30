@@ -36,12 +36,18 @@ export interface User {
   members?: string;
 }
 
+export interface VoiceChannel {
+  name: string;
+  users: number;
+  userList?: string[];
+}
+
 export interface Server {
   id: number;
   name: string;
   icon: string;
   textChannels: Channel[];
-  voiceChannels: { name: string; users: number }[];
+  voiceChannels: VoiceChannel[];
 }
 
 // Server 2 - Gaming Server
@@ -57,18 +63,27 @@ const gamingChannels: Channel[] = [
         id: 1,
         user: 'GameBot',
         time: '9:00 AM',
-        content: 'Welcome to the Gaming Server! 🎮\n\nThis is the start of our gaming community.',
+        content: 'Welcome to Gaming Hub! 🎮\n\nThis is where gamers unite to play, compete, and have fun together!',
         isBot: true,
         isWelcome: true
       },
       {
         id: 2,
-        user: 'Admin',
+        user: 'GuildMaster',
         time: '10:30 AM',
-        content: '🎉 **NEW TOURNAMENT ANNOUNCED!**\n\nJoin our weekly tournament this Friday at 8 PM EST!\n\nPrizes:\n🥇 $100 Steam Gift Card\n🥈 $50 Steam Gift Card\n🥉 $25 Steam Gift Card\n\nRegister in #tournament-signup!',
+        content: '🏆 **WEEKLY TOURNAMENT ANNOUNCED!**\n\nJoin our Valorant tournament this Friday at 8 PM EST!\n\nPrizes:\n🥇 $100 Steam Gift Card\n🥈 $50 Steam Gift Card\n🥉 $25 Steam Gift Card\n\nRegister by reacting with ⚔️!',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎮', count: 45 }, { emoji: '🔥', count: 32 }, { emoji: '💰', count: 28 }]
+        reactions: [{ emoji: '⚔️', count: 147 }, { emoji: '🔥', count: 89 }, { emoji: '💰', count: 76 }]
+      },
+      {
+        id: 3,
+        user: 'ModeratorX',
+        time: '2:15 PM',
+        content: '🎯 New game night schedule:\n\n**Monday**: Valorant Ranked\n**Wednesday**: Among Us\n**Friday**: Tournament Night\n**Saturday**: Variety Games\n\nSee you in the voice channels!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎮', count: 234 }, { emoji: '📅', count: 67 }]
       }
     ]
   },
@@ -81,46 +96,95 @@ const gamingChannels: Channel[] = [
     messages: [
       {
         id: 1,
-        user: 'Gamer1',
+        user: 'ProGamer99',
         time: '2:15 PM',
-        content: 'Anyone playing the new RPG that just came out? The graphics are insane! 🎮',
+        content: 'Just hit Diamond in Valorant! 💎 Anyone want to duo queue?',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎮', count: 8 }, { emoji: '🔥', count: 5 }]
+        reactions: [{ emoji: '💎', count: 12 }, { emoji: '🔥', count: 8 }]
       },
       {
         id: 2,
-        user: 'Gamer2',
+        user: 'GamerGirl2024',
         time: '2:18 PM',
-        content: 'Yes! I\'ve been grinding for 6 hours straight. The skill tree is so complex but rewarding.',
-        isBot: false
+        content: 'Congrats! I\'m still stuck in Gold 😅 Need to work on my aim',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😅', count: 5 }]
       },
       {
         id: 3,
-        user: 'Gamer3',
+        user: 'AimBot_Not',
         time: '2:20 PM',
-        content: 'I\'m still stuck on the first boss 😅 Any tips?',
+        content: '@GamerGirl2024 Let\'s practice in the aim trainer together! I\'ll be in the Gaming Lounge VC',
+        isBot: false
+      },
+      {
+        id: 4,
+        user: 'RageQuit',
+        time: '2:25 PM',
+        content: 'Who\'s playing the new Call of Duty? The campaign is insane! 🎯',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '😅', count: 12 }, { emoji: '💪', count: 6 }]
+        reactions: [{ emoji: '🎯', count: 15 }, { emoji: '💥', count: 9 }]
       }
     ]
   },
   {
-    id: 'tournament-signup',
-    name: '🏆-tournament-signup',
+    id: 'valorant-lfg',
+    name: '🎯-valorant-lfg',
     type: 'text',
     serverId: 2,
-    description: 'Sign up for tournaments',
+    description: 'Looking for group - Valorant',
     messages: [
       {
         id: 1,
-        user: 'TournamentBot',
-        time: '8:00 AM',
-        content: 'Tournament Registration is now OPEN! 🏆\n\nReact with ⚔️ to join the tournament!',
+        user: 'ValorantBot',
+        time: '1:00 PM',
+        content: 'Welcome to Valorant LFG! 🎯\n\nFind teammates for ranked, unrated, or custom games here!',
         isBot: true,
+        isWelcome: true
+      },
+      {
+        id: 2,
+        user: 'IronToRadiant',
+        time: '3:45 PM',
+        content: 'LF2M for ranked queue - currently Gold 2, looking for similar rank players. Must have mic! 🎤',
+        isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '⚔️', count: 156 }]
+        reactions: [{ emoji: '🎤', count: 3 }, { emoji: '⚔️', count: 7 }]
+      },
+      {
+        id: 3,
+        user: 'SageMain',
+        time: '3:50 PM',
+        content: 'Sage main here! Gold 3, can play support. Add me: SageMain#VAL',
+        isBot: false
+      }
+    ]
+  },
+  {
+    id: 'minecraft-builds',
+    name: '🏗️-minecraft-builds',
+    type: 'text',
+    serverId: 2,
+    description: 'Show off your Minecraft creations',
+    messages: [
+      {
+        id: 1,
+        user: 'BuildMaster',
+        time: '11:30 AM',
+        content: 'Just finished my medieval castle! 🏰 Took me 3 weeks but totally worth it. Check it out on our server!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏰', count: 45 }, { emoji: '🔥', count: 23 }, { emoji: '😍', count: 31 }]
+      },
+      {
+        id: 2,
+        user: 'RedstoneWiz',
+        time: '12:15 PM',
+        content: 'Working on an automatic farm design. Anyone know how to optimize hopper timing?',
+        isBot: false
       }
     ]
   }
@@ -139,18 +203,27 @@ const musicChannels: Channel[] = [
         id: 1,
         user: 'MusicBot',
         time: '7:00 AM',
-        content: 'Welcome to the Music Lovers Community! 🎵\n\nShare your favorite tracks and discover new music!',
+        content: 'Welcome to Music Lovers! 🎵\n\nShare your passion for music, discover new artists, and vibe together!',
         isBot: true,
         isWelcome: true
       },
       {
         id: 2,
-        user: 'DJ_Mike',
+        user: 'DJ_Phoenix',
         time: '11:45 AM',
-        content: '🎧 **LIVE MIX SESSION TONIGHT!**\n\nJoin me at 9 PM for a 2-hour electronic music mix!\n\nGenres: House, Techno, Progressive\n\nSee you in the voice channel! 🔊',
+        content: '🎧 **LIVE DJ SET TONIGHT!**\n\nJoin me at 9 PM EST for a 3-hour progressive house journey!\n\n🎶 Featured artists: Deadmau5, Eric Prydz, Anjunabeats\n🔊 Broadcasting live in the DJ Booth!\n\nSee you on the dance floor! 💃🕺',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎧', count: 67 }, { emoji: '🔊', count: 45 }, { emoji: '🎵', count: 89 }]
+        reactions: [{ emoji: '🎧', count: 156 }, { emoji: '🔥', count: 89 }, { emoji: '💃', count: 234 }]
+      },
+      {
+        id: 3,
+        user: 'VinylCollector',
+        time: '3:30 PM',
+        content: '📀 **VINYL SWAP MEET THIS WEEKEND!**\n\nBring your rare finds and let\'s trade! Looking for:\n• Pink Floyd - Animals (1977 pressing)\n• Daft Punk - Random Access Memories\n• Any Blue Note jazz records\n\nDM me your collection lists! 🎼',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📀', count: 67 }, { emoji: '🎼', count: 45 }]
       }
     ]
   },
@@ -163,21 +236,30 @@ const musicChannels: Channel[] = [
     messages: [
       {
         id: 1,
-        user: 'MusicLover1',
+        user: 'MelodyHunter',
         time: '1:30 PM',
-        content: 'Just discovered this amazing indie band! Check out "Midnight Dreams" by Aurora Waves 🌙✨',
+        content: 'Just discovered this amazing indie band! 🌟\n\n**"Midnight Dreams" by Aurora Waves**\n\nAbsolutely ethereal vocals with dreamy synths. Perfect for late night listening! 🌙✨',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎵', count: 15 }, { emoji: '❤️', count: 8 }]
+        reactions: [{ emoji: '🌟', count: 23 }, { emoji: '🌙', count: 15 }, { emoji: '❤️', count: 31 }]
       },
       {
         id: 2,
-        user: 'VinylCollector',
+        user: 'ClassicRockFan',
         time: '1:35 PM',
-        content: 'Classic recommendation: Pink Floyd - "Wish You Were Here" 🎸\n\nIf you haven\'t heard this masterpiece, you\'re missing out!',
+        content: 'Classic recommendation: **Pink Floyd - "Comfortably Numb"** 🎸\n\nDavid Gilmour\'s guitar solo still gives me chills after 40+ years. Pure perfection! 🔥',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎸', count: 23 }, { emoji: '🔥', count: 18 }]
+        reactions: [{ emoji: '🎸', count: 78 }, { emoji: '🔥', count: 45 }, { emoji: '🤘', count: 89 }]
+      },
+      {
+        id: 3,
+        user: 'ElectroVibes',
+        time: '2:10 PM',
+        content: 'For all the electronic music lovers:\n\n**Flume - "Never Be Like You"** 🎛️\n\nThe production on this track is insane. Those vocal chops! 🎵',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎛️', count: 34 }, { emoji: '🎵', count: 56 }]
       }
     ]
   },
@@ -190,25 +272,54 @@ const musicChannels: Channel[] = [
     messages: [
       {
         id: 1,
-        user: 'Producer1',
-        time: '3:45 PM',
-        content: 'Working on a new track! Any tips for getting that warm analog sound in digital? 🎹',
-        isBot: false
+        user: 'BeatMaker3000',
+        time: '10:15 AM',
+        content: 'Working on a new trap beat! 🥁 Any tips for getting that hard-hitting 808 sound? Currently using FL Studio.',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🥁', count: 12 }]
       },
       {
         id: 2,
         user: 'StudioMaster',
-        time: '3:50 PM',
-        content: 'Try using some tape saturation plugins and vintage EQ emulations. Also, don\'t forget about harmonic distortion!',
+        time: '10:30 AM',
+        content: '@BeatMaker3000 Try layering your 808s with a sine wave and add some saturation! Also, side-chain compress against your kick for that pumping effect 🔊',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🎯', count: 12 }, { emoji: '🙏', count: 7 }]
+        reactions: [{ emoji: '🔊', count: 18 }, { emoji: '🙏', count: 8 }]
+      },
+      {
+        id: 3,
+        user: 'SynthWave',
+        time: '11:45 AM',
+        content: 'Just finished mixing my synthwave track! The 80s vibes are strong with this one 🌆✨\n\nTip: Use analog emulation plugins for that authentic vintage sound!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌆', count: 25 }, { emoji: '✨', count: 19 }]
+      }
+    ]
+  },
+  {
+    id: 'listening-party',
+    name: '🎶-listening-party',
+    type: 'text',
+    serverId: 3,
+    description: 'Synchronized music listening sessions',
+    messages: [
+      {
+        id: 1,
+        user: 'PartyHost',
+        time: '4:00 PM',
+        content: '🎶 **LISTENING PARTY STARTING NOW!**\n\nTonight\'s album: **The Dark Side of the Moon - Pink Floyd**\n\nJoin the "Music Listening" voice channel and let\'s experience this masterpiece together! 🌙',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎶', count: 67 }, { emoji: '🌙', count: 45 }]
       }
     ]
   }
 ];
 
-// Midjourney Server (Server 4) - keep existing channels
+// Midjourney Server (Server 4) - keep existing channels but update some content
 const midjourneyChannels: Channel[] = [
   {
     id: 'general',
@@ -227,28 +338,28 @@ const midjourneyChannels: Channel[] = [
       },
       {
         id: 2,
-        user: 'User1',
+        user: 'DigitalArtist',
         time: '3:45 PM',
-        content: 'Hey everyone! Just joined the community. Really excited to be here and learn from all of you.',
+        content: 'Hey everyone! Just joined the community. Really excited to learn about AI art generation! 🎨',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '👋', count: 5 }, { emoji: '🎉', count: 3 }]
+        reactions: [{ emoji: '👋', count: 15 }, { emoji: '🎨', count: 23 }]
       },
       {
         id: 3,
-        user: 'User2',
+        user: 'MidJourneyPro',
         time: '3:47 PM',
-        content: 'Welcome @User1! Make sure to check out the rules channel and introduce yourself properly.',
+        content: 'Welcome @DigitalArtist! Make sure to check out #newbies for beginner tips and #showcase for inspiration!',
         isBot: false
       },
       {
         id: 4,
-        user: 'User3',
+        user: 'AIEnthusiast',
         time: '3:50 PM',
-        content: 'Has anyone tried the new features that were released yesterday? The updates look amazing!',
+        content: 'The new V6 model is absolutely incredible! The detail and coherence improvements are mind-blowing 🤯',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🔥', count: 12 }, { emoji: '💯', count: 8 }]
+        reactions: [{ emoji: '🤯', count: 34 }, { emoji: '🔥', count: 28 }]
       }
     ]
   },
@@ -306,26 +417,28 @@ const midjourneyChannels: Channel[] = [
       },
       {
         id: 2,
-        user: 'User4',
+        user: 'NewUser2024',
         time: '2:35 PM',
-        content: 'Hi everyone! I\'m completely new to this. Can someone explain the basics of how everything works?',
+        content: 'Hi everyone! I\'m completely new to AI art generation. Can someone explain how to write effective prompts?',
         isBot: false
       },
       {
         id: 3,
-        user: 'User5',
+        user: 'HelpfulMember',
         time: '2:37 PM',
-        content: 'Welcome! I\'d recommend starting with our beginner guide: https://docs.ourproject.com/beginners\n\nAlso, don\'t hesitate to ask questions here - we\'re all very friendly!',
+        content: 'Welcome! Start with our beginner guide: https://docs.midjourney.com/beginners\n\nFor prompts, be descriptive but concise. Try: "a majestic lion, digital art, highly detailed, 4k" as a starting point!',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '❤️', count: 8 }, { emoji: '🙏', count: 4 }]
+        reactions: [{ emoji: '❤️', count: 12 }, { emoji: '🙏', count: 8 }]
       },
       {
         id: 4,
-        user: 'User6',
+        user: 'PromptMaster',
         time: '2:40 PM',
-        content: 'I second that! Also make sure to read the #rules channel when you have a chance.',
-        isBot: false
+        content: 'Also check out the #showcase channel for inspiration and see what prompts others are using! Learning from examples is the best way 🎨',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎨', count: 15 }]
       }
     ]
   },
@@ -346,28 +459,28 @@ const midjourneyChannels: Channel[] = [
       },
       {
         id: 2,
-        user: 'User7',
+        user: 'CreativeGenius',
         time: '1:15 PM',
-        content: 'Just finished my latest project! Check it out: https://myproject.dev\n\nBuilt with the latest technologies and really proud of how it turned out!',
+        content: 'Just created this surreal landscape! 🌄\n\nPrompt: "floating islands in a purple sky, waterfalls cascading into clouds, fantasy art, ethereal lighting, 8k quality"\n\nI\'m amazed by how V6 handles complex scenes!',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '🔥', count: 23 }, { emoji: '💯', count: 18 }, { emoji: '🎉', count: 15 }]
+        reactions: [{ emoji: '🌄', count: 89 }, { emoji: '🔥', count: 67 }, { emoji: '✨', count: 45 }]
       },
       {
         id: 3,
-        user: 'User8',
+        user: 'PortraitPro',
         time: '1:20 PM',
-        content: 'Wow @User7, that design is absolutely stunning! The animations are so smooth. Did you use any specific framework?',
+        content: 'Wow @CreativeGenius! The atmospheric perspective is incredible. How long did it take to get the composition right?',
         isBot: false
       },
       {
         id: 4,
-        user: 'User7',
+        user: 'CreativeGenius',
         time: '1:22 PM',
-        content: 'Thanks! I used React with Framer Motion for the animations. The design system is custom built with Tailwind CSS.',
+        content: 'Thanks! About 15 iterations. The key was adding "rule of thirds" and "golden ratio composition" to the prompt.',
         isBot: false,
         hasReactions: true,
-        reactions: [{ emoji: '👍', count: 12 }]
+        reactions: [{ emoji: '💡', count: 23 }]
       }
     ]
   },
@@ -416,10 +529,10 @@ const midjourneyChannels: Channel[] = [
         id: 2,
         user: 'Admin',
         time: '2:30 PM',
-        content: '🎉 **BIG UPDATE INCOMING!**\n\nWe\'re excited to announce major new features coming next week:\n\n• Enhanced user interface\n• New collaboration tools\n• Improved performance\n• Mobile app updates\n\nStay tuned for more details!',
+        content: '🎉 **MIDJOURNEY V6 IS NOW LIVE!**\n\nMajor improvements include:\n\n• Enhanced prompt understanding\n• Better coherence in complex scenes\n• Improved text rendering\n• Higher resolution outputs\n• More realistic lighting\n\nTry it now with --v 6 in your prompts!',
         isBot: true,
         hasReactions: true,
-        reactions: [{ emoji: '🎉', count: 89 }, { emoji: '🔥', count: 156 }, { emoji: '👀', count: 234 }]
+        reactions: [{ emoji: '🎉', count: 234 }, { emoji: '🔥', count: 189 }, { emoji: '🚀', count: 156 }]
       }
     ]
   }
@@ -432,10 +545,10 @@ export const servers: Server[] = [
     icon: "🔥",
     textChannels: gamingChannels,
     voiceChannels: [
-      { name: "Gaming Lounge", users: 5 },
-      { name: "Tournament Arena", users: 12 },
-      { name: "Chill Gaming", users: 3 },
-      { name: "Strategy Games", users: 0 }
+      { name: "Gaming Lounge", users: 5, userList: ["ProGamer99", "AimBot_Not", "GamerGirl2024", "RageQuit", "NoobSlayer"] },
+      { name: "Tournament Arena", users: 12, userList: ["GuildMaster", "ValorantPro", "ClutchKing", "HeadshotOnly", "TacticalGenius", "FragMaster", "EcoRound", "SpikeDefuser", "FlashBang", "SmokeScreen", "WallBang", "PistolAce"] },
+      { name: "Minecraft Creative", users: 3, userList: ["BuildMaster", "RedstoneWiz", "BlockCrafter"] },
+      { name: "Chill Gaming", users: 2, userList: ["CasualGamer", "RelaxedPlayer"] }
     ]
   },
   {
@@ -444,10 +557,10 @@ export const servers: Server[] = [
     icon: "🎵",
     textChannels: musicChannels,
     voiceChannels: [
-      { name: "Music Listening", users: 8 },
-      { name: "DJ Booth", users: 15 },
-      { name: "Jam Session", users: 4 },
-      { name: "Production Talk", users: 2 }
+      { name: "Music Listening", users: 8, userList: ["PartyHost", "VinylCollector", "MelodyHunter", "ClassicRockFan", "ElectroVibes", "JazzCat", "BluesLover", "SynthWave"] },
+      { name: "DJ Booth", users: 15, userList: ["DJ_Phoenix", "MixMaster", "BeatDropper", "BassBoosted", "TechnoTrance", "HouseHead", "DubstepDrop", "ChillHop", "LoFiVibes", "DeepHouse", "ProgressiveKing", "TrapLord", "FunkSoul", "DiscoFever", "ElectroSwing"] },
+      { name: "Jam Session", users: 4, userList: ["GuitarHero", "BassPlayer", "DrumBeat", "KeyboardMaster"] },
+      { name: "Production Talk", users: 2, userList: ["BeatMaker3000", "StudioMaster"] }
     ]
   },
   {
@@ -456,14 +569,13 @@ export const servers: Server[] = [
     icon: "/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png",
     textChannels: midjourneyChannels,
     voiceChannels: [
-      { name: "General", users: 0 },
-      { name: "🎨 Creative Session", users: 3 },
-      { name: "Help Desk", users: 1 }
+      { name: "General Chat", users: 6, userList: ["DigitalArtist", "MidJourneyPro", "AIEnthusiast", "CreativeGenius", "PortraitPro", "PromptMaster"] },
+      { name: "🎨 Creative Session", users: 3, userList: ["ArtDirector", "ConceptArtist", "VisualDesigner"] },
+      { name: "Help Desk", users: 2, userList: ["HelpfulMember", "TutorialGuru"] }
     ]
   }
 ];
 
-// Legacy exports for backward compatibility
 export const channels: Channel[] = midjourneyChannels;
 
 export const dmUsers: User[] = [

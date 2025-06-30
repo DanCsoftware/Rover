@@ -206,14 +206,27 @@ const DiscordSidebar = ({
                 {expandedGroups.includes("voice") && (
                   <div className="ml-2">
                     {getCurrentServer()?.voiceChannels.map((channel, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center px-2 py-1.5 rounded cursor-pointer hover:bg-gray-700"
-                      >
-                        <Volume2 className="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" />
-                        <span className="text-gray-300 text-sm flex-1 truncate">{channel.name}</span>
-                        {channel.users > 0 && (
-                          <span className="text-gray-500 text-xs flex-shrink-0">{channel.users}</span>
+                      <div key={index} className="mb-1">
+                        <div className="flex items-center px-2 py-1.5 rounded cursor-pointer hover:bg-gray-700">
+                          <Volume2 className="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" />
+                          <span className="text-gray-300 text-sm flex-1 truncate">{channel.name}</span>
+                          {channel.users > 0 && (
+                            <span className="text-gray-500 text-xs flex-shrink-0">{channel.users}</span>
+                          )}
+                        </div>
+                        
+                        {/* Show users in voice channel */}
+                        {channel.userList && channel.userList.length > 0 && (
+                          <div className="ml-6 space-y-1">
+                            {channel.userList.map((user, userIndex) => (
+                              <div key={userIndex} className="flex items-center px-2 py-1 text-gray-400 text-xs">
+                                <div className="w-4 h-4 rounded-full bg-gray-600 flex items-center justify-center mr-2 flex-shrink-0">
+                                  <span className="text-white text-xs font-bold">{user.charAt(0)}</span>
+                                </div>
+                                <span className="truncate">{user}</span>
+                              </div>
+                            ))}
+                          </div>
                         )}
                       </div>
                     ))}
