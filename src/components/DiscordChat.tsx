@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { Send, Plus, Gift, Smile } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,8 +23,10 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   const channelUsers = useMemo(() => {
     const userMap = new Map();
     
-    // Process messages to extract unique users
-    chatMessages.forEach((msg) => {
+    // Process all messages (both initial and new ones) to extract unique users
+    const allMessages = [...messages, ...chatMessages.slice(messages.length)];
+    
+    allMessages.forEach((msg) => {
       if (!userMap.has(msg.user) && msg.user !== 'You') {
         let role: 'owner' | 'admin' | 'moderator' | 'member' = 'member';
         let status: 'online' | 'idle' | 'dnd' | 'offline' = 'online';
@@ -36,7 +37,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
           role = 'admin';
         } else if (msg.user.includes('Moderator') || msg.user.includes('Mod')) {
           role = 'moderator';
-        } else if (msg.user.includes('Guild') || msg.user.includes('Owner')) {
+        } else if (msg.user.includes('Guild') || msg.user.includes('Owner') || msg.user === 'GuildMaster') {
           role = 'owner';
         }
 
@@ -52,9 +53,12 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
           status = 'online';
         }
 
-        // Some users might be idle/offline
-        if (Math.random() > 0.8) {
-          status = Math.random() > 0.5 ? 'idle' : 'dnd';
+        // Add some variety to status - most users online, some idle/dnd
+        const randomStatus = Math.random();
+        if (randomStatus > 0.85) {
+          status = 'idle';
+        } else if (randomStatus > 0.95) {
+          status = 'dnd';
         }
 
         userMap.set(msg.user, {
@@ -67,8 +71,22 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
       }
     });
 
+    // Add some additional users to make the list more realistic
+    const additionalUsers = [
+      { id: 'user1', name: 'ProGamer99', status: 'online' as const, role: 'member' as const, activity: 'Playing Valorant' },
+      { id: 'user2', name: 'GamerGirl2024', status: 'online' as const, role: 'member' as const, activity: 'Streaming' },
+      { id: 'user3', name: 'TacticalGenius', status: 'idle' as const, role: 'member' as const },
+      { id: 'user4', name: 'BuildMaster', status: 'online' as const, role: 'member' as const, activity: 'Building' },
+    ];
+
+    additionalUsers.forEach(user => {
+      if (!userMap.has(user.name)) {
+        userMap.set(user.name, user);
+      }
+    });
+
     return Array.from(userMap.values());
-  }, [chatMessages]);
+  }, [messages, chatMessages]);
 
   const getMessageAvatar = (msgUser: string, isBot?: boolean) => {
     if (msgUser === 'Midjourney Bot' || isBot) {
@@ -230,8 +248,12 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
                     <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                       <span className="text-white text-xs font-bold">R</span>
                     </div>
+                  ) : msg.user === 'Midjourney Bot' || msg.isBot ? (
+                    <img src="/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png" alt="Bot" className="w-6 h-6 rounded-full" />
                   ) : (
-                    getMessageAvatar(msg.user, msg.isBot)
+                    <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold">
+                      {msg.user.charAt(0)}
+                    </div>
                   )}
                 </div>
                 <div className="flex-1">
