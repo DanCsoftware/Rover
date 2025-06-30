@@ -1,18 +1,14 @@
 
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
+import DiscordSidebar from "@/components/DiscordSidebar";
+import DiscordChat from "@/components/DiscordChat";
+import DiscordUserPanel from "@/components/DiscordUserPanel";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-900">
-      <Navigation />
-      <Hero />
-      <Features />
-      <CTA />
-      <Footer />
+    <div className="h-screen bg-gray-900 flex overflow-hidden">
+      <DiscordSidebar />
+      <DiscordChat />
+      <DiscordUserPanel />
     </div>
   );
 };
