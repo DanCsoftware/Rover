@@ -1,4 +1,3 @@
-
 export interface Message {
   id: number;
   user: string;
@@ -50,6 +49,34 @@ export interface Server {
   textChannels: Channel[];
   voiceChannels: VoiceChannel[];
 }
+
+const MALICIOUS_DOMAINS = [
+  'bit.ly/malware',
+  'suspicious-discord.com',
+  'fake-steam.com',
+  'phishing-site.net',
+  'malware-download.org'
+];
+
+const SUSPICIOUS_PATTERNS = [
+  /[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/, // IP addresses
+  /[a-zA-Z0-9]+-[a-zA-Z0-9]+-[a-zA-Z0-9]+\.(tk|ml|ga|cf)/, // Suspicious TLDs
+  /discord[0-9a-z-]*\.(com|org|net)/, // Discord impersonation
+  /steam[0-9a-z-]*\.(com|org|net)/, // Steam impersonation
+];
+
+const SAFE_DOMAINS = [
+  'discord.com',
+  'discord.gg',
+  'github.com',
+  'youtube.com',
+  'twitter.com',
+  'reddit.com',
+  'stackoverflow.com',
+  'google.com',
+  'microsoft.com',
+  'steam.com'
+];
 
 // Server 2 - Gaming Server
 const gamingChannels: Channel[] = [
@@ -418,6 +445,39 @@ const midjourneyChannels: Channel[] = [
         links: ['https://docs.midjourney.com/prompts', 'https://midjourney.com/gallery', 'https://docs.midjourney.com/tips', 'https://docs.midjourney.com/settings'],
         hasReactions: true,
         reactions: [{ emoji: '📋', count: 156 }, { emoji: '🎯', count: 89 }]
+      },
+      {
+        id: 6,
+        user: 'CommunityMod',
+        time: '8:30 PM',
+        content: '🔗 **COMMUNITY LINKS**\n\n💬 Discord Server: https://discord.gg/midjourney\n🐦 Twitter: https://twitter.com/midjourney\n📘 Facebook: https://facebook.com/midjourney\n📸 Instagram: https://instagram.com/midjourney',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://discord.gg/midjourney', 'https://twitter.com/midjourney', 'https://facebook.com/midjourney', 'https://instagram.com/midjourney'],
+        hasReactions: true,
+        reactions: [{ emoji: '💬', count: 78 }, { emoji: '🐦', count: 45 }]
+      },
+      {
+        id: 7,
+        user: 'TechSupport',
+        time: '8:35 PM',
+        content: '⚠️ **WARNING - SUSPICIOUS LINKS DETECTED**\n\nDo NOT click these links - they are for testing purposes only:\n• https://fake-midjourney.com\n• https://phishing-site.net/midjourney\n• https://suspicious-discord.com/invite\n\nAlways verify links before clicking!',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://fake-midjourney.com', 'https://phishing-site.net/midjourney', 'https://suspicious-discord.com/invite'],
+        hasReactions: true,
+        reactions: [{ emoji: '⚠️', count: 234 }, { emoji: '🚨', count: 156 }]
+      },
+      {
+        id: 8,
+        user: 'DevTeam',
+        time: '8:40 PM',
+        content: '🛠️ **DEVELOPER RESOURCES**\n\n📄 API Documentation: https://docs.midjourney.com/api\n🔧 Developer Tools: https://github.com/midjourney/tools\n💾 Sample Code: https://github.com/midjourney/examples\n🧪 Sandbox Environment: https://sandbox.midjourney.com',
+        isBot: false,
+        hasLinks: true,
+        links: ['https://docs.midjourney.com/api', 'https://github.com/midjourney/tools', 'https://github.com/midjourney/examples', 'https://sandbox.midjourney.com'],
+        hasReactions: true,
+        reactions: [{ emoji: '🛠️', count: 89 }, { emoji: '💾', count: 67 }]
       }
     ]
   },
@@ -797,4 +857,3 @@ export const dmMessages: Record<string, Message[]> = {
     }
   ]
 };
-
