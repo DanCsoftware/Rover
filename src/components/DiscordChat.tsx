@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useMemo } from "react";
 import { Send, Plus, Gift, Smile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Message } from "@/data/discordData";
@@ -19,17 +20,55 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [showUserList, setShowUserList] = useState(true);
 
-  // Mock users for the user list
-  const mockUsers = [
-    { id: '1', name: 'ServerOwner', status: 'online' as const, role: 'owner' as const, activity: 'Playing Valorant' },
-    { id: '2', name: 'AdminUser', status: 'online' as const, role: 'admin' as const },
-    { id: '3', name: 'ModUser1', status: 'online' as const, role: 'moderator' as const, activity: 'Listening to Spotify' },
-    { id: '4', name: 'ActiveUser1', status: 'online' as const, activity: 'In a voice channel' },
-    { id: '5', name: 'ActiveUser2', status: 'online' as const },
-    { id: '6', name: 'IdleUser', status: 'idle' as const, activity: 'Away' },
-    { id: '7', name: 'BusyUser', status: 'dnd' as const, activity: 'Do Not Disturb' },
-    { id: '8', name: 'OfflineUser', status: 'offline' as const },
-  ];
+  // Extract users from messages and create user list with roles and status
+  const channelUsers = useMemo(() => {
+    const userMap = new Map();
+    
+    // Process messages to extract unique users
+    chatMessages.forEach((msg) => {
+      if (!userMap.has(msg.user) && msg.user !== 'You') {
+        let role: 'owner' | 'admin' | 'moderator' | 'member' = 'member';
+        let status: 'online' | 'idle' | 'dnd' | 'offline' = 'online';
+        let activity: string | undefined;
+
+        // Assign roles based on user patterns
+        if (msg.user.includes('Admin') || msg.user === 'ModeratorX') {
+          role = 'admin';
+        } else if (msg.user.includes('Moderator') || msg.user.includes('Mod')) {
+          role = 'moderator';
+        } else if (msg.user.includes('Guild') || msg.user.includes('Owner')) {
+          role = 'owner';
+        }
+
+        // Assign activities based on user names/context
+        if (msg.user.includes('Gamer') || msg.user.includes('Pro')) {
+          activity = 'Playing games';
+        } else if (msg.user.includes('DJ') || msg.user.includes('Music')) {
+          activity = 'Listening to music';
+        } else if (msg.user.includes('Artist') || msg.user.includes('Creative')) {
+          activity = 'Creating art';
+        } else if (msg.user.includes('Bot')) {
+          activity = 'Bot activities';
+          status = 'online';
+        }
+
+        // Some users might be idle/offline
+        if (Math.random() > 0.8) {
+          status = Math.random() > 0.5 ? 'idle' : 'dnd';
+        }
+
+        userMap.set(msg.user, {
+          id: msg.user.toLowerCase().replace(/\s+/g, '-'),
+          name: msg.user,
+          status,
+          role,
+          activity
+        });
+      }
+    });
+
+    return Array.from(userMap.values());
+  }, [chatMessages]);
 
   const getMessageAvatar = (msgUser: string, isBot?: boolean) => {
     if (msgUser === 'Midjourney Bot' || isBot) {
@@ -312,7 +351,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
 
       {/* User List - only show for text channels when showUserList is true */}
       {channelType === 'text' && showUserList && (
-        <DiscordUserList users={mockUsers} className="w-60 flex-shrink-0" />
+        <DiscordUserList users={channelUsers} className="w-60 flex-shrink-0" />
       )}
     </div>
   );
