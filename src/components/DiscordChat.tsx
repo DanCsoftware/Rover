@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Send, Plus, Gift, Smile, Sparkles, Search, ExternalLink, MessageSquare, Server, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Message } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
@@ -445,134 +446,136 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
           showUserList={showUserList}
         />
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-4 space-y-4">
-            {/* Profile Section - only show for DMs */}
-            {channelType === 'dm' && (
-              <div className="flex flex-col items-center text-center py-8">
-                <div className="w-20 h-20 rounded-full bg-gray-600 flex items-center justify-center mb-4">
-                  {activeUser.avatar ? (
-                    <img src={activeUser.avatar} alt={activeUser.name} className="w-16 h-16 rounded-full" />
-                  ) : (
-                    <div className="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-white text-2xl font-bold">
-                      {activeUser.name.charAt(0)}
-                    </div>
-                  )}
-                </div>
-                <h2 className="text-white text-2xl font-bold">{activeUser.name}</h2>
-                <p className="text-gray-400">{activeUser.username}</p>
-                <p className="text-gray-400 mt-2">This is the beginning of your direct message history with {activeUser.name}.</p>
-                <div className="flex space-x-2 mt-4">
-                  <Button variant="destructive" size="sm">Mute</Button>
-                  <Button variant="secondary" size="sm">View Profile</Button>
-                  <Button variant="secondary" size="sm">Report</Button>
-                </div>
-                <div className="text-gray-500 text-sm mt-4">September 14, 2024</div>
-              </div>
-            )}
-
-            {/* Channel Header - only show for text channels */}
-            {channelType === 'text' && (
-              <div className="flex flex-col items-start py-8">
-                <div className="w-16 h-16 rounded-full bg-gray-600 flex items-center justify-center mb-4">
-                  <span className="text-gray-400 text-2xl">#</span>
-                </div>
-                <h2 className="text-white text-2xl font-bold">Welcome to #{channelName}!</h2>
-                <p className="text-gray-400 mt-2">This is the start of the #{channelName} channel.</p>
-                <div className="text-gray-500 text-sm mt-4">September 14, 2024</div>
-              </div>
-            )}
-
-            {/* Messages */}
-            {chatMessages.map((msg) => (
-              <div key={msg.id} className={`flex items-start space-x-3 ${msg.user === 'ROVER' ? 'relative' : ''}`}>
-                {msg.user === 'ROVER' && (
-                  <div className="absolute -left-2 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 rounded-full opacity-60"></div>
-                )}
-                <div className="flex-shrink-0">
-                  {getMessageAvatar(msg.user, msg.isBot)}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <span className={`font-medium ${msg.user === 'ROVER' ? 'text-blue-300' : 'text-white'}`}>
-                      {msg.user}
-                    </span>
-                    {msg.user === 'ROVER' && (
-                      <div className="flex items-center space-x-1">
-                        <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-2 py-0.5 rounded-full font-medium">
-                          AI Assistant
-                        </div>
-                        <Sparkles className="w-3 h-3 text-blue-400 animate-pulse" />
+        {/* Messages - Now using ScrollArea */}
+        <div className="flex-1">
+          <ScrollArea className="h-full">
+            <div className="p-4 space-y-4">
+              {/* Profile Section - only show for DMs */}
+              {channelType === 'dm' && (
+                <div className="flex flex-col items-center text-center py-8">
+                  <div className="w-20 h-20 rounded-full bg-gray-600 flex items-center justify-center mb-4">
+                    {activeUser.avatar ? (
+                      <img src={activeUser.avatar} alt={activeUser.name} className="w-16 h-16 rounded-full" />
+                    ) : (
+                      <div className="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-white text-2xl font-bold">
+                        {activeUser.name.charAt(0)}
                       </div>
                     )}
-                    {msg.isBot && msg.user !== 'ROVER' && (
-                      <span className="bg-indigo-600 text-white text-xs px-1.5 py-0.5 rounded">BOT</span>
-                    )}
-                    {msg.time && <span className="text-gray-500 text-xs">{msg.time}</span>}
                   </div>
-                  
-                  {renderMessageContent(msg)}
-                  
-                  {msg.hasButton && (
-                    <Button className="mt-2 bg-green-600 hover:bg-green-700 text-white" size="sm">
-                      {msg.buttonText}
-                    </Button>
-                  )}
-                  
-                  {msg.hasButtons && (
-                    <div className="flex space-x-2 mt-2">
-                      {msg.buttons?.map((button, index) => (
-                        <Button 
-                          key={index} 
-                          className={index === 0 ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-500"} 
-                          size="sm"
-                        >
-                          {button}
-                        </Button>
-                      ))}
-                    </div>
-                  )}
-
-                  {msg.hasInvite && (
-                    <div className="mt-3 bg-gray-800 rounded-lg p-4 max-w-md">
-                      <div className="text-white text-sm mb-2">You've Been Invited To Join A Server</div>
-                      <div className="flex items-center space-x-3">
-                        <img src="/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png" alt="Server" className="w-12 h-12 rounded-lg" />
-                        <div className="flex-1">
-                          <div className="text-white font-medium">Midjourney ✅</div>
-                          <div className="text-gray-400 text-sm">🟢 858,103 Online ⚫ 20,943,714 Members</div>
-                        </div>
-                        <Button className="bg-green-600 hover:bg-green-700 text-white" size="sm">
-                          Join
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-
-                  {renderReactions(msg.hasReactions ? msg.reactions : undefined)}
+                  <h2 className="text-white text-2xl font-bold">{activeUser.name}</h2>
+                  <p className="text-gray-400">{activeUser.username}</p>
+                  <p className="text-gray-400 mt-2">This is the beginning of your direct message history with {activeUser.name}.</p>
+                  <div className="flex space-x-2 mt-4">
+                    <Button variant="destructive" size="sm">Mute</Button>
+                    <Button variant="secondary" size="sm">View Profile</Button>
+                    <Button variant="secondary" size="sm">Report</Button>
+                  </div>
+                  <div className="text-gray-500 text-sm mt-4">September 14, 2024</div>
                 </div>
-              </div>
-            ))}
+              )}
 
-            {/* AI Assistant Processing */}
-            {showAIAssistant && (
-              <AIAssistant 
-                message={message} 
-                onResponse={(response) => {
-                  const aiMessage: Message = {
-                    id: Date.now(),
-                    user: 'ROVER',
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    content: response,
-                    isBot: true
-                  };
-                  setChatMessages(prev => [...prev, aiMessage]);
-                  setShowAIAssistant(false);
-                }} 
-              />
-            )}
-          </div>
+              {/* Channel Header - only show for text channels */}
+              {channelType === 'text' && (
+                <div className="flex flex-col items-start py-8">
+                  <div className="w-16 h-16 rounded-full bg-gray-600 flex items-center justify-center mb-4">
+                    <span className="text-gray-400 text-2xl">#</span>
+                  </div>
+                  <h2 className="text-white text-2xl font-bold">Welcome to #{channelName}!</h2>
+                  <p className="text-gray-400 mt-2">This is the start of the #{channelName} channel.</p>
+                  <div className="text-gray-500 text-sm mt-4">September 14, 2024</div>
+                </div>
+              )}
+
+              {/* Messages */}
+              {chatMessages.map((msg) => (
+                <div key={msg.id} className={`flex items-start space-x-3 ${msg.user === 'ROVER' ? 'relative' : ''}`}>
+                  {msg.user === 'ROVER' && (
+                    <div className="absolute -left-2 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 rounded-full opacity-60"></div>
+                  )}
+                  <div className="flex-shrink-0">
+                    {getMessageAvatar(msg.user, msg.isBot)}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <span className={`font-medium ${msg.user === 'ROVER' ? 'text-blue-300' : 'text-white'}`}>
+                        {msg.user}
+                      </span>
+                      {msg.user === 'ROVER' && (
+                        <div className="flex items-center space-x-1">
+                          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                            AI Assistant
+                          </div>
+                          <Sparkles className="w-3 h-3 text-blue-400 animate-pulse" />
+                        </div>
+                      )}
+                      {msg.isBot && msg.user !== 'ROVER' && (
+                        <span className="bg-indigo-600 text-white text-xs px-1.5 py-0.5 rounded">BOT</span>
+                      )}
+                      {msg.time && <span className="text-gray-500 text-xs">{msg.time}</span>}
+                    </div>
+                    
+                    {renderMessageContent(msg)}
+                    
+                    {msg.hasButton && (
+                      <Button className="mt-2 bg-green-600 hover:bg-green-700 text-white" size="sm">
+                        {msg.buttonText}
+                      </Button>
+                    )}
+                    
+                    {msg.hasButtons && (
+                      <div className="flex space-x-2 mt-2">
+                        {msg.buttons?.map((button, index) => (
+                          <Button 
+                            key={index} 
+                            className={index === 0 ? "bg-green-600 hover:bg-green-700" : "bg-gray-600 hover:bg-gray-500"} 
+                            size="sm"
+                          >
+                            {button}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
+
+                    {msg.hasInvite && (
+                      <div className="mt-3 bg-gray-800 rounded-lg p-4 max-w-md">
+                        <div className="text-white text-sm mb-2">You've Been Invited To Join A Server</div>
+                        <div className="flex items-center space-x-3">
+                          <img src="/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png" alt="Server" className="w-12 h-12 rounded-lg" />
+                          <div className="flex-1">
+                            <div className="text-white font-medium">Midjourney ✅</div>
+                            <div className="text-gray-400 text-sm">🟢 858,103 Online ⚫ 20,943,714 Members</div>
+                          </div>
+                          <Button className="bg-green-600 hover:bg-green-700 text-white" size="sm">
+                            Join
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+
+                    {renderReactions(msg.hasReactions ? msg.reactions : undefined)}
+                  </div>
+                </div>
+              ))}
+
+              {/* AI Assistant Processing */}
+              {showAIAssistant && (
+                <AIAssistant 
+                  message={message} 
+                  onResponse={(response) => {
+                    const aiMessage: Message = {
+                      id: Date.now(),
+                      user: 'ROVER',
+                      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                      content: response,
+                      isBot: true
+                    };
+                    setChatMessages(prev => [...prev, aiMessage]);
+                    setShowAIAssistant(false);
+                  }} 
+                />
+              )}
+            </div>
+          </ScrollArea>
         </div>
 
         {/* Message Input */}

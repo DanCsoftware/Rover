@@ -1,5 +1,8 @@
 import { SearchQuery, SearchResult, ThreadResult, performSearch, findHistoricalThreads, suggestChannels, findSimilarServers } from './searchEngine';
 
+// Export the types so they can be imported elsewhere
+export type { SearchResult, ThreadResult };
+
 export interface ProcessedQuery {
   intent: 'search' | 'navigate' | 'find_threads' | 'find_servers' | 'find_channels' | 'summary_search';
   searchQuery: SearchQuery;

@@ -1,4 +1,3 @@
-
 import { servers, dmUsers, dmMessages, Message, Server, User } from '@/data/discordData';
 
 export interface SearchResult {
@@ -168,13 +167,15 @@ class SearchIndex {
     const results: SearchResult[] = [];
     
     Array.from(this.serverIndex.values()).forEach(server => {
-      const relevance = this.calculateRelevance(query, `${server.name} ${server.description || ''}`);
+      // Create a fallback description if none exists
+      const serverDescription = (server as any).description || `${server.name} Discord Server`;
+      const relevance = this.calculateRelevance(query, `${server.name} ${serverDescription}`);
       if (relevance > 0.1) {
         results.push({
           type: 'server',
           id: server.id.toString(),
           title: server.name,
-          content: server.description || `${server.name} Discord Server`,
+          content: serverDescription,
           relevanceScore: relevance,
           context: `${server.textChannels.length} text channels, ${server.voiceChannels.length} voice channels`
         });
@@ -328,7 +329,9 @@ export const findSimilarServers = (currentServerId: string, criteria: string): S
   const currentServer = servers.find(s => s.id.toString() === currentServerId);
   if (!currentServer) return [];
 
-  const searchQuery = `${criteria} ${currentServer.name} ${currentServer.description || ''}`;
+  // Create a fallback description if none exists
+  const serverDescription = (currentServer as any).description || `${currentServer.name} Discord Server`;
+  const searchQuery = `${criteria} ${currentServer.name} ${serverDescription}`;
   return searchEngine.searchServers(searchQuery).filter(s => s.id !== currentServerId);
 };
 
