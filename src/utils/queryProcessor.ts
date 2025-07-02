@@ -4,14 +4,20 @@ import { SearchQuery, SearchResult, ThreadResult, performSearch, findHistoricalT
 export type { SearchResult, ThreadResult };
 
 export interface ProcessedQuery {
-  intent: 'search' | 'navigate' | 'find_threads' | 'find_servers' | 'find_channels' | 'summary_search';
+  intent: 'search' | 'navigate' | 'find_threads' | 'find_servers' | 'find_channels' | 'summary_search' | 'moderation' | 'user_analysis' | 'channel_analysis';
   searchQuery: SearchQuery;
   additionalContext?: string;
   suggestions?: string[];
+  moderationContext?: {
+    type: 'user_safety' | 'channel_optimization' | 'general_moderation';
+    targetUsers?: string[];
+    targetChannels?: string[];
+    riskLevel?: 'all' | 'medium' | 'high' | 'critical';
+  };
 }
 
 export interface SearchResponse {
-  type: 'search_results' | 'navigation' | 'threads' | 'servers' | 'channels' | 'error';
+  type: 'search_results' | 'navigation' | 'threads' | 'servers' | 'channels' | 'moderation_report' | 'error';
   results?: SearchResult[];
   threads?: ThreadResult[];
   message: string;
@@ -21,6 +27,7 @@ export interface SearchResponse {
     id: string;
     name: string;
   };
+  moderationData?: any;
 }
 
 export class QueryProcessor {
@@ -33,6 +40,30 @@ export class QueryProcessor {
       /messages?.*containing/i,
       /discussions?.*about/i,
       /conversations?.*about/i
+    ],
+    moderation: [
+      /users?.*harass/i,
+      /users?.*toxic/i,
+      /users?.*violat/i,
+      /users?.*not.*follow.*rules/i,
+      /users?.*problem/i,
+      /ban.*users?/i,
+      /kick.*users?/i,
+      /warn.*users?/i,
+      /moderat/i,
+      /safety.*report/i,
+      /behavior.*analysis/i
+    ],
+    channelManagement: [
+      /channels?.*delete/i,
+      /channels?.*remove/i,
+      /channels?.*unused/i,
+      /channels?.*inactive/i,
+      /channels?.*no.*longer.*need/i,
+      /optimize.*channels?/i,
+      /channel.*management/i,
+      /consolidate.*channels?/i,
+      /merge.*channels?/i
     ],
     threads: [
       /find.*threads?.*about/i,
@@ -107,6 +138,10 @@ export class QueryProcessor {
       intent = 'find_channels';
     } else if (this.matchesPatterns(lowerQuery, this.searchPatterns.navigation)) {
       intent = 'navigate';
+    } else if (this.matchesPatterns(lowerQuery, this.searchPatterns.moderation)) {
+      intent = 'moderation';
+    } else if (this.matchesPatterns(lowerQuery, this.searchPatterns.channelManagement)) {
+      intent = 'channel_analysis';
     }
 
     // Extract search parameters
@@ -277,6 +312,23 @@ export class QueryProcessor {
             type: 'error',
             message: `Couldn't find channels to navigate to for "${searchQuery.query}". Try being more specific.`,
             suggestions: processedQuery.suggestions
+          };
+
+        case 'moderation':
+        case 'user_analysis':
+          return {
+            type: 'moderation_report',
+            message: 'Moderation analysis requires server context. Please specify which server to analyze.',
+            suggestions: ['Try: "analyze user behavior in this server"', 'Try: "show high-risk users"'],
+            moderationData: { type: 'user_safety', placeholder: true }
+          };
+
+        case 'channel_analysis':
+          return {
+            type: 'moderation_report', 
+            message: 'Channel optimization analysis ready. Processing server channels...',
+            suggestions: ['Try: "show inactive channels"', 'Try: "recommend channels to delete"'],
+            moderationData: { type: 'channel_optimization', placeholder: true }
           };
 
         case 'search':
