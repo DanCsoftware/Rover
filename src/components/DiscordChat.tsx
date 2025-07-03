@@ -453,44 +453,75 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
             return `I searched thoroughly but didn't find any results for "${originalQuery}" in **${activeUser.name}** server.\n\n💡 **Try:**\n• Using different keywords\n• Asking about a specific channel\n• Checking if you meant something else\n\nWhat would you like me to help you find? 🔍`;
           }
           
-          let response = `🔍 **Found ${serverFilteredResults.length} interaction(s) for "${originalQuery}" in ${activeUser.name}:**\n\n`;
+          // Check if this is a user interaction query
+          const isUserQuery = originalQuery.toLowerCase().includes('users i talked to') || 
+                             originalQuery.toLowerCase().includes('conversations') ||
+                             originalQuery.toLowerCase().includes('recent users');
           
-          // Check if this is a harassment/moderation query and add rule context
+          // Check if this is a harassment/moderation query (used later)
           const isHarassmentQuery = originalQuery.toLowerCase().includes('harassment') || 
                                    originalQuery.toLowerCase().includes('toxic') || 
                                    originalQuery.toLowerCase().includes('violat') ||
                                    originalQuery.toLowerCase().includes('abuse');
           
-          if (isHarassmentQuery) {
-            response += `⚠️ **Community Guidelines Reference:**\n`;
-            response += `• **Rule 2:** No harassment, bullying, or personal attacks\n`;
-            response += `• **Rule 3:** Maintain respectful communication at all times\n`;
-            response += `• **Rule 5:** No discriminatory language or hate speech\n`;
-            response += `• **Rule 8:** Follow Discord Terms of Service\n\n`;
-            response += `📋 **Potential Violations Found:**\n`;
-          }
+          let response = '';
           
-          serverFilteredResults.slice(0, 5).forEach((result, index) => {
-            // Format timestamp properly
-            const timeDisplay = result.timestamp === 'Unknown time' ? 
-              '🕐 Today' : `🕐 ${result.timestamp}`;
-            
-            response += `**${index + 1}. Conversation with ${result.user}**\n`;
-            response += `   ${timeDisplay}\n`;
-            response += `   📍 #${result.channel || channelName}\n`;
-            response += `   👤 ${result.user || 'Unknown user'}\n`;
-            
-            // Add rule violation analysis for harassment queries
-            if (isHarassmentQuery) {
-              const violatedRules = analyzeRuleViolations(result.content);
-              if (violatedRules.length > 0) {
-                response += `   🚨 **Violated Rules:** ${violatedRules.join(', ')}\n`;
-                response += `   ⚖️ **Severity:** ${determineSeverity(result.content)}\n`;
+          if (isUserQuery) {
+            // Group results by user to show unique conversations
+            const userConversations = new Map();
+            serverFilteredResults.forEach(result => {
+              if (!userConversations.has(result.user)) {
+                userConversations.set(result.user, []);
               }
+              userConversations.get(result.user).push(result);
+            });
+            
+            response = `👥 **Found conversations with ${userConversations.size} user(s) about "${originalQuery.split(' ').pop()}" in ${activeUser.name}:**\n\n`;
+            
+            Array.from(userConversations.entries()).slice(0, 5).forEach(([user, messages], index) => {
+              const latestMessage = messages[0]; // Most recent message from this user
+              const timeDisplay = latestMessage.timestamp === 'Unknown time' ? 
+                '🕐 Today' : `🕐 ${latestMessage.timestamp}`;
+              
+              response += `**${index + 1}. ${user}**\n`;
+              response += `   ${timeDisplay}\n`;
+              response += `   📍 #${latestMessage.channel || channelName}\n`;
+              response += `   💬 "${latestMessage.content.substring(0, 120)}${latestMessage.content.length > 120 ? '...' : ''}"\n`;
+              response += `   📊 ${messages.length} message(s) in conversation\n\n`;
+            });
+          } else {
+            response = `🔍 **Found ${serverFilteredResults.length} result(s) for "${originalQuery}" in ${activeUser.name}:**\n\n`;
+            
+            if (isHarassmentQuery) {
+              response += `⚠️ **Community Guidelines Reference:**\n`;
+              response += `• **Rule 2:** No harassment, bullying, or personal attacks\n`;
+              response += `• **Rule 3:** Maintain respectful communication at all times\n`;
+              response += `• **Rule 5:** No discriminatory language or hate speech\n`;
+              response += `• **Rule 8:** Follow Discord Terms of Service\n\n`;
+              response += `📋 **Potential Violations Found:**\n`;
             }
             
-            response += `   💬 "${result.content.slice(0, 120)}${result.content.length > 120 ? '...' : ''}"\n\n`;
-          });
+            serverFilteredResults.slice(0, 5).forEach((result, index) => {
+              const timeDisplay = result.timestamp === 'Unknown time' ? 
+                '🕐 Today' : `🕐 ${result.timestamp}`;
+              
+              response += `**${index + 1}. ${result.user}**\n`;
+              response += `   ${timeDisplay}\n`;
+              response += `   📍 #${result.channel || channelName}\n`;
+              response += `   💬 "${result.content.substring(0, 120)}${result.content.length > 120 ? '...' : ''}"\n`;
+              
+              // Add rule violation analysis for harassment queries
+              if (isHarassmentQuery) {
+                const violatedRules = analyzeRuleViolations(result.content);
+                if (violatedRules.length > 0) {
+                  response += `   🚨 **Violated Rules:** ${violatedRules.join(', ')}\n`;
+                  response += `   ⚖️ **Severity:** ${determineSeverity(result.content)}\n`;
+                }
+              }
+              
+              response += `\n`;
+            });
+          }
           
           if (isHarassmentQuery) {
             response += `🛡️ **Moderation Actions Recommended:**\n`;
