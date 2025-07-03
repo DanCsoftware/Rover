@@ -445,13 +445,48 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
       case 'search_results':
         if (searchResponse.results && searchResponse.results.length > 0) {
           let response = `🔍 **Found ${searchResponse.results.length} results for "${originalQuery}" in ${activeUser.name}:**\n\n`;
+          
+          // Check if this is a harassment/moderation query and add rule context
+          const isHarassmentQuery = originalQuery.toLowerCase().includes('harassment') || 
+                                   originalQuery.toLowerCase().includes('toxic') || 
+                                   originalQuery.toLowerCase().includes('violat') ||
+                                   originalQuery.toLowerCase().includes('abuse');
+          
+          if (isHarassmentQuery) {
+            response += `⚠️ **Community Guidelines Reference:**\n`;
+            response += `• **Rule 2:** No harassment, bullying, or personal attacks\n`;
+            response += `• **Rule 3:** Maintain respectful communication at all times\n`;
+            response += `• **Rule 5:** No discriminatory language or hate speech\n`;
+            response += `• **Rule 8:** Follow Discord Terms of Service\n\n`;
+            response += `📋 **Potential Violations Found:**\n`;
+          }
+          
           searchResponse.results.slice(0, 5).forEach((result, index) => {
             response += `**${index + 1}. ${result.title}**\n`;
             response += `   🕐 ${result.timestamp || 'Unknown time'}\n`;
             response += `   📍 #${result.channel}\n`;
             response += `   👤 ${result.user}\n`;
+            
+            // Add rule violation analysis for harassment queries
+            if (isHarassmentQuery) {
+              const violatedRules = analyzeRuleViolations(result.content);
+              if (violatedRules.length > 0) {
+                response += `   🚨 **Violated Rules:** ${violatedRules.join(', ')}\n`;
+                response += `   ⚖️ **Severity:** ${determineSeverity(result.content)}\n`;
+              }
+            }
+            
             response += `   💬 "${result.content.slice(0, 120)}${result.content.length > 120 ? '...' : ''}"\n\n`;
           });
+          
+          if (isHarassmentQuery) {
+            response += `🛡️ **Moderation Actions Recommended:**\n`;
+            response += `• Review each message for rule violations\n`;
+            response += `• Document evidence for potential disciplinary action\n`;
+            response += `• Consider warning or temporary mute for first-time offenses\n`;
+            response += `• Report severe violations to server administrators\n\n`;
+          }
+          
           response += searchResponse.results.length > 5 ? 
             `*...and ${searchResponse.results.length - 5} more results in this server. Would you like me to show more?*` : 
             `**What would you like to explore next?** I can help you dive deeper into any of these results! 🎯`;
@@ -477,6 +512,64 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
       default:
         return searchResponse.message + "\n\nIs there anything specific about this topic you'd like me to help you explore further? 🚀";
     }
+  };
+
+  // Helper function to analyze rule violations in message content
+  const analyzeRuleViolations = (messageContent: string): string[] => {
+    const violatedRules: string[] = [];
+    const lowerContent = messageContent.toLowerCase();
+    
+    // Rule 2: No harassment, bullying, or personal attacks
+    if (lowerContent.includes('stupid') || lowerContent.includes('idiot') || 
+        lowerContent.includes('loser') || lowerContent.includes('shut up') ||
+        lowerContent.includes('get lost') || lowerContent.includes('pathetic')) {
+      violatedRules.push('Rule 2 (No harassment/bullying)');
+    }
+    
+    // Rule 3: Maintain respectful communication
+    if (lowerContent.includes('hate') || lowerContent.includes('disgusting') ||
+        lowerContent.includes('awful') || lowerContent.includes('terrible person')) {
+      violatedRules.push('Rule 3 (Respectful communication)');
+    }
+    
+    // Rule 5: No discriminatory language
+    if (lowerContent.includes('retard') || lowerContent.includes('gay') ||
+        lowerContent.includes('fag') || lowerContent.includes('racist terms')) {
+      violatedRules.push('Rule 5 (No discriminatory language)');
+    }
+    
+    // Rule 8: Follow Discord ToS
+    if (lowerContent.includes('spam') || lowerContent.includes('raid') ||
+        lowerContent.includes('doxx') || lowerContent.includes('illegal')) {
+      violatedRules.push('Rule 8 (Discord ToS violation)');
+    }
+    
+    return violatedRules;
+  };
+
+  // Helper function to determine severity of violation
+  const determineSeverity = (messageContent: string): string => {
+    const lowerContent = messageContent.toLowerCase();
+    
+    // Critical violations
+    if (lowerContent.includes('kill yourself') || lowerContent.includes('die') ||
+        lowerContent.includes('doxx') || lowerContent.includes('racist terms')) {
+      return 'CRITICAL - Immediate action required';
+    }
+    
+    // High severity
+    if (lowerContent.includes('retard') || lowerContent.includes('hate') ||
+        lowerContent.includes('pathetic') || lowerContent.includes('disgusting')) {
+      return 'HIGH - Warning/timeout recommended';
+    }
+    
+    // Medium severity
+    if (lowerContent.includes('stupid') || lowerContent.includes('shut up') ||
+        lowerContent.includes('loser') || lowerContent.includes('awful')) {
+      return 'MEDIUM - Verbal warning suggested';
+    }
+    
+    return 'LOW - Monitor for pattern';
   };
 
   const handleModerationQuery = async (query: string, processedQuery: any): Promise<string> => {
