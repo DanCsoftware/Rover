@@ -137,19 +137,34 @@ class SearchIndex {
     queryKeywords.forEach(keyword => {
       const messages = this.messageIndex.get(keyword) || [];
       messages.forEach(message => {
+        // Filter by server if specified
+        if (filters.server && (message as any).serverName !== filters.server) {
+          return;
+        }
+        
+        // Filter by channel if specified
+        if (filters.channel && (message as any).channelName !== filters.channel) {
+          return;
+        }
+        
+        // Filter by user if specified
+        if (filters.user && message.user !== filters.user) {
+          return;
+        }
+        
         const relevance = this.calculateRelevance(query, message.content);
         if (relevance > 0.1) {
           results.push({
             type: 'message',
             id: message.id.toString(),
-            title: `Message from ${message.user}`,
+            title: `${message.user} in #${(message as any).channelName}`,
             content: message.content,
             server: (message as any).serverName,
             channel: (message as any).channelName,
             user: message.user,
             timestamp: message.time,
             relevanceScore: relevance,
-            context: `In #${(message as any).channelName} on ${(message as any).serverName}`
+            context: `Posted ${message.time} in #${(message as any).channelName}`
           });
         }
       });

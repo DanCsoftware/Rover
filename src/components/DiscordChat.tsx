@@ -378,8 +378,10 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
         const cleanMessage = userMessage.replace('@rover', '').trim();
         
         try {
-          // Process the query using our intelligent query processor
+          // Process the query using our intelligent query processor with server filtering
           const processedQuery = queryProcessor.processQuery(cleanMessage, activeUser.name, channelName);
+          // Ensure we only search within the current server
+          processedQuery.searchQuery.server = activeUser.name;
           
           // Handle different types of queries with meaningful responses
           let response = "";
@@ -442,31 +444,35 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
     switch (searchResponse.type) {
       case 'search_results':
         if (searchResponse.results && searchResponse.results.length > 0) {
-          let response = `🔍 **Found ${searchResponse.results.length} results for "${originalQuery}":**\n\n`;
-          searchResponse.results.slice(0, 3).forEach((result, index) => {
+          let response = `🔍 **Found ${searchResponse.results.length} results for "${originalQuery}" in ${activeUser.name}:**\n\n`;
+          searchResponse.results.slice(0, 5).forEach((result, index) => {
             response += `**${index + 1}. ${result.title}**\n`;
-            response += `   📍 ${result.channel} • ${result.user || 'Unknown'}\n`;
-            response += `   💬 ${result.content.slice(0, 100)}${result.content.length > 100 ? '...' : ''}\n\n`;
+            response += `   🕐 ${result.timestamp || 'Unknown time'}\n`;
+            response += `   📍 #${result.channel}\n`;
+            response += `   👤 ${result.user}\n`;
+            response += `   💬 "${result.content.slice(0, 120)}${result.content.length > 120 ? '...' : ''}"\n\n`;
           });
-          response += searchResponse.results.length > 3 ? 
-            `*...and ${searchResponse.results.length - 3} more results. Would you like me to refine the search?*` : 
+          response += searchResponse.results.length > 5 ? 
+            `*...and ${searchResponse.results.length - 5} more results in this server. Would you like me to show more?*` : 
             `**What would you like to explore next?** I can help you dive deeper into any of these results! 🎯`;
           return response;
         }
-        return `I searched thoroughly but didn't find specific results for "${originalQuery}". Let me suggest some alternatives:\n\n• Try broader search terms\n• Check if you meant a different topic\n• Ask me to search in specific channels\n\n💡 **Tip:** I can search across all messages, threads, and discussions. What specific aspect interests you most? 🤔`;
+        return `I searched thoroughly but didn't find specific results for "${originalQuery}" in ${activeUser.name}. Let me suggest some alternatives:\n\n• Try broader search terms\n• Check if you meant a different topic\n• Ask me to search in specific channels\n\n💡 **Tip:** I'm only searching within this server. What specific aspect interests you most? 🤔`;
 
       case 'threads':
         if (searchResponse.threads && searchResponse.threads.length > 0) {
-          let response = `💬 **Found ${searchResponse.threads.length} conversation threads about "${originalQuery}":**\n\n`;
+          let response = `💬 **Found ${searchResponse.threads.length} conversation threads about "${originalQuery}" in ${activeUser.name}:**\n\n`;
           searchResponse.threads.slice(0, 3).forEach((thread, index) => {
             response += `**${index + 1}. ${thread.topic}**\n`;
-            response += `   👥 ${thread.participants.length} participants • ${thread.messages.length} messages\n`;
-            response += `   📅 Last active: ${thread.endTime}\n\n`;
+            response += `   👥 ${thread.participants.join(', ')}\n`;
+            response += `   📅 ${thread.startTime} - ${thread.endTime}\n`;
+            response += `   📍 #${thread.channel}\n`;
+            response += `   💬 ${thread.messages.length} messages\n\n`;
           });
           response += `Want me to show you the key highlights from any of these discussions? 📖`;
           return response;
         }
-        return `No conversation threads found about "${originalQuery}", but I can help you start one! 🚀\n\nHere's how:\n• Share your thoughts in the relevant channel\n• Ask specific questions to spark discussion\n• Tag people who might be interested\n\nWhat aspect of "${originalQuery}" would you like to discuss? 💭`;
+        return `No conversation threads found about "${originalQuery}" in ${activeUser.name}, but I can help you start one! 🚀\n\nHere's how:\n• Share your thoughts in the relevant channel\n• Ask specific questions to spark discussion\n• Tag people who might be interested\n\nWhat aspect of "${originalQuery}" would you like to discuss? 💭`;
 
       default:
         return searchResponse.message + "\n\nIs there anything specific about this topic you'd like me to help you explore further? 🚀";
