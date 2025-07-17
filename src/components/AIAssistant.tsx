@@ -31,7 +31,12 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
   };
 
   const generateIntelligentResponse = async (userMessage: string): Promise<string> => {
-    const cleanMessage = userMessage.replace('@rover', '').trim();
+    const cleanMessage = userMessage.replace(/@rover/gi, '').trim();
+    
+    // First check for conversational patterns before processing as queries
+    if (isConversationalMessage(cleanMessage)) {
+      return handleConversationalMessage(cleanMessage);
+    }
     
     // Process the query using our intelligent query processor
     const processedQuery = queryProcessor.processQuery(cleanMessage, "Gaming Hub", "general-gaming");
@@ -130,6 +135,50 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
     }
     
     return `🏗️ **Channel Management Hub**\n\nI can help you build the perfect server structure! Here's what I can analyze:\n\n**📊 Current Server Status:**\n• Active channels: Healthy engagement across gaming topics\n• Member satisfaction: High (based on participation)\n• Content variety: Good mix of gaming discussions\n\n**🔍 Available Analysis:**\n• Channel activity patterns and peak times\n• Member engagement by channel type\n• Content quality and relevance\n• Redundancy and consolidation opportunities\n\n**🛠️ Management Tools:**\n• "channel health report" - Full activity analysis\n• "suggest new channels" - Based on member interests\n• "optimize layout" - Improve channel organization\n\nYour server structure looks solid! What specific improvements are you considering? 🎯`;
+  };
+
+  const isConversationalMessage = (message: string): boolean => {
+    const lowerMessage = message.toLowerCase();
+    const greetingPatterns = [
+      /^(hi|hello|hey|yo|sup|greetings|good morning|good afternoon|good evening)/i,
+      /^(thanks|thank you|thx|ty|appreciate)/i,
+      /^(bye|goodbye|see ya|later|cya)/i,
+      /^(how are you|what's up|how's it going)/i,
+      /^(who are you|what are you|introduce yourself)/i
+    ];
+    
+    return greetingPatterns.some(pattern => pattern.test(message.trim()));
+  };
+
+  const handleConversationalMessage = (message: string): string => {
+    const lowerMessage = message.toLowerCase();
+    
+    // Greetings
+    if (/^(hi|hello|hey|yo|sup|greetings|good morning|good afternoon|good evening)/i.test(message)) {
+      return `👋 **Hey there!** I'm ROVER, your friendly Discord AI assistant!\n\n🤖 **What I can do for you:**\n• Search through server messages and conversations\n• Help you find channels and communities\n• Analyze user behavior and server health\n• Provide gaming tips and recommendations\n• Answer questions about Discord features\n\n💬 **Try asking me:**\n• "Find messages about Valorant"\n• "What games are popular here?"\n• "Help me find teammates"\n• "Show me channel activity"\n\nWhat would you like to explore together? I'm here to make your Discord experience awesome! 🚀`;
+    }
+    
+    // Thanks
+    if (/^(thanks|thank you|thx|ty|appreciate)/i.test(message)) {
+      return `😊 **You're very welcome!** Always happy to help!\n\nI'm here 24/7 to assist with anything Discord-related - whether you need help finding information, connecting with other gamers, or just want to chat about your favorite games.\n\nIs there anything else I can help you with today? 🎮`;
+    }
+    
+    // Goodbyes
+    if (/^(bye|goodbye|see ya|later|cya)/i.test(message)) {
+      return `👋 **See you later!** Feel free to mention me anytime you need help.\n\nHappy gaming, and I hope you have awesome matches ahead! 🎮✨`;
+    }
+    
+    // How are you / What's up
+    if (/^(how are you|what's up|how's it going)/i.test(message)) {
+      return `🤖 **I'm doing great, thanks for asking!** Always excited to help fellow gamers.\n\n📊 **Server Status Check:**\n• Community activity: High engagement today! 🔥\n• Gaming discussions: Lots of Valorant and new game buzz\n• Overall vibe: Positive and welcoming 😊\n\n**How about you?** Ready for some gaming, need help finding teammates, or curious about what's trending in the server? 🎮`;
+    }
+    
+    // Who/what are you
+    if (/^(who are you|what are you|introduce yourself)/i.test(message)) {
+      return `🤖 **I'm ROVER - your AI companion for this gaming community!**\n\n**🎯 My Purpose:**\nI'm here to make your Discord experience smoother and more enjoyable. Think of me as your helpful guide who knows everything happening in the server!\n\n**⚡ My Superpowers:**\n• 🔍 **Smart Search** - Find any message, conversation, or topic instantly\n• 👥 **Community Insights** - Show you who's active and what's trending\n• 🛡️ **Safety Analysis** - Help mods keep the community healthy\n• 🎮 **Gaming Helper** - Recommend games, find teammates, share tips\n• 🧭 **Navigation** - Guide you to the perfect channels for your interests\n\n**💡 Fun Fact:** I learn from every interaction to give you better, more personalized help!\n\nWhat adventure should we start with? 🚀`;
+    }
+    
+    return message; // Fallback for unmatched conversational messages
   };
 
   const handleGeneralQuery = async (query: string, processedQuery: any): Promise<string> => {
