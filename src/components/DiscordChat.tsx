@@ -630,6 +630,48 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   const handleGeneralQuery = async (query: string, processedQuery: any): Promise<string> => {
     const lowerQuery = query.toLowerCase();
     
+    // Greetings and introductions
+    if (lowerQuery.includes('hello') || lowerQuery.includes('hi') || lowerQuery.includes('hey') || 
+        lowerQuery.includes('greetings') || lowerQuery.includes('good morning') || 
+        lowerQuery.includes('good afternoon') || lowerQuery.includes('good evening') ||
+        lowerQuery.includes('what\'s up') || lowerQuery.includes('whats up') ||
+        lowerQuery.includes('howdy') || lowerQuery.includes('yo')) {
+      const greetings = [
+        `👋 **Hey there!** I'm ROVER, your friendly AI companion for **${activeUser.name}** server!`,
+        `🤖 **Hello!** Great to meet you! I'm ROVER, and I'm here to help you navigate and enjoy this awesome Discord community!`,
+        `✨ **Hi there!** Welcome! I'm ROVER, your intelligent Discord assistant ready to make your experience amazing!`,
+        `🚀 **Greetings!** I'm ROVER, your AI-powered helper for all things Discord - from finding content to discovering communities!`
+      ];
+      
+      const selectedGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+      
+      return `${selectedGreeting}\n\n**🎯 I'm here to help you with:**\n• 🔍 Finding messages, channels, and conversations\n• 🎮 Discovering gaming communities and teammates\n• 👥 Connecting with other members\n• 📊 Server insights and navigation\n• 🛡️ Safety and moderation support\n\n**💡 Try asking me something like:**\n• "Find recent conversations about gaming"\n• "What channels should I check out?"\n• "Help me find Valorant players"\n• "Show me what's happening in this server"\n\nWhat would you like to explore today? I'm excited to help! 🌟`;
+    }
+    
+    // Thank you responses
+    if (lowerQuery.includes('thank') || lowerQuery.includes('thanks') || lowerQuery.includes('appreciate')) {
+      const responses = [
+        `🤗 **You're very welcome!** It's my pleasure to help make your Discord experience awesome!`,
+        `✨ **Happy to help!** That's what I'm here for - feel free to ask me anything anytime!`,
+        `🚀 **No problem at all!** I love helping out the **${activeUser.name}** community!`,
+        `💙 **Anytime!** Your success and enjoyment here is what makes my AI heart happy!`
+      ];
+      
+      return responses[Math.floor(Math.random() * responses.length)] + 
+             `\n\nIs there anything else I can help you with today? 😊`;
+    }
+    
+    // Good vibes and positive responses
+    if (lowerQuery.includes('how are you') || lowerQuery.includes('how\'re you') || 
+        lowerQuery.includes('how are things') || lowerQuery.includes('what\'s going on')) {
+      return `🤖 **I'm doing fantastic, thanks for asking!** I've been busy helping amazing members like you navigate **${activeUser.name}** server!\n\n**🔥 What's been happening:**\n• Connecting gamers with their perfect teammates\n• Helping people discover awesome channels\n• Analyzing server health and community vibes\n• Learning new ways to be even more helpful!\n\n**💭 I'm especially excited about:**\n• The growing gaming communities here\n• All the interesting conversations happening\n• Meeting new members like you!\n\nHow are YOU doing? What brings you to the server today? 🌟`;
+    }
+    
+    // Help-related queries
+    if (lowerQuery.includes('help') || lowerQuery.includes('what can you do') || lowerQuery.includes('how do you work')) {
+      return `🤖 **Meet ROVER - Your Discord AI Companion!**\n\nI'm here to make your Discord experience incredible! Here's what I can do:\n\n**🔍 Smart Search & Discovery:**\n• Find specific messages, threads, or conversations\n• Locate the perfect channels for your interests\n• Discover active communities and games\n\n**👥 Community Insights:**\n• Analyze user behavior and server health\n• Help you connect with like-minded members\n• Provide safety and moderation insights\n\n**🎮 Gaming Support:**\n• Find teammates for your favorite games\n• Get gaming recommendations and tips\n• Navigate gaming channels and communities\n\n**💬 Smart Conversations:**\n• Answer questions about the server\n• Provide personalized recommendations\n• Help with Discord features and navigation\n\nJust mention me with @rover and ask anything! I'm powered by advanced AI and learn from every interaction to serve you better. 🚀`;
+    }
+    
     // Gaming-related queries
     if (lowerQuery.includes('game') || lowerQuery.includes('play')) {
       return `🎮 **Gaming Discussion Central!**\n\nLooks like you're interested in gaming! This server is perfect for that:\n\n**🔥 Popular Games Here:**\n• Valorant (most active community)\n• Call of Duty (latest updates discussed daily)\n• Minecraft (creative builds and servers)\n• Fortnite (zero build is trending!)\n\n**🎯 Where to Go:**\n• General gaming chat: #general-gaming\n• Find teammates: #valorant-lfg\n• Share streams: #stream-promotion\n\n**💡 Pro Tips:**\n• Use @everyone sparingly in LFG channels\n• Share your rank when looking for teammates\n• Check pinned messages for server rules\n\nWhat games are you into? I can point you to the most active communities! 🚀`;
