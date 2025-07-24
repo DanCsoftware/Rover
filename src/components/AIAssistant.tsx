@@ -9,7 +9,7 @@ import { NavigationGuide } from '@/utils/navigationGuide';
 
 interface AIAssistantProps {
   message: string;
-  onResponse: (response: string) => void;
+  onResponse: (response: string, navigationGuide?: any) => void;
 }
 
 export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
@@ -51,6 +51,14 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
     
     // Check for navigation requests
     if (NavigationGuide.isNavigationQuery(cleanMessage)) {
+      const guide = NavigationGuide.findGuide(cleanMessage);
+      if (guide) {
+        // Pass the guide as special data
+        setTimeout(() => {
+          onResponse("", guide);
+        }, 0);
+        return ""; // Return empty string as we'll handle the response differently
+      }
       return handleNavigationQuery(cleanMessage);
     }
     
@@ -271,13 +279,7 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
   };
 
   const handleNavigationQuery = (query: string): string => {
-    const guide = NavigationGuide.findGuide(query);
-    
-    if (!guide) {
-      return `🧭 **Navigation Help** 🧭\n\nI can help you navigate Discord! Try asking me:\n\n• "Help me find notification settings"\n• "Where are my privacy settings?"\n• "Navigate to server settings"\n• "How do I access my profile?"\n• "Show me friends list"\n\nWhat would you like to find? 🔍`;
-    }
-    
-    return NavigationGuide.formatNavigationResponse(guide, query);
+    return `🧭 **Navigation Help** 🧭\n\nI can help you navigate Discord! Try asking me:\n\n• "Help me find notification settings"\n• "Where are my privacy settings?"\n• "Navigate to server settings"\n• "How do I access my profile?"\n• "Show me friends list"\n\nWhat would you like to find? 🔍`;
   };
 
 

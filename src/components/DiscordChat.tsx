@@ -6,6 +6,7 @@ import { Message } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
+import { NavigationHelper } from "./NavigationHelper";
 import { extractLinksFromText, generateSafetyReport, LinkSafetyReport, generateSmartLinkResponse } from "@/utils/linkSafetyAnalyzer";
 import { 
   parseSummaryRequest, 
@@ -787,7 +788,11 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
                       {msg.time && <span className="text-gray-500 text-xs">{msg.time}</span>}
                     </div>
                     
-                    {renderMessageContent(msg)}
+                    {msg.navigationGuide ? (
+                      <NavigationHelper guide={msg.navigationGuide} query={msg.content} />
+                    ) : (
+                      renderMessageContent(msg)
+                    )}
                     
                     {msg.hasButton && (
                       <Button className="mt-2 bg-green-600 hover:bg-green-700 text-white" size="sm">
@@ -834,17 +839,18 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
               {showAIAssistant && (
                 <AIAssistant 
                   message={message} 
-                  onResponse={(response) => {
+                  onResponse={(response, navigationGuide) => {
                     const aiMessage: Message = {
                       id: Date.now(),
                       user: 'ROVER',
                       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                      content: response,
-                      isBot: true
+                      content: response || "Navigation guide",
+                      isBot: true,
+                      navigationGuide
                     };
                     setChatMessages(prev => [...prev, aiMessage]);
                     setShowAIAssistant(false);
-                  }} 
+                  }}
                 />
               )}
             </div>

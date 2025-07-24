@@ -8,6 +8,7 @@ export interface Message {
   buttonText?: string;
   hasButtons?: boolean;
   buttons?: string[];
+  navigationGuide?: any; // For special navigation responses
   hasInvite?: boolean;
   hasLinks?: boolean;
   links?: string[];
