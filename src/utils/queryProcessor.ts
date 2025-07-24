@@ -94,9 +94,13 @@ export class QueryProcessor {
       /channels?.*discussing/i
     ],
     navigation: [
+      /help me (navigate|find|get to|access)/i,
+      /where (is|are|can I find)/i,
+      /how do I (get to|access|find)/i,
+      /navigate to|show me (how to|where)/i,
+      /take me to|(find|locate) (my|the)/i,
       /navigate.*to/i,
       /go.*to/i,
-      /take.*me.*to/i,
       /switch.*to/i,
       /open.*channel/i,
       /join.*channel/i

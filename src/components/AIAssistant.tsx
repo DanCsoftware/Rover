@@ -5,6 +5,7 @@ import { queryProcessor, SearchResponse } from '@/utils/queryProcessor';
 import { moderationEngine } from '@/utils/moderationEngine';
 import { parseSummaryRequest, generateSummary, filterMessagesByTime, filterMessagesByUser } from '@/utils/conversationAnalyzer';
 import { servers } from '@/data/discordData';
+import { NavigationGuide } from '@/utils/navigationGuide';
 
 interface AIAssistantProps {
   message: string;
@@ -46,6 +47,11 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
     // Check for summarization requests first
     if (isSummarizationRequest(cleanMessage)) {
       return handleSummarizationRequest(cleanMessage);
+    }
+    
+    // Check for navigation requests
+    if (NavigationGuide.isNavigationQuery(cleanMessage)) {
+      return handleNavigationQuery(cleanMessage);
     }
     
     // Handle different types of queries with meaningful responses
@@ -263,6 +269,17 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
       default: return 60;
     }
   };
+
+  const handleNavigationQuery = (query: string): string => {
+    const guide = NavigationGuide.findGuide(query);
+    
+    if (!guide) {
+      return `🧭 **Navigation Help** 🧭\n\nI can help you navigate Discord! Try asking me:\n\n• "Help me find notification settings"\n• "Where are my privacy settings?"\n• "Navigate to server settings"\n• "How do I access my profile?"\n• "Show me friends list"\n\nWhat would you like to find? 🔍`;
+    }
+    
+    return NavigationGuide.formatNavigationResponse(guide, query);
+  };
+
 
   const handleGeneralQuery = async (query: string, processedQuery: any): Promise<string> => {
     const lowerQuery = query.toLowerCase();
