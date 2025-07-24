@@ -66,43 +66,43 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
     switch (searchResponse.type) {
       case 'search_results':
         if (searchResponse.results && searchResponse.results.length > 0) {
-          let response = `🔍 **Found ${searchResponse.results.length} results for "${originalQuery}":**\n\n`;
+          let response = `🕵️ **Aha! I dug up ${searchResponse.results.length} juicy results for "${originalQuery}":**\n\n`;
           searchResponse.results.slice(0, 3).forEach((result, index) => {
             response += `**${index + 1}. ${result.title}**\n`;
-            response += `   📍 ${result.channel} • ${result.user || 'Unknown'}\n`;
-            response += `   💬 ${result.content.slice(0, 100)}${result.content.length > 100 ? '...' : ''}\n\n`;
+            response += `   📍 ${result.channel} • ${result.user || 'Unknown'} dropped this gem\n`;
+            response += `   💭 "${result.content.slice(0, 100)}${result.content.length > 100 ? '..."' : '"'}\n\n`;
           });
           response += searchResponse.results.length > 3 ? 
-            `*...and ${searchResponse.results.length - 3} more results. Would you like me to refine the search?*` : 
-            `**What would you like to explore next?** I can help you dive deeper into any of these results! 🎯`;
+            `*...plus ${searchResponse.results.length - 3} more goodies! Want me to narrow it down?*` : 
+            `**Ooh, what catches your eye?** I can totally dive deeper into any of these! 🎯`;
           return response;
         }
-        return `I searched thoroughly but didn't find specific results for "${originalQuery}". Let me suggest some alternatives:\n\n• Try broader search terms\n• Check if you meant a different topic\n• Ask me to search in specific channels\n\n💡 **Tip:** I can search across all messages, threads, and discussions. What specific aspect interests you most? 🤔`;
+        return `Hmm, I scoured every corner but "${originalQuery}" is playing hide and seek! 🙈\n\n**Let's try a different approach:**\n• Maybe use broader search terms?\n• Could it be spelled differently?\n• Want me to check specific channels?\n\n💡 **Pro tip:** I'm like a bloodhound for finding stuff - just give me a scent and I'll track it down! What angle should we try next? 🤔`;
 
       case 'threads':
         if (searchResponse.threads && searchResponse.threads.length > 0) {
-          let response = `💬 **Found ${searchResponse.threads.length} conversation threads about "${originalQuery}":**\n\n`;
+          let response = `💬 **Sweet! I found ${searchResponse.threads.length} hot conversation threads about "${originalQuery}":**\n\n`;
           searchResponse.threads.slice(0, 3).forEach((thread, index) => {
             response += `**${index + 1}. ${thread.topic}**\n`;
-            response += `   👥 ${thread.participants.length} participants • ${thread.messages.length} messages\n`;
-            response += `   📅 Last active: ${thread.endTime}\n\n`;
+            response += `   👥 ${thread.participants.length} people chatting • ${thread.messages.length} messages of pure discussion\n`;
+            response += `   📅 Last buzzing: ${thread.endTime}\n\n`;
           });
-          response += `Want me to show you the key highlights from any of these discussions? 📖`;
+          response += `Want me to spill the tea on the best moments from these convos? I've got all the highlights! 📖✨`;
           return response;
         }
-        return `No conversation threads found about "${originalQuery}", but I can help you start one! 🚀\n\nHere's how:\n• Share your thoughts in the relevant channel\n• Ask specific questions to spark discussion\n• Tag people who might be interested\n\nWhat aspect of "${originalQuery}" would you like to discuss? 💭`;
+        return `Hmm, no threads about "${originalQuery}" yet, but hey - someone's gotta be the trendsetter! 🚀\n\n**Let's get the conversation rolling:**\n• Drop your thoughts in the perfect channel\n• Ask something juicy to get people talking\n• Tag some friends who'd be into this topic\n\nWhat's your take on "${originalQuery}"? I bet others are dying to hear it! 💭`;
 
       case 'channels':
         if (searchResponse.results && searchResponse.results.length > 0) {
-          let response = `📺 **Perfect! Here are channels for "${originalQuery}":**\n\n`;
+          let response = `📺 **Boom! Found some awesome channels for "${originalQuery}":**\n\n`;
           searchResponse.results.slice(0, 4).forEach((channel, index) => {
             response += `**${index + 1}. #${channel.title}**\n`;
-            response += `   📊 Active discussion • ${channel.content.slice(0, 80)}${channel.content.length > 80 ? '...' : ''}\n\n`;
+            response += `   🔥 Active vibes • ${channel.content.slice(0, 80)}${channel.content.length > 80 ? '...' : ''}\n\n`;
           });
-          response += `Which channel interests you most? I can show you recent highlights or help you jump into the conversation! 🎮`;
+          response += `Which one's calling your name? I can give you the inside scoop on what's buzzing or help you jump right into the action! 🎮`;
           return response;
         }
-        return `No dedicated channels found for "${originalQuery}", but don't worry! 🌟\n\n**Here's what you can do:**\n• Post in #general-gaming for broad topics\n• Check #suggestions to request a new channel\n• Ask me about related channels that might work\n\nWhat specifically about "${originalQuery}" did you want to discuss? I can point you to the best place! 🎯`;
+        return `Hmm, no dedicated channels for "${originalQuery}" yet, but that just means we get to be creative! 🌟\n\n**Here's the game plan:**\n• Drop it in #general-gaming - everyone loves broad topics there!\n• Hit up #suggestions if you think we need a whole channel for this\n• Ask me about similar channels that might vibe with your topic\n\nSo what's the deal with "${originalQuery}"? I'm totally here to find you the perfect spot to chat about it! 🎯`;
 
       default:
         return searchResponse.message + "\n\nIs there anything specific about this topic you'd like me to help you explore further? 🚀";
