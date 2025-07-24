@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Bot, Sparkles, Search, Shield, BarChart } from 'lucide-react';
 import { queryProcessor, SearchResponse } from '@/utils/queryProcessor';
 import { moderationEngine } from '@/utils/moderationEngine';
+import { parseSummaryRequest, generateSummary, filterMessagesByTime, filterMessagesByUser } from '@/utils/conversationAnalyzer';
+import { servers } from '@/data/discordData';
 
 interface AIAssistantProps {
   message: string;
@@ -40,6 +42,11 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
     
     // Process the query using our intelligent query processor
     const processedQuery = queryProcessor.processQuery(cleanMessage, "Gaming Hub", "general-gaming");
+    
+    // Check for summarization requests first
+    if (isSummarizationRequest(cleanMessage)) {
+      return handleSummarizationRequest(cleanMessage);
+    }
     
     // Handle different types of queries with meaningful responses
     switch (processedQuery.intent) {
@@ -179,6 +186,82 @@ export const AIAssistant = ({ message, onResponse }: AIAssistantProps) => {
     }
     
     return message; // Fallback for unmatched conversational messages
+  };
+
+  const isSummarizationRequest = (message: string): boolean => {
+    const lowerMessage = message.toLowerCase();
+    const summaryPatterns = [
+      /summarize|summary|sum up|recap|tldr|tl;dr/i,
+      /what happened|what's the key|key points|important info|main points/i,
+      /brief me|give me a rundown|catch me up|overview/i
+    ];
+    
+    return summaryPatterns.some(pattern => pattern.test(message));
+  };
+
+  const handleSummarizationRequest = (message: string): string => {
+    try {
+      // Parse the summarization request
+      const summaryRequest = parseSummaryRequest(message);
+      
+      // Get all messages from gaming hub server
+      const gamingHub = servers.find(server => server.name === "Gaming Hub");
+      const allMessages = gamingHub?.textChannels.flatMap(channel => channel.messages) || [];
+      
+      // Get messages for the requested time range
+      let messagesToAnalyze = allMessages;
+      
+      // Filter by time if specified
+      if (summaryRequest.timeRange) {
+        const timeInMinutes = extractTimeFromRange(summaryRequest.timeRange);
+        messagesToAnalyze = filterMessagesByTime(messagesToAnalyze, timeInMinutes);
+      }
+      
+      // Filter by user if specified
+      if (summaryRequest.targetUser) {
+        messagesToAnalyze = filterMessagesByUser(messagesToAnalyze, summaryRequest.targetUser);
+      }
+      
+      if (messagesToAnalyze.length === 0) {
+        return `📋 **Nothing to Summarize!**\n\nI couldn't find any messages matching your criteria. Try:\n• Expanding the time range\n• Checking different channels\n• Using broader search terms\n\nWhat else can I help you dig up? 🔍`;
+      }
+      
+      // Generate the summary
+      const conversationSummary = generateSummary(messagesToAnalyze, summaryRequest);
+      
+      // Format the response with ROVER's personality
+      let response = `📋 **ROVER's Smart Summary** *(${conversationSummary.timeRange})*\n\n`;
+      response += conversationSummary.summary;
+      response += `\n\n📊 **Quick Stats:**\n`;
+      response += `• **Messages Analyzed:** ${conversationSummary.messageCount}\n`;
+      response += `• **Active Participants:** ${conversationSummary.participants.length}\n`;
+      response += `• **Duration:** ${conversationSummary.metadata.duration}\n`;
+      
+      if (conversationSummary.keyTopics.length > 0) {
+        response += `• **Hot Topics:** ${conversationSummary.keyTopics.join(', ')}\n`;
+      }
+      
+      response += `\n💡 **Want more details?** Ask me to "summarize detailed" or "show timeline" for deeper insights! 🔍`;
+      
+      return response;
+    } catch (error) {
+      return `🤖 **Oops!** I hit a snag while cooking up that summary.\n\nTry asking me to:\n• "Summarize the last hour"\n• "Give me key points from today"\n• "What did [username] say recently?"\n\nI'm getting better at this - what should I analyze next? 🔧`;
+    }
+  };
+
+  const extractTimeFromRange = (timeRange: string): number => {
+    const match = timeRange.match(/(\d+)\s*(minute|hour|day)s?/i);
+    if (!match) return 60; // Default 1 hour
+    
+    const amount = parseInt(match[1]);
+    const unit = match[2].toLowerCase();
+    
+    switch (unit) {
+      case 'minute': return amount;
+      case 'hour': return amount * 60;
+      case 'day': return amount * 24 * 60;
+      default: return 60;
+    }
   };
 
   const handleGeneralQuery = async (query: string, processedQuery: any): Promise<string> => {
