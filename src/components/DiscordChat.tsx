@@ -709,7 +709,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   };
 
   return (
-    <div className="flex h-full bg-gray-700">
+    <div className="flex h-full" style={{ backgroundColor: 'hsl(var(--discord-bg-primary))' }}>
       {/* Main Chat Area */}
       <div className="flex flex-col flex-1 min-w-0 h-full">
         {/* Chat Header */}
@@ -727,18 +727,18 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
               {/* Profile Section - only show for DMs */}
               {channelType === 'dm' && (
                 <div className="flex flex-col items-center text-center py-8">
-                  <div className="w-20 h-20 rounded-full bg-gray-600 flex items-center justify-center mb-4">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}>
                     {activeUser.avatar ? (
                       <img src={activeUser.avatar} alt={activeUser.name} className="w-16 h-16 rounded-full" />
                     ) : (
-                      <div className="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center text-white text-2xl font-bold">
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold" style={{ backgroundColor: 'hsl(var(--discord-brand))', color: 'white' }}>
                         {activeUser.name.charAt(0)}
                       </div>
                     )}
                   </div>
-                  <h2 className="text-white text-2xl font-bold">{activeUser.name}</h2>
-                  <p className="text-gray-400">{activeUser.username}</p>
-                  <p className="text-gray-400 mt-2">This is the beginning of your direct message history with {activeUser.name}.</p>
+                  <h2 className="text-2xl font-bold" style={{ color: 'hsl(var(--discord-text-normal))' }}>{activeUser.name}</h2>
+                  <p style={{ color: 'hsl(var(--discord-text-muted))' }}>{activeUser.username}</p>
+                  <p className="mt-2" style={{ color: 'hsl(var(--discord-text-muted))' }}>This is the beginning of your direct message history with {activeUser.name}.</p>
                   <div className="flex space-x-2 mt-4">
                     <Button variant="destructive" size="sm">Mute</Button>
                     <Button variant="secondary" size="sm">View Profile</Button>
@@ -751,41 +751,44 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
               {/* Channel Header - only show for text channels */}
               {channelType === 'text' && (
                 <div className="flex flex-col items-start py-8">
-                  <div className="w-16 h-16 rounded-full bg-gray-600 flex items-center justify-center mb-4">
-                    <span className="text-gray-400 text-2xl">#</span>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}>
+                    <span className="text-2xl" style={{ color: 'hsl(var(--discord-text-muted))' }}>#</span>
                   </div>
-                  <h2 className="text-white text-2xl font-bold">Welcome to #{channelName}!</h2>
-                  <p className="text-gray-400 mt-2">This is the start of the #{channelName} channel.</p>
+                  <h2 className="text-2xl font-bold" style={{ color: 'hsl(var(--discord-text-normal))' }}>Welcome to #{channelName}!</h2>
+                  <p className="mt-2" style={{ color: 'hsl(var(--discord-text-muted))' }}>This is the start of the #{channelName} channel. Try @ROVER for help!</p>
                   <div className="text-gray-500 text-sm mt-4">September 14, 2024</div>
                 </div>
               )}
 
               {/* Messages */}
               {chatMessages.map((msg) => (
-                <div key={msg.id} className={`flex items-start space-x-3 ${msg.user === 'ROVER' ? 'relative' : ''}`}>
+                <div key={msg.id} className={`flex items-start space-x-3 ${msg.user === 'ROVER' ? 'relative rover-message p-4 -mx-4 -my-2 mb-2' : ''}`}>
                   {msg.user === 'ROVER' && (
-                    <div className="absolute -left-2 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 rounded-full opacity-60"></div>
+                    <div className="absolute -left-6 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-600 rounded-full rover-glow"></div>
                   )}
                   <div className="flex-shrink-0">
                     {getMessageAvatar(msg.user, msg.isBot)}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-1">
-                      <span className={`font-medium ${msg.user === 'ROVER' ? 'text-blue-300' : 'text-white'}`}>
+                      <span 
+                        className="font-medium" 
+                        style={{ color: msg.user === 'ROVER' ? 'hsl(var(--rover-primary))' : 'hsl(var(--discord-text-normal))' }}
+                      >
                         {msg.user}
                       </span>
                       {msg.user === 'ROVER' && (
                         <div className="flex items-center space-x-1">
-                          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-2 py-0.5 rounded-full font-medium">
-                            AI Assistant
+                          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-2 py-0.5 rounded-full font-medium rover-glow">
+                            🤖 AI Navigator
                           </div>
-                          <Sparkles className="w-3 h-3 text-blue-400 animate-pulse" />
+                          <Sparkles className="w-4 h-4 text-blue-400 animate-pulse" />
                         </div>
                       )}
                       {msg.isBot && msg.user !== 'ROVER' && (
-                        <span className="bg-indigo-600 text-white text-xs px-1.5 py-0.5 rounded">BOT</span>
+                        <span className="text-white text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: 'hsl(var(--discord-brand))' }}>BOT</span>
                       )}
-                      {msg.time && <span className="text-gray-500 text-xs">{msg.time}</span>}
+                      {msg.time && <span className="text-xs" style={{ color: 'hsl(var(--discord-text-muted))' }}>{msg.time}</span>}
                     </div>
                     
                     {msg.navigationGuide ? (
@@ -859,39 +862,51 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
 
         {/* Message Input */}
         <div className="p-4 flex-shrink-0">
-          <div className="bg-gray-600 rounded-lg flex items-center px-4 py-3">
-            <button className="mr-3 p-1 hover:bg-gray-500 rounded">
-              <Plus className="w-5 h-5 text-gray-400" />
+          <div 
+            className="rounded-lg flex items-center px-4 py-3"
+            style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}
+          >
+            <button className="mr-3 p-1 rounded transition-colors hover:bg-black/20">
+              <Plus className="w-5 h-5" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
             </button>
             <input
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @rover find messages about gaming)`}
-              className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none"
+              placeholder={`Message ${channelType === 'text' ? '#' + channelName : '@' + channelName} (try @ROVER help me navigate to notification settings)`}
+              className="flex-1 bg-transparent outline-none text-sm placeholder-gray-400"
+              style={{ 
+                color: 'hsl(var(--discord-text-normal))'
+              }}
             />
             <div className="flex items-center space-x-2 ml-3">
-              <button className="p-1 hover:bg-gray-500 rounded">
-                <Gift className="w-5 h-5 text-gray-400" />
+              <button className="p-1 rounded transition-colors hover:bg-black/20">
+                <Gift className="w-5 h-5" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
               </button>
-              <button className="p-1 hover:bg-gray-500 rounded">
-                <Smile className="w-5 h-5 text-gray-400" />
+              <button className="p-1 rounded transition-colors hover:bg-black/20">
+                <Smile className="w-5 h-5" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
               </button>
               <button 
                 onClick={handleSendMessage}
-                className="p-1 hover:bg-gray-500 rounded"
+                className="p-1 rounded transition-colors hover:bg-black/20"
               >
-                <Send className="w-5 h-5 text-gray-400" />
+                <Send className="w-5 h-5" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
               </button>
             </div>
           </div>
           
-          {/* Enhanced hint for @rover */}
+          {/* Enhanced hint for @rover with ROVER branding */}
           {message.toLowerCase().includes('@rover') && (
-            <div className="mt-2 text-xs text-gray-400 flex items-center space-x-2">
-              <Search className="w-3 h-3 text-blue-500 animate-pulse" />
-              <span>ROVER Enhanced Search & Navigation - try: "find servers about gaming" or "navigate to music channels"</span>
+            <div className="mt-2 text-xs flex items-center space-x-2 p-2 rounded border-l-2 rover-glow" style={{ 
+              backgroundColor: 'hsl(var(--discord-bg-secondary))',
+              borderColor: 'hsl(var(--rover-primary))',
+              color: 'hsl(var(--discord-text-muted))'
+            }}>
+              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                <Sparkles className="w-2 h-2 text-white" />
+              </div>
+              <span>🤖 <strong style={{ color: 'hsl(var(--rover-primary))' }}>ROVER</strong> Enhanced Navigation - try: "help me navigate to privacy settings" or "find notification options"</span>
             </div>
           )}
         </div>

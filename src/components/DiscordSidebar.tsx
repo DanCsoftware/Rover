@@ -76,15 +76,19 @@ const DiscordSidebar = ({
   };
 
   return (
-    <div className="flex h-full bg-gray-800">
+    <div className="flex h-full" style={{ backgroundColor: 'hsl(var(--discord-bg-secondary))' }}>
       {/* Server List */}
-      <div className="w-16 bg-gray-900 flex flex-col items-center py-3 space-y-2 flex-shrink-0">
+      <div className="w-16 flex flex-col items-center py-3 space-y-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--discord-bg-tertiary))' }}>
         {/* Discord Icon for Direct Messages */}
         <div
           onClick={onDMViewClick}
-          className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all ${
-            isDMView ? "bg-indigo-600" : "bg-gray-700 hover:bg-indigo-600 hover:rounded-xl"
+          className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
+            isDMView ? "rounded-2xl" : "hover:rounded-2xl"
           }`}
+          style={{ 
+            backgroundColor: isDMView ? 'hsl(var(--discord-brand))' : 'hsl(var(--discord-bg-primary))',
+            color: 'white'
+          }}
         >
           <svg 
             viewBox="0 -28.5 256 256" 
@@ -100,15 +104,19 @@ const DiscordSidebar = ({
           </svg>
         </div>
         
-        <div className="w-8 h-0.5 bg-gray-600 rounded-full"></div>
+        <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
         
         {servers.map((server) => (
           <div
             key={server.id}
             onClick={() => onServerClick(server.id)}
-            className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all ${
-              isServerActive(server.id) ? "bg-indigo-600" : "bg-gray-700 hover:bg-indigo-600 hover:rounded-xl"
+            className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
+              isServerActive(server.id) ? "rounded-2xl" : "hover:rounded-2xl"
             }`}
+            style={{ 
+              backgroundColor: isServerActive(server.id) ? 'hsl(var(--discord-brand))' : 'hsl(var(--discord-bg-primary))',
+              color: 'white'
+            }}
           >
             {server.icon.startsWith("/") ? (
               <img src={server.icon} alt={server.name} className="w-8 h-8 rounded-full" />
@@ -117,16 +125,19 @@ const DiscordSidebar = ({
             )}
           </div>
         ))}
-        <div className="w-8 h-0.5 bg-gray-600 rounded-full"></div>
-        <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-600 hover:rounded-xl transition-all">
-          <span className="text-green-400 text-2xl">+</span>
+        <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
+        <div 
+          className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:rounded-2xl transition-all duration-200"
+          style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', color: 'hsl(var(--discord-green))' }}
+        >
+          <span className="text-2xl">+</span>
         </div>
       </div>
 
       {/* Channel List */}
-      <div className="flex-1 bg-gray-800 flex flex-col min-w-0">
-        <div className="h-12 border-b border-gray-700 flex items-center px-4 flex-shrink-0">
-          <span className="text-white font-semibold truncate">
+      <div className="flex-1 flex flex-col min-w-0" style={{ backgroundColor: 'hsl(var(--discord-bg-secondary))' }}>
+        <div className="h-12 flex items-center px-4 flex-shrink-0 shadow-sm" style={{ borderBottom: '1px solid hsl(var(--discord-bg-quaternary))' }}>
+          <span className="font-semibold truncate" style={{ color: 'hsl(var(--discord-text-normal))' }}>
             {isDMView ? "Direct Messages" : getCurrentServerName()}
           </span>
         </div>
@@ -135,17 +146,30 @@ const DiscordSidebar = ({
           {isDMView ? (
             /* Direct Messages View */
             <div className="p-2">
-              <div className="flex items-center justify-between px-2 py-1 text-gray-400 text-xs uppercase font-semibold">
+              <div className="flex items-center justify-between px-2 py-1 text-xs uppercase font-semibold" style={{ color: 'hsl(var(--discord-text-muted))' }}>
                 <span className="truncate">Direct Messages</span>
-                <span className="text-lg cursor-pointer hover:text-white flex-shrink-0">+</span>
+                <span className="text-lg cursor-pointer flex-shrink-0 hover:text-white transition-colors">+</span>
               </div>
               
               {dmChannels.map((channel) => (
-                <div
+                  <div
                   key={channel.id}
-                  className={`flex items-center px-2 py-1.5 rounded cursor-pointer transition-colors ${
-                    isChannelActive(channel.id, 'dm') ? "bg-gray-700" : "hover:bg-gray-700"
+                  className={`flex items-center px-2 py-1.5 mx-2 rounded cursor-pointer transition-colors ${
+                    isChannelActive(channel.id, 'dm') ? "" : ""
                   }`}
+                  style={{ 
+                    backgroundColor: isChannelActive(channel.id, 'dm') ? 'hsl(var(--discord-bg-quaternary))' : 'transparent'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isChannelActive(channel.id, 'dm')) {
+                      e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-tertiary))';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isChannelActive(channel.id, 'dm')) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
                   onClick={() => channel.id !== "search" && channel.id !== "tickets" && channel.id !== "group1" && onDMClick(channel.id)}
                 >
                   <div className="w-8 h-8 mr-3 flex-shrink-0">
@@ -165,7 +189,7 @@ const DiscordSidebar = ({
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-gray-300 text-sm truncate">{channel.name}</div>
+                    <div className="text-sm truncate" style={{ color: 'hsl(var(--discord-text-normal))' }}>{channel.name}</div>
                     {channel.members && (
                       <div className="text-gray-500 text-xs truncate">{channel.members}</div>
                     )}
@@ -266,7 +290,7 @@ const DiscordSidebar = ({
         </ScrollArea>
 
         {/* User Panel */}
-        <div className="h-14 bg-gray-900 flex items-center px-2 flex-shrink-0">
+        <div className="h-14 flex items-center px-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--discord-bg-tertiary))' }}>
           <Avatar className="w-8 h-8 mr-2 flex-shrink-0">
             <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User" />
             <AvatarFallback className="bg-indigo-600 text-white text-sm font-bold">
@@ -274,18 +298,18 @@ const DiscordSidebar = ({
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <div className="text-white text-sm font-medium truncate">User</div>
-            <div className="text-gray-400 text-xs truncate">#1234</div>
+            <div className="text-sm font-medium truncate" style={{ color: 'hsl(var(--discord-text-normal))' }}>User</div>
+            <div className="text-xs truncate" style={{ color: 'hsl(var(--discord-text-muted))' }}>#1234</div>
           </div>
           <div className="flex space-x-1 flex-shrink-0">
-            <button className="p-1 hover:bg-gray-700 rounded">
-              <Mic className="w-4 h-4 text-gray-400" />
+            <button className="p-1 rounded hover:bg-black/20 transition-colors">
+              <Mic className="w-4 h-4" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
             </button>
-            <button className="p-1 hover:bg-gray-700 rounded">
-              <Headphones className="w-4 h-4 text-gray-400" />
+            <button className="p-1 rounded hover:bg-black/20 transition-colors">
+              <Headphones className="w-4 h-4" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
             </button>
-            <button className="p-1 hover:bg-gray-700 rounded">
-              <Settings className="w-4 h-4 text-gray-400" />
+            <button className="p-1 rounded hover:bg-black/20 transition-colors">
+              <Settings className="w-4 h-4" style={{ color: 'hsl(var(--discord-interactive-normal))' }} />
             </button>
           </div>
         </div>

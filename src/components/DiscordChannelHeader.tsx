@@ -11,21 +11,19 @@ interface DiscordChannelHeaderProps {
 
 const DiscordChannelHeader = ({ channelName, channelType, onToggleUserList, showUserList }: DiscordChannelHeaderProps) => {
   return (
-    <div className="h-12 border-b border-gray-600 flex items-center justify-between px-4 flex-shrink-0 bg-gray-700">
+    <div className="h-12 flex items-center justify-between px-4 flex-shrink-0 shadow-sm" style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', borderBottom: '1px solid hsl(var(--discord-bg-quaternary))' }}>
       <div className="flex items-center min-w-0 flex-1">
-        <div className="w-6 h-6 rounded-full bg-gray-600 flex items-center justify-center mr-3 flex-shrink-0">
-          {channelType === 'text' ? (
-            <Hash className="w-4 h-4 text-gray-400" />
-          ) : (
-            <AtSign className="w-4 h-4 text-gray-400" />
-          )}
-        </div>
-        <span className="text-white font-semibold mr-2 truncate">{channelName}</span>
+        {channelType === 'text' ? (
+          <Hash className="w-6 h-6 mr-3 flex-shrink-0" style={{ color: 'hsl(var(--discord-text-muted))' }} />
+        ) : (
+          <AtSign className="w-6 h-6 mr-3 flex-shrink-0" style={{ color: 'hsl(var(--discord-text-muted))' }} />
+        )}
+        <span className="font-semibold mr-2 truncate" style={{ color: 'hsl(var(--discord-text-normal))' }}>{channelName}</span>
         {channelType === 'text' && (
           <>
-            <div className="h-6 w-px bg-gray-600 mx-2 flex-shrink-0" />
-            <span className="text-gray-400 text-sm truncate">
-              Welcome to #{channelName}!
+            <div className="h-6 w-px mx-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }} />
+            <span className="text-sm truncate" style={{ color: 'hsl(var(--discord-text-muted))' }}>
+              Welcome to #{channelName}! 🤖 Try @ROVER for navigation help
             </span>
           </>
         )}
@@ -34,18 +32,19 @@ const DiscordChannelHeader = ({ channelName, channelType, onToggleUserList, show
       <div className="flex items-center space-x-2 flex-shrink-0">
         {channelType === 'text' && (
           <>
-            <button className="p-1.5 hover:bg-gray-600 rounded text-gray-400 hover:text-white transition-colors">
+            <button className="p-1.5 rounded transition-colors hover:bg-black/20" style={{ color: 'hsl(var(--discord-interactive-normal))' }}>
               <Hash className="w-5 h-5" />
             </button>
-            <button className="p-1.5 hover:bg-gray-600 rounded text-gray-400 hover:text-white transition-colors">
+            <button className="p-1.5 rounded transition-colors hover:bg-black/20" style={{ color: 'hsl(var(--discord-interactive-normal))' }}>
               <Bell className="w-5 h-5" />
             </button>
-            <button className="p-1.5 hover:bg-gray-600 rounded text-gray-400 hover:text-white transition-colors">
+            <button className="p-1.5 rounded transition-colors hover:bg-black/20" style={{ color: 'hsl(var(--discord-interactive-normal))' }}>
               <Pin className="w-5 h-5" />
             </button>
             <button 
               onClick={onToggleUserList}
-              className={`p-1.5 hover:bg-gray-600 rounded transition-colors ${showUserList ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+              className="p-1.5 rounded transition-colors hover:bg-black/20"
+              style={{ color: showUserList ? 'hsl(var(--discord-text-normal))' : 'hsl(var(--discord-interactive-normal))' }}
             >
               <Users className="w-5 h-5" />
             </button>
@@ -54,19 +53,26 @@ const DiscordChannelHeader = ({ channelName, channelType, onToggleUserList, show
         
         <div className="flex items-center space-x-2 ml-2">
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            <Search className="w-4 h-4 absolute left-2 top-1/2 transform -translate-y-1/2" style={{ color: 'hsl(var(--discord-text-muted))' }} />
             <input
               type="text"
               placeholder="Search"
-              className="bg-gray-900 text-white text-sm rounded px-7 py-1 w-36 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:w-60 transition-all duration-200"
+              className="text-sm rounded px-7 py-1 w-36 focus:outline-none focus:w-60 transition-all duration-200"
+              style={{ 
+                backgroundColor: 'hsl(var(--discord-bg-secondary))', 
+                color: 'hsl(var(--discord-text-normal))',
+                border: '1px solid transparent'
+              }}
+              onFocus={(e) => e.target.style.borderColor = 'hsl(var(--discord-brand))'}
+              onBlur={(e) => e.target.style.borderColor = 'transparent'}
             />
           </div>
           
-          <button className="p-1.5 hover:bg-gray-600 rounded text-gray-400 hover:text-white transition-colors">
+          <button className="p-1.5 rounded transition-colors hover:bg-black/20" style={{ color: 'hsl(var(--discord-interactive-normal))' }}>
             <Inbox className="w-5 h-5" />
           </button>
           
-          <button className="p-1.5 hover:bg-gray-600 rounded text-gray-400 hover:text-white transition-colors">
+          <button className="p-1.5 rounded transition-colors hover:bg-black/20" style={{ color: 'hsl(var(--discord-interactive-normal))' }}>
             <HelpCircle className="w-5 h-5" />
           </button>
         </div>
