@@ -373,24 +373,30 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   const handleAIResponse = async (userMessage: string) => {
     setShowAIAssistant(true);
     
-    // Simple AI response for now - this will be enhanced with proper assistant
-    const handleResponse = (response: string) => {
+    // Use the new AI Assistant to get response with special components
+    const handleResponse = (response: string, navigationGuide?: any, specialComponent?: any) => {
       const aiMessage: Message = {
         id: Date.now() + 1,
         user: 'ROVER',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         content: response,
-        isBot: true
+        isBot: true,
+        navigationGuide,
+        specialComponent
       };
 
       setChatMessages(prev => [...prev, aiMessage]);
       setShowAIAssistant(false);
     };
 
-    // For now, provide a simple response
-    setTimeout(() => {
-      handleResponse("Hello! I'm ROVER, your AI assistant. I'm here to help with Discord navigation, fact-checking, server recommendations, and more! How can I assist you today? ✨");
-    }, 1000);
+    // Import and use AIAssistant
+    try {
+      const { processAIRequest } = await import('./AIAssistant');
+      await processAIRequest(userMessage, handleResponse);
+    } catch (error) {
+      console.error('AI Assistant error:', error);
+      handleResponse("I'm having trouble processing that request right now, but I'm still here to help! Could you try rephrasing your question? 🤖");
+    }
   };
 
   // Helper functions for AI response generation (moved from AIAssistant)
