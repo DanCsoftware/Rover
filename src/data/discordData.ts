@@ -1235,6 +1235,911 @@ const midjourneyChannels: Channel[] = [
   }
 ];
 
+// Server 5 - Tech & Programming
+const techChannels: Channel[] = [
+  {
+    id: 'tech-announcements',
+    name: '📢-announcements',
+    type: 'text',
+    serverId: 5,
+    description: 'Tech news and community updates',
+    messages: [
+      {
+        id: 1,
+        user: 'TechAdmin',
+        time: '7:00 AM',
+        content: '💻 **WELCOME TO DEV CENTRAL!** 💻\n\nThe ultimate community for developers, programmers, and tech enthusiasts!\n\n🔧 Get help with your code\n📚 Learn new technologies\n🤝 Network with other devs\n💼 Find job opportunities\n\nCheck out #rules and introduce yourself in #introductions!',
+        isBot: true,
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '💻', count: 2456 }, { emoji: '🚀', count: 1234 }, { emoji: '👨‍💻', count: 987 }]
+      },
+      {
+        id: 2,
+        user: 'ModTeam',
+        time: '9:30 AM',
+        content: '🎉 **NEW CHANNEL ALERT!**\n\nWe\'ve added #rust-lang for all you Rustaceans out there! 🦀\n\nAlso coming soon:\n• Monthly code challenges\n• Live coding sessions with industry pros\n• Resume review workshops\n\nStay tuned!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🦀', count: 567 }, { emoji: '🎉', count: 345 }]
+      }
+    ]
+  },
+  {
+    id: 'general-tech',
+    name: 'general',
+    type: 'text',
+    serverId: 5,
+    description: 'General tech discussion',
+    messages: [
+      {
+        id: 1,
+        user: 'ReactDev2024',
+        time: '10:15 AM',
+        content: 'Has anyone tried the new React 19 features? The use() hook looks promising 🤔',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚛️', count: 45 }]
+      },
+      {
+        id: 2,
+        user: 'TypeScriptFan',
+        time: '10:17 AM',
+        content: '@ReactDev2024 Yeah! The Actions API is a game changer for forms. No more useFormState hacks',
+        isBot: false
+      },
+      {
+        id: 3,
+        user: 'FullStackDev',
+        time: '10:20 AM',
+        content: 'Honestly the server components thing is still confusing to me. When do I use "use client" vs not?',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤔', count: 67 }]
+      },
+      {
+        id: 4,
+        user: 'NextJSExpert',
+        time: '10:22 AM',
+        content: '@FullStackDev Simple rule: if it needs browser APIs (useState, onClick, useEffect) = use client. Otherwise server by default. Think of it as: server = data fetching, client = interactivity',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💡', count: 89 }, { emoji: '🙏', count: 34 }]
+      },
+      {
+        id: 5,
+        user: 'PythonDev',
+        time: '10:45 AM',
+        content: 'Meanwhile in Python land, FastAPI just keeps getting better. The new dependency injection system is *chef\'s kiss* 🐍',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🐍', count: 56 }]
+      },
+      {
+        id: 6,
+        user: 'GoLangGopher',
+        time: '10:48 AM',
+        content: '@PythonDev FastAPI is great but have you tried Go? No virtual envs, single binary deployment, blazing fast 🚀',
+        isBot: false
+      },
+      {
+        id: 7,
+        user: 'PythonDev',
+        time: '10:50 AM',
+        content: 'Go is nice but I miss my list comprehensions and the ecosystem for ML/AI. Different tools for different jobs!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💯', count: 78 }]
+      },
+      {
+        id: 8,
+        user: 'RustEvangelist',
+        time: '11:00 AM',
+        content: '*laughs in memory safety* 🦀',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🦀', count: 234 }, { emoji: '😂', count: 156 }]
+      },
+      {
+        id: 9,
+        user: 'NewbieDev',
+        time: '11:30 AM',
+        content: 'Hey everyone! I\'m learning to code. Started with Python last week. Any tips for a complete beginner?',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👋', count: 45 }, { emoji: '🎉', count: 34 }]
+      },
+      {
+        id: 10,
+        user: 'SeniorDev',
+        time: '11:32 AM',
+        content: '@NewbieDev Welcome! Best tips:\n1. Build projects, not just tutorials\n2. Read other people\'s code\n3. Don\'t compare yourself to others\n4. Google is your best friend\n5. Breaks are important - burnout is real',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🙏', count: 189 }, { emoji: '📝', count: 67 }]
+      },
+      {
+        id: 11,
+        user: 'OpenSourceContrib',
+        time: '12:00 PM',
+        content: 'Just got my first PR merged into a major open source project! 🎊 Took 3 weeks of back and forth but worth it',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎊', count: 456 }, { emoji: '👏', count: 234 }]
+      },
+      {
+        id: 12,
+        user: 'DevOpsGuru',
+        time: '12:15 PM',
+        content: 'Anyone else struggling with Kubernetes lately? Our cluster keeps having OOM issues and I can\'t figure out why',
+        isBot: false
+      },
+      {
+        id: 13,
+        user: 'CloudArchitect',
+        time: '12:18 PM',
+        content: '@DevOpsGuru Check your resource limits vs requests ratio. Also look at vertical pod autoscaler - saved us so many headaches',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '☁️', count: 23 }]
+      }
+    ]
+  },
+  {
+    id: 'help-desk',
+    name: '🆘-help',
+    type: 'text',
+    serverId: 5,
+    description: 'Get help with your code',
+    messages: [
+      {
+        id: 1,
+        user: 'HelpBot',
+        time: '6:00 AM',
+        content: '🆘 **HELP CHANNEL GUIDELINES** 🆘\n\nTo get the best help:\n\n1. **Describe your problem clearly**\n2. **Share relevant code** (use code blocks!)\n3. **Include error messages**\n4. **Mention what you\'ve tried**\n5. **Be patient and respectful**\n\nUse ``` for code blocks!\n\n```javascript\nconst example = "like this";\n```',
+        isBot: true,
+        isWelcome: true
+      },
+      {
+        id: 2,
+        user: 'StuckDeveloper',
+        time: '1:45 PM',
+        content: 'Can someone help me? My React app keeps re-rendering infinitely 😭\n\n```jsx\nuseEffect(() => {\n  setData(fetchData());\n}, [data]);\n```',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🔁', count: 23 }]
+      },
+      {
+        id: 3,
+        user: 'ReactMentor',
+        time: '1:47 PM',
+        content: '@StuckDeveloper Classic issue! You have `data` in your dependency array but you\'re also setting `data` inside the effect. This creates an infinite loop.\n\nFix:\n```jsx\nuseEffect(() => {\n  setData(fetchData());\n}, []); // Empty deps = runs once\n```\n\nOr if you need to refetch based on something else, use that as the dependency instead!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💡', count: 45 }, { emoji: '🙏', count: 34 }]
+      },
+      {
+        id: 4,
+        user: 'StuckDeveloper',
+        time: '1:49 PM',
+        content: '@ReactMentor THANK YOU! That fixed it. I was stuck on this for 2 hours 😅',
+        isBot: false
+      },
+      {
+        id: 5,
+        user: 'CSSNightmare',
+        time: '2:30 PM',
+        content: 'Why won\'t my div center?? I\'ve tried everything!\n\n```css\n.container {\n  margin: auto;\n  text-align: center;\n}\n```',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😭', count: 89 }]
+      },
+      {
+        id: 6,
+        user: 'CSSWizard',
+        time: '2:32 PM',
+        content: '@CSSNightmare The classic struggle! Try flexbox:\n\n```css\n.container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh; /* or parent height */\n}\n```\n\nOr grid:\n```css\n.container {\n  display: grid;\n  place-items: center;\n}\n```',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🎯', count: 67 }, { emoji: '✨', count: 45 }]
+      }
+    ]
+  },
+  {
+    id: 'job-board',
+    name: '💼-jobs',
+    type: 'text',
+    serverId: 5,
+    description: 'Job postings and career opportunities',
+    messages: [
+      {
+        id: 1,
+        user: 'TechRecruiter',
+        time: '9:00 AM',
+        content: '🚀 **HIRING: Senior Frontend Developer** 🚀\n\n**Company:** TechCorp (YC-backed startup)\n**Location:** Remote (US/EU timezones)\n**Salary:** $150k-$200k + equity\n\n**Requirements:**\n• 5+ years React experience\n• TypeScript proficiency\n• Experience with design systems\n• Strong communication skills\n\n**Perks:**\n• Unlimited PTO\n• $5k learning budget\n• Latest MacBook Pro\n• Health/dental/vision\n\nDM me for details! 📩',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🚀', count: 234 }, { emoji: '💰', count: 156 }]
+      },
+      {
+        id: 2,
+        user: 'StartupFounder',
+        time: '11:30 AM',
+        content: '👋 **LOOKING FOR CO-FOUNDER**\n\nBuilding an AI-powered developer tool. Looking for a technical co-founder who\'s passionate about DX.\n\n• Pre-seed funded ($500k)\n• 50/50 equity split\n• Fully remote\n• Currently 2 people\n\nIdeal: Full-stack dev with AI/ML interest. Let\'s chat if interested!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤝', count: 89 }, { emoji: '🧠', count: 45 }]
+      },
+      {
+        id: 3,
+        user: 'FreelanceHub',
+        time: '2:00 PM',
+        content: '💻 **FREELANCE GIG**\n\n**Project:** E-commerce website rebuild\n**Stack:** Next.js, Tailwind, Stripe\n**Budget:** $8,000-$12,000\n**Timeline:** 6 weeks\n\nClient is responsive and knows what they want. Previous site mockups available. Reply here or DM!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💻', count: 67 }]
+      }
+    ]
+  }
+];
+
+// Server 6 - Anime & Manga Community
+const animeChannels: Channel[] = [
+  {
+    id: 'anime-announcements',
+    name: '📢-announcements',
+    type: 'text',
+    serverId: 6,
+    description: 'Anime news and server updates',
+    messages: [
+      {
+        id: 1,
+        user: 'AnimeAdmin',
+        time: '8:00 AM',
+        content: '🌸 **WELCOME TO OTAKU PARADISE!** 🌸\n\nYour home for anime, manga, and Japanese culture!\n\n📺 Seasonal anime discussions\n📚 Manga recommendations\n🎌 Japanese language learning\n🎮 Anime games corner\n\nNo spoilers without tags! Use ||spoiler|| format.',
+        isBot: true,
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🌸', count: 3456 }, { emoji: '✨', count: 2345 }, { emoji: '🎌', count: 1234 }]
+      },
+      {
+        id: 2,
+        user: 'NewsBot',
+        time: '10:00 AM',
+        content: '📰 **ANIME NEWS ROUNDUP**\n\n🔥 Chainsaw Man Part 2 anime confirmed for 2025!\n⚔️ Demon Slayer final arc movie announced\n🏴‍☠️ One Piece live action Season 2 in production\n🌟 Your Name director\'s new film releases next month\n\nDiscuss in #seasonal-anime!',
+        isBot: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🔥', count: 1567 }, { emoji: '⚔️', count: 892 }]
+      }
+    ]
+  },
+  {
+    id: 'general-anime',
+    name: 'general',
+    type: 'text',
+    serverId: 6,
+    description: 'General anime discussion',
+    messages: [
+      {
+        id: 1,
+        user: 'AnimeFan2024',
+        time: '11:00 AM',
+        content: 'Just finished Frieren. That show hit different 🥺 The way it handles grief and the passage of time...',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🥺', count: 234 }, { emoji: '✨', count: 156 }]
+      },
+      {
+        id: 2,
+        user: 'MangaReader',
+        time: '11:02 AM',
+        content: '@AnimeFan2024 The manga goes even deeper! Highly recommend reading it. The art is beautiful',
+        isBot: false
+      },
+      {
+        id: 3,
+        user: 'WeebSupreme',
+        time: '11:05 AM',
+        content: 'Frieren is peak but have yall seen Dungeon Meshi? Comfort food anime of the year 🍳',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🍳', count: 89 }, { emoji: '🐉', count: 67 }]
+      },
+      {
+        id: 4,
+        user: 'OldSchoolOtaku',
+        time: '11:15 AM',
+        content: 'Modern anime is great but nothing beats 90s/2000s vibes. Cowboy Bebop, Evangelion, Serial Experiments Lain... that era was special',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤠', count: 145 }, { emoji: '🚀', count: 78 }]
+      },
+      {
+        id: 5,
+        user: 'NewToAnime',
+        time: '11:30 AM',
+        content: 'Hey! Just started watching anime. Finished Attack on Titan and loved it. What should I watch next?',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👋', count: 45 }]
+      },
+      {
+        id: 6,
+        user: 'AnimeGuide',
+        time: '11:32 AM',
+        content: '@NewToAnime Great first choice! Based on AoT you might like:\n\n**Action/Drama:**\n• Vinland Saga\n• Jujutsu Kaisen\n• Demon Slayer\n\n**Mind-bending:**\n• Steins;Gate\n• Death Note\n• Code Geass\n\n**Emotional:**\n• Fullmetal Alchemist: Brotherhood\n• Hunter x Hunter\n\nFMAB is often considered the best anime ever, so that\'s a safe pick!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📝', count: 234 }, { emoji: '🙏', count: 156 }]
+      },
+      {
+        id: 7,
+        user: 'ShonenJumper',
+        time: '12:00 PM',
+        content: 'One Piece finally in its peak era 🏴‍☠️ Gear 5 was worth the 20+ year wait',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏴‍☠️', count: 567 }, { emoji: '⚡', count: 345 }]
+      },
+      {
+        id: 8,
+        user: 'SliceOfLifeFan',
+        time: '12:15 PM',
+        content: 'Yall are sleeping on Spy x Family. Anya is carrying that show on her back 🥜',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🥜', count: 456 }, { emoji: '😂', count: 234 }]
+      },
+      {
+        id: 9,
+        user: 'HorrorAnimeEnjoyer',
+        time: '12:30 PM',
+        content: 'Anyone else hyped for Uzumaki adaptation? Junji Ito finally getting the anime treatment he deserves',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌀', count: 89 }, { emoji: '😱', count: 67 }]
+      },
+      {
+        id: 10,
+        user: 'CasualViewer',
+        time: '1:00 PM',
+        content: 'Hot take: sub > dub for everything except Cowboy Bebop and Ghost Stories 🎤',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🔥', count: 234 }, { emoji: '👎', count: 123 }]
+      }
+    ]
+  },
+  {
+    id: 'manga-corner',
+    name: '📚-manga',
+    type: 'text',
+    serverId: 6,
+    description: 'Manga discussion and recommendations',
+    messages: [
+      {
+        id: 1,
+        user: 'MangaCollector',
+        time: '10:00 AM',
+        content: 'My manga collection just hit 500 volumes! 📚 Starting to run out of shelf space lol',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📚', count: 345 }, { emoji: '😮', count: 156 }]
+      },
+      {
+        id: 2,
+        user: 'DigitalReader',
+        time: '10:05 AM',
+        content: '@MangaCollector That\'s impressive! I went full digital after moving twice. My Kindle has like 2000+ chapters saved',
+        isBot: false
+      },
+      {
+        id: 3,
+        user: 'PhysicalGang',
+        time: '10:08 AM',
+        content: 'Nothing beats the feeling of physical volumes though. The smell of new manga pages 👃✨',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '✨', count: 89 }]
+      },
+      {
+        id: 4,
+        user: 'WeeklyJumpFan',
+        time: '11:00 AM',
+        content: 'This week\'s Jump was CRAZY. ||Jujutsu Kaisen chapter had me screaming|| 😱',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😱', count: 234 }]
+      }
+    ]
+  }
+];
+
+// Server 7 - Fitness & Health
+const fitnessChannels: Channel[] = [
+  {
+    id: 'fitness-announcements',
+    name: '📢-announcements',
+    type: 'text',
+    serverId: 7,
+    description: 'Fitness community updates',
+    messages: [
+      {
+        id: 1,
+        user: 'FitAdmin',
+        time: '5:00 AM',
+        content: '💪 **WELCOME TO GAINS NATION!** 💪\n\nYour community for fitness, health, and self-improvement!\n\n🏋️ Workout tips & form checks\n🥗 Nutrition & meal prep\n🏃 Cardio & endurance\n🧘 Mental health & wellness\n\nRemember: Every rep counts, every meal matters, every day is progress! 🔥',
+        isBot: true,
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '💪', count: 4567 }, { emoji: '🔥', count: 3456 }, { emoji: '🏆', count: 2345 }]
+      },
+      {
+        id: 2,
+        user: 'ChallengeBot',
+        time: '6:00 AM',
+        content: '🎯 **JANUARY CHALLENGE: 75 HARD LITE**\n\nModified version for our community:\n\n✅ 45 min workout daily\n✅ Drink 3L water\n✅ No alcohol\n✅ Follow a diet (your choice)\n✅ 10 min reading/learning\n\n**Prize:** Custom role + $50 gift card\n\nSign up in #challenges!',
+        isBot: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🎯', count: 892 }, { emoji: '💪', count: 567 }]
+      }
+    ]
+  },
+  {
+    id: 'general-fitness',
+    name: 'general',
+    type: 'text',
+    serverId: 7,
+    description: 'General fitness discussion',
+    messages: [
+      {
+        id: 1,
+        user: 'GymRat2024',
+        time: '6:30 AM',
+        content: 'Early morning grind! 5AM gym hits different when you\'re the only one there 🌅',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌅', count: 234 }, { emoji: '💪', count: 156 }]
+      },
+      {
+        id: 2,
+        user: 'NightOwlLifter',
+        time: '6:32 AM',
+        content: '@GymRat2024 5AM?? I\'m still at the gym from last night\'s session lol jk. Night gym supremacy 🌙',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🌙', count: 89 }]
+      },
+      {
+        id: 3,
+        user: 'BeginnerGains',
+        time: '8:00 AM',
+        content: 'Been lifting for 3 months now and finally seeing newbie gains! Bench went from 95 to 135 lbs 📈',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📈', count: 456 }, { emoji: '🎉', count: 345 }]
+      },
+      {
+        id: 4,
+        user: 'VeteranLifter',
+        time: '8:05 AM',
+        content: '@BeginnerGains Love to see it! Those newbie gains are amazing. Keep it up and you\'ll hit 225 before you know it',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🙌', count: 78 }]
+      },
+      {
+        id: 5,
+        user: 'FormChecker',
+        time: '9:00 AM',
+        content: 'Posted a squat form check video in #form-checks. Please roast my form, I want to improve before going heavier 🏋️',
+        isBot: false
+      },
+      {
+        id: 6,
+        user: 'PowerlifterPete',
+        time: '9:15 AM',
+        content: '@FormChecker Just watched it - depth looks good! Two things:\n1. Keep your chest up more at the bottom\n2. Drive through your whole foot, not just heels\n\nOverall solid though! 👍',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👍', count: 67 }, { emoji: '📝', count: 34 }]
+      },
+      {
+        id: 7,
+        user: 'CardioQueen',
+        time: '10:00 AM',
+        content: 'Just ran my first half marathon! 2:15 finish time. Never thought I could do it 🏃‍♀️🎉',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏃‍♀️', count: 567 }, { emoji: '🎉', count: 456 }, { emoji: '🏅', count: 345 }]
+      },
+      {
+        id: 8,
+        user: 'MarathonMike',
+        time: '10:05 AM',
+        content: '@CardioQueen That\'s an amazing first time! The first one is always the hardest. Full marathon next? 😏',
+        isBot: false
+      },
+      {
+        id: 9,
+        user: 'HomeGymOwner',
+        time: '11:00 AM',
+        content: 'Finally completed my home gym setup! Power rack, adjustable dumbbells, cable machine. Never need a commercial gym again 🏠💪',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏠', count: 234 }, { emoji: '💪', count: 156 }]
+      },
+      {
+        id: 10,
+        user: 'BudgetFitness',
+        time: '11:10 AM',
+        content: '@HomeGymOwner How much did that set you back? Been thinking about it but worried about the cost',
+        isBot: false
+      },
+      {
+        id: 11,
+        user: 'HomeGymOwner',
+        time: '11:12 AM',
+        content: '@BudgetFitness About $3k total but I bought most stuff used from Facebook Marketplace. Worth it - gym membership was $80/month and I save 2 hours commute time daily',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💰', count: 89 }]
+      }
+    ]
+  },
+  {
+    id: 'nutrition',
+    name: '🥗-nutrition',
+    type: 'text',
+    serverId: 7,
+    description: 'Nutrition, diet, and meal prep',
+    messages: [
+      {
+        id: 1,
+        user: 'MealPrepKing',
+        time: '7:00 AM',
+        content: 'Sunday meal prep done! 15 containers ready for the week:\n\n• Chicken breast + rice + broccoli\n• Ground turkey + sweet potato + green beans\n• Salmon + quinoa + asparagus\n\nTotal: ~2400 calories/day, 180g protein 🍱',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🍱', count: 345 }, { emoji: '🔥', count: 234 }]
+      },
+      {
+        id: 2,
+        user: 'BulkingSeason',
+        time: '9:00 AM',
+        content: 'Trying to eat 3500 calories clean is actually so hard. My stomach can\'t handle this much food 😫',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😫', count: 156 }]
+      },
+      {
+        id: 3,
+        user: 'NutritionCoach',
+        time: '9:05 AM',
+        content: '@BulkingSeason Tips for clean bulk calories:\n• Olive oil in everything (+120 cal/tbsp)\n• Nut butters (calorie dense)\n• Dried fruits\n• Mass gainer shakes\n• Eat more frequently, smaller portions\n\nDon\'t force it - gradual increase works better!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📝', count: 234 }, { emoji: '🙏', count: 156 }]
+      },
+      {
+        id: 4,
+        user: 'CuttingCrew',
+        time: '10:00 AM',
+        content: 'On a 500 cal deficit and the hunger is REAL. Any tips for staying full?',
+        isBot: false
+      },
+      {
+        id: 5,
+        user: 'SatietyScience',
+        time: '10:05 AM',
+        content: '@CuttingCrew Volume eating is key:\n• Huge salads with lean protein\n• Air-popped popcorn (snack goat)\n• Greek yogurt + berries\n• Egg whites (17 cal each!)\n• Sugar-free jello\n• WATER. So much water.\n\nAlso caffeine is your friend during cuts 🧊',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🥗', count: 189 }, { emoji: '💡', count: 89 }]
+      }
+    ]
+  }
+];
+
+// Server 8 - Movie & TV Enthusiasts
+const movieChannels: Channel[] = [
+  {
+    id: 'movie-announcements',
+    name: '📢-announcements',
+    type: 'text',
+    serverId: 8,
+    description: 'Movie news and community updates',
+    messages: [
+      {
+        id: 1,
+        user: 'CinemaAdmin',
+        time: '9:00 AM',
+        content: '🎬 **WELCOME TO CINEMA CENTRAL!** 🎬\n\nThe ultimate community for movie & TV lovers!\n\n🍿 Movie reviews & discussions\n📺 TV show watch parties\n🎭 Actor/Director spotlights\n🏆 Awards season coverage\n\n**SPOILER RULES:** Use ||spoiler tags|| for anything less than 2 weeks old!',
+        isBot: true,
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🎬', count: 2345 }, { emoji: '🍿', count: 1890 }, { emoji: '📺', count: 1456 }]
+      }
+    ]
+  },
+  {
+    id: 'general-movies',
+    name: 'general',
+    type: 'text',
+    serverId: 8,
+    description: 'General movie and TV discussion',
+    messages: [
+      {
+        id: 1,
+        user: 'FilmBuff',
+        time: '10:00 AM',
+        content: 'Just watched Oppenheimer again. Nolan really outdid himself. That practical IMAX footage is insane 🎥',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💣', count: 234 }, { emoji: '🎥', count: 156 }]
+      },
+      {
+        id: 2,
+        user: 'CasualViewer',
+        time: '10:05 AM',
+        content: '@FilmBuff I still need to see it! Is it worth the 3 hour runtime?',
+        isBot: false
+      },
+      {
+        id: 3,
+        user: 'FilmBuff',
+        time: '10:07 AM',
+        content: '@CasualViewer Absolutely. Doesn\'t feel like 3 hours honestly. The pacing is incredible. Just don\'t try to watch it on your phone lol',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👍', count: 67 }]
+      },
+      {
+        id: 4,
+        user: 'HorrorFanatic',
+        time: '11:00 AM',
+        content: 'Horror movie recommendations? Already seen all the classics. Need something obscure 🎃',
+        isBot: false
+      },
+      {
+        id: 5,
+        user: 'GenreExpert',
+        time: '11:05 AM',
+        content: '@HorrorFanatic Try these hidden gems:\n• Noroi: The Curse (Japanese, found footage)\n• Lake Mungo (Australian, slow burn)\n• Pontypool (Canadian, unique concept)\n• The Wailing (Korean, absolutely terrifying)\n• Possum (British, disturbing AF)\n\nWarning: These are NOT casual watches 😱',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😱', count: 189 }, { emoji: '📝', count: 134 }]
+      },
+      {
+        id: 6,
+        user: 'TVShowAddict',
+        time: '12:00 PM',
+        content: 'Just binged Shogun in 2 days. Why is nobody talking about this show?? It\'s a masterpiece 🇯🇵',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🇯🇵', count: 345 }, { emoji: '⚔️', count: 234 }]
+      },
+      {
+        id: 7,
+        user: 'PeakTVEnjoyer',
+        time: '12:05 PM',
+        content: '@TVShowAddict RIGHT?? The production value is insane. Hiroyuki Sanada deserves all the awards',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🏆', count: 156 }]
+      },
+      {
+        id: 8,
+        user: 'MarvelDCFan',
+        time: '1:00 PM',
+        content: 'Hot take: The superhero genre isn\'t dead, studios just need to stop making mediocre content and actually try again',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🔥', count: 234 }, { emoji: '💯', count: 178 }]
+      },
+      {
+        id: 9,
+        user: 'SuperheroSkeptic',
+        time: '1:05 PM',
+        content: '@MarvelDCFan Hard disagree. We\'ve had like 50 superhero movies in 10 years. Time for something new',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤔', count: 89 }]
+      },
+      {
+        id: 10,
+        user: 'ClassicCinemaLover',
+        time: '2:00 PM',
+        content: 'Just introduced my kids to The Princess Bride. Their reaction to "Hello, my name is Inigo Montoya" was priceless 😂⚔️',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚔️', count: 456 }, { emoji: '😂', count: 345 }, { emoji: '❤️', count: 234 }]
+      }
+    ]
+  },
+  {
+    id: 'streaming-recs',
+    name: '📺-streaming',
+    type: 'text',
+    serverId: 8,
+    description: 'What to watch on streaming services',
+    messages: [
+      {
+        id: 1,
+        user: 'StreamingGuide',
+        time: '10:00 AM',
+        content: '📺 **THIS WEEK\'S PICKS**\n\n**Netflix:**\n• 3 Body Problem (Sci-fi epic)\n• Ripley (Noir thriller)\n\n**Max:**\n• True Detective: Night Country\n• The Curse\n\n**Apple TV+:**\n• Severance S2 (when it drops)\n• Slow Horses\n\n**Prime:**\n• Fallout (surprisingly good!)\n• Mr. & Mrs. Smith',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📺', count: 567 }, { emoji: '📝', count: 234 }]
+      },
+      {
+        id: 2,
+        user: 'BingeWatcher',
+        time: '11:00 AM',
+        content: 'Can we talk about how Apple TV+ is quietly putting out the best content? Severance, For All Mankind, Slow Horses... all bangers',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🍎', count: 234 }, { emoji: '💯', count: 156 }]
+      },
+      {
+        id: 3,
+        user: 'NetflixNerd',
+        time: '11:05 AM',
+        content: '@BingeWatcher True but their release schedule is painful. One season every 2 years is rough',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😢', count: 89 }]
+      }
+    ]
+  }
+];
+
+// Server 9 - Crypto & Finance
+const cryptoChannels: Channel[] = [
+  {
+    id: 'crypto-announcements',
+    name: '📢-announcements',
+    type: 'text',
+    serverId: 9,
+    description: 'Crypto news and market updates',
+    messages: [
+      {
+        id: 1,
+        user: 'CryptoAdmin',
+        time: '6:00 AM',
+        content: '📈 **WELCOME TO CRYPTO CENTRAL!** 📈\n\nYour hub for cryptocurrency and financial discussion!\n\n💰 Market analysis & news\n📊 Trading strategies\n🔐 Security best practices\n💎 Long-term investing\n\n⚠️ **DISCLAIMER:** Not financial advice. DYOR. Never invest more than you can afford to lose.',
+        isBot: true,
+        isWelcome: true,
+        hasReactions: true,
+        reactions: [{ emoji: '📈', count: 3456 }, { emoji: '💰', count: 2345 }, { emoji: '💎', count: 1890 }]
+      }
+    ]
+  },
+  {
+    id: 'general-crypto',
+    name: 'general',
+    type: 'text',
+    serverId: 9,
+    description: 'General crypto discussion',
+    messages: [
+      {
+        id: 1,
+        user: 'BitcoinMaxi',
+        time: '7:00 AM',
+        content: 'ETF approval was huge but this is just the beginning. Institutional adoption is going to be massive 📈',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📈', count: 345 }, { emoji: '🚀', count: 234 }]
+      },
+      {
+        id: 2,
+        user: 'AltcoinTrader',
+        time: '7:05 AM',
+        content: 'BTC pumps, alts dump. Then BTC consolidates and alts pump. Same cycle every time 🔄',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🔄', count: 156 }]
+      },
+      {
+        id: 3,
+        user: 'DeFiDegen',
+        time: '8:00 AM',
+        content: 'New yield farm on Arbitrum looking juicy 👀 30% APY on stables. Anyone looked into it?',
+        isBot: false
+      },
+      {
+        id: 4,
+        user: 'SafetyFirst',
+        time: '8:05 AM',
+        content: '@DeFiDegen Be careful with those yields. If it seems too good to be true... Check if it\'s audited, how long it\'s been running, and always start small',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚠️', count: 89 }, { emoji: '👍', count: 67 }]
+      },
+      {
+        id: 5,
+        user: 'HODLer',
+        time: '9:00 AM',
+        content: 'Remember: Time in the market > timing the market. Been holding since 2017 and not selling until 2030 at least 💎🙌',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💎', count: 456 }, { emoji: '🙌', count: 345 }]
+      },
+      {
+        id: 6,
+        user: 'TradingNewbie',
+        time: '10:00 AM',
+        content: 'Can someone explain what a stop-loss is? I keep seeing it mentioned but don\'t understand',
+        isBot: false
+      },
+      {
+        id: 7,
+        user: 'TradingMentor',
+        time: '10:05 AM',
+        content: '@TradingNewbie It\'s an order that automatically sells your position if the price drops to a certain level. Protects you from big losses.\n\nExample: Buy BTC at $50k, set stop-loss at $45k. If BTC drops to $45k, it auto-sells. Max loss = 10%.\n\nAbsolutely essential for risk management!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '📚', count: 234 }, { emoji: '🙏', count: 156 }]
+      },
+      {
+        id: 8,
+        user: 'NFTSkeptic',
+        time: '11:00 AM',
+        content: 'NFT market is so dead. Remember when people were paying millions for JPEGs? 💀',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💀', count: 345 }, { emoji: '😂', count: 234 }]
+      },
+      {
+        id: 9,
+        user: 'NFTBeliever',
+        time: '11:05 AM',
+        content: '@NFTSkeptic The speculative bubble popped but the tech is still useful. Gaming, ticketing, digital ownership... just needs real utility',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🤔', count: 89 }]
+      }
+    ]
+  },
+  {
+    id: 'security-tips',
+    name: '🔐-security',
+    type: 'text',
+    serverId: 9,
+    description: 'Crypto security best practices',
+    messages: [
+      {
+        id: 1,
+        user: 'SecurityBot',
+        time: '12:00 AM',
+        content: '🔐 **CRYPTO SECURITY ESSENTIALS**\n\n**Must-Do:**\n✅ Use hardware wallet for large holdings\n✅ Enable 2FA (preferably hardware key)\n✅ Never share seed phrase - EVER\n✅ Use unique passwords everywhere\n✅ Verify URLs before connecting wallet\n\n**Red Flags:**\n🚩 "Send crypto to receive more"\n🚩 "Connect wallet" on random sites\n🚩 DMs asking for seed phrase\n🚩 Too-good-to-be-true yields\n🚩 Urgency/FOMO tactics\n\n**Remember:** Not your keys, not your crypto!',
+        isBot: true,
+        hasReactions: true,
+        reactions: [{ emoji: '🔐', count: 567 }, { emoji: '📝', count: 345 }]
+      },
+      {
+        id: 2,
+        user: 'ScamVictim',
+        time: '2:00 PM',
+        content: 'PSA: Got phished yesterday. Clicked a fake Uniswap link from Google ads. Lost 0.5 ETH 😭 Please triple-check URLs',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '😭', count: 234 }, { emoji: '🙏', count: 156 }]
+      },
+      {
+        id: 3,
+        user: 'SecurityExpert',
+        time: '2:05 PM',
+        content: '@ScamVictim Sorry to hear that. Tip: Bookmark official sites and ONLY use bookmarks. Never Google DeFi platforms - ads are full of scams',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💡', count: 345 }]
+      }
+    ]
+  }
+];
+
 export const servers: Server[] = [
   {
     id: 2,
@@ -1271,6 +2176,65 @@ export const servers: Server[] = [
       { name: "General Chat", users: 6, userList: ["DigitalArtist", "MidJourneyPro", "AIEnthusiast", "CreativeGenius", "PortraitPro", "PromptMaster"] },
       { name: "🎨 Creative Session", users: 3, userList: ["ArtDirector", "ConceptArtist", "VisualDesigner"] },
       { name: "Help Desk", users: 2, userList: ["HelpfulMember", "TutorialGuru"] }
+    ]
+  },
+  {
+    id: 5,
+    name: "Dev Central",
+    icon: "💻",
+    textChannels: techChannels,
+    voiceChannels: [
+      { name: "Code Review", users: 8, userList: ["ReactDev2024", "TypeScriptFan", "FullStackDev", "NextJSExpert", "PythonDev", "GoLangGopher", "RustEvangelist", "SeniorDev"] },
+      { name: "Pair Programming", users: 4, userList: ["NewbieDev", "ReactMentor", "CSSWizard", "DevOpsGuru"] },
+      { name: "Interview Prep", users: 3, userList: ["JobSeeker", "TechRecruiter", "InterviewCoach"] },
+      { name: "Rubber Duck", users: 2, userList: ["DebugDuck", "StuckDeveloper"] }
+    ]
+  },
+  {
+    id: 6,
+    name: "Otaku Paradise",
+    icon: "🌸",
+    textChannels: animeChannels,
+    voiceChannels: [
+      { name: "Watch Party", users: 15, userList: ["AnimeFan2024", "MangaReader", "WeebSupreme", "OldSchoolOtaku", "NewToAnime", "AnimeGuide", "ShonenJumper", "SliceOfLifeFan", "HorrorAnimeEnjoyer", "CasualViewer", "MangaCollector", "DigitalReader", "PhysicalGang", "WeeklyJumpFan", "VoiceActorFan"] },
+      { name: "Manga Readers", users: 6, userList: ["ChapterDropper", "SpoilerAvoider", "WeeklyWaiter", "VolumeCollector", "ScanlationReader", "OfficialOnly"] },
+      { name: "Cosplay Corner", users: 4, userList: ["CosplayQueen", "PropMaker", "SewingMaster", "WigWizard"] },
+      { name: "Japanese Learning", users: 5, userList: ["N5Student", "KanjiKing", "ListeningPractice", "GrammarGuru", "ConversationClub"] }
+    ]
+  },
+  {
+    id: 7,
+    name: "Gains Nation",
+    icon: "💪",
+    textChannels: fitnessChannels,
+    voiceChannels: [
+      { name: "Gym Talk", users: 12, userList: ["GymRat2024", "NightOwlLifter", "BeginnerGains", "VeteranLifter", "FormChecker", "PowerlifterPete", "HomeGymOwner", "BudgetFitness", "MealPrepKing", "BulkingSeason", "CuttingCrew", "NutritionCoach"] },
+      { name: "Running Club", users: 6, userList: ["CardioQueen", "MarathonMike", "5KRunner", "TrailBlazer", "TreadmillTerror", "OutdoorEnthusiast"] },
+      { name: "Yoga & Mobility", users: 4, userList: ["FlexibilityFirst", "YogaMaster", "StretchDaily", "RecoveryFocused"] },
+      { name: "Accountability", users: 3, userList: ["DailyChecker", "ProgressTracker", "MotivationMachine"] }
+    ]
+  },
+  {
+    id: 8,
+    name: "Cinema Central",
+    icon: "🎬",
+    textChannels: movieChannels,
+    voiceChannels: [
+      { name: "Watch Party", users: 10, userList: ["FilmBuff", "CasualViewer", "HorrorFanatic", "GenreExpert", "TVShowAddict", "PeakTVEnjoyer", "MarvelDCFan", "ClassicCinemaLover", "StreamingGuide", "BingeWatcher"] },
+      { name: "Film Critics", users: 5, userList: ["MovieReviewer", "RatingDebater", "PlotAnalyst", "CinematographyFan", "DirectorWatcher"] },
+      { name: "Spoiler Zone", users: 3, userList: ["SpoilerLover", "PlotDiscusser", "EndingDebater"] }
+    ]
+  },
+  {
+    id: 9,
+    name: "Crypto Central",
+    icon: "📈",
+    textChannels: cryptoChannels,
+    voiceChannels: [
+      { name: "Market Discussion", users: 14, userList: ["BitcoinMaxi", "AltcoinTrader", "DeFiDegen", "SafetyFirst", "HODLer", "TradingNewbie", "TradingMentor", "NFTSkeptic", "NFTBeliever", "ChartAnalyst", "WhaleWatcher", "RetailInvestor", "InstitutionalBull", "MacroTrader"] },
+      { name: "Trading Floor", users: 6, userList: ["DayTrader", "SwingTrader", "ScalpMaster", "OptionsPlayer", "LeverageKing", "RiskManager"] },
+      { name: "DeFi Discussion", users: 4, userList: ["YieldFarmer", "LiquidityProvider", "ProtocolExplorer", "SmartContractDev"] },
+      { name: "Security Help", users: 2, userList: ["SecurityExpert", "HardwareWalletPro"] }
     ]
   }
 ];
