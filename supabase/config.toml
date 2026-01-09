@@ -1,0 +1,4 @@
+project_id = "ayoqlapkdyeqegxmvpay"
+
+[functions.rover-chat]
+verify_jwt = false

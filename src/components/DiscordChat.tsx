@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Send, Plus, Gift, Smile, Sparkles, Search, ExternalLink, MessageSquare, Server, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -19,6 +19,7 @@ import {
   ConversationSummary 
 } from "@/utils/conversationAnalyzer";
 import { queryProcessor, SearchResponse, SearchResult, ThreadResult } from "@/utils/queryProcessor";
+import { useRoverChat } from "@/hooks/useRoverChat";
 
 interface DiscordChatProps {
   channelName: string;
@@ -33,11 +34,27 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [showUserList, setShowUserList] = useState(true);
   const [searchResults, setSearchResults] = useState<SearchResponse | null>(null);
+  const streamingMessageIdRef = useRef<number | null>(null);
+  
+  const { streamingResponse, isStreaming, error: roverError, sendMessage: sendRoverMessage } = useRoverChat();
 
   // Update chatMessages when messages prop changes (channel switching)
   useEffect(() => {
     setChatMessages(messages);
   }, [messages]);
+
+  // Update streaming message in real-time
+  useEffect(() => {
+    if (isStreaming && streamingResponse && streamingMessageIdRef.current) {
+      setChatMessages(prev => 
+        prev.map(msg => 
+          msg.id === streamingMessageIdRef.current 
+            ? { ...msg, content: streamingResponse }
+            : msg
+        )
+      );
+    }
+  }, [streamingResponse, isStreaming]);
 
   // Extract users from messages and create user list with roles and status
   const channelUsers = useMemo(() => {
@@ -373,29 +390,49 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
   const handleAIResponse = async (userMessage: string) => {
     setShowAIAssistant(true);
     
-    // Use the new AI Assistant to get response with special components
-    const handleResponse = (response: string, navigationGuide?: any, specialComponent?: any) => {
-      const aiMessage: Message = {
-        id: Date.now() + 1,
-        user: 'ROVER',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        content: response,
-        isBot: true,
-        navigationGuide,
-        specialComponent
-      };
-
-      setChatMessages(prev => [...prev, aiMessage]);
-      setShowAIAssistant(false);
+    // Create a placeholder message for streaming
+    const messageId = Date.now() + 1;
+    streamingMessageIdRef.current = messageId;
+    
+    const placeholderMessage: Message = {
+      id: messageId,
+      user: 'ROVER',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      content: '🤔 Thinking...',
+      isBot: true
     };
+    
+    setChatMessages(prev => [...prev, placeholderMessage]);
 
-    // Import and use AIAssistant
     try {
-      const { processAIRequest } = await import('./AIAssistant');
-      await processAIRequest(userMessage, handleResponse);
+      const context = {
+        channelName,
+        serverName: activeUser?.name || 'Gaming Hub',
+        messages: chatMessages
+      };
+      
+      const response = await sendRoverMessage(userMessage, context);
+      
+      // Update the placeholder message with final response
+      setChatMessages(prev => 
+        prev.map(msg => 
+          msg.id === messageId 
+            ? { ...msg, content: response || "I processed your request!" }
+            : msg
+        )
+      );
     } catch (error) {
       console.error('AI Assistant error:', error);
-      handleResponse("I'm having trouble processing that request right now, but I'm still here to help! Could you try rephrasing your question? 🤖");
+      setChatMessages(prev => 
+        prev.map(msg => 
+          msg.id === messageId 
+            ? { ...msg, content: roverError || "I'm having trouble processing that request right now, but I'm still here to help! Could you try rephrasing your question? 🤖" }
+            : msg
+        )
+      );
+    } finally {
+      setShowAIAssistant(false);
+      streamingMessageIdRef.current = null;
     }
   };
 
