@@ -2140,31 +2140,139 @@ const cryptoChannels: Channel[] = [
   }
 ];
 
+// Server member interface for unified member list
+export interface ServerMember {
+  id: string;
+  name: string;
+  status: 'online' | 'idle' | 'dnd' | 'offline';
+  activity?: string;
+  role?: 'owner' | 'admin' | 'moderator' | 'member';
+  inVoice?: string;
+}
+
+// Server role assignments
+const serverRoles: Record<number, Record<string, 'owner' | 'admin' | 'moderator' | 'member'>> = {
+  2: { // Gaming Hub
+    "EsportsManager": "admin",
+    "TwitchStreamerPro": "moderator",
+    "CommunityManager": "admin",
+    "DevTeam": "admin",
+    "GuildMaster": "owner",
+    "ModeratorX": "moderator",
+    "ValorantCoach": "moderator",
+    "StreamerPro": "moderator"
+  },
+  3: { // Music Lovers
+    "CommunityDJ": "owner",
+    "VinylCollector": "admin",
+    "MelodyExplorer": "moderator",
+    "SynthMaster": "moderator"
+  },
+  4: { // Midjourney
+    "MidJourneyPro": "admin",
+    "TutorialGuru": "moderator",
+    "CreativeGenius": "moderator"
+  },
+  5: { // Dev Central
+    "SeniorDev": "owner",
+    "ReactMentor": "admin",
+    "DevOpsGuru": "admin",
+    "InterviewCoach": "moderator"
+  },
+  6: { // Otaku Paradise
+    "AnimeGuide": "owner",
+    "OldSchoolOtaku": "admin",
+    "WeebSupreme": "moderator"
+  },
+  7: { // Gains Nation
+    "NutritionCoach": "owner",
+    "VeteranLifter": "admin",
+    "FormChecker": "moderator"
+  },
+  8: { // Cinema Central
+    "FilmBuff": "owner",
+    "GenreExpert": "admin",
+    "MovieReviewer": "moderator"
+  },
+  9: { // Crypto Central
+    "TradingMentor": "owner",
+    "ChartAnalyst": "admin",
+    "SecurityExpert": "moderator",
+    "RiskManager": "moderator"
+  }
+};
+
+// Helper function to get server members
+export const getServerMembers = (serverId: number): ServerMember[] => {
+  const server = servers.find(s => s.id === serverId);
+  if (!server) return [];
+  
+  const memberMap = new Map<string, ServerMember>();
+  const roles = serverRoles[serverId] || {};
+  
+  // Add voice channel users (they're online with activity)
+  server.voiceChannels.forEach(vc => {
+    (vc.userList || []).forEach(name => {
+      memberMap.set(name, {
+        id: name.toLowerCase().replace(/\s/g, '-'),
+        name,
+        status: 'online',
+        activity: `In 🔊 ${vc.name}`,
+        role: roles[name] || 'member',
+        inVoice: vc.name
+      });
+    });
+  });
+  
+  // Add message authors from text channels
+  server.textChannels.forEach(ch => {
+    ch.messages.forEach(msg => {
+      if (!msg.isBot && msg.user !== 'You' && !memberMap.has(msg.user)) {
+        // Assign varied statuses
+        const rand = Math.random();
+        let status: 'online' | 'idle' | 'dnd' | 'offline' = 'online';
+        if (rand > 0.7) status = 'offline';
+        else if (rand > 0.5) status = 'idle';
+        else if (rand > 0.4) status = 'dnd';
+        
+        memberMap.set(msg.user, {
+          id: msg.user.toLowerCase().replace(/\s/g, '-'),
+          name: msg.user,
+          status,
+          role: roles[msg.user] || 'member'
+        });
+      }
+    });
+  });
+  
+  return Array.from(memberMap.values());
+};
+
 export const servers: Server[] = [
   {
     id: 2,
     name: "Gaming Hub",
-    icon: "🔥",
+    icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=64&h=64&fit=crop",
     textChannels: gamingChannels,
     voiceChannels: [
-      { name: "Gaming Lounge", users: 12, userList: ["xXGamerGodXx", "ProShooter", "ClutchMaster", "TacticalGenius", "ValorantCoach", "StreamerPro", "RageQuitter2024", "AimBot_Not", "GamerGirl2024", "MinecraftSteve", "FortniteKid", "BuildMaster"] },
-      { name: "Valorant Ranked", users: 15, userList: ["RadiantChaser", "DuelMaster", "SmokeSpammer", "IronToImmortal", "EntryFragger", "FlashBangGod", "GoldGrinder", "SilverSurfer", "SwiftRotation", "AceClutcher", "PatientCoach", "NewPlayerHelp", "ValorantSage", "CustomGameMaster", "PromptMaster"] },
-      { name: "Stream Chat", users: 8, userList: ["TwitchStreamerPro", "RisingStreamer", "ContentCreator2024", "VarietyStreamer", "CompetitiveCoach", "SmallStreamerSupport", "ViewerSupreme", "StreamerWannabe"] },
-      { name: "Tournament Arena", users: 6, userList: ["EsportsManager", "TournamentTracker", "GuildMaster", "ModeratorX", "CommunityManager", "DevTeam"] },
-      { name: "Clips & Highlights", users: 4, userList: ["ClutchKing2024", "HighlightHunter", "SpeedRunner", "FailCompilation"] }
+      { name: "Gaming Lounge", users: 4, userList: ["xXGamerGodXx", "ClutchMaster", "TacticalGenius", "StreamerPro"] },
+      { name: "Valorant Ranked", users: 5, userList: ["RadiantChaser", "DuelMaster", "SmokeSpammer", "EntryFragger", "ValorantCoach"] },
+      { name: "Stream Chat", users: 2, userList: ["TwitchStreamerPro", "ViewerSupreme"] },
+      { name: "Tournament Arena", users: 0 },
+      { name: "AFK", users: 1, userList: ["RageQuitter2024"] }
     ]
   },
   {
     id: 3,
     name: "Music Lovers",
-    icon: "🎵",
+    icon: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=64&h=64&fit=crop",
     textChannels: musicChannels,
     voiceChannels: [
-      { name: "🎧 Listening Party", users: 18, userList: ["MelodyExplorer", "LoFiVibes", "MetalHead666", "ClassicalMind", "PopPrincess", "IndieDiscoverer", "HipHopHead2024", "RadioRebel", "VinylCollector", "DigitalNomad", "ConcertAddict", "BudgetMelomaniac", "GenZMusiclover", "OldSchoolPurist", "MiddleGroundMelody", "NightOwlListener", "SunriseSerenader", "WorkoutBeats"] },
-      { name: "🎤 DJ Booth", users: 6, userList: ["CommunityDJ", "NeonNights", "RetroWave80s", "SynthMaster", "HouseMixGod", "TechnoVibe"] },
-      { name: "🎸 Jam Session", users: 4, userList: ["GuitarHero", "BassLegend", "DrummingDave", "KeyboardWizard"] },
-      { name: "💿 Vinyl Corner", users: 3, userList: ["VinylVault", "RareRecords", "AnalogAudio"] },
-      { name: "🎼 Production Talk", users: 2, userList: ["BeatMaker3000", "StudioMaster"] }
+      { name: "🎧 Listening Party", users: 6, userList: ["MelodyExplorer", "LoFiVibes", "MetalHead666", "VinylCollector", "PopPrincess", "IndieDiscoverer"] },
+      { name: "🎤 DJ Booth", users: 2, userList: ["CommunityDJ", "SynthMaster"] },
+      { name: "🎸 Jam Session", users: 3, userList: ["GuitarHero", "BassLegend", "DrummingDave"] },
+      { name: "💿 Vinyl Corner", users: 0 },
+      { name: "🎼 Production Talk", users: 1, userList: ["BeatMaker3000"] }
     ]
   },
   {
@@ -2173,68 +2281,68 @@ export const servers: Server[] = [
     icon: "/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png",
     textChannels: midjourneyChannels,
     voiceChannels: [
-      { name: "General Chat", users: 6, userList: ["DigitalArtist", "MidJourneyPro", "AIEnthusiast", "CreativeGenius", "PortraitPro", "PromptMaster"] },
-      { name: "🎨 Creative Session", users: 3, userList: ["ArtDirector", "ConceptArtist", "VisualDesigner"] },
-      { name: "Help Desk", users: 2, userList: ["HelpfulMember", "TutorialGuru"] }
+      { name: "General Chat", users: 3, userList: ["MidJourneyPro", "AIEnthusiast", "CreativeGenius"] },
+      { name: "🎨 Creative Session", users: 2, userList: ["ArtDirector", "ConceptArtist"] },
+      { name: "Help Desk", users: 1, userList: ["TutorialGuru"] }
     ]
   },
   {
     id: 5,
     name: "Dev Central",
-    icon: "💻",
+    icon: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=64&h=64&fit=crop",
     textChannels: techChannels,
     voiceChannels: [
-      { name: "Code Review", users: 8, userList: ["ReactDev2024", "TypeScriptFan", "FullStackDev", "NextJSExpert", "PythonDev", "GoLangGopher", "RustEvangelist", "SeniorDev"] },
-      { name: "Pair Programming", users: 4, userList: ["NewbieDev", "ReactMentor", "CSSWizard", "DevOpsGuru"] },
-      { name: "Interview Prep", users: 3, userList: ["JobSeeker", "TechRecruiter", "InterviewCoach"] },
-      { name: "Rubber Duck", users: 2, userList: ["DebugDuck", "StuckDeveloper"] }
+      { name: "Code Review", users: 4, userList: ["ReactDev2024", "TypeScriptFan", "SeniorDev", "FullStackDev"] },
+      { name: "Pair Programming", users: 2, userList: ["NewbieDev", "ReactMentor"] },
+      { name: "Interview Prep", users: 0 },
+      { name: "Rubber Duck", users: 1, userList: ["DebugDuck"] }
     ]
   },
   {
     id: 6,
     name: "Otaku Paradise",
-    icon: "🌸",
+    icon: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=64&h=64&fit=crop",
     textChannels: animeChannels,
     voiceChannels: [
-      { name: "Watch Party", users: 15, userList: ["AnimeFan2024", "MangaReader", "WeebSupreme", "OldSchoolOtaku", "NewToAnime", "AnimeGuide", "ShonenJumper", "SliceOfLifeFan", "HorrorAnimeEnjoyer", "CasualViewer", "MangaCollector", "DigitalReader", "PhysicalGang", "WeeklyJumpFan", "VoiceActorFan"] },
-      { name: "Manga Readers", users: 6, userList: ["ChapterDropper", "SpoilerAvoider", "WeeklyWaiter", "VolumeCollector", "ScanlationReader", "OfficialOnly"] },
-      { name: "Cosplay Corner", users: 4, userList: ["CosplayQueen", "PropMaker", "SewingMaster", "WigWizard"] },
-      { name: "Japanese Learning", users: 5, userList: ["N5Student", "KanjiKing", "ListeningPractice", "GrammarGuru", "ConversationClub"] }
+      { name: "Watch Party", users: 7, userList: ["AnimeFan2024", "MangaReader", "WeebSupreme", "OldSchoolOtaku", "AnimeGuide", "ShonenJumper", "SliceOfLifeFan"] },
+      { name: "Manga Readers", users: 3, userList: ["ChapterDropper", "WeeklyWaiter", "VolumeCollector"] },
+      { name: "Cosplay Corner", users: 0 },
+      { name: "Japanese Learning", users: 2, userList: ["N5Student", "KanjiKing"] }
     ]
   },
   {
     id: 7,
     name: "Gains Nation",
-    icon: "💪",
+    icon: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=64&h=64&fit=crop",
     textChannels: fitnessChannels,
     voiceChannels: [
-      { name: "Gym Talk", users: 12, userList: ["GymRat2024", "NightOwlLifter", "BeginnerGains", "VeteranLifter", "FormChecker", "PowerlifterPete", "HomeGymOwner", "BudgetFitness", "MealPrepKing", "BulkingSeason", "CuttingCrew", "NutritionCoach"] },
-      { name: "Running Club", users: 6, userList: ["CardioQueen", "MarathonMike", "5KRunner", "TrailBlazer", "TreadmillTerror", "OutdoorEnthusiast"] },
-      { name: "Yoga & Mobility", users: 4, userList: ["FlexibilityFirst", "YogaMaster", "StretchDaily", "RecoveryFocused"] },
-      { name: "Accountability", users: 3, userList: ["DailyChecker", "ProgressTracker", "MotivationMachine"] }
+      { name: "Gym Talk", users: 5, userList: ["GymRat2024", "VeteranLifter", "FormChecker", "NutritionCoach", "PowerlifterPete"] },
+      { name: "Running Club", users: 2, userList: ["CardioQueen", "MarathonMike"] },
+      { name: "Yoga & Mobility", users: 0 },
+      { name: "Accountability", users: 1, userList: ["DailyChecker"] }
     ]
   },
   {
     id: 8,
     name: "Cinema Central",
-    icon: "🎬",
+    icon: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=64&h=64&fit=crop",
     textChannels: movieChannels,
     voiceChannels: [
-      { name: "Watch Party", users: 10, userList: ["FilmBuff", "CasualViewer", "HorrorFanatic", "GenreExpert", "TVShowAddict", "PeakTVEnjoyer", "MarvelDCFan", "ClassicCinemaLover", "StreamingGuide", "BingeWatcher"] },
-      { name: "Film Critics", users: 5, userList: ["MovieReviewer", "RatingDebater", "PlotAnalyst", "CinematographyFan", "DirectorWatcher"] },
-      { name: "Spoiler Zone", users: 3, userList: ["SpoilerLover", "PlotDiscusser", "EndingDebater"] }
+      { name: "Watch Party", users: 4, userList: ["FilmBuff", "CasualViewer", "HorrorFanatic", "GenreExpert"] },
+      { name: "Film Critics", users: 2, userList: ["MovieReviewer", "CinematographyFan"] },
+      { name: "Spoiler Zone", users: 0 }
     ]
   },
   {
     id: 9,
     name: "Crypto Central",
-    icon: "📈",
+    icon: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=64&h=64&fit=crop",
     textChannels: cryptoChannels,
     voiceChannels: [
-      { name: "Market Discussion", users: 14, userList: ["BitcoinMaxi", "AltcoinTrader", "DeFiDegen", "SafetyFirst", "HODLer", "TradingNewbie", "TradingMentor", "NFTSkeptic", "NFTBeliever", "ChartAnalyst", "WhaleWatcher", "RetailInvestor", "InstitutionalBull", "MacroTrader"] },
-      { name: "Trading Floor", users: 6, userList: ["DayTrader", "SwingTrader", "ScalpMaster", "OptionsPlayer", "LeverageKing", "RiskManager"] },
-      { name: "DeFi Discussion", users: 4, userList: ["YieldFarmer", "LiquidityProvider", "ProtocolExplorer", "SmartContractDev"] },
-      { name: "Security Help", users: 2, userList: ["SecurityExpert", "HardwareWalletPro"] }
+      { name: "Market Discussion", users: 6, userList: ["BitcoinMaxi", "TradingMentor", "ChartAnalyst", "HODLer", "DeFiDegen", "MacroTrader"] },
+      { name: "Trading Floor", users: 3, userList: ["DayTrader", "SwingTrader", "RiskManager"] },
+      { name: "DeFi Discussion", users: 0 },
+      { name: "Security Help", users: 1, userList: ["SecurityExpert"] }
     ]
   }
 ];

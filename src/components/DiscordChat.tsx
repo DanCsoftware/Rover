@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { Send, Plus, Gift, Smile, Sparkles, Search, ExternalLink, MessageSquare, Server, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Message } from "@/data/discordData";
+import { Message, getServerMembers } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
@@ -26,9 +26,10 @@ interface DiscordChatProps {
   messages: Message[];
   activeUser: any;
   channelType: 'text' | 'dm';
+  activeServerId?: number;
 }
 
-const DiscordChat = ({ channelName, messages, activeUser, channelType }: DiscordChatProps) => {
+const DiscordChat = ({ channelName, messages, activeUser, channelType, activeServerId }: DiscordChatProps) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<Message[]>(messages);
   const [showAIAssistant, setShowAIAssistant] = useState(false);
@@ -56,74 +57,44 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType }: Discord
     }
   }, [streamingResponse, isStreaming]);
 
-  // Extract users from messages and create user list with roles and status
+  // Get server members using the unified function
   const channelUsers = useMemo(() => {
-    const userMap = new Map();
+    if (activeServerId) {
+      return getServerMembers(activeServerId);
+    }
     
-    // Process all messages (both initial and new ones) to extract unique users
+    // Fallback: Extract users from messages
+    const userMap = new Map();
     const allMessages = [...messages, ...chatMessages.slice(messages.length)];
     
     allMessages.forEach((msg) => {
       if (!userMap.has(msg.user) && msg.user !== 'You') {
         let role: 'owner' | 'admin' | 'moderator' | 'member' = 'member';
         let status: 'online' | 'idle' | 'dnd' | 'offline' = 'online';
-        let activity: string | undefined;
 
-        // Assign roles based on user patterns
         if (msg.user.includes('Admin') || msg.user === 'ModeratorX') {
           role = 'admin';
         } else if (msg.user.includes('Moderator') || msg.user.includes('Mod')) {
           role = 'moderator';
-        } else if (msg.user.includes('Guild') || msg.user.includes('Owner') || msg.user === 'GuildMaster') {
+        } else if (msg.user.includes('Guild') || msg.user.includes('Owner')) {
           role = 'owner';
         }
 
-        // Assign activities based on user names/context
-        if (msg.user.includes('Gamer') || msg.user.includes('Pro')) {
-          activity = 'Playing games';
-        } else if (msg.user.includes('DJ') || msg.user.includes('Music')) {
-          activity = 'Listening to music';
-        } else if (msg.user.includes('Artist') || msg.user.includes('Creative')) {
-          activity = 'Creating art';
-        } else if (msg.user.includes('Bot')) {
-          activity = 'Bot activities';
-          status = 'online';
-        }
-
-        // Add some variety to status - most users online, some idle/dnd
         const randomStatus = Math.random();
-        if (randomStatus > 0.85) {
-          status = 'idle';
-        } else if (randomStatus > 0.95) {
-          status = 'dnd';
-        }
+        if (randomStatus > 0.85) status = 'idle';
+        else if (randomStatus > 0.95) status = 'dnd';
 
         userMap.set(msg.user, {
           id: msg.user.toLowerCase().replace(/\s+/g, '-'),
           name: msg.user,
           status,
-          role,
-          activity
+          role
         });
       }
     });
 
-    // Add some additional users to make the list more realistic
-    const additionalUsers = [
-      { id: 'user1', name: 'ProGamer99', status: 'online' as const, role: 'member' as const, activity: 'Playing Valorant' },
-      { id: 'user2', name: 'GamerGirl2024', status: 'online' as const, role: 'member' as const, activity: 'Streaming' },
-      { id: 'user3', name: 'TacticalGenius', status: 'idle' as const, role: 'member' as const },
-      { id: 'user4', name: 'BuildMaster', status: 'online' as const, role: 'member' as const, activity: 'Building' },
-    ];
-
-    additionalUsers.forEach(user => {
-      if (!userMap.has(user.name)) {
-        userMap.set(user.name, user);
-      }
-    });
-
     return Array.from(userMap.values());
-  }, [messages, chatMessages]);
+  }, [messages, chatMessages, activeServerId]);
 
   const getMessageAvatar = (msgUser: string, isBot?: boolean) => {
     if (msgUser === 'ROVER') {

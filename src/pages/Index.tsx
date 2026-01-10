@@ -42,11 +42,12 @@ const Index = () => {
         />
         
         <ResizablePanel defaultSize={60} minSize={40}>
-          <DiscordChat 
+<DiscordChat 
             channelName={getCurrentChannelName()}
             messages={getCurrentMessages()}
             activeUser={activeUser}
             channelType={activeChannelType}
+            activeServerId={activeServer}
           />
         </ResizablePanel>
         

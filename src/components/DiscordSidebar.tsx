@@ -106,11 +106,11 @@ const DiscordSidebar = ({
         
         <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
         
-        {servers.map((server) => (
+{servers.map((server) => (
           <div
             key={server.id}
             onClick={() => onServerClick(server.id)}
-            className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
+            className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 overflow-hidden ${
               isServerActive(server.id) ? "rounded-2xl" : "hover:rounded-2xl"
             }`}
             style={{ 
@@ -118,8 +118,8 @@ const DiscordSidebar = ({
               color: 'white'
             }}
           >
-            {server.icon.startsWith("/") ? (
-              <img src={server.icon} alt={server.name} className="w-8 h-8 rounded-full" />
+            {server.icon.startsWith("/") || server.icon.startsWith("http") ? (
+              <img src={server.icon} alt={server.name} className="w-full h-full object-cover" />
             ) : (
               <span className="text-xl">{server.icon}</span>
             )}
