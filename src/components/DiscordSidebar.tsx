@@ -136,7 +136,14 @@ const DiscordSidebar = ({
                   style: { color: server.iconStyle.iconColor }
                 })
               ) : (
-                <span className="text-xl font-bold" style={{ color: server.iconStyle.iconColor }}>
+                <span 
+                  className="font-bold" 
+                  style={{ 
+                    color: server.iconStyle.iconColor,
+                    fontSize: server.iconStyle.textSize || '1.25rem',
+                    fontWeight: server.iconStyle.fontWeight || '700'
+                  }}
+                >
                   {server.iconStyle.text}
                 </span>
               )

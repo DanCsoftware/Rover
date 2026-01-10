@@ -49,6 +49,8 @@ export interface ServerIconStyle {
   iconName?: string;
   iconColor?: string;
   text?: string;
+  textSize?: string;
+  fontWeight?: string;
 }
 
 export interface Server {
@@ -2262,9 +2264,9 @@ export const servers: Server[] = [
     name: "Gaming Hub",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+      background: "linear-gradient(145deg, #5865f2 0%, #3b44c4 50%, #2d3494 100%)",
       iconName: "Gamepad2",
-      iconColor: "white"
+      iconColor: "#ffffff"
     },
     textChannels: gamingChannels,
     voiceChannels: [
@@ -2280,9 +2282,9 @@ export const servers: Server[] = [
     name: "Music Lovers",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #ec4899 0%, #a855f7 100%)",
+      background: "linear-gradient(145deg, #eb459e 0%, #c73488 50%, #8b2366 100%)",
       iconName: "Music",
-      iconColor: "white"
+      iconColor: "#ffffff"
     },
     textChannels: musicChannels,
     voiceChannels: [
@@ -2309,9 +2311,9 @@ export const servers: Server[] = [
     name: "Dev Central",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #1e3a8a 0%, #312e81 100%)",
+      background: "linear-gradient(145deg, #2b2d31 0%, #1e1f22 50%, #111214 100%)",
       iconName: "Code",
-      iconColor: "#60a5fa"
+      iconColor: "#57f287"
     },
     textChannels: techChannels,
     voiceChannels: [
@@ -2326,9 +2328,9 @@ export const servers: Server[] = [
     name: "Otaku Paradise",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #dc2626 0%, #ec4899 100%)",
+      background: "linear-gradient(145deg, #ed4245 0%, #c93335 50%, #8b2325 100%)",
       iconName: "Sparkles",
-      iconColor: "white"
+      iconColor: "#ffc0cb"
     },
     textChannels: animeChannels,
     voiceChannels: [
@@ -2343,9 +2345,9 @@ export const servers: Server[] = [
     name: "Gains Nation",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #16a34a 0%, #65a30d 100%)",
+      background: "linear-gradient(145deg, #57f287 0%, #3eb870 50%, #2a8550 100%)",
       iconName: "Dumbbell",
-      iconColor: "white"
+      iconColor: "#ffffff"
     },
     textChannels: fitnessChannels,
     voiceChannels: [
@@ -2360,9 +2362,9 @@ export const servers: Server[] = [
     name: "Cinema Central",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #0d9488 0%, #1e3a5f 100%)",
+      background: "linear-gradient(145deg, #1abc9c 0%, #16a085 50%, #0e7a64 100%)",
       iconName: "Film",
-      iconColor: "white"
+      iconColor: "#ffffff"
     },
     textChannels: movieChannels,
     voiceChannels: [
@@ -2376,9 +2378,11 @@ export const servers: Server[] = [
     name: "Crypto Central",
     icon: "",
     iconStyle: {
-      background: "linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)",
+      background: "linear-gradient(145deg, #f0b132 0%, #d9980c 50%, #b37a00 100%)",
       text: "₿",
-      iconColor: "white"
+      iconColor: "#ffffff",
+      textSize: "1.5rem",
+      fontWeight: "700"
     },
     textChannels: cryptoChannels,
     voiceChannels: [
