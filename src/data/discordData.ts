@@ -44,10 +44,18 @@ export interface VoiceChannel {
   userList?: string[];
 }
 
+export interface ServerIconStyle {
+  background: string;
+  iconName?: string;
+  iconColor?: string;
+  text?: string;
+}
+
 export interface Server {
   id: number;
   name: string;
   icon: string;
+  iconStyle?: ServerIconStyle;
   textChannels: Channel[];
   voiceChannels: VoiceChannel[];
 }
@@ -2252,7 +2260,12 @@ export const servers: Server[] = [
   {
     id: 2,
     name: "Gaming Hub",
-    icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+      iconName: "Gamepad2",
+      iconColor: "white"
+    },
     textChannels: gamingChannels,
     voiceChannels: [
       { name: "Gaming Lounge", users: 4, userList: ["xXGamerGodXx", "ClutchMaster", "TacticalGenius", "StreamerPro"] },
@@ -2265,7 +2278,12 @@ export const servers: Server[] = [
   {
     id: 3,
     name: "Music Lovers",
-    icon: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #ec4899 0%, #a855f7 100%)",
+      iconName: "Music",
+      iconColor: "white"
+    },
     textChannels: musicChannels,
     voiceChannels: [
       { name: "🎧 Listening Party", users: 6, userList: ["MelodyExplorer", "LoFiVibes", "MetalHead666", "VinylCollector", "PopPrincess", "IndieDiscoverer"] },
@@ -2289,7 +2307,12 @@ export const servers: Server[] = [
   {
     id: 5,
     name: "Dev Central",
-    icon: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #1e3a8a 0%, #312e81 100%)",
+      iconName: "Code",
+      iconColor: "#60a5fa"
+    },
     textChannels: techChannels,
     voiceChannels: [
       { name: "Code Review", users: 4, userList: ["ReactDev2024", "TypeScriptFan", "SeniorDev", "FullStackDev"] },
@@ -2301,7 +2324,12 @@ export const servers: Server[] = [
   {
     id: 6,
     name: "Otaku Paradise",
-    icon: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #dc2626 0%, #ec4899 100%)",
+      iconName: "Sparkles",
+      iconColor: "white"
+    },
     textChannels: animeChannels,
     voiceChannels: [
       { name: "Watch Party", users: 7, userList: ["AnimeFan2024", "MangaReader", "WeebSupreme", "OldSchoolOtaku", "AnimeGuide", "ShonenJumper", "SliceOfLifeFan"] },
@@ -2313,7 +2341,12 @@ export const servers: Server[] = [
   {
     id: 7,
     name: "Gains Nation",
-    icon: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #16a34a 0%, #65a30d 100%)",
+      iconName: "Dumbbell",
+      iconColor: "white"
+    },
     textChannels: fitnessChannels,
     voiceChannels: [
       { name: "Gym Talk", users: 5, userList: ["GymRat2024", "VeteranLifter", "FormChecker", "NutritionCoach", "PowerlifterPete"] },
@@ -2325,7 +2358,12 @@ export const servers: Server[] = [
   {
     id: 8,
     name: "Cinema Central",
-    icon: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #0d9488 0%, #1e3a5f 100%)",
+      iconName: "Film",
+      iconColor: "white"
+    },
     textChannels: movieChannels,
     voiceChannels: [
       { name: "Watch Party", users: 4, userList: ["FilmBuff", "CasualViewer", "HorrorFanatic", "GenreExpert"] },
@@ -2336,7 +2374,12 @@ export const servers: Server[] = [
   {
     id: 9,
     name: "Crypto Central",
-    icon: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=64&h=64&fit=crop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)",
+      text: "₿",
+      iconColor: "white"
+    },
     textChannels: cryptoChannels,
     voiceChannels: [
       { name: "Market Discussion", users: 6, userList: ["BitcoinMaxi", "TradingMentor", "ChartAnalyst", "HODLer", "DeFiDegen", "MacroTrader"] },

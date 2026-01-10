@@ -1,7 +1,8 @@
-import { Bot, Hash, Volume2, Settings, Headphones, Mic, ChevronDown, ChevronRight } from "lucide-react";
+import { Bot, Hash, Volume2, Settings, Headphones, Mic, ChevronDown, ChevronRight, Gamepad2, Music, Code, Sparkles, Dumbbell, Film, Compass } from "lucide-react";
 import { useState } from "react";
-import { servers } from "@/data/discordData";
+import { servers, ServerIconStyle } from "@/data/discordData";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface DiscordSidebarProps {
@@ -26,6 +27,15 @@ const DiscordSidebar = ({
   activeServer 
 }: DiscordSidebarProps) => {
   const [expandedGroups, setExpandedGroups] = useState<string[]>(["text", "voice"]);
+  
+  const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+    Gamepad2,
+    Music,
+    Code,
+    Sparkles,
+    Dumbbell,
+    Film
+  };
   
   const dmChannels = [
     { id: "search", name: "Find or start a conve...", type: "dm" },
@@ -106,7 +116,7 @@ const DiscordSidebar = ({
         
         <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
         
-{servers.map((server) => (
+        {servers.map((server) => (
           <div
             key={server.id}
             onClick={() => onServerClick(server.id)}
@@ -114,11 +124,23 @@ const DiscordSidebar = ({
               isServerActive(server.id) ? "rounded-2xl" : "hover:rounded-2xl"
             }`}
             style={{ 
-              backgroundColor: isServerActive(server.id) ? 'hsl(var(--discord-brand))' : 'hsl(var(--discord-bg-primary))',
+              background: server.iconStyle?.background || (isServerActive(server.id) ? 'hsl(var(--discord-brand))' : 'hsl(var(--discord-bg-primary))'),
               color: 'white'
             }}
+            title={server.name}
           >
-            {server.icon.startsWith("/") || server.icon.startsWith("http") ? (
+            {server.iconStyle ? (
+              server.iconStyle.iconName && iconMap[server.iconStyle.iconName] ? (
+                React.createElement(iconMap[server.iconStyle.iconName], {
+                  className: "w-6 h-6",
+                  style: { color: server.iconStyle.iconColor }
+                })
+              ) : (
+                <span className="text-xl font-bold" style={{ color: server.iconStyle.iconColor }}>
+                  {server.iconStyle.text}
+                </span>
+              )
+            ) : server.icon.startsWith("/") || server.icon.startsWith("http") ? (
               <img src={server.icon} alt={server.name} className="w-full h-full object-cover" />
             ) : (
               <span className="text-xl">{server.icon}</span>
@@ -129,8 +151,16 @@ const DiscordSidebar = ({
         <div 
           className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:rounded-2xl transition-all duration-200"
           style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', color: 'hsl(var(--discord-green))' }}
+          title="Add a Server"
         >
           <span className="text-2xl">+</span>
+        </div>
+        <div 
+          className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:rounded-2xl transition-all duration-200"
+          style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', color: 'hsl(var(--discord-green))' }}
+          title="Explore Discoverable Servers"
+        >
+          <Compass className="w-6 h-6" />
         </div>
       </div>
 
