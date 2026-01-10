@@ -2,7 +2,6 @@ import DiscordSidebar from "@/components/DiscordSidebar";
 import DiscordChat from "@/components/DiscordChat";
 import DiscordUserPanel from "@/components/DiscordUserPanel";
 import DiscordDiscovery from "@/components/DiscordDiscovery";
-import AdminModerationPanel from "@/components/AdminModerationPanel";
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
 import { useDiscordState } from "@/hooks/useDiscordState";
 import { servers } from "@/data/discordData";
@@ -52,7 +51,7 @@ const Index = () => {
     );
   }
 
-  // Normal view with resizable panels
+  // Normal view with resizable panels - no third column for admin, uses insights banner in chat
   return (
     <div className="h-screen bg-gray-900 flex overflow-hidden">
       <ResizablePanelGroup direction="horizontal" className="w-full group">
@@ -76,35 +75,30 @@ const Index = () => {
           className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:opacity-100" 
         />
         
-        <ResizablePanel defaultSize={60} minSize={40}>
+        <ResizablePanel defaultSize={activeChannelType === 'dm' ? 60 : 80} minSize={40}>
           <DiscordChat 
             channelName={getCurrentChannelName()}
             messages={getCurrentMessages()}
             activeUser={activeUser}
             channelType={activeChannelType}
             activeServerId={activeServer}
+            isAdmin={isCurrentServerAdmin}
+            serverName={currentServerName}
           />
         </ResizablePanel>
         
-        <ResizableHandle 
-          withHandle 
-          className="hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:opacity-100" 
-        />
-        
-        {/* Show admin panel for admin servers, user panel for DMs */}
-        {isCurrentServerAdmin && activeChannelType === 'text' ? (
-          <ResizablePanel defaultSize={20} minSize={15} maxSize={30} className="hidden lg:block">
-            <AdminModerationPanel 
-              serverName={currentServerName}
-              serverId={activeServer}
-              messages={getCurrentMessages()}
+        {/* Only show user panel for DMs */}
+        {activeChannelType === 'dm' && (
+          <>
+            <ResizableHandle 
+              withHandle 
+              className="hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:opacity-100" 
             />
-          </ResizablePanel>
-        ) : activeChannelType === 'dm' ? (
-          <ResizablePanel defaultSize={20} minSize={0} maxSize={25} className="hidden lg:block">
-            <DiscordUserPanel activeUser={activeUser} />
-          </ResizablePanel>
-        ) : null}
+            <ResizablePanel defaultSize={20} minSize={0} maxSize={25} className="hidden lg:block">
+              <DiscordUserPanel activeUser={activeUser} />
+            </ResizablePanel>
+          </>
+        )}
       </ResizablePanelGroup>
     </div>
   );

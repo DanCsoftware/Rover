@@ -6,6 +6,7 @@ import { Message, getServerMembers } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
+import RoverInsightsBanner from "./RoverInsightsBanner";
 import { NavigationHelper } from "./NavigationHelper";
 import { ServerRecommendations } from "./ServerRecommendations";
 import { FactCheckResults } from "./FactCheckResults";
@@ -27,9 +28,11 @@ interface DiscordChatProps {
   activeUser: any;
   channelType: 'text' | 'dm';
   activeServerId?: number;
+  isAdmin?: boolean;
+  serverName?: string;
 }
 
-const DiscordChat = ({ channelName, messages, activeUser, channelType, activeServerId }: DiscordChatProps) => {
+const DiscordChat = ({ channelName, messages, activeUser, channelType, activeServerId, isAdmin = false, serverName = '' }: DiscordChatProps) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState<Message[]>(messages);
   const [showAIAssistant, setShowAIAssistant] = useState(false);
@@ -685,7 +688,17 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
           channelType={channelType}
           onToggleUserList={() => setShowUserList(!showUserList)}
           showUserList={showUserList}
+          isAdmin={isAdmin}
         />
+        
+        {/* ROVER Insights Banner for Admin Servers */}
+        {isAdmin && channelType === 'text' && (
+          <RoverInsightsBanner 
+            serverName={serverName}
+            serverId={activeServerId || 0}
+            messages={chatMessages}
+          />
+        )}
 
         {/* Messages - Fixed ScrollArea implementation */}
         <div className="flex-1 min-h-0">

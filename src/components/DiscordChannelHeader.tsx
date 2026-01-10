@@ -1,5 +1,5 @@
 
-import { Hash, Users, Bell, Pin, Search, AtSign, Settings, X, Inbox, HelpCircle } from "lucide-react";
+import { Hash, Users, Bell, Pin, Search, AtSign, Settings, X, Inbox, HelpCircle, Shield } from "lucide-react";
 import { useState } from "react";
 
 interface DiscordChannelHeaderProps {
@@ -7,9 +7,10 @@ interface DiscordChannelHeaderProps {
   channelType: 'text' | 'dm';
   onToggleUserList: () => void;
   showUserList: boolean;
+  isAdmin?: boolean;
 }
 
-const DiscordChannelHeader = ({ channelName, channelType, onToggleUserList, showUserList }: DiscordChannelHeaderProps) => {
+const DiscordChannelHeader = ({ channelName, channelType, onToggleUserList, showUserList, isAdmin = false }: DiscordChannelHeaderProps) => {
   return (
     <div className="h-12 flex items-center justify-between px-4 flex-shrink-0 shadow-sm" style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', borderBottom: '1px solid hsl(var(--discord-bg-quaternary))' }}>
       <div className="flex items-center min-w-0 flex-1">
@@ -19,7 +20,25 @@ const DiscordChannelHeader = ({ channelName, channelType, onToggleUserList, show
           <AtSign className="w-6 h-6 mr-3 flex-shrink-0" style={{ color: 'hsl(var(--discord-text-muted))' }} />
         )}
         <span className="font-semibold mr-2 truncate" style={{ color: 'hsl(var(--discord-text-normal))' }}>{channelName}</span>
-        {channelType === 'text' && (
+        
+        {/* Admin Mode Indicator */}
+        {isAdmin && channelType === 'text' && (
+          <>
+            <div className="h-6 w-px mx-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }} />
+            <div 
+              className="flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium"
+              style={{ 
+                backgroundColor: 'rgba(88, 101, 242, 0.2)',
+                color: '#818cf8'
+              }}
+            >
+              <Shield className="w-3 h-3" />
+              <span>Admin</span>
+            </div>
+          </>
+        )}
+        
+        {channelType === 'text' && !isAdmin && (
           <>
             <div className="h-6 w-px mx-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }} />
             <span className="text-sm truncate" style={{ color: 'hsl(var(--discord-text-muted))' }}>
