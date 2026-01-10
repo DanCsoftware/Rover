@@ -6,6 +6,7 @@ export const useDiscordState = () => {
   const [activeChannel, setActiveChannel] = useState<string>('official-links');
   const [activeChannelType, setActiveChannelType] = useState<'text' | 'dm'>('text');
   const [isDMView, setIsDMView] = useState<boolean>(false);
+  const [isDiscoverView, setIsDiscoverView] = useState<boolean>(false);
   const [activeServer, setActiveServer] = useState<number>(4); // Default to Midjourney server
   const [activeUser, setActiveUser] = useState<User>({
     id: 'server',
@@ -46,6 +47,7 @@ export const useDiscordState = () => {
 
   const switchToDMView = () => {
     setIsDMView(true);
+    setIsDiscoverView(false);
     setActiveChannelType('dm');
     // If current channel is not a DM, switch to first available DM
     if (activeChannelType !== 'dm') {
@@ -57,12 +59,18 @@ export const useDiscordState = () => {
     }
   };
 
+  const switchToDiscover = () => {
+    setIsDiscoverView(true);
+    setIsDMView(false);
+  };
+
   const switchToServer = (serverId: number) => {
     console.log('Switching to server:', serverId);
     const server = servers.find(s => s.id === serverId);
     if (server) {
       setActiveServer(serverId);
       setIsDMView(false);
+      setIsDiscoverView(false);
       setActiveChannelType('text');
       // Switch to first available text channel for this server
       const firstChannel = server.textChannels[0];
@@ -115,10 +123,12 @@ export const useDiscordState = () => {
     activeChannelType,
     activeUser,
     isDMView,
+    isDiscoverView,
     activeServer,
     switchToChannel,
     switchToDM,
     switchToDMView,
+    switchToDiscover,
     switchToServer,
     getCurrentMessages,
     getCurrentChannelName

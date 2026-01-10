@@ -10,9 +10,11 @@ interface DiscordSidebarProps {
   onDMClick: (userId: string) => void;
   onDMViewClick: () => void;
   onServerClick: (serverId: number) => void;
+  onDiscoverClick: () => void;
   activeChannel: string;
   activeChannelType: 'text' | 'dm';
   isDMView: boolean;
+  isDiscoverView: boolean;
   activeServer: number;
 }
 
@@ -21,9 +23,11 @@ const DiscordSidebar = ({
   onDMClick, 
   onDMViewClick, 
   onServerClick,
+  onDiscoverClick,
   activeChannel, 
   activeChannelType, 
   isDMView,
+  isDiscoverView,
   activeServer 
 }: DiscordSidebarProps) => {
   const [expandedGroups, setExpandedGroups] = useState<string[]>(["text", "voice"]);
@@ -163,8 +167,14 @@ const DiscordSidebar = ({
           <span className="text-2xl">+</span>
         </div>
         <div 
-          className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:rounded-2xl transition-all duration-200"
-          style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', color: 'hsl(var(--discord-green))' }}
+          onClick={onDiscoverClick}
+          className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
+            isDiscoverView ? "rounded-2xl" : "hover:rounded-2xl"
+          }`}
+          style={{ 
+            backgroundColor: isDiscoverView ? 'hsl(var(--discord-green))' : 'hsl(var(--discord-bg-primary))',
+            color: isDiscoverView ? 'white' : 'hsl(var(--discord-green))'
+          }}
           title="Explore Discoverable Servers"
         >
           <Compass className="w-6 h-6" />

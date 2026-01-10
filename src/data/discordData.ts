@@ -62,6 +62,14 @@ export interface Server {
   voiceChannels: VoiceChannel[];
 }
 
+export interface ServerDiscoveryMeta {
+  bannerImage: string;
+  description: string;
+  onlineCount: number;
+  memberCount: number;
+  isVerified: boolean;
+}
+
 const MALICIOUS_DOMAINS = [
   'bit.ly/malware',
   'suspicious-discord.com',
@@ -2530,4 +2538,63 @@ export const dmMessages: Record<string, Message[]> = {
       isBot: true
     }
   ]
+};
+
+export const serverDiscoveryData: Record<number, ServerDiscoveryMeta> = {
+  2: {
+    bannerImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=300&fit=crop",
+    description: "The ultimate gaming community. Find teams, discuss strategies, share highlights, and compete in weekly tournaments!",
+    onlineCount: 1289146,
+    memberCount: 4169870,
+    isVerified: true
+  },
+  3: {
+    bannerImage: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=300&fit=crop",
+    description: "A community for music lovers everywhere. Share your favorite tracks, discover new artists, and connect with fellow enthusiasts.",
+    onlineCount: 245893,
+    memberCount: 892456,
+    isVerified: true
+  },
+  4: {
+    bannerImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=300&fit=crop",
+    description: "The official Midjourney Discord. Create stunning AI art, get inspiration, and connect with millions of creators worldwide.",
+    onlineCount: 2456789,
+    memberCount: 19847562,
+    isVerified: true
+  },
+  5: {
+    bannerImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=300&fit=crop",
+    description: "A developer community for sharing knowledge, getting help with code, and connecting with fellow programmers.",
+    onlineCount: 189234,
+    memberCount: 756892,
+    isVerified: true
+  },
+  6: {
+    bannerImage: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&h=300&fit=crop",
+    description: "Your paradise for anime and manga discussions. Watch parties, recommendations, and a vibrant otaku community!",
+    onlineCount: 567823,
+    memberCount: 1456789,
+    isVerified: true
+  },
+  7: {
+    bannerImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=300&fit=crop",
+    description: "Transform your body and mind. Fitness tips, workout routines, nutrition advice, and a supportive community to keep you motivated.",
+    onlineCount: 89234,
+    memberCount: 345678,
+    isVerified: false
+  },
+  8: {
+    bannerImage: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&h=300&fit=crop",
+    description: "The ultimate destination for movie buffs. Reviews, discussions, watch parties, and everything cinema!",
+    onlineCount: 156789,
+    memberCount: 567234,
+    isVerified: true
+  },
+  9: {
+    bannerImage: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=300&fit=crop",
+    description: "Navigate the world of cryptocurrency. Market analysis, trading strategies, and a community of crypto enthusiasts.",
+    onlineCount: 234567,
+    memberCount: 987654,
+    isVerified: false
+  }
 };
