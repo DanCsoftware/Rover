@@ -25,32 +25,50 @@ const Index = () => {
   return (
     <div className="h-screen bg-gray-900 flex overflow-hidden">
       <ResizablePanelGroup direction="horizontal" className="w-full group">
-        <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
-          <DiscordSidebar 
-            onChannelClick={switchToChannel}
-            onDMClick={switchToDM}
-            onDMViewClick={switchToDMView}
-            onServerClick={switchToServer}
-            onDiscoverClick={switchToDiscover}
-            activeChannel={activeChannel}
-            activeChannelType={activeChannelType}
-            isDMView={isDMView}
-            isDiscoverView={isDiscoverView}
-            activeServer={activeServer}
-          />
-        </ResizablePanel>
-        
-        <ResizableHandle 
-          withHandle 
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:opacity-100" 
-        />
-        
         {isDiscoverView ? (
-          <ResizablePanel defaultSize={80} minSize={60}>
-            <DiscordDiscovery onServerClick={switchToServer} />
-          </ResizablePanel>
+          <>
+            {/* Only server icon bar when in Discover view */}
+            <ResizablePanel defaultSize={5} minSize={5} maxSize={5}>
+              <DiscordSidebar 
+                onChannelClick={switchToChannel}
+                onDMClick={switchToDM}
+                onDMViewClick={switchToDMView}
+                onServerClick={switchToServer}
+                onDiscoverClick={switchToDiscover}
+                activeChannel={activeChannel}
+                activeChannelType={activeChannelType}
+                isDMView={isDMView}
+                isDiscoverView={isDiscoverView}
+                activeServer={activeServer}
+              />
+            </ResizablePanel>
+            
+            <ResizablePanel defaultSize={95} minSize={60}>
+              <DiscordDiscovery onServerClick={switchToServer} />
+            </ResizablePanel>
+          </>
         ) : (
           <>
+            <ResizablePanel defaultSize={20} minSize={15} maxSize={30}>
+              <DiscordSidebar 
+                onChannelClick={switchToChannel}
+                onDMClick={switchToDM}
+                onDMViewClick={switchToDMView}
+                onServerClick={switchToServer}
+                onDiscoverClick={switchToDiscover}
+                activeChannel={activeChannel}
+                activeChannelType={activeChannelType}
+                isDMView={isDMView}
+                isDiscoverView={isDiscoverView}
+                activeServer={activeServer}
+              />
+            </ResizablePanel>
+            
+            <ResizableHandle 
+              withHandle 
+              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:opacity-100" 
+            />
+            
             <ResizablePanel defaultSize={60} minSize={40}>
               <DiscordChat 
                 channelName={getCurrentChannelName()}
