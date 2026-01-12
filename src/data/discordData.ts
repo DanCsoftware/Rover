@@ -2653,6 +2653,338 @@ export const discoverableServers = [
     },
     textChannels: [],
     voiceChannels: []
+  },
+  // Tabletop & RPG
+  {
+    id: 18,
+    name: "Dungeons & Dragons Tavern",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #9b59b6 0%, #8e44ad 50%, #5b2c6f 100%)",
+      text: "🎲",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 19,
+    name: "Critical Role Fans",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #e74c3c 0%, #c0392b 50%, #7b241c 100%)",
+      text: "🐉",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 20,
+    name: "Board Game Nights",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #d4a574 0%, #b8860b 50%, #8b6914 100%)",
+      text: "♟️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Food & Cooking
+  {
+    id: 21,
+    name: "Gourmet Kitchen",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff6b35 0%, #e55039 50%, #b33939 100%)",
+      text: "👨‍🍳",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 22,
+    name: "Baking Enthusiasts",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ffb6c1 0%, #ff69b4 50%, #db7093 100%)",
+      text: "🧁",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 23,
+    name: "Vegan Life",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #7bed9f 0%, #26de81 50%, #20bf6b 100%)",
+      text: "🌱",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Finance & Crypto
+  {
+    id: 24,
+    name: "Day Traders Lounge",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2ecc71 0%, #27ae60 50%, #1e8449 100%)",
+      text: "📈",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 25,
+    name: "NFT Creators",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #a855f7 0%, #9333ea 50%, #7e22ce 100%)",
+      text: "💎",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 26,
+    name: "Passive Income Hub",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #10b981 0%, #059669 50%, #047857 100%)",
+      text: "💰",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Tech & Science
+  {
+    id: 27,
+    name: "AI & Machine Learning",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%)",
+      text: "🤖",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 28,
+    name: "Cybersecurity Zone",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #22c55e 0%, #16a34a 50%, #15803d 100%)",
+      text: "🔐",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 29,
+    name: "Space Explorers",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #1e3a8a 0%, #1e40af 50%, #312e81 100%)",
+      text: "🚀",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 30,
+    name: "Linux Masters",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #f97316 0%, #ea580c 50%, #c2410c 100%)",
+      text: "🐧",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Arts & Hobbies
+  {
+    id: 31,
+    name: "Digital Artists United",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #f472b6 0%, #ec4899 50%, #db2777 100%)",
+      text: "🎨",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 32,
+    name: "Writers Guild",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #d4a574 0%, #a78b71 50%, #8b7355 100%)",
+      text: "✍️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 33,
+    name: "3D Printing Lab",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #fb923c 0%, #f97316 50%, #ea580c 100%)",
+      text: "🔧",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 34,
+    name: "Woodworking Workshop",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #a16207 0%, #854d0e 50%, #713f12 100%)",
+      text: "🪚",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Lifestyle & Wellness
+  {
+    id: 35,
+    name: "Mental Health Support",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #a5b4fc 0%, #818cf8 50%, #6366f1 100%)",
+      text: "💜",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 36,
+    name: "Meditation & Mindfulness",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #5eead4 0%, #2dd4bf 50%, #14b8a6 100%)",
+      text: "🧘",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 37,
+    name: "Pet Parents",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)",
+      text: "🐾",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Entertainment
+  {
+    id: 38,
+    name: "Horror Movie Fans",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #7f1d1d 0%, #991b1b 50%, #450a0a 100%)",
+      text: "💀",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 39,
+    name: "K-Pop Universe",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #f9a8d4 0%, #f472b6 50%, #ec4899 100%)",
+      text: "⭐",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 40,
+    name: "Retro Gaming",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #c084fc 0%, #a855f7 50%, #9333ea 100%)",
+      text: "🕹️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 41,
+    name: "True Crime Podcast Club",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #1e3a5f 0%, #1e3a8a 50%, #172554 100%)",
+      text: "🔍",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Sports & Outdoors
+  {
+    id: 42,
+    name: "Soccer/Football Fans",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #22c55e 0%, #16a34a 50%, #15803d 100%)",
+      text: "⚽",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 43,
+    name: "Hiking & Camping",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #65a30d 0%, #4d7c0f 50%, #3f6212 100%)",
+      text: "⛰️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 44,
+    name: "Car Enthusiasts",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%)",
+      text: "🏎️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
   }
 ];
 
@@ -2770,6 +3102,203 @@ export const serverDiscoveryData: Record<number, ServerDiscoveryMeta> = {
     onlineCount: 28901,
     memberCount: 145678,
     isVerified: false
+  },
+  // NEW SERVERS - Tabletop & RPG
+  18: {
+    bannerImage: "https://images.unsplash.com/photo-1605870445919-838d190e8e1b?w=800&h=300&fit=crop",
+    description: "Roll initiative! D&D campaigns, character builds, lore discussions, and finding your next party.",
+    onlineCount: 34567,
+    memberCount: 278901,
+    isVerified: true
+  },
+  19: {
+    bannerImage: "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=800&h=300&fit=crop",
+    description: "The unofficial fan community for Critical Role. Episode discussions, fan art, and fellow Critters!",
+    onlineCount: 67890,
+    memberCount: 456789,
+    isVerified: true
+  },
+  20: {
+    bannerImage: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800&h=300&fit=crop",
+    description: "From Catan to Gloomhaven - find players, discuss strategies, and organize game nights.",
+    onlineCount: 12345,
+    memberCount: 98765,
+    isVerified: false
+  },
+  // Food & Cooking
+  21: {
+    bannerImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=300&fit=crop",
+    description: "Master the art of cooking. Share recipes, techniques, and culinary adventures from around the world.",
+    onlineCount: 23456,
+    memberCount: 167890,
+    isVerified: true
+  },
+  22: {
+    bannerImage: "https://images.unsplash.com/photo-1486427944544-d2c6e33fc1d9?w=800&h=300&fit=crop",
+    description: "Rise to the occasion! Bread, pastries, cakes, and everything baked with love and precision.",
+    onlineCount: 15678,
+    memberCount: 123456,
+    isVerified: false
+  },
+  23: {
+    bannerImage: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=300&fit=crop",
+    description: "Plant-based living made delicious. Recipes, tips, and a supportive vegan community.",
+    onlineCount: 18901,
+    memberCount: 145678,
+    isVerified: false
+  },
+  // Finance & Crypto
+  24: {
+    bannerImage: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=300&fit=crop",
+    description: "Real-time market analysis, trading strategies, and live discussions for serious traders.",
+    onlineCount: 45678,
+    memberCount: 234567,
+    isVerified: true
+  },
+  25: {
+    bannerImage: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=300&fit=crop",
+    description: "Create, collect, and trade NFTs. Showcase your digital art and connect with collectors.",
+    onlineCount: 34567,
+    memberCount: 189012,
+    isVerified: false
+  },
+  26: {
+    bannerImage: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=300&fit=crop",
+    description: "Build wealth through dividends, real estate, and smart investments. Financial freedom awaits!",
+    onlineCount: 21345,
+    memberCount: 156789,
+    isVerified: false
+  },
+  // Tech & Science
+  27: {
+    bannerImage: "https://images.unsplash.com/photo-1677442135136-760c813028c0?w=800&h=300&fit=crop",
+    description: "Explore the frontier of AI. Share projects, discuss papers, and build the future together.",
+    onlineCount: 56789,
+    memberCount: 345678,
+    isVerified: true
+  },
+  28: {
+    bannerImage: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=300&fit=crop",
+    description: "Stay secure in the digital age. CTF challenges, security news, and ethical hacking discussions.",
+    onlineCount: 23456,
+    memberCount: 178901,
+    isVerified: true
+  },
+  29: {
+    bannerImage: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&h=300&fit=crop",
+    description: "The final frontier awaits. Space news, astrophotography, and cosmic discussions.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: true
+  },
+  30: {
+    bannerImage: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&h=300&fit=crop",
+    description: "Open source enthusiasts unite. Distro discussions, ricing, and Linux troubleshooting.",
+    onlineCount: 19876,
+    memberCount: 145678,
+    isVerified: false
+  },
+  // Arts & Hobbies
+  31: {
+    bannerImage: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&h=300&fit=crop",
+    description: "From Photoshop to Procreate. Share your art, get feedback, and grow as a digital artist.",
+    onlineCount: 45678,
+    memberCount: 289012,
+    isVerified: true
+  },
+  32: {
+    bannerImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=300&fit=crop",
+    description: "Craft compelling stories. Writing prompts, critiques, and a community of fellow wordsmiths.",
+    onlineCount: 18901,
+    memberCount: 134567,
+    isVerified: false
+  },
+  33: {
+    bannerImage: "https://images.unsplash.com/photo-1631558207579-4e2a1f55f074?w=800&h=300&fit=crop",
+    description: "Layer by layer, build amazing things. Printer tips, STL sharing, and troubleshooting help.",
+    onlineCount: 15678,
+    memberCount: 112345,
+    isVerified: false
+  },
+  34: {
+    bannerImage: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=300&fit=crop",
+    description: "Craft beautiful pieces from wood. Project showcases, techniques, and tool recommendations.",
+    onlineCount: 12345,
+    memberCount: 89012,
+    isVerified: false
+  },
+  // Lifestyle & Wellness
+  35: {
+    bannerImage: "https://images.unsplash.com/photo-1493836512294-502baa1986e2?w=800&h=300&fit=crop",
+    description: "A safe space to talk, listen, and heal. Mental health resources and peer support.",
+    onlineCount: 28901,
+    memberCount: 198765,
+    isVerified: true
+  },
+  36: {
+    bannerImage: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=300&fit=crop",
+    description: "Find your inner peace. Guided sessions, mindfulness tips, and a calm community.",
+    onlineCount: 19876,
+    memberCount: 145678,
+    isVerified: false
+  },
+  37: {
+    bannerImage: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=300&fit=crop",
+    description: "Celebrate our furry, scaly, and feathered friends. Pet photos, advice, and wholesome content.",
+    onlineCount: 56789,
+    memberCount: 345678,
+    isVerified: true
+  },
+  // Entertainment
+  38: {
+    bannerImage: "https://images.unsplash.com/photo-1509248961725-9d3c1af87d2d?w=800&h=300&fit=crop",
+    description: "For those who love the thrill of fear. Horror movie reviews, discussions, and recommendations.",
+    onlineCount: 23456,
+    memberCount: 167890,
+    isVerified: false
+  },
+  39: {
+    bannerImage: "https://images.unsplash.com/photo-1617886322168-72b886573c5a?w=800&h=300&fit=crop",
+    description: "Stan your favorites! K-Pop news, fan content, and a vibrant multi-fandom community.",
+    onlineCount: 78901,
+    memberCount: 567890,
+    isVerified: true
+  },
+  40: {
+    bannerImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=300&fit=crop",
+    description: "Nostalgia gaming at its finest. Classic consoles, ROMs, and retro gaming discussions.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: false
+  },
+  41: {
+    bannerImage: "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&h=300&fit=crop",
+    description: "Deep dives into real cases. Podcast recommendations, case discussions, and mystery solving.",
+    onlineCount: 45678,
+    memberCount: 289012,
+    isVerified: true
+  },
+  // Sports & Outdoors
+  42: {
+    bannerImage: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&h=300&fit=crop",
+    description: "The beautiful game unites us. Match discussions, transfer news, and club debates.",
+    onlineCount: 89012,
+    memberCount: 567890,
+    isVerified: true
+  },
+  43: {
+    bannerImage: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=300&fit=crop",
+    description: "Adventure awaits outdoors. Trail recommendations, gear reviews, and trip planning.",
+    onlineCount: 23456,
+    memberCount: 178901,
+    isVerified: false
+  },
+  44: {
+    bannerImage: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=300&fit=crop",
+    description: "From classics to supercars. Car meets, build projects, and automotive discussions.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: true
   }
 };
 
@@ -2882,5 +3411,338 @@ export const discoveryMetadata: Record<number, DiscoveryServerMeta> = {
       'Study groups for 20+ languages'
     ],
     specialFeatures: ['Tandem Partners', 'Voice Practice', 'Cultural Exchange']
+  },
+  // NEW SERVERS METADATA - Tabletop & RPG
+  18: {
+    category: 'Gaming',
+    tags: ['dnd', 'tabletop', 'rpg', 'fantasy', 'roleplay', 'campaigns', 'dungeons', 'dragons'],
+    activityLevel: 'high',
+    communityVibe: 'Adventure-loving dungeon masters and players',
+    whyJoin: [
+      'Find campaigns and players in your timezone',
+      'Share homebrew content and character art',
+      'Weekly one-shots for drop-in play'
+    ],
+    specialFeatures: ['LFG Board', 'Character Showcase', 'DM Resources']
+  },
+  19: {
+    category: 'Entertainment',
+    tags: ['critical-role', 'dnd', 'actual-play', 'critters', 'vox-machina', 'bells-hells'],
+    activityLevel: 'very_high',
+    communityVibe: 'Passionate Critters celebrating every episode',
+    whyJoin: [
+      'Live episode watch parties every Thursday',
+      'Deep lore discussions and theories',
+      'Amazing fan art community'
+    ],
+    specialFeatures: ['Episode Discussions', 'Fan Art Gallery', 'Lore Wiki']
+  },
+  20: {
+    category: 'Gaming',
+    tags: ['boardgames', 'tabletop', 'catan', 'strategy', 'party-games', 'gloomhaven'],
+    activityLevel: 'medium',
+    communityVibe: 'Friendly gamers always ready to play',
+    whyJoin: [
+      'Virtual game nights via Tabletop Simulator',
+      'Board game recommendations by taste',
+      'Local meetup coordination'
+    ],
+    specialFeatures: ['Game Nights', 'Reviews', 'Trade/Sell']
+  },
+  // Food & Cooking
+  21: {
+    category: 'Lifestyle',
+    tags: ['cooking', 'recipes', 'chef', 'culinary', 'food', 'kitchen', 'gourmet'],
+    activityLevel: 'high',
+    communityVibe: 'Home cooks and aspiring chefs sharing their passion',
+    whyJoin: [
+      'Daily recipe sharing from cuisines worldwide',
+      'Live cooking sessions and tutorials',
+      'Ingredient substitution help anytime'
+    ],
+    specialFeatures: ['Recipe Database', 'Cooking Streams', 'Meal Planning']
+  },
+  22: {
+    category: 'Lifestyle',
+    tags: ['baking', 'pastry', 'bread', 'cakes', 'desserts', 'sourdough'],
+    activityLevel: 'medium',
+    communityVibe: 'Bakers sharing the joy of fresh-baked goods',
+    whyJoin: [
+      'Troubleshooting help for tricky recipes',
+      'Weekly baking challenges with prizes',
+      'Sourdough starter tips and tricks'
+    ],
+    specialFeatures: ['Bake-Alongs', 'Recipe Exchange', 'Showstopper Gallery']
+  },
+  23: {
+    category: 'Lifestyle',
+    tags: ['vegan', 'plant-based', 'vegetarian', 'healthy', 'sustainable', 'recipes'],
+    activityLevel: 'medium',
+    communityVibe: 'Compassionate community embracing plant-based living',
+    whyJoin: [
+      'Easy vegan recipes for beginners',
+      'Product reviews and recommendations',
+      'Support for your plant-based journey'
+    ],
+    specialFeatures: ['Meal Prep Ideas', 'Restaurant Finder', 'Nutrition Tips']
+  },
+  // Finance & Crypto
+  24: {
+    category: 'Finance',
+    tags: ['trading', 'stocks', 'forex', 'investing', 'markets', 'daytrading'],
+    activityLevel: 'very_high',
+    communityVibe: 'Serious traders sharing real-time insights',
+    whyJoin: [
+      'Live market analysis during trading hours',
+      'Educational resources for all skill levels',
+      'Backtesting strategies with peers'
+    ],
+    specialFeatures: ['Market Alerts', 'Chart Analysis', 'Paper Trading']
+  },
+  25: {
+    category: 'Technology',
+    tags: ['nft', 'crypto', 'digital-art', 'blockchain', 'web3', 'collectibles'],
+    activityLevel: 'high',
+    communityVibe: 'Digital artists and collectors building the future',
+    whyJoin: [
+      'Showcase your NFT creations',
+      'Connect with serious collectors',
+      'Learn smart contract basics'
+    ],
+    specialFeatures: ['Artist Spotlights', 'Drop Alerts', 'Minting Guides']
+  },
+  26: {
+    category: 'Finance',
+    tags: ['passive-income', 'dividends', 'fire', 'investing', 'real-estate', 'wealth'],
+    activityLevel: 'medium',
+    communityVibe: 'Building wealth together, one income stream at a time',
+    whyJoin: [
+      'Dividend portfolio discussions',
+      'Side hustle ideas that actually work',
+      'FIRE journey tracking and motivation'
+    ],
+    specialFeatures: ['Portfolio Reviews', 'Income Reports', 'Book Club']
+  },
+  // Tech & Science
+  27: {
+    category: 'Technology',
+    tags: ['ai', 'machine-learning', 'python', 'deep-learning', 'llm', 'data-science'],
+    activityLevel: 'very_high',
+    communityVibe: 'Cutting-edge researchers and enthusiasts',
+    whyJoin: [
+      'Discuss the latest AI papers and breakthroughs',
+      'Get help with your ML projects',
+      'Network with industry professionals'
+    ],
+    specialFeatures: ['Paper Discussions', 'Project Showcase', 'Job Board']
+  },
+  28: {
+    category: 'Technology',
+    tags: ['cybersecurity', 'hacking', 'ctf', 'infosec', 'pentesting', 'security'],
+    activityLevel: 'high',
+    communityVibe: 'White hats and security researchers staying sharp',
+    whyJoin: [
+      'CTF team formations and practice',
+      'Security news and vulnerability discussions',
+      'Career advice from industry pros'
+    ],
+    specialFeatures: ['CTF Events', 'Bug Bounty Tips', 'Cert Study Groups']
+  },
+  29: {
+    category: 'Science',
+    tags: ['space', 'astronomy', 'nasa', 'astrophysics', 'rockets', 'stargazing'],
+    activityLevel: 'high',
+    communityVibe: 'Dreamers looking up at the stars together',
+    whyJoin: [
+      'Live launch watch parties',
+      'Astrophotography tips and sharing',
+      'Space news and mission updates'
+    ],
+    specialFeatures: ['Launch Calendar', 'Telescope Advice', 'Night Sky Alerts']
+  },
+  30: {
+    category: 'Technology',
+    tags: ['linux', 'open-source', 'ubuntu', 'arch', 'terminal', 'programming'],
+    activityLevel: 'high',
+    communityVibe: 'Open source enthusiasts and terminal wizards',
+    whyJoin: [
+      'Distro recommendations for your use case',
+      'Rice showcase and dotfiles sharing',
+      'Quick troubleshooting help'
+    ],
+    specialFeatures: ['Distro Reviews', 'Ricing Gallery', 'Package Recommendations']
+  },
+  // Arts & Hobbies
+  31: {
+    category: 'Creative',
+    tags: ['digital-art', 'illustration', 'photoshop', 'procreate', 'drawing', 'design'],
+    activityLevel: 'very_high',
+    communityVibe: 'Artists inspiring and supporting each other',
+    whyJoin: [
+      'Daily art challenges to boost creativity',
+      'Constructive critique from fellow artists',
+      'Commission opportunities and networking'
+    ],
+    specialFeatures: ['Art Challenges', 'Critique Corner', 'Tutorial Library']
+  },
+  32: {
+    category: 'Creative',
+    tags: ['writing', 'fiction', 'poetry', 'storytelling', 'nanowrimo', 'authors'],
+    activityLevel: 'medium',
+    communityVibe: 'Writers on their journey from draft to publication',
+    whyJoin: [
+      'Beta readers for your manuscripts',
+      'Writing sprints for productivity',
+      'Query letter and publishing advice'
+    ],
+    specialFeatures: ['Writing Sprints', 'Critique Partners', 'Publishing Guide']
+  },
+  33: {
+    category: 'Technology',
+    tags: ['3d-printing', 'maker', 'thingiverse', 'cad', 'filament', 'resin'],
+    activityLevel: 'high',
+    communityVibe: 'Makers turning ideas into physical objects',
+    whyJoin: [
+      'Troubleshooting for any printer issue',
+      'STL file sharing and remixes',
+      'Print quality optimization tips'
+    ],
+    specialFeatures: ['Print Help', 'File Library', 'Printer Reviews']
+  },
+  34: {
+    category: 'Creative',
+    tags: ['woodworking', 'carpentry', 'diy', 'furniture', 'tools', 'crafts'],
+    activityLevel: 'medium',
+    communityVibe: 'Craftspeople building beautiful things with wood',
+    whyJoin: [
+      'Project planning and advice',
+      'Tool recommendations for your budget',
+      'Finishing techniques that make a difference'
+    ],
+    specialFeatures: ['Project Gallery', 'Tool Reviews', 'Beginner Guides']
+  },
+  // Lifestyle & Wellness
+  35: {
+    category: 'Lifestyle',
+    tags: ['mental-health', 'support', 'anxiety', 'depression', 'wellness', 'self-care'],
+    activityLevel: 'high',
+    communityVibe: 'A safe, judgment-free zone for healing',
+    whyJoin: [
+      'Peer support from those who understand',
+      'Coping strategies and resources',
+      'Celebrating small wins together'
+    ],
+    specialFeatures: ['Support Circles', 'Resource Library', 'Daily Check-ins']
+  },
+  36: {
+    category: 'Lifestyle',
+    tags: ['meditation', 'mindfulness', 'yoga', 'zen', 'breathing', 'calm'],
+    activityLevel: 'medium',
+    communityVibe: 'Finding peace in a chaotic world',
+    whyJoin: [
+      'Guided meditation sessions',
+      'Mindfulness techniques for daily life',
+      'Calm discussion spaces'
+    ],
+    specialFeatures: ['Guided Sessions', 'Breathing Exercises', 'Gratitude Practice']
+  },
+  37: {
+    category: 'Lifestyle',
+    tags: ['pets', 'dogs', 'cats', 'animals', 'cute', 'pet-care'],
+    activityLevel: 'very_high',
+    communityVibe: 'Wholesome pet content and helpful advice',
+    whyJoin: [
+      'Endless cute pet photos and videos',
+      'Pet care advice from experienced owners',
+      'Support for pet health concerns'
+    ],
+    specialFeatures: ['Pet Showcase', 'Health Advice', 'Training Tips']
+  },
+  // Entertainment
+  38: {
+    category: 'Entertainment',
+    tags: ['horror', 'movies', 'scary', 'thriller', 'slasher', 'supernatural'],
+    activityLevel: 'medium',
+    communityVibe: 'Horror fans who love the thrill of fear',
+    whyJoin: [
+      'Hidden gem recommendations you wont find elsewhere',
+      'Spoiler-free and spoiler discussion channels',
+      'Weekly horror movie watch parties'
+    ],
+    specialFeatures: ['Movie Rankings', 'Watch Parties', 'Review Threads']
+  },
+  39: {
+    category: 'Music',
+    tags: ['kpop', 'bts', 'blackpink', 'korea', 'idol', 'fandom'],
+    activityLevel: 'very_high',
+    communityVibe: 'Multi-fandom energy and fan content',
+    whyJoin: [
+      'Comeback announcements and discussions',
+      'Fan art and edit sharing',
+      'Ticket and merch trading'
+    ],
+    specialFeatures: ['Fancam Threads', 'Lyric Translations', 'Fan Projects']
+  },
+  40: {
+    category: 'Gaming',
+    tags: ['retro', 'nintendo', 'sega', 'arcade', 'emulation', 'nostalgia'],
+    activityLevel: 'medium',
+    communityVibe: 'Nostalgic gamers preserving gaming history',
+    whyJoin: [
+      'Retro game recommendations by genre',
+      'Emulation setup help',
+      'CRT and hardware discussions'
+    ],
+    primaryGames: ['NES', 'SNES', 'Sega Genesis', 'PS1', 'N64'],
+    specialFeatures: ['High Score Challenges', 'Collection Showcase', 'Mod Guides']
+  },
+  41: {
+    category: 'Entertainment',
+    tags: ['true-crime', 'podcasts', 'mystery', 'detective', 'investigation', 'cases'],
+    activityLevel: 'high',
+    communityVibe: 'Armchair detectives diving deep into cases',
+    whyJoin: [
+      'Case discussions with fellow enthusiasts',
+      'Podcast recommendations by style',
+      'Respectful, victim-centered community'
+    ],
+    specialFeatures: ['Case Threads', 'Podcast Reviews', 'Documentary Discussions']
+  },
+  // Sports & Outdoors
+  42: {
+    category: 'Sports',
+    tags: ['soccer', 'football', 'premier-league', 'la-liga', 'champions-league', 'world-cup'],
+    activityLevel: 'very_high',
+    communityVibe: 'Passionate fans debating the beautiful game',
+    whyJoin: [
+      'Live match threads and reactions',
+      'Transfer window speculation',
+      'Fantasy league competitions'
+    ],
+    specialFeatures: ['Match Threads', 'Transfer News', 'Fantasy Leagues']
+  },
+  43: {
+    category: 'Lifestyle',
+    tags: ['hiking', 'camping', 'outdoors', 'nature', 'backpacking', 'trails'],
+    activityLevel: 'medium',
+    communityVibe: 'Outdoor enthusiasts sharing adventures',
+    whyJoin: [
+      'Trail recommendations by difficulty and location',
+      'Gear reviews from real users',
+      'Trip planning assistance'
+    ],
+    specialFeatures: ['Trail Database', 'Gear Reviews', 'Trip Reports']
+  },
+  44: {
+    category: 'Lifestyle',
+    tags: ['cars', 'automotive', 'racing', 'jdm', 'mods', 'mechanics'],
+    activityLevel: 'high',
+    communityVibe: 'Gearheads united by the love of automobiles',
+    whyJoin: [
+      'Build project showcases and advice',
+      'Mechanical troubleshooting help',
+      'Car meet coordination'
+    ],
+    specialFeatures: ['Build Threads', 'Mechanic Help', 'Car Meets']
   }
 };
