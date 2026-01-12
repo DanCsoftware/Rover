@@ -29,16 +29,9 @@ export const useRoverChat = (): UseRoverChatReturn => {
     setStreamingResponse('');
     setError(null);
 
-    // Validate configuration before making any request
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-
-    if (!supabaseUrl || !supabaseKey) {
-      const configError = 'ROVER is not configured. Backend connection missing. Please check environment setup.';
-      setError(configError);
-      setIsStreaming(false);
-      throw new Error(configError);
-    }
+    // External Supabase project for ROVER
+    const EXTERNAL_SUPABASE_URL = 'https://zmwtueuwvbqrvppbsmyl.supabase.co';
+    const EXTERNAL_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inptd3R1ZXV3dmJxcnZwcGJzbXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxNzg0NTgsImV4cCI6MjA4Mzc1NDQ1OH0.k132RAxzhH1OLBd5RirZVo8GN9qJyTPhcLtWH93yRtw';
 
     const cleanMessage = userMessage.replace(/@rover/gi, '').trim();
     
@@ -46,14 +39,14 @@ export const useRoverChat = (): UseRoverChatReturn => {
       { role: 'user', content: cleanMessage }
     ];
 
-    const CHAT_URL = `${supabaseUrl}/functions/v1/discord-rover`;
+    const CHAT_URL = `${EXTERNAL_SUPABASE_URL}/functions/v1/discord-rover`;
 
     try {
       const resp = await fetch(CHAT_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${supabaseKey}`,
+          Authorization: `Bearer ${EXTERNAL_ANON_KEY}`,
         },
         body: JSON.stringify({ 
           messages,
