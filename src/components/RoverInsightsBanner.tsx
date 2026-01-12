@@ -5,11 +5,11 @@ import {
   ChevronUp, 
   Activity, 
   AlertTriangle, 
-  Sparkles,
   ExternalLink
 } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import AdminModerationPanel from './AdminModerationPanel';
+import RoverAvatar from './RoverAvatar';
 import { Message } from '@/data/discordData';
 
 interface RoverInsightsBannerProps {
@@ -40,12 +40,7 @@ const RoverInsightsBanner = ({
         }}
       >
         <div className="flex items-center gap-2">
-          <div 
-            className="w-6 h-6 rounded-md flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #5865f2 0%, #7c3aed 100%)' }}
-          >
-            <Sparkles className="w-3 h-3 text-white" />
-          </div>
+          <RoverAvatar size="sm" showVerified={false} />
           <span className="text-xs font-medium" style={{ color: 'hsl(var(--discord-text-muted))' }}>
             ROVER Insights (Admin)
           </span>
@@ -65,12 +60,7 @@ const RoverInsightsBanner = ({
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <div 
-            className="w-7 h-7 rounded-lg flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #5865f2 0%, #7c3aed 100%)' }}
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
+          <RoverAvatar size="sm" showVerified={true} />
           <div>
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold" style={{ color: 'hsl(var(--discord-text-normal))' }}>
