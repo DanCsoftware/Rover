@@ -46,7 +46,7 @@ export const useRoverChat = (): UseRoverChatReturn => {
       { role: 'user', content: cleanMessage }
     ];
 
-    const CHAT_URL = `${supabaseUrl}/functions/v1/rover-chat`;
+    const CHAT_URL = `${supabaseUrl}/functions/v1/discord-rover`;
 
     try {
       const resp = await fetch(CHAT_URL, {
@@ -122,7 +122,7 @@ export const useRoverChat = (): UseRoverChatReturn => {
 
           try {
             const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            const content = parsed.candidates?.[0]?.content?.parts?.[0]?.text as string | undefined;
             if (content) {
               fullResponse += content;
               setStreamingResponse(fullResponse);
@@ -146,7 +146,7 @@ export const useRoverChat = (): UseRoverChatReturn => {
           if (jsonStr === '[DONE]') continue;
           try {
             const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            const content = parsed.candidates?.[0]?.content?.parts?.[0]?.text as string | undefined;
             if (content) {
               fullResponse += content;
               setStreamingResponse(fullResponse);
