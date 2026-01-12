@@ -51,7 +51,7 @@ const RoverRecommendationCard = ({
 
   return (
     <div 
-      className="group relative rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer"
+      className="group relative rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer h-full flex flex-col"
       style={{ backgroundColor: 'hsl(var(--discord-bg-secondary))' }}
       onClick={onExplore}
     >
@@ -93,7 +93,7 @@ const RoverRecommendationCard = ({
       </div>
 
       {/* Content */}
-      <div className="p-4 pt-2">
+      <div className="p-4 pt-2 flex-1 flex flex-col">
         {/* Header */}
         <div className="flex items-start justify-between mb-2">
           <div>
@@ -135,7 +135,7 @@ const RoverRecommendationCard = ({
         </div>
 
         {/* Why You'll Love It */}
-        <div className="mb-3">
+        <div className="mb-3 flex-1">
           <p 
             className="text-xs font-semibold mb-2 flex items-center gap-1"
             style={{ color: '#a78bfa' }}
@@ -159,7 +159,7 @@ const RoverRecommendationCard = ({
 
         {/* Tags */}
         {extendedMeta?.tags && (
-          <div className="flex flex-wrap gap-1 mb-3">
+          <div className="flex flex-wrap gap-1 mb-3 flex-shrink-0">
             {extendedMeta.tags.slice(0, 4).map((tag, idx) => (
               <span 
                 key={idx}
@@ -181,7 +181,7 @@ const RoverRecommendationCard = ({
             e.stopPropagation();
             onExplore?.();
           }}
-          className="w-full py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-all hover:opacity-90 group-hover:gap-3"
+          className="w-full py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 transition-all hover:opacity-90 group-hover:gap-3 mt-auto flex-shrink-0"
           style={{ 
             backgroundColor: '#5865f2',
             color: 'white'
