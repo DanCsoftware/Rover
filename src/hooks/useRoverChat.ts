@@ -97,55 +97,69 @@ export const useRoverChat = (): UseRoverChatReturn => {
         if (done) break;
         
         textBuffer += decoder.decode(value, { stream: true });
-
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf('\n')) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-
-          if (line.endsWith('\r')) line = line.slice(0, -1);
-          if (line.startsWith(':') || line.trim() === '') continue;
-          if (!line.startsWith('data: ')) continue;
-
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === '[DONE]') {
-            streamDone = true;
-            break;
-          }
-
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.candidates?.[0]?.content?.parts?.[0]?.text as string | undefined;
-            if (content) {
-              fullResponse += content;
-              setStreamingResponse(fullResponse);
+        
+        // DEBUG: Log raw chunks
+        console.log('📥 Raw chunk received:', textBuffer.substring(0, 200));
+        
+        // Gemini streams JSON array: [{...},\n{...},\n...]
+        // Remove leading [ or , from array structure
+        let cleanBuffer = textBuffer.replace(/^\s*[\[,]\s*/, '');
+        
+        // Try to find complete JSON objects
+        let braceDepth = 0;
+        let objectStart = -1;
+        let i = 0;
+        
+        while (i < cleanBuffer.length) {
+          const char = cleanBuffer[i];
+          
+          if (char === '{') {
+            if (braceDepth === 0) objectStart = i;
+            braceDepth++;
+          } else if (char === '}') {
+            braceDepth--;
+            if (braceDepth === 0 && objectStart !== -1) {
+              // Found complete object
+              const jsonStr = cleanBuffer.slice(objectStart, i + 1);
+              console.log('🔍 Parsing JSON object:', jsonStr.substring(0, 150));
+              
+              try {
+                const parsed = JSON.parse(jsonStr);
+                console.log('✅ Parsed successfully:', JSON.stringify(parsed).substring(0, 200));
+                
+                const content = parsed.candidates?.[0]?.content?.parts?.[0]?.text as string | undefined;
+                console.log('📝 Extracted text:', content);
+                
+                if (content) {
+                  fullResponse += content;
+                  setStreamingResponse(fullResponse);
+                }
+                
+                // Check if stream is done
+                if (parsed.candidates?.[0]?.finishReason === 'STOP') {
+                  console.log('🏁 Stream finished (STOP received)');
+                  streamDone = true;
+                }
+              } catch (parseError) {
+                console.error('❌ Parse error:', parseError, 'for:', jsonStr.substring(0, 100));
+              }
+              
+              // Move past this object
+              cleanBuffer = cleanBuffer.slice(i + 1);
+              i = -1; // Reset to start of remaining buffer
+              objectStart = -1;
             }
-          } catch {
-            // Incomplete JSON, put it back
-            textBuffer = line + '\n' + textBuffer;
-            break;
           }
+          i++;
         }
+        
+        // Keep unprocessed data for next iteration
+        textBuffer = cleanBuffer;
       }
 
-      // Final flush
-      if (textBuffer.trim()) {
-        for (let raw of textBuffer.split('\n')) {
-          if (!raw) continue;
-          if (raw.endsWith('\r')) raw = raw.slice(0, -1);
-          if (raw.startsWith(':') || raw.trim() === '') continue;
-          if (!raw.startsWith('data: ')) continue;
-          const jsonStr = raw.slice(6).trim();
-          if (jsonStr === '[DONE]') continue;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.candidates?.[0]?.content?.parts?.[0]?.text as string | undefined;
-            if (content) {
-              fullResponse += content;
-              setStreamingResponse(fullResponse);
-            }
-          } catch { /* ignore partial leftovers */ }
-        }
+      // Log any remaining buffer
+      if (textBuffer.trim() && textBuffer.trim() !== ']') {
+        console.log('⚠️ Remaining buffer after stream:', textBuffer.substring(0, 100));
       }
 
       setIsStreaming(false);
