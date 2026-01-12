@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
-import { Search, Sparkles, Bot, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { Search, Sparkles, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 import { servers, serverDiscoveryData, discoverableServers, discoveryMetadata, userJoinedServerIds } from "@/data/discordData";
 import { discordApps, appCategories } from "@/data/appsData";
 import DiscordDiscoverSidebar from "./DiscordDiscoverSidebar";
 import DiscoverServerCard from "./DiscoverServerCard";
 import DiscoverAppCard from "./DiscoverAppCard";
 import RoverRecommendationCard from "./RoverRecommendationCard";
+import RoverAvatar from "./RoverAvatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRoverChat } from "@/hooks/useRoverChat";
 import { serverDiscovery, ServerRecommendation } from "@/utils/serverDiscovery";
@@ -27,12 +28,6 @@ const DiscordDiscovery = ({ onServerClick }: DiscordDiscoveryProps) => {
   const { streamingResponse, isStreaming, sendMessage } = useRoverChat();
 
   const interestTags = ['Gaming', 'Music', 'Art', 'Tech', 'Anime', 'Fitness', 'Learning', 'Creative'];
-
-  // Load initial recommendations on mount
-  useEffect(() => {
-    const initialRecs = serverDiscovery.getDiscoveryRecommendations();
-    setRecommendations(initialRecs);
-  }, []);
 
   const handleRoverSearch = async (query: string) => {
     if (!query.trim()) return;
@@ -232,16 +227,8 @@ const DiscordDiscovery = ({ onServerClick }: DiscordDiscoveryProps) => {
               >
                 <div className="p-6">
                   <div className="flex items-start gap-4">
-                    {/* ROVER Avatar */}
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                      style={{ 
-                        background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
-                        boxShadow: '0 0 20px rgba(139, 92, 246, 0.4)'
-                      }}
-                    >
-                      <Bot className="w-6 h-6 text-white" />
-                    </div>
+                    {/* ROVER Avatar - Discord-style */}
+                    <RoverAvatar size="lg" isThinking={isStreaming} showVerified={true} />
                     
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
@@ -345,8 +332,8 @@ const DiscordDiscovery = ({ onServerClick }: DiscordDiscoveryProps) => {
                 />
               </div>
 
-              {/* ROVER Recommendations Section - NEW SERVERS */}
-              {recommendations.length > 0 && (
+              {/* ROVER Recommendations Section - Only after search */}
+              {hasSearched && recommendations.length > 0 && (
                 <div className="mb-8">
                   <div className="flex items-center gap-2 mb-4">
                     <Sparkles className="w-5 h-5" style={{ color: '#a78bfa' }} />
@@ -354,7 +341,7 @@ const DiscordDiscovery = ({ onServerClick }: DiscordDiscoveryProps) => {
                       className="text-lg font-bold"
                       style={{ color: 'hsl(var(--discord-text-normal))' }}
                     >
-                      {hasSearched ? 'Recommended for You' : 'Communities to Explore'}
+                      Recommended for You
                     </h2>
                     <span 
                       className="text-xs px-2 py-0.5 rounded-full"
@@ -379,13 +366,31 @@ const DiscordDiscovery = ({ onServerClick }: DiscordDiscoveryProps) => {
                           matchScore={rec.matchScore}
                           matchReasons={rec.matchReasons}
                           onExplore={() => {
-                            // For now, show a toast or handle join - could navigate to a preview
                             console.log('Explore server:', rec.server.id);
                           }}
                         />
                       );
                     })}
                   </div>
+                </div>
+              )}
+
+              {/* Empty State - Before Search */}
+              {!hasSearched && (
+                <div className="text-center py-16">
+                  <RoverAvatar size="lg" className="mx-auto mb-4 opacity-60" showVerified={false} />
+                  <h3 
+                    className="text-lg font-semibold mb-2"
+                    style={{ color: 'hsl(var(--discord-text-normal))' }}
+                  >
+                    Tell ROVER what you're looking for
+                  </h3>
+                  <p 
+                    className="text-sm"
+                    style={{ color: 'hsl(var(--discord-text-muted))' }}
+                  >
+                    Type your interests above or click a tag to get started
+                  </p>
                 </div>
               )}
 

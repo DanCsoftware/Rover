@@ -1,11 +1,12 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { Send, Plus, Gift, Smile, Sparkles, Search, ExternalLink, MessageSquare, Server, Hash } from "lucide-react";
+import { Send, Plus, Gift, Smile, Search, ExternalLink, MessageSquare, Server, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Message, getServerMembers } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
+import RoverAvatar from "./RoverAvatar";
 import RoverInsightsBanner from "./RoverInsightsBanner";
 import { NavigationHelper } from "./NavigationHelper";
 import { ServerRecommendations } from "./ServerRecommendations";
@@ -99,13 +100,9 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
     return Array.from(userMap.values());
   }, [messages, chatMessages, activeServerId]);
 
-  const getMessageAvatar = (msgUser: string, isBot?: boolean) => {
+  const getMessageAvatar = (msgUser: string, isBot?: boolean, isThinking?: boolean) => {
     if (msgUser === 'ROVER') {
-      return (
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
-          <Sparkles className="w-4 h-4 text-white" />
-        </div>
-      );
+      return <RoverAvatar size="sm" isThinking={isThinking} showVerified={true} />;
     }
     if (msgUser === 'Midjourney Bot' || isBot) {
       return <img src="/lovable-uploads/ca8cef9f-1434-48e7-a22c-29adeb14325a.png" alt="Bot" className="w-8 h-8 rounded-full" />;
@@ -772,12 +769,9 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
                         {msg.user}
                       </span>
                       {msg.user === 'ROVER' && (
-                        <div className="flex items-center space-x-1">
-                          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-2 py-0.5 rounded-full font-medium rover-glow">
-                            🤖 AI Navigator
-                          </div>
-                          <Sparkles className="w-4 h-4 text-blue-400 animate-pulse" />
-                        </div>
+                        <span className="ml-1 px-1.5 py-0.5 text-[10px] font-bold bg-[#5865F2] text-white rounded uppercase tracking-wide">
+                          AI
+                        </span>
                       )}
                       {msg.isBot && msg.user !== 'ROVER' && (
                         <span className="text-white text-xs px-1.5 py-0.5 rounded" style={{ backgroundColor: 'hsl(var(--discord-brand))' }}>BOT</span>
@@ -897,9 +891,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
               borderColor: 'hsl(var(--rover-primary))',
               color: 'hsl(var(--discord-text-muted))'
             }}>
-              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-2 h-2 text-white" />
-              </div>
+              <RoverAvatar size="sm" showVerified={false} />
               <span>🤖 <strong style={{ color: 'hsl(var(--rover-primary))' }}>ROVER</strong> Enhanced Navigation - try: "help me navigate to privacy settings" or "find notification options"</span>
             </div>
           )}
