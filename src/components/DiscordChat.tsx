@@ -892,7 +892,7 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
               color: 'hsl(var(--discord-text-muted))'
             }}>
               <RoverAvatar size="sm" showVerified={false} />
-              <span>🤖 <strong style={{ color: 'hsl(var(--rover-primary))' }}>ROVER</strong> Enhanced Navigation - try: "help me navigate to privacy settings" or "find notification options"</span>
+              <span><strong style={{ color: 'hsl(var(--rover-primary))' }}>ROVER</strong> Enhanced Navigation — try: "help me navigate to privacy settings" or "find notification options"</span>
             </div>
           )}
         </div>
