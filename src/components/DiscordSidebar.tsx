@@ -99,12 +99,10 @@ const DiscordSidebar = ({
       {/* Server List */}
       <div className="w-16 flex flex-col items-stretch py-3 space-y-2 flex-shrink-0" style={{ backgroundColor: 'hsl(var(--discord-bg-tertiary))' }}>
         {/* Discord Icon for Direct Messages */}
-        <div className="relative w-full flex items-center justify-center group">
-          {/* Left indicator pill - shows when DM view is active, shorter on hover */}
-          {isDMView ? (
+        <div className="relative w-full flex items-center justify-center">
+          {/* Left indicator pill - shows when DM view is active */}
+          {isDMView && (
             <div className="absolute left-0 w-1 h-10 rounded-r-full bg-white" />
-          ) : (
-            <div className="absolute left-0 w-1 h-5 rounded-r-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
           )}
           <div
             onClick={onDMViewClick}
@@ -139,12 +137,10 @@ const DiscordSidebar = ({
           const isMod = membership?.role === 'moderator';
           
           return (
-            <div key={server.id} className="relative w-full flex items-center justify-center group">
-              {/* Left indicator pill - shows when server is active, shorter on hover */}
-              {isServerActive(server.id) ? (
+            <div key={server.id} className="relative w-full flex items-center justify-center">
+              {/* Left indicator pill - shows when server is active */}
+              {isServerActive(server.id) && (
                 <div className="absolute left-0 w-1 h-10 rounded-r-full bg-white" />
-              ) : (
-                <div className="absolute left-0 w-1 h-5 rounded-r-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
               )}
               <div
                 onClick={() => onServerClick(server.id)}
