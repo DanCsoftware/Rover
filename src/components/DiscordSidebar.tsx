@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { HomeTab } from "@/hooks/useDiscordState";
+import QuickSwitcherDialog from "./QuickSwitcherDialog";
 
 interface DiscordSidebarProps {
   onChannelClick: (channelId: string) => void;
@@ -36,6 +37,7 @@ const DiscordSidebar = ({
   activeHomeTab
 }: DiscordSidebarProps) => {
   const [expandedGroups, setExpandedGroups] = useState<string[]>(["text", "voice"]);
+  const [isQuickSwitcherOpen, setIsQuickSwitcherOpen] = useState(false);
   
   const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
     Gamepad2,
@@ -233,15 +235,25 @@ const DiscordSidebar = ({
             {isDMView ? (
               /* Direct Messages View with Home Navigation */
               <div className="p-2">
-                {/* Search Bar */}
+                {/* Search Bar - Opens Quick Switcher */}
                 <div 
-                  className="flex items-center px-2 py-1.5 mb-2 rounded cursor-pointer"
+                  onClick={() => setIsQuickSwitcherOpen(true)}
+                  className="flex items-center px-2 py-1.5 mb-2 rounded cursor-pointer hover:bg-opacity-80 transition-colors"
                   style={{ backgroundColor: 'hsl(var(--discord-bg-tertiary))' }}
                 >
                   <span className="text-sm flex-1" style={{ color: 'hsl(var(--discord-text-muted))' }}>
                     Find or start a conversation
                   </span>
                 </div>
+
+                {/* Quick Switcher Dialog */}
+                <QuickSwitcherDialog
+                  open={isQuickSwitcherOpen}
+                  onOpenChange={setIsQuickSwitcherOpen}
+                  onChannelClick={onChannelClick}
+                  onServerClick={onServerClick}
+                  onDMClick={onDMClick}
+                />
 
                 {/* Home Navigation Items */}
                 <div className="space-y-0.5 mb-4">
