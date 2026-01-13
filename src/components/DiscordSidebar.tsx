@@ -1,9 +1,10 @@
-import { Bot, Hash, Volume2, Settings, Headphones, Mic, ChevronDown, ChevronRight, Gamepad2, Music, Code, Sparkles, Dumbbell, Film, Compass, Crown, Shield } from "lucide-react";
+import { Bot, Hash, Volume2, Settings, Headphones, Mic, ChevronDown, ChevronRight, Gamepad2, Music, Code, Sparkles, Dumbbell, Film, Compass, Crown, Shield, Users, Store, Search, Flag } from "lucide-react";
 import { useState } from "react";
 import { servers, ServerIconStyle, currentUserMemberships } from "@/data/discordData";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { HomeTab } from "@/hooks/useDiscordState";
 
 interface DiscordSidebarProps {
   onChannelClick: (channelId: string) => void;
@@ -11,11 +12,13 @@ interface DiscordSidebarProps {
   onDMViewClick: () => void;
   onServerClick: (serverId: number) => void;
   onDiscoverClick: () => void;
+  onHomeTabClick: (tab: HomeTab) => void;
   activeChannel: string;
   activeChannelType: 'text' | 'dm';
   isDMView: boolean;
   isDiscoverView: boolean;
   activeServer: number;
+  activeHomeTab: HomeTab;
 }
 
 const DiscordSidebar = ({ 
@@ -24,11 +27,13 @@ const DiscordSidebar = ({
   onDMViewClick, 
   onServerClick,
   onDiscoverClick,
+  onHomeTabClick,
   activeChannel, 
   activeChannelType, 
   isDMView,
   isDiscoverView,
-  activeServer 
+  activeServer,
+  activeHomeTab
 }: DiscordSidebarProps) => {
   const [expandedGroups, setExpandedGroups] = useState<string[]>(["text", "voice"]);
   
@@ -217,19 +222,127 @@ const DiscordSidebar = ({
           
           <ScrollArea className="flex-1">
             {isDMView ? (
-              /* Direct Messages View */
+              /* Direct Messages View with Home Navigation */
               <div className="p-2">
+                {/* Search Bar */}
+                <div 
+                  className="flex items-center px-2 py-1.5 mb-2 rounded cursor-pointer"
+                  style={{ backgroundColor: 'hsl(var(--discord-bg-tertiary))' }}
+                >
+                  <span className="text-sm flex-1" style={{ color: 'hsl(var(--discord-text-muted))' }}>
+                    Find or start a conversation
+                  </span>
+                </div>
+
+                {/* Home Navigation Items */}
+                <div className="space-y-0.5 mb-4">
+                  {/* Friends */}
+                  <div 
+                    onClick={() => onHomeTabClick('friends')}
+                    className="flex items-center px-2 py-2 rounded cursor-pointer transition-colors"
+                    style={{ 
+                      backgroundColor: activeHomeTab === 'friends' && !activeChannel
+                        ? 'hsl(var(--discord-bg-quaternary))' 
+                        : 'transparent' 
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!(activeHomeTab === 'friends' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-tertiary))';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!(activeHomeTab === 'friends' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    <Users className="w-5 h-5 mr-3" style={{ color: 'hsl(var(--discord-text-muted))' }} />
+                    <span style={{ color: 'hsl(var(--discord-text-normal))' }}>Friends</span>
+                  </div>
+
+                  {/* Nitro */}
+                  <div 
+                    onClick={() => onHomeTabClick('nitro')}
+                    className="flex items-center px-2 py-2 rounded cursor-pointer transition-colors"
+                    style={{ 
+                      backgroundColor: activeHomeTab === 'nitro' && !activeChannel
+                        ? 'hsl(var(--discord-bg-quaternary))' 
+                        : 'transparent' 
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!(activeHomeTab === 'nitro' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-tertiary))';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!(activeHomeTab === 'nitro' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    <Sparkles className="w-5 h-5 mr-3" style={{ color: '#ff73fa' }} />
+                    <span style={{ color: 'hsl(var(--discord-text-normal))' }}>Nitro</span>
+                  </div>
+
+                  {/* Shop */}
+                  <div 
+                    onClick={() => onHomeTabClick('shop')}
+                    className="flex items-center px-2 py-2 rounded cursor-pointer transition-colors"
+                    style={{ 
+                      backgroundColor: activeHomeTab === 'shop' && !activeChannel
+                        ? 'hsl(var(--discord-bg-quaternary))' 
+                        : 'transparent' 
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!(activeHomeTab === 'shop' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-tertiary))';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!(activeHomeTab === 'shop' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    <Store className="w-5 h-5 mr-3" style={{ color: 'hsl(var(--discord-text-muted))' }} />
+                    <span style={{ color: 'hsl(var(--discord-text-normal))' }}>Shop</span>
+                  </div>
+
+                  {/* Quests */}
+                  <div 
+                    onClick={() => onHomeTabClick('quests')}
+                    className="flex items-center px-2 py-2 rounded cursor-pointer transition-colors"
+                    style={{ 
+                      backgroundColor: activeHomeTab === 'quests' && !activeChannel
+                        ? 'hsl(var(--discord-bg-quaternary))' 
+                        : 'transparent' 
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!(activeHomeTab === 'quests' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-tertiary))';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!(activeHomeTab === 'quests' && !activeChannel)) {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
+                  >
+                    <Flag className="w-5 h-5 mr-3" style={{ color: 'hsl(var(--discord-green))' }} />
+                    <span style={{ color: 'hsl(var(--discord-text-normal))' }}>Quests</span>
+                  </div>
+                </div>
+
+                {/* Direct Messages Section */}
                 <div className="flex items-center justify-between px-2 py-1 text-xs uppercase font-semibold" style={{ color: 'hsl(var(--discord-text-muted))' }}>
                   <span className="truncate">Direct Messages</span>
                   <span className="text-lg cursor-pointer flex-shrink-0 hover:text-white transition-colors">+</span>
                 </div>
                 
-                {dmChannels.map((channel) => (
+                {dmChannels.filter(c => c.id !== 'search').map((channel) => (
                     <div
                     key={channel.id}
-                    className={`flex items-center px-2 py-1.5 mx-2 rounded cursor-pointer transition-colors ${
-                      isChannelActive(channel.id, 'dm') ? "" : ""
-                    }`}
+                    className={`flex items-center px-2 py-1.5 mx-2 rounded cursor-pointer transition-colors`}
                     style={{ 
                       backgroundColor: isChannelActive(channel.id, 'dm') ? 'hsl(var(--discord-bg-quaternary))' : 'transparent'
                     }}
@@ -243,7 +356,7 @@ const DiscordSidebar = ({
                         e.currentTarget.style.backgroundColor = 'transparent';
                       }
                     }}
-                    onClick={() => channel.id !== "search" && channel.id !== "tickets" && channel.id !== "group1" && onDMClick(channel.id)}
+                    onClick={() => channel.id !== "tickets" && channel.id !== "group1" && onDMClick(channel.id)}
                   >
                     <div className="w-8 h-8 mr-3 flex-shrink-0">
                       {channel.name === "Midjourney Bot" ? (

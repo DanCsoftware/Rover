@@ -2,12 +2,15 @@
 import { useState, useMemo } from 'react';
 import { servers, dmUsers, dmMessages, User, Message, currentUserMemberships } from '@/data/discordData';
 
+export type HomeTab = 'friends' | 'nitro' | 'shop' | 'quests';
+
 export const useDiscordState = () => {
   const [activeChannel, setActiveChannel] = useState<string>('official-links');
   const [activeChannelType, setActiveChannelType] = useState<'text' | 'dm'>('text');
   const [isDMView, setIsDMView] = useState<boolean>(false);
   const [isDiscoverView, setIsDiscoverView] = useState<boolean>(false);
   const [activeServer, setActiveServer] = useState<number>(4); // Default to Midjourney server
+  const [activeHomeTab, setActiveHomeTab] = useState<HomeTab>('friends');
   const [activeUser, setActiveUser] = useState<User>({
     id: 'server',
     name: 'Midjourney',
@@ -60,15 +63,15 @@ export const useDiscordState = () => {
   const switchToDMView = () => {
     setIsDMView(true);
     setIsDiscoverView(false);
+    setActiveHomeTab('friends');
+    // Don't auto-select a DM, show Friends view by default
+    setActiveChannel('');
     setActiveChannelType('dm');
-    // If current channel is not a DM, switch to first available DM
-    if (activeChannelType !== 'dm') {
-      const firstDM = dmUsers[0];
-      if (firstDM) {
-        setActiveChannel(firstDM.id);
-        setActiveUser(firstDM);
-      }
-    }
+  };
+
+  const switchToHomeTab = (tab: HomeTab) => {
+    setActiveHomeTab(tab);
+    setActiveChannel('');
   };
 
   const switchToDiscover = () => {
@@ -137,6 +140,7 @@ export const useDiscordState = () => {
     isDMView,
     isDiscoverView,
     activeServer,
+    activeHomeTab,
     isCurrentServerAdmin,
     currentServerRole,
     switchToChannel,
@@ -144,6 +148,7 @@ export const useDiscordState = () => {
     switchToDMView,
     switchToDiscover,
     switchToServer,
+    switchToHomeTab,
     getCurrentMessages,
     getCurrentChannelName
   };
