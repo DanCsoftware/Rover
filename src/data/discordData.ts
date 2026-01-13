@@ -2985,6 +2985,685 @@ export const discoverableServers = [
     },
     textChannels: [],
     voiceChannels: []
+  },
+  // NEW SERVERS - Gaming (45-56)
+  {
+    id: 45,
+    name: "Minecraft Builders",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #6aa84f 0%, #38761d 50%, #274e13 100%)",
+      text: "⛏️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 46,
+    name: "Fortnite Battleground",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #7b68ee 0%, #6a5acd 50%, #483d8b 100%)",
+      text: "🎯",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 47,
+    name: "World of Warcraft Classic",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #f4a460 0%, #cd853f 50%, #8b4513 100%)",
+      text: "⚔️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 48,
+    name: "Rocket League Trading",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #00bfff 0%, #1e90ff 50%, #0000cd 100%)",
+      text: "🚗",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 49,
+    name: "Pokemon TCG Online",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ffd700 0%, #ffb347 50%, #ff8c00 100%)",
+      text: "⚡",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 50,
+    name: "VR Gaming Hub",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #00ced1 0%, #20b2aa 50%, #008b8b 100%)",
+      text: "🥽",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 51,
+    name: "Speedrunning Community",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff4500 0%, #ff6347 50%, #dc143c 100%)",
+      text: "⏱️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 52,
+    name: "Stardew Valley Farm",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #90ee90 0%, #32cd32 50%, #228b22 100%)",
+      text: "🌾",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 53,
+    name: "League of Legends Academy",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #1e90ff 0%, #4169e1 50%, #0000cd 100%)",
+      text: "🏆",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 54,
+    name: "Genshin Impact World",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #87ceeb 0%, #6495ed 50%, #4169e1 100%)",
+      text: "✨",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 55,
+    name: "Destiny 2 Guardians",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2f4f4f 0%, #1a1a2e 50%, #0d0d1a 100%)",
+      text: "🌙",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 56,
+    name: "Overwatch 2 Arena",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff7f00 0%, #ff4500 50%, #cc3700 100%)",
+      text: "🎮",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Technology (57-64)
+  {
+    id: 57,
+    name: "Web Dev Bootcamp",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #61dafb 0%, #00d8ff 50%, #0099cc 100%)",
+      text: "🌐",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 58,
+    name: "Python Developers",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #3776ab 0%, #ffd43b 50%, #306998 100%)",
+      text: "🐍",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 59,
+    name: "Mobile App Makers",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #a855f7 0%, #7c3aed 50%, #5b21b6 100%)",
+      text: "📱",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 60,
+    name: "DevOps & Cloud",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff9900 0%, #232f3e 50%, #1a1a2e 100%)",
+      text: "☁️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 61,
+    name: "Blockchain Builders",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #627eea 0%, #3c3c3d 50%, #1a1a2e 100%)",
+      text: "⛓️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 62,
+    name: "Arduino & Raspberry Pi",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #00979d 0%, #c51a4a 50%, #8b0000 100%)",
+      text: "🔌",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 63,
+    name: "Data Science Hub",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff6f00 0%, #ff9100 50%, #ffab00 100%)",
+      text: "📊",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 64,
+    name: "Self-Hosted Community",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2d3436 0%, #636e72 50%, #b2bec3 100%)",
+      text: "🖥️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Entertainment (65-72)
+  {
+    id: 65,
+    name: "Marvel Universe",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ed1d24 0%, #b30000 50%, #8b0000 100%)",
+      text: "🦸",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 66,
+    name: "Star Wars Cantina",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ffe81f 0%, #000000 50%, #1a1a1a 100%)",
+      text: "⭐",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 67,
+    name: "DC Comics Central",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #0078f0 0%, #003366 50%, #001a33 100%)",
+      text: "🦇",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 68,
+    name: "Movie Critics Club",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #c9b037 0%, #af9500 50%, #8c7600 100%)",
+      text: "🎬",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 69,
+    name: "Reality TV Watchers",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff69b4 0%, #ff1493 50%, #c71585 100%)",
+      text: "📺",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 70,
+    name: "Broadway & Theatre",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #daa520 0%, #b8860b 50%, #8b6914 100%)",
+      text: "🎭",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 71,
+    name: "Podcast Network",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #1db954 0%, #1ed760 50%, #169c46 100%)",
+      text: "🎙️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 72,
+    name: "Meme Factory",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%)",
+      text: "😂",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Music & Audio (73-78)
+  {
+    id: 73,
+    name: "EDM Universe",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff00ff 0%, #00ffff 50%, #ff00ff 100%)",
+      text: "🎧",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 74,
+    name: "Hip Hop Heads",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ffd700 0%, #1a1a1a 50%, #333333 100%)",
+      text: "🎤",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 75,
+    name: "Classical Music Lounge",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #8b4513 0%, #d2691e 50%, #deb887 100%)",
+      text: "🎻",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 76,
+    name: "Guitar Players United",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #8b0000 0%, #cd853f 50%, #deb887 100%)",
+      text: "🎸",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 77,
+    name: "Vinyl Collectors",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2f2f2f 0%, #1a1a1a 50%, #0d0d0d 100%)",
+      text: "💿",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 78,
+    name: "Music Production Academy",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #9b59b6 0%, #8e44ad 50%, #6c3483 100%)",
+      text: "🎹",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Sports & Fitness (79-84)
+  {
+    id: 79,
+    name: "NBA Basketball Fans",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #c9082a 0%, #17408b 50%, #0c2340 100%)",
+      text: "🏀",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 80,
+    name: "Fantasy Football League",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #013369 0%, #d50a0a 50%, #8b0000 100%)",
+      text: "🏈",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 81,
+    name: "Running & Marathon",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff6b35 0%, #f7c59f 50%, #efefef 100%)",
+      text: "🏃",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 82,
+    name: "Powerlifting Zone",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #1a1a1a 0%, #b22222 50%, #8b0000 100%)",
+      text: "🏋️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 83,
+    name: "Chess Masters",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2c3e50 0%, #34495e 50%, #1a252f 100%)",
+      text: "♟️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 84,
+    name: "MMA & UFC Discussion",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #d4af37 0%, #1a1a1a 50%, #333333 100%)",
+      text: "🥊",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Lifestyle & Hobbies (85-94)
+  {
+    id: 85,
+    name: "Travel Adventures",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #00bcd4 0%, #03a9f4 50%, #0288d1 100%)",
+      text: "✈️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 86,
+    name: "Coffee Enthusiasts",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #6f4e37 0%, #5c4033 50%, #3c2415 100%)",
+      text: "☕",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 87,
+    name: "Fashion & Style",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ff69b4 0%, #da70d6 50%, #ba55d3 100%)",
+      text: "👗",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 88,
+    name: "Home Improvement DIY",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #f39c12 0%, #e67e22 50%, #d35400 100%)",
+      text: "🔨",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 89,
+    name: "Gardening & Plants",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #27ae60 0%, #2ecc71 50%, #1abc9c 100%)",
+      text: "🌱",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 90,
+    name: "Personal Finance",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #27ae60 0%, #2ecc71 50%, #1abc9c 100%)",
+      text: "💰",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 91,
+    name: "Parenting Support",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #ffb6c1 0%, #ffc0cb 50%, #ffe4e1 100%)",
+      text: "👶",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 92,
+    name: "LGBTQ+ Safe Space",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #e40303 0%, #ff8c00 25%, #ffed00 50%, #008026 62%, #24408e 75%, #732982 100%)",
+      text: "🏳️‍🌈",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 93,
+    name: "Astrology & Tarot",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #1a1a2e 0%, #4a0080 50%, #9900ff 100%)",
+      text: "🔮",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 94,
+    name: "Mechanical Keyboards",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2d3436 0%, #636e72 50%, #dfe6e9 100%)",
+      text: "⌨️",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  // Education & Learning (95-100)
+  {
+    id: 95,
+    name: "College Students Hub",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #3498db 0%, #2980b9 50%, #1f618d 100%)",
+      text: "🎓",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 96,
+    name: "STEM Tutoring",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #9b59b6 0%, #8e44ad 50%, #6c3483 100%)",
+      text: "🔬",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 97,
+    name: "History Buffs",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #b8860b 0%, #daa520 50%, #cd853f 100%)",
+      text: "📜",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 98,
+    name: "Philosophy Circle",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #2c3e50 0%, #34495e 50%, #5d6d7e 100%)",
+      text: "🤔",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 99,
+    name: "Career Development",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #16a085 0%, #1abc9c 50%, #48c9b0 100%)",
+      text: "💼",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
+  },
+  {
+    id: 100,
+    name: "Study Abroad Community",
+    icon: "",
+    iconStyle: {
+      background: "linear-gradient(145deg, #3498db 0%, #e74c3c 50%, #f39c12 100%)",
+      text: "🌍",
+      textSize: "1.5rem"
+    },
+    textChannels: [],
+    voiceChannels: []
   }
 ];
 
@@ -3299,6 +3978,405 @@ export const serverDiscoveryData: Record<number, ServerDiscoveryMeta> = {
     onlineCount: 34567,
     memberCount: 234567,
     isVerified: true
+  },
+  // NEW SERVERS - Gaming (45-56)
+  45: {
+    bannerImage: "https://images.unsplash.com/photo-1587573089684-f6d1d8e1b8b8?w=800&h=300&fit=crop",
+    description: "Build epic creations and survive together. Minecraft builders and adventurers unite!",
+    onlineCount: 45678,
+    memberCount: 289012,
+    isVerified: true
+  },
+  46: {
+    bannerImage: "https://images.unsplash.com/photo-1589241062272-c0a000072dfa?w=800&h=300&fit=crop",
+    description: "Drop in, gear up, and dominate. Fortnite strategies, squad matchmaking, and Victory Royales!",
+    onlineCount: 78901,
+    memberCount: 456789,
+    isVerified: true
+  },
+  47: {
+    bannerImage: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&h=300&fit=crop",
+    description: "For the Horde! For the Alliance! WoW Classic raiders, PvPers, and lore enthusiasts.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: true
+  },
+  48: {
+    bannerImage: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&h=300&fit=crop",
+    description: "Trade items, find teammates, and climb the ranks in Rocket League.",
+    onlineCount: 23456,
+    memberCount: 178901,
+    isVerified: false
+  },
+  49: {
+    bannerImage: "https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?w=800&h=300&fit=crop",
+    description: "Gotta collect 'em all! Pokemon TCG trades, deck building, and competitive play.",
+    onlineCount: 19876,
+    memberCount: 145678,
+    isVerified: true
+  },
+  50: {
+    bannerImage: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800&h=300&fit=crop",
+    description: "Step into virtual reality. VR gaming discussions, recommendations, and multiplayer sessions.",
+    onlineCount: 28901,
+    memberCount: 189012,
+    isVerified: false
+  },
+  51: {
+    bannerImage: "https://images.unsplash.com/photo-1511882150382-421056c89033?w=800&h=300&fit=crop",
+    description: "Go fast! Speedrunning strategies, world records, and GDQ watch parties.",
+    onlineCount: 15678,
+    memberCount: 123456,
+    isVerified: true
+  },
+  52: {
+    bannerImage: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=300&fit=crop",
+    description: "Cozy farming vibes. Stardew Valley tips, farm showcases, and multiplayer co-op.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: false
+  },
+  53: {
+    bannerImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=300&fit=crop",
+    description: "Climb the ranked ladder. LoL coaching, tier lists, and team recruitment.",
+    onlineCount: 89012,
+    memberCount: 567890,
+    isVerified: true
+  },
+  54: {
+    bannerImage: "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=800&h=300&fit=crop",
+    description: "Explore Teyvat together. Genshin builds, events, and gacha luck sharing.",
+    onlineCount: 67890,
+    memberCount: 456789,
+    isVerified: true
+  },
+  55: {
+    bannerImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=300&fit=crop",
+    description: "Eyes up, Guardian. Destiny 2 raids, sherpa runs, and loot discussions.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  56: {
+    bannerImage: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=800&h=300&fit=crop",
+    description: "Heroes never die! Overwatch 2 team finder, hero mains, and competitive play.",
+    onlineCount: 56789,
+    memberCount: 389012,
+    isVerified: true
+  },
+  // Technology (57-64)
+  57: {
+    bannerImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=300&fit=crop",
+    description: "Learn web development from scratch. React, JavaScript, and frontend mastery.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: true
+  },
+  58: {
+    bannerImage: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&h=300&fit=crop",
+    description: "All things Python. Django, Flask, automation, and data science projects.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  59: {
+    bannerImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=300&fit=crop",
+    description: "Build the next big app. iOS, Android, Flutter, and React Native development.",
+    onlineCount: 23456,
+    memberCount: 189012,
+    isVerified: false
+  },
+  60: {
+    bannerImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=300&fit=crop",
+    description: "Deploy, scale, automate. AWS, Docker, Kubernetes, and CI/CD pipelines.",
+    onlineCount: 34567,
+    memberCount: 256789,
+    isVerified: true
+  },
+  61: {
+    bannerImage: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=300&fit=crop",
+    description: "Build the decentralized future. Ethereum, Solidity, and smart contract development.",
+    onlineCount: 28901,
+    memberCount: 198765,
+    isVerified: false
+  },
+  62: {
+    bannerImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=300&fit=crop",
+    description: "DIY electronics and IoT projects. Arduino, Raspberry Pi, and maker community.",
+    onlineCount: 19876,
+    memberCount: 156789,
+    isVerified: false
+  },
+  63: {
+    bannerImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=300&fit=crop",
+    description: "Extract insights from data. Pandas, visualization, ML, and career advice.",
+    onlineCount: 34567,
+    memberCount: 267890,
+    isVerified: true
+  },
+  64: {
+    bannerImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=300&fit=crop",
+    description: "Run your own services. Homelab setups, self-hosting tips, and privacy-focused solutions.",
+    onlineCount: 23456,
+    memberCount: 178901,
+    isVerified: false
+  },
+  // Entertainment (65-72)
+  65: {
+    bannerImage: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&h=300&fit=crop",
+    description: "Assemble! MCU discussions, comic debates, and superhero content.",
+    onlineCount: 78901,
+    memberCount: 567890,
+    isVerified: true
+  },
+  66: {
+    bannerImage: "https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?w=800&h=300&fit=crop",
+    description: "In a galaxy far, far away. Star Wars lore, Mandalorian talk, and fan theories.",
+    onlineCount: 67890,
+    memberCount: 456789,
+    isVerified: true
+  },
+  67: {
+    bannerImage: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=800&h=300&fit=crop",
+    description: "I'm Batman. DC comics, movies, and the Snyderverse discussions.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  68: {
+    bannerImage: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&h=300&fit=crop",
+    description: "Cinema appreciation at its finest. Oscar predictions, indie films, and movie analysis.",
+    onlineCount: 23456,
+    memberCount: 189012,
+    isVerified: false
+  },
+  69: {
+    bannerImage: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=300&fit=crop",
+    description: "Drama, drama, drama! Reality TV discussions from Bachelor to Survivor.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: false
+  },
+  70: {
+    bannerImage: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&h=300&fit=crop",
+    description: "The show must go on! Broadway musicals, theatre reviews, and performance art.",
+    onlineCount: 19876,
+    memberCount: 145678,
+    isVerified: true
+  },
+  71: {
+    bannerImage: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&h=300&fit=crop",
+    description: "Your ears will thank you. Podcast recommendations, discussions, and creator networking.",
+    onlineCount: 28901,
+    memberCount: 198765,
+    isVerified: false
+  },
+  72: {
+    bannerImage: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=800&h=300&fit=crop",
+    description: "Internet culture at its finest. Fresh memes, dank content, and humor for days.",
+    onlineCount: 89012,
+    memberCount: 678901,
+    isVerified: true
+  },
+  // Music & Audio (73-78)
+  73: {
+    bannerImage: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=300&fit=crop",
+    description: "Bass drops and festival vibes. EDM production, DJ culture, and rave community.",
+    onlineCount: 56789,
+    memberCount: 389012,
+    isVerified: true
+  },
+  74: {
+    bannerImage: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=300&fit=crop",
+    description: "Real hip hop heads only. Beats, bars, and the culture that started it all.",
+    onlineCount: 67890,
+    memberCount: 456789,
+    isVerified: true
+  },
+  75: {
+    bannerImage: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&h=300&fit=crop",
+    description: "Timeless compositions. Classical music appreciation, orchestra discussions, and composer deep dives.",
+    onlineCount: 12345,
+    memberCount: 98765,
+    isVerified: false
+  },
+  76: {
+    bannerImage: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&h=300&fit=crop",
+    description: "Six strings of magic. Guitar lessons, gear talk, tabs, and jam sessions.",
+    onlineCount: 34567,
+    memberCount: 256789,
+    isVerified: true
+  },
+  77: {
+    bannerImage: "https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?w=800&h=300&fit=crop",
+    description: "Analog warmth forever. Vinyl collecting, turntable setups, and audiophile discussions.",
+    onlineCount: 15678,
+    memberCount: 123456,
+    isVerified: false
+  },
+  78: {
+    bannerImage: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=300&fit=crop",
+    description: "Create your sound. Ableton, FL Studio, mixing techniques, and producer networking.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  // Sports & Fitness (79-84)
+  79: {
+    bannerImage: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=300&fit=crop",
+    description: "Ball is life. NBA discussions, fantasy basketball, and hoop culture.",
+    onlineCount: 67890,
+    memberCount: 456789,
+    isVerified: true
+  },
+  80: {
+    bannerImage: "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=800&h=300&fit=crop",
+    description: "Draft day every day. NFL fantasy leagues, trade advice, and game analysis.",
+    onlineCount: 78901,
+    memberCount: 567890,
+    isVerified: true
+  },
+  81: {
+    bannerImage: "https://images.unsplash.com/photo-1461896836934- voices-4?w=800&h=300&fit=crop",
+    description: "Hit the pavement. Marathon training, C25K support, and running motivation.",
+    onlineCount: 23456,
+    memberCount: 178901,
+    isVerified: false
+  },
+  82: {
+    bannerImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=300&fit=crop",
+    description: "Lift heavy things. Powerlifting programs, PR celebrations, and strength community.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: true
+  },
+  83: {
+    bannerImage: "https://images.unsplash.com/photo-1560174038-da43ac74f01b?w=800&h=300&fit=crop",
+    description: "Checkmate! Chess strategy, puzzle training, and online tournament organization.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  84: {
+    bannerImage: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&h=300&fit=crop",
+    description: "Combat sports fanatics. UFC fight discussions, MMA technique, and boxing talk.",
+    onlineCount: 56789,
+    memberCount: 389012,
+    isVerified: true
+  },
+  // Lifestyle & Hobbies (85-94)
+  85: {
+    bannerImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=300&fit=crop",
+    description: "Wanderlust community. Travel tips, destination guides, and adventure stories.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  86: {
+    bannerImage: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&h=300&fit=crop",
+    description: "Caffeine connoisseurs unite. Coffee brewing methods, bean reviews, and latte art.",
+    onlineCount: 28901,
+    memberCount: 198765,
+    isVerified: false
+  },
+  87: {
+    bannerImage: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=300&fit=crop",
+    description: "Express yourself through style. Fashion trends, outfit inspo, and streetwear culture.",
+    onlineCount: 34567,
+    memberCount: 256789,
+    isVerified: true
+  },
+  88: {
+    bannerImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=300&fit=crop",
+    description: "Fix it yourself! Home renovation projects, tool recommendations, and DIY tutorials.",
+    onlineCount: 23456,
+    memberCount: 189012,
+    isVerified: false
+  },
+  89: {
+    bannerImage: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=300&fit=crop",
+    description: "Green thumbs welcome. Gardening tips, plant care, and houseplant obsession.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: true
+  },
+  90: {
+    bannerImage: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=300&fit=crop",
+    description: "Financial freedom awaits. Budgeting, FIRE movement, and smart money habits.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  91: {
+    bannerImage: "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&h=300&fit=crop",
+    description: "It takes a village. Parenting advice, kid activities, and family support.",
+    onlineCount: 28901,
+    memberCount: 198765,
+    isVerified: false
+  },
+  92: {
+    bannerImage: "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?w=800&h=300&fit=crop",
+    description: "Pride year-round. LGBTQ+ community, support, and celebration of identity.",
+    onlineCount: 56789,
+    memberCount: 389012,
+    isVerified: true
+  },
+  93: {
+    bannerImage: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&h=300&fit=crop",
+    description: "Written in the stars. Astrology readings, tarot discussions, and spiritual exploration.",
+    onlineCount: 34567,
+    memberCount: 234567,
+    isVerified: false
+  },
+  94: {
+    bannerImage: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&h=300&fit=crop",
+    description: "Thock thock thock. Mechanical keyboard builds, switch reviews, and keycap collections.",
+    onlineCount: 23456,
+    memberCount: 178901,
+    isVerified: true
+  },
+  // Education & Learning (95-100)
+  95: {
+    bannerImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=300&fit=crop",
+    description: "Survive college together. Study tips, dorm life, and academic support.",
+    onlineCount: 45678,
+    memberCount: 345678,
+    isVerified: true
+  },
+  96: {
+    bannerImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=300&fit=crop",
+    description: "Science homework help. Math, physics, chemistry tutoring and study groups.",
+    onlineCount: 34567,
+    memberCount: 267890,
+    isVerified: true
+  },
+  97: {
+    bannerImage: "https://images.unsplash.com/photo-1461360370896-922624d12a74?w=800&h=300&fit=crop",
+    description: "Those who don't learn history... Historical discussions, documentaries, and archaeology.",
+    onlineCount: 23456,
+    memberCount: 189012,
+    isVerified: false
+  },
+  98: {
+    bannerImage: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=800&h=300&fit=crop",
+    description: "I think, therefore I am. Philosophy discussions, ethics debates, and deep thinking.",
+    onlineCount: 19876,
+    memberCount: 145678,
+    isVerified: false
+  },
+  99: {
+    bannerImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=300&fit=crop",
+    description: "Level up your career. Resume reviews, interview prep, and networking tips.",
+    onlineCount: 34567,
+    memberCount: 256789,
+    isVerified: true
+  },
+  100: {
+    bannerImage: "https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&h=300&fit=crop",
+    description: "See the world. Study abroad experiences, visa help, and cultural exchange.",
+    onlineCount: 28901,
+    memberCount: 198765,
+    isVerified: false
   }
 };
 
@@ -3744,5 +4822,696 @@ export const discoveryMetadata: Record<number, DiscoveryServerMeta> = {
       'Car meet coordination'
     ],
     specialFeatures: ['Build Threads', 'Mechanic Help', 'Car Meets']
+  },
+  // NEW SERVERS METADATA - Gaming (45-56)
+  45: {
+    category: 'Gaming',
+    tags: ['minecraft', 'survival', 'creative', 'building', 'redstone', 'mods', 'servers'],
+    activityLevel: 'very_high',
+    communityVibe: 'Creative builders and survival enthusiasts',
+    whyJoin: [
+      'Active SMP servers with friendly communities',
+      'Redstone tutorials and build showcases',
+      'Modpack recommendations and support'
+    ],
+    primaryGames: ['Minecraft Java', 'Minecraft Bedrock'],
+    specialFeatures: ['Build Contests', 'SMP Servers', 'Tutorial Library']
+  },
+  46: {
+    category: 'Gaming',
+    tags: ['fortnite', 'battle-royale', 'competitive', 'streaming', 'building', 'zero-build'],
+    activityLevel: 'very_high',
+    communityVibe: 'Competitive players and content creators',
+    whyJoin: [
+      'Squad finder for ranked and casual',
+      'Building tutorials and edit courses',
+      'Tournament organization and scrims'
+    ],
+    primaryGames: ['Fortnite'],
+    specialFeatures: ['Squad Finder', 'Creative Codes', 'Tournaments']
+  },
+  47: {
+    category: 'Gaming',
+    tags: ['wow', 'mmorpg', 'raids', 'classic', 'pvp', 'guilds', 'warcraft'],
+    activityLevel: 'high',
+    communityVibe: 'Dedicated raiders and nostalgic players',
+    whyJoin: [
+      'Guild recruitment for all servers',
+      'Raid guides and boss strategies',
+      'Classic vs Retail debates'
+    ],
+    primaryGames: ['World of Warcraft Classic', 'WoW Retail'],
+    specialFeatures: ['Guild Finder', 'Raid Planning', 'Lore Discussions']
+  },
+  48: {
+    category: 'Gaming',
+    tags: ['rocket-league', 'trading', 'ranks', 'esports', 'car-soccer', 'competitive'],
+    activityLevel: 'high',
+    communityVibe: 'Traders and competitive players',
+    whyJoin: [
+      'Safe trading with reputation system',
+      'Rank boosting parties and coaching',
+      'Tournament announcements'
+    ],
+    primaryGames: ['Rocket League'],
+    specialFeatures: ['Trading Post', 'Rank Finder', 'Replay Analysis']
+  },
+  49: {
+    category: 'Gaming',
+    tags: ['pokemon', 'tcg', 'trading-cards', 'collecting', 'deck-building', 'competitive'],
+    activityLevel: 'medium',
+    communityVibe: 'Collectors and competitive players',
+    whyJoin: [
+      'Card trading and price checking',
+      'Deck building advice and meta analysis',
+      'Pull showcase and collection sharing'
+    ],
+    primaryGames: ['Pokemon TCG Live', 'Pokemon TCG'],
+    specialFeatures: ['Trade Board', 'Deck Lists', 'Pack Openings']
+  },
+  50: {
+    category: 'Gaming',
+    tags: ['vr', 'meta-quest', 'beat-saber', 'vrchat', 'virtual-reality', 'oculus'],
+    activityLevel: 'high',
+    communityVibe: 'VR enthusiasts exploring new worlds',
+    whyJoin: [
+      'VR game recommendations and reviews',
+      'Multiplayer session organization',
+      'Hardware troubleshooting and setup help'
+    ],
+    primaryGames: ['Beat Saber', 'VRChat', 'Half-Life Alyx', 'Pavlov'],
+    specialFeatures: ['VR Meetups', 'Game Reviews', 'Tech Support']
+  },
+  51: {
+    category: 'Gaming',
+    tags: ['speedrun', 'records', 'gdq', 'glitches', 'routing', 'leaderboards'],
+    activityLevel: 'high',
+    communityVibe: 'Dedicated runners pushing the limits',
+    whyJoin: [
+      'Learn speedrun routes and strategies',
+      'GDQ watch parties and discussions',
+      'World record celebrations'
+    ],
+    primaryGames: ['Various'],
+    specialFeatures: ['Route Guides', 'Leaderboards', 'GDQ Events']
+  },
+  52: {
+    category: 'Gaming',
+    tags: ['stardew', 'farming', 'cozy', 'multiplayer', 'mods', 'simulation'],
+    activityLevel: 'medium',
+    communityVibe: 'Cozy gamers enjoying farm life',
+    whyJoin: [
+      'Farm layout inspiration and tips',
+      'Multiplayer co-op sessions',
+      'Mod recommendations and support'
+    ],
+    primaryGames: ['Stardew Valley'],
+    specialFeatures: ['Farm Showcases', 'Co-op Finder', 'Mod Lists']
+  },
+  53: {
+    category: 'Gaming',
+    tags: ['lol', 'moba', 'ranked', 'coaching', 'esports', 'league'],
+    activityLevel: 'very_high',
+    communityVibe: 'Competitive players climbing the ladder',
+    whyJoin: [
+      'Free coaching from high-elo players',
+      'Team recruitment for clash and flex',
+      'Meta discussions and tier lists'
+    ],
+    primaryGames: ['League of Legends'],
+    specialFeatures: ['Coaching', 'Team Finder', 'VOD Reviews']
+  },
+  54: {
+    category: 'Gaming',
+    tags: ['genshin', 'gacha', 'exploration', 'builds', 'anime', 'mihoyo'],
+    activityLevel: 'very_high',
+    communityVibe: 'Travelers exploring Teyvat together',
+    whyJoin: [
+      'Character build guides and team comps',
+      'Co-op for domains and bosses',
+      'Gacha luck and wish tracking'
+    ],
+    primaryGames: ['Genshin Impact', 'Honkai Star Rail'],
+    specialFeatures: ['Build Guides', 'Co-op Finder', 'Leak Discussion']
+  },
+  55: {
+    category: 'Gaming',
+    tags: ['destiny', 'raids', 'loot', 'fireteam', 'pve', 'pvp', 'bungie'],
+    activityLevel: 'high',
+    communityVibe: 'Guardians fighting the darkness together',
+    whyJoin: [
+      'LFG for raids, dungeons, and nightfalls',
+      'Sherpa runs for new players',
+      'Build crafting and loadout optimization'
+    ],
+    primaryGames: ['Destiny 2'],
+    specialFeatures: ['LFG Board', 'Sherpa Runs', 'Build Guides']
+  },
+  56: {
+    category: 'Gaming',
+    tags: ['overwatch', 'fps', 'heroes', 'competitive', 'esports', 'blizzard'],
+    activityLevel: 'high',
+    communityVibe: 'Hero mains teaming up for victory',
+    whyJoin: [
+      'Role queue team finder',
+      'Hero-specific tips and VOD reviews',
+      'OWL discussions and predictions'
+    ],
+    primaryGames: ['Overwatch 2'],
+    specialFeatures: ['Team Finder', 'Hero Guides', 'Scrim Organization']
+  },
+  // Technology (57-64)
+  57: {
+    category: 'Technology',
+    tags: ['javascript', 'react', 'webdev', 'frontend', 'html', 'css', 'nodejs'],
+    activityLevel: 'very_high',
+    communityVibe: 'Developers learning and growing together',
+    whyJoin: [
+      'Beginner-friendly code help',
+      'Project portfolio reviews',
+      'Job hunting tips and mock interviews'
+    ],
+    specialFeatures: ['Code Reviews', 'Project Showcase', 'Job Board']
+  },
+  58: {
+    category: 'Technology',
+    tags: ['python', 'django', 'flask', 'automation', 'scripting', 'backend'],
+    activityLevel: 'very_high',
+    communityVibe: 'Pythonistas solving problems together',
+    whyJoin: [
+      'Quick help with Python questions',
+      'Project collaboration opportunities',
+      'Career advice from senior devs'
+    ],
+    specialFeatures: ['Code Help', 'Project Collabs', 'Learning Resources']
+  },
+  59: {
+    category: 'Technology',
+    tags: ['ios', 'android', 'flutter', 'swift', 'kotlin', 'react-native'],
+    activityLevel: 'high',
+    communityVibe: 'Mobile developers building the future',
+    whyJoin: [
+      'Cross-platform development tips',
+      'App store optimization advice',
+      'Beta testing opportunities'
+    ],
+    specialFeatures: ['App Reviews', 'Beta Testing', 'Launch Support']
+  },
+  60: {
+    category: 'Technology',
+    tags: ['aws', 'docker', 'kubernetes', 'devops', 'cicd', 'terraform', 'cloud'],
+    activityLevel: 'high',
+    communityVibe: 'Infrastructure experts automating everything',
+    whyJoin: [
+      'Cloud architecture discussions',
+      'CI/CD pipeline troubleshooting',
+      'Certification study groups'
+    ],
+    specialFeatures: ['Arch Reviews', 'Cert Study', 'Job Referrals']
+  },
+  61: {
+    category: 'Technology',
+    tags: ['ethereum', 'solidity', 'defi', 'smart-contracts', 'web3', 'crypto'],
+    activityLevel: 'high',
+    communityVibe: 'Builders of the decentralized web',
+    whyJoin: [
+      'Smart contract code reviews',
+      'DeFi protocol discussions',
+      'Hackathon team formation'
+    ],
+    specialFeatures: ['Code Audits', 'Project Launches', 'Hackathons']
+  },
+  62: {
+    category: 'Technology',
+    tags: ['electronics', 'iot', 'raspberry-pi', 'maker', 'arduino', 'embedded'],
+    activityLevel: 'medium',
+    communityVibe: 'Makers building cool gadgets',
+    whyJoin: [
+      'Project inspiration and guidance',
+      'Component sourcing help',
+      'Troubleshooting hardware issues'
+    ],
+    specialFeatures: ['Project Showcase', 'Parts Finder', 'Circuit Help']
+  },
+  63: {
+    category: 'Technology',
+    tags: ['data-science', 'pandas', 'visualization', 'statistics', 'jupyter', 'analytics'],
+    activityLevel: 'high',
+    communityVibe: 'Data enthusiasts finding insights',
+    whyJoin: [
+      'Dataset recommendations and sharing',
+      'Visualization feedback',
+      'Career transition support'
+    ],
+    specialFeatures: ['Dataset Library', 'Portfolio Reviews', 'Job Prep']
+  },
+  64: {
+    category: 'Technology',
+    tags: ['homelab', 'selfhost', 'privacy', 'servers', 'docker', 'linux'],
+    activityLevel: 'high',
+    communityVibe: 'Privacy-conscious self-hosters',
+    whyJoin: [
+      'Self-hosted app recommendations',
+      'Homelab setup showcases',
+      'Docker compose templates'
+    ],
+    specialFeatures: ['App Directory', 'Homelab Tours', 'Config Sharing']
+  },
+  // Entertainment (65-72)
+  65: {
+    category: 'Entertainment',
+    tags: ['mcu', 'comics', 'superheroes', 'movies', 'marvel', 'avengers'],
+    activityLevel: 'very_high',
+    communityVibe: 'True believers discussing the multiverse',
+    whyJoin: [
+      'Movie and show premiere discussions',
+      'Comic book reading groups',
+      'Theory crafting and speculation'
+    ],
+    specialFeatures: ['Watch Parties', 'Comic Club', 'Theory Threads']
+  },
+  66: {
+    category: 'Entertainment',
+    tags: ['starwars', 'mandalorian', 'jedi', 'galaxy', 'lucasfilm', 'disney'],
+    activityLevel: 'very_high',
+    communityVibe: 'Fans from a galaxy far, far away',
+    whyJoin: [
+      'New episode live reactions',
+      'Deep lore discussions',
+      'Cosplay and collectible sharing'
+    ],
+    specialFeatures: ['Episode Threads', 'Lore Wiki', 'Cosplay Gallery']
+  },
+  67: {
+    category: 'Entertainment',
+    tags: ['batman', 'superman', 'dc', 'comics', 'dceu', 'justice-league'],
+    activityLevel: 'high',
+    communityVibe: 'DC fans defending their heroes',
+    whyJoin: [
+      'Comic recommendations by hero',
+      'Movie and show discussions',
+      'Fan art and cosplay'
+    ],
+    specialFeatures: ['Reading Orders', 'Watch Parties', 'Fan Creations']
+  },
+  68: {
+    category: 'Entertainment',
+    tags: ['cinema', 'reviews', 'oscars', 'indie', 'film', 'directors'],
+    activityLevel: 'medium',
+    communityVibe: 'Cinephiles with discerning tastes',
+    whyJoin: [
+      'Hidden gem recommendations',
+      'Director filmography discussions',
+      'Oscar season predictions'
+    ],
+    specialFeatures: ['Review Threads', 'Watchlists', 'Film Club']
+  },
+  69: {
+    category: 'Entertainment',
+    tags: ['reality', 'bachelor', 'survivor', 'drama', 'tv-shows', 'competition'],
+    activityLevel: 'high',
+    communityVibe: 'Drama enthusiasts who live for chaos',
+    whyJoin: [
+      'Live episode discussion threads',
+      'Spoiler and prediction channels',
+      'All-time rankings debates'
+    ],
+    specialFeatures: ['Live Threads', 'Spoiler Zone', 'Rankings']
+  },
+  70: {
+    category: 'Entertainment',
+    tags: ['musicals', 'theatre', 'hamilton', 'acting', 'broadway', 'stage'],
+    activityLevel: 'medium',
+    communityVibe: 'Theatre kids never grow up',
+    whyJoin: [
+      'Show recommendations by style',
+      'Bootleg trading (legal recordings)',
+      'Audition tips and support'
+    ],
+    specialFeatures: ['Show Reviews', 'Recording Trades', 'Performer Support']
+  },
+  71: {
+    category: 'Entertainment',
+    tags: ['podcasts', 'audio', 'content-creation', 'storytelling', 'interviews'],
+    activityLevel: 'medium',
+    communityVibe: 'Audio content creators and listeners',
+    whyJoin: [
+      'Podcast recommendations by genre',
+      'Equipment and production tips',
+      'Cross-promotion opportunities'
+    ],
+    specialFeatures: ['Rec Engine', 'Creator Tips', 'Promo Exchange']
+  },
+  72: {
+    category: 'Entertainment',
+    tags: ['memes', 'humor', 'shitposts', 'dank', 'internet-culture', 'funny'],
+    activityLevel: 'very_high',
+    communityVibe: 'Terminally online memers',
+    whyJoin: [
+      'Fresh memes before they go mainstream',
+      'OC meme competitions',
+      'Cursed content corner'
+    ],
+    specialFeatures: ['Meme Contests', 'OC Only', 'Cursed Corner']
+  },
+  // Music & Audio (73-78)
+  73: {
+    category: 'Music',
+    tags: ['edm', 'dubstep', 'festivals', 'producers', 'dj', 'electronic'],
+    activityLevel: 'very_high',
+    communityVibe: 'Ravers and producers united by bass',
+    whyJoin: [
+      'Festival lineup discussions',
+      'Producer feedback and collabs',
+      'Set recordings and tracklists'
+    ],
+    specialFeatures: ['Festival Chat', 'Producer Collabs', 'Set Sharing']
+  },
+  74: {
+    category: 'Music',
+    tags: ['hiphop', 'rap', 'beats', 'culture', 'producers', 'lyrics'],
+    activityLevel: 'very_high',
+    communityVibe: 'Hip hop heads keeping the culture alive',
+    whyJoin: [
+      'New release discussions',
+      'Beat showcase and feedback',
+      'Lyric analysis and debates'
+    ],
+    specialFeatures: ['New Drops', 'Beat Battles', 'Lyric Breakdowns']
+  },
+  75: {
+    category: 'Music',
+    tags: ['classical', 'orchestra', 'piano', 'composers', 'symphony', 'opera'],
+    activityLevel: 'low',
+    communityVibe: 'Appreciators of timeless compositions',
+    whyJoin: [
+      'Recording recommendations',
+      'Composer deep dives',
+      'Practice and performance tips'
+    ],
+    specialFeatures: ['Recording Club', 'Composer Studies', 'Practice Help']
+  },
+  76: {
+    category: 'Music',
+    tags: ['guitar', 'tabs', 'covers', 'gear', 'lessons', 'musicians'],
+    activityLevel: 'high',
+    communityVibe: 'Guitarists of all skill levels',
+    whyJoin: [
+      'Tab requests and sharing',
+      'Gear advice and reviews',
+      'Cover feedback and jam sessions'
+    ],
+    specialFeatures: ['Tab Library', 'Gear Reviews', 'Cover Contests']
+  },
+  77: {
+    category: 'Music',
+    tags: ['vinyl', 'records', 'turntables', 'hifi', 'collecting', 'audiophile'],
+    activityLevel: 'medium',
+    communityVibe: 'Analog purists with golden ears',
+    whyJoin: [
+      'Collection showcases',
+      'Setup advice and optimization',
+      'Record hunting tips'
+    ],
+    specialFeatures: ['Collection Pics', 'Setup Help', 'Trade Post']
+  },
+  78: {
+    category: 'Music',
+    tags: ['ableton', 'fl-studio', 'mixing', 'mastering', 'production', 'daw'],
+    activityLevel: 'very_high',
+    communityVibe: 'Producers learning and creating together',
+    whyJoin: [
+      'Production technique tutorials',
+      'Mix feedback from peers',
+      'Collaboration opportunities'
+    ],
+    specialFeatures: ['Tutorial Library', 'Mix Feedback', 'Collab Finder']
+  },
+  // Sports & Fitness (79-84)
+  79: {
+    category: 'Sports',
+    tags: ['nba', 'basketball', 'fantasy', 'lebron', 'playoffs', 'hoops'],
+    activityLevel: 'very_high',
+    communityVibe: 'Hoops fans debating the GOAT',
+    whyJoin: [
+      'Game day live threads',
+      'Fantasy basketball leagues',
+      'Trade and FA discussions'
+    ],
+    specialFeatures: ['Game Threads', 'Fantasy Leagues', 'NBA News']
+  },
+  80: {
+    category: 'Sports',
+    tags: ['nfl', 'fantasy-football', 'drafts', 'touchdown', 'sunday', 'football'],
+    activityLevel: 'very_high',
+    communityVibe: 'Fantasy managers grinding for the chip',
+    whyJoin: [
+      'Draft strategy discussions',
+      'Start/sit advice',
+      'Waiver wire recommendations'
+    ],
+    specialFeatures: ['Draft Help', 'Start/Sit', 'Waiver Watch']
+  },
+  81: {
+    category: 'Sports',
+    tags: ['running', 'marathon', 'c25k', 'tracking', 'fitness', 'cardio'],
+    activityLevel: 'medium',
+    communityVibe: 'Runners supporting each other',
+    whyJoin: [
+      'Training plan recommendations',
+      'Race day motivation',
+      'Gear reviews and tips'
+    ],
+    specialFeatures: ['Training Plans', 'Race Reports', 'Gear Talk']
+  },
+  82: {
+    category: 'Sports',
+    tags: ['lifting', 'strength', 'squat', 'deadlift', 'powerlifting', 'gym'],
+    activityLevel: 'high',
+    communityVibe: 'Lifters chasing PRs together',
+    whyJoin: [
+      'Form check videos',
+      'Program recommendations',
+      'PR celebrations'
+    ],
+    specialFeatures: ['Form Checks', 'Programs', 'PR Board']
+  },
+  83: {
+    category: 'Sports',
+    tags: ['chess', 'lichess', 'openings', 'tactics', 'puzzles', 'strategy'],
+    activityLevel: 'high',
+    communityVibe: 'Strategic minds in eternal battle',
+    whyJoin: [
+      'Daily puzzles and challenges',
+      'Opening preparation help',
+      'Game analysis and improvement'
+    ],
+    specialFeatures: ['Daily Puzzles', 'Opening Study', 'Game Analysis']
+  },
+  84: {
+    category: 'Sports',
+    tags: ['ufc', 'mma', 'boxing', 'fights', 'combat-sports', 'martial-arts'],
+    activityLevel: 'very_high',
+    communityVibe: 'Combat sports fanatics',
+    whyJoin: [
+      'Fight night live threads',
+      'Predictions and betting discussion',
+      'Technique breakdowns'
+    ],
+    specialFeatures: ['Fight Threads', 'Predictions', 'Technique Analysis']
+  },
+  // Lifestyle & Hobbies (85-94)
+  85: {
+    category: 'Lifestyle',
+    tags: ['travel', 'backpacking', 'destinations', 'adventure', 'nomad', 'explore'],
+    activityLevel: 'high',
+    communityVibe: 'Adventurers sharing the world',
+    whyJoin: [
+      'Destination recommendations',
+      'Budget travel tips',
+      'Travel buddy finder'
+    ],
+    specialFeatures: ['Destination Guides', 'Budget Tips', 'Travel Buddies']
+  },
+  86: {
+    category: 'Lifestyle',
+    tags: ['coffee', 'espresso', 'beans', 'brewing', 'latte', 'caffeine'],
+    activityLevel: 'medium',
+    communityVibe: 'Caffeinated perfectionists',
+    whyJoin: [
+      'Brewing method comparisons',
+      'Bean recommendations',
+      'Equipment reviews'
+    ],
+    specialFeatures: ['Brew Guides', 'Bean Reviews', 'Setup Showcases']
+  },
+  87: {
+    category: 'Lifestyle',
+    tags: ['fashion', 'streetwear', 'ootd', 'trends', 'style', 'clothing'],
+    activityLevel: 'high',
+    communityVibe: 'Style-conscious individuals',
+    whyJoin: [
+      'Outfit feedback and inspiration',
+      'Sale alerts and deals',
+      'Trend discussions'
+    ],
+    specialFeatures: ['OOTD Posts', 'Sale Alerts', 'Style Advice']
+  },
+  88: {
+    category: 'Lifestyle',
+    tags: ['diy', 'renovation', 'tools', 'projects', 'home', 'improvement'],
+    activityLevel: 'medium',
+    communityVibe: 'Handy homeowners helping each other',
+    whyJoin: [
+      'Project troubleshooting',
+      'Tool recommendations',
+      'Before/after showcases'
+    ],
+    specialFeatures: ['Project Help', 'Tool Reviews', 'Transformations']
+  },
+  89: {
+    category: 'Lifestyle',
+    tags: ['gardening', 'houseplants', 'succulents', 'plants', 'green-thumb', 'nature'],
+    activityLevel: 'high',
+    communityVibe: 'Plant parents with green thumbs',
+    whyJoin: [
+      'Plant care troubleshooting',
+      'Propagation tips and trades',
+      'Garden planning help'
+    ],
+    specialFeatures: ['Plant ID', 'Prop Swaps', 'Garden Tours']
+  },
+  90: {
+    category: 'Finance',
+    tags: ['budgeting', 'saving', 'fire', 'frugal', 'investing', 'money'],
+    activityLevel: 'high',
+    communityVibe: 'Financially conscious community',
+    whyJoin: [
+      'Budgeting tips and tools',
+      'FIRE journey sharing',
+      'Frugal living hacks'
+    ],
+    specialFeatures: ['Budget Templates', 'FIRE Tracking', 'Frugal Tips']
+  },
+  91: {
+    category: 'Lifestyle',
+    tags: ['parenting', 'babies', 'kids', 'family', 'children', 'mom', 'dad'],
+    activityLevel: 'high',
+    communityVibe: 'Parents supporting parents',
+    whyJoin: [
+      'Age-specific advice channels',
+      'Product recommendations',
+      'Venting and support'
+    ],
+    specialFeatures: ['Age Groups', 'Product Reviews', 'Support Circle']
+  },
+  92: {
+    category: 'Lifestyle',
+    tags: ['lgbtq', 'pride', 'community', 'support', 'queer', 'inclusive'],
+    activityLevel: 'very_high',
+    communityVibe: 'Safe and celebratory community',
+    whyJoin: [
+      'Identity-specific channels',
+      'Coming out support',
+      'Pride event coordination'
+    ],
+    specialFeatures: ['Safe Space', 'Support', 'Pride Events']
+  },
+  93: {
+    category: 'Lifestyle',
+    tags: ['astrology', 'tarot', 'zodiac', 'spiritual', 'horoscope', 'mystical'],
+    activityLevel: 'medium',
+    communityVibe: 'Spiritual explorers seeking meaning',
+    whyJoin: [
+      'Free readings and interpretations',
+      'Birth chart discussions',
+      'Tarot learning resources'
+    ],
+    specialFeatures: ['Free Readings', 'Chart Analysis', 'Learning']
+  },
+  94: {
+    category: 'Technology',
+    tags: ['keyboards', 'switches', 'keycaps', 'builds', 'mechanical', 'typing'],
+    activityLevel: 'high',
+    communityVibe: 'Keyboard enthusiasts chasing endgame',
+    whyJoin: [
+      'Build showcases and inspiration',
+      'Switch comparisons and sound tests',
+      'Group buy announcements'
+    ],
+    specialFeatures: ['Build Gallery', 'Sound Tests', 'GB Alerts']
+  },
+  // Education & Learning (95-100)
+  95: {
+    category: 'Education',
+    tags: ['college', 'university', 'studying', 'dorms', 'student', 'academic'],
+    activityLevel: 'very_high',
+    communityVibe: 'Students helping students survive',
+    whyJoin: [
+      'Study group formation',
+      'Major-specific advice',
+      'Campus life discussions'
+    ],
+    specialFeatures: ['Study Groups', 'Major Channels', 'Life Advice']
+  },
+  96: {
+    category: 'Education',
+    tags: ['math', 'physics', 'chemistry', 'homework', 'tutoring', 'science'],
+    activityLevel: 'high',
+    communityVibe: 'STEM students and tutors',
+    whyJoin: [
+      'Homework help from peers',
+      'Concept explanations',
+      'Study resource sharing'
+    ],
+    specialFeatures: ['Homework Help', 'Concept Guides', 'Resources']
+  },
+  97: {
+    category: 'Education',
+    tags: ['history', 'wwii', 'ancient', 'archaeology', 'historical', 'past'],
+    activityLevel: 'medium',
+    communityVibe: 'History enthusiasts and academics',
+    whyJoin: [
+      'Era-specific discussions',
+      'Documentary recommendations',
+      'Primary source sharing'
+    ],
+    specialFeatures: ['Era Channels', 'Doc Club', 'Source Library']
+  },
+  98: {
+    category: 'Education',
+    tags: ['philosophy', 'ethics', 'debate', 'thinkers', 'logic', 'existential'],
+    activityLevel: 'medium',
+    communityVibe: 'Deep thinkers questioning everything',
+    whyJoin: [
+      'Structured philosophical debates',
+      'Reading group discussions',
+      'Ethics case studies'
+    ],
+    specialFeatures: ['Debate Club', 'Reading Group', 'Ethics Lab']
+  },
+  99: {
+    category: 'Lifestyle',
+    tags: ['jobs', 'interviews', 'resume', 'networking', 'career', 'professional'],
+    activityLevel: 'high',
+    communityVibe: 'Professionals helping each other grow',
+    whyJoin: [
+      'Resume and LinkedIn reviews',
+      'Mock interview practice',
+      'Industry networking'
+    ],
+    specialFeatures: ['Resume Reviews', 'Mock Interviews', 'Networking']
+  },
+  100: {
+    category: 'Education',
+    tags: ['exchange', 'international', 'visa', 'culture', 'study-abroad', 'global'],
+    activityLevel: 'medium',
+    communityVibe: 'Global students sharing experiences',
+    whyJoin: [
+      'Country-specific advice',
+      'Visa and paperwork help',
+      'Cultural adjustment support'
+    ],
+    specialFeatures: ['Country Guides', 'Visa Help', 'Culture Exchange']
   }
 };
