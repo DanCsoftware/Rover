@@ -33,7 +33,7 @@ const ActiveNowPanel = () => {
 
   return (
     <div 
-      className="w-60 p-4 flex-shrink-0 hidden lg:block overflow-y-auto h-full"
+      className="w-full p-4 flex-shrink-0 hidden lg:block overflow-y-auto h-full"
       style={{ backgroundColor: 'hsl(var(--discord-bg-secondary))' }}
     >
       <h3 
