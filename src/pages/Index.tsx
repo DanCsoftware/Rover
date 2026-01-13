@@ -135,7 +135,7 @@ const Index = () => {
               withHandle 
               className="hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:opacity-100" 
             />
-            <ResizablePanel defaultSize={20} minSize={0} maxSize={25} className="hidden lg:block">
+            <ResizablePanel defaultSize={20} minSize={0} maxSize={25} className="hidden lg:block h-full">
               <ActiveNowPanel />
             </ResizablePanel>
           </>

@@ -39,7 +39,7 @@ const DiscordFriendsPanel = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col" style={{ backgroundColor: 'hsl(var(--discord-bg-primary))' }}>
+    <div className="flex-1 flex flex-col h-full min-h-0" style={{ backgroundColor: 'hsl(var(--discord-bg-primary))' }}>
       {/* Header with tabs */}
       <div 
         className="h-12 flex items-center px-4 gap-4 flex-shrink-0"

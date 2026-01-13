@@ -31,16 +31,9 @@ const ActiveNowPanel = () => {
     }
   ];
 
-  const promotedQuest = {
-    title: 'Alpha vs Omega Quest',
-    availableUntil: '1/20/26',
-    description: 'Play VALORANT for 15 minutes with your Discord client open to unlock a special Avatar Decoration.',
-    icon: '🎮'
-  };
-
   return (
     <div 
-      className="w-60 p-4 flex-shrink-0 hidden lg:block overflow-y-auto"
+      className="w-60 p-4 flex-shrink-0 hidden lg:block overflow-y-auto h-full"
       style={{ backgroundColor: 'hsl(var(--discord-bg-secondary))' }}
     >
       <h3 
@@ -150,78 +143,6 @@ const ActiveNowPanel = () => {
         ))}
       </div>
 
-      {/* PROMOTED Quest Card */}
-      <div className="mt-4">
-        <div className="flex items-center justify-between mb-2">
-          <span 
-            className="text-xs uppercase font-semibold"
-            style={{ color: 'hsl(var(--discord-text-muted))' }}
-          >
-            PROMOTED
-          </span>
-          <MoreHorizontal 
-            className="w-4 h-4 cursor-pointer" 
-            style={{ color: 'hsl(var(--discord-text-muted))' }}
-          />
-        </div>
-        <div 
-          className="p-3 rounded-lg"
-          style={{ backgroundColor: 'hsl(var(--discord-bg-tertiary))' }}
-        >
-          <div className="flex items-start gap-3 mb-3">
-            <span className="text-2xl">{promotedQuest.icon}</span>
-            <div className="flex-1 min-w-0">
-              <div 
-                className="font-medium text-sm"
-                style={{ color: 'hsl(var(--discord-text-normal))' }}
-              >
-                {promotedQuest.title}
-              </div>
-              <div 
-                className="text-xs"
-                style={{ color: 'hsl(var(--discord-text-muted))' }}
-              >
-                Available until {promotedQuest.availableUntil}
-              </div>
-            </div>
-          </div>
-          <p 
-            className="text-xs mb-3 leading-relaxed"
-            style={{ color: 'hsl(var(--discord-text-muted))' }}
-          >
-            {promotedQuest.description}
-          </p>
-          <div className="flex gap-2">
-            <button 
-              className="flex-1 px-3 py-1.5 rounded text-xs font-medium transition-colors"
-              style={{ 
-                backgroundColor: 'hsl(var(--discord-bg-primary))',
-                color: 'hsl(var(--discord-text-normal))'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-quaternary))';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'hsl(var(--discord-bg-primary))';
-              }}
-            >
-              Learn More
-            </button>
-            <button 
-              className="flex-1 px-3 py-1.5 rounded text-xs font-medium text-white transition-colors"
-              style={{ backgroundColor: 'hsl(var(--discord-blurple))' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'hsl(var(--discord-blurple-hover))';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'hsl(var(--discord-blurple))';
-              }}
-            >
-              Accept Quest
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* Empty state fallback */}
       {groupActivities.length === 0 && activitySuggestions.length === 0 && (
