@@ -131,7 +131,9 @@ const DiscordSidebar = ({
           </div>
         </div>
         
-        <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
+        <div className="w-full flex items-center justify-center">
+          <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
+        </div>
         
         {servers.map((server) => {
           const membership = currentUserMemberships.find(m => m.serverId === server.id);
@@ -199,26 +201,32 @@ const DiscordSidebar = ({
             </div>
           );
         })}
-        <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
-        <div 
-          className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:rounded-2xl transition-all duration-200"
-          style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', color: 'hsl(var(--discord-green))' }}
-          title="Add a Server"
-        >
-          <span className="text-2xl">+</span>
+        <div className="w-full flex items-center justify-center">
+          <div className="w-8 h-0.5 rounded-full" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}></div>
         </div>
-        <div 
-          onClick={onDiscoverClick}
-          className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
-            isDiscoverView ? "rounded-2xl" : "hover:rounded-2xl"
-          }`}
-          style={{ 
-            backgroundColor: isDiscoverView ? 'hsl(var(--discord-green))' : 'hsl(var(--discord-bg-primary))',
-            color: isDiscoverView ? 'white' : 'hsl(var(--discord-green))'
-          }}
-          title="Explore Discoverable Servers"
-        >
-          <Compass className="w-6 h-6" />
+        <div className="w-full flex items-center justify-center">
+          <div 
+            className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:rounded-2xl transition-all duration-200"
+            style={{ backgroundColor: 'hsl(var(--discord-bg-primary))', color: 'hsl(var(--discord-green))' }}
+            title="Add a Server"
+          >
+            <span className="text-2xl">+</span>
+          </div>
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <div 
+            onClick={onDiscoverClick}
+            className={`w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 ${
+              isDiscoverView ? "rounded-2xl" : "hover:rounded-2xl"
+            }`}
+            style={{ 
+              backgroundColor: isDiscoverView ? 'hsl(var(--discord-green))' : 'hsl(var(--discord-bg-primary))',
+              color: isDiscoverView ? 'white' : 'hsl(var(--discord-green))'
+            }}
+            title="Explore Discoverable Servers"
+          >
+            <Compass className="w-6 h-6" />
+          </div>
         </div>
       </div>
 
