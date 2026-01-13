@@ -9,12 +9,12 @@ const DiscordFriendsPanel = () => {
   const [friendsFilter, setFriendsFilter] = useState<FriendsFilter>('online');
 
   const friends = [
-    { id: 1, name: 'drizzle', status: 'Idle', statusType: 'idle', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face' },
-    { id: 2, name: 'Ebar 💖', status: '🐣 물좀마셔라', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face' },
-    { id: 3, name: 'Ren', status: 'Online', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1494790108755-2616b0433ccd?w=32&h=32&fit=crop&crop=face' },
-    { id: 4, name: 'SexyBeast', status: '🔊 In voice • 🐸 my first status', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face' },
-    { id: 5, name: 'GamerPro', status: 'Playing Valorant', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face' },
-    { id: 6, name: 'MusicLover', status: 'Listening to Spotify', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face' },
+    { id: 1, name: 'User1', status: 'Idle', statusType: 'idle', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face' },
+    { id: 2, name: 'User2', status: 'Online', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face' },
+    { id: 3, name: 'User3', status: 'Online', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face' },
+    { id: 4, name: 'User4', status: 'In voice channel', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face' },
+    { id: 5, name: 'User5', status: 'Playing a game', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcabd36?w=32&h=32&fit=crop&crop=face' },
+    { id: 6, name: 'User6', status: 'Listening to music', statusType: 'online', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face' },
   ];
 
   const tabs: { key: FriendsFilter; label: string }[] = [
