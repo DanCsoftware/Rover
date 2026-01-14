@@ -71,50 +71,6 @@ const SCORE_ADJUSTMENTS: Record<string, Record<string, number>> = {
   dismiss: { critical: -3, high: -2, medium: -1, low: -1 },
 }
 
-serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
-  }
-
-  try {
-    const { messages, channelContext, requestType, actionDetails } = await req.json()
-    
-    // Initialize Supabase client
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    )
-
-    // Get Gemini API key
-    const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY')
-    if (!GEMINI_API_KEY) {
-      throw new Error('GEMINI_API_KEY not configured')
-    }
-
-    // Handle different request types
-    if (requestType === 'moderation_analysis') {
-      return await handleModerationAnalysis(supabase, channelContext, GEMINI_API_KEY)
-    } else if (requestType === 'moderation_action') {
-      return await handleModerationAction(supabase, channelContext, actionDetails)
-    } else {
-      // Default: chat mode
-      return await handleChatMode(supabase, messages, channelContext, GEMINI_API_KEY)
-    }
-
-  } catch (error) {
-    console.error('❌ Error:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    
-    return new Response(
-      JSON.stringify({ error: errorMessage }),
-      { 
-        status: 500, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
-    )
-  }
-})
-
 async function handleModerationAnalysis(supabase: any, channelContext: any, apiKey: string) {
   console.log('🔍 Starting moderation analysis...')
   
@@ -467,6 +423,36 @@ ${channelContext.messages?.slice(-30).map((msg: any) =>
     },
   })
 }
+
+serve(async (req) => {
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders })
+  }
+
+  try {
+    const { messages, channelContext, requestType, actionDetails } = await req.json()
+    
+    // Initialize Supabase client
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    )
+
+    // Get Gemini API key
+    const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY')
+    if (!GEMINI_API_KEY) {
+      throw new Error('GEMINI_API_KEY not configured')
+    }
+
+    // Handle different request types
+    if (requestType === 'moderation_analysis') {
+      return await handleModerationAnalysis(supabase, channelContext, GEMINI_API_KEY)
+    } else if (requestType === 'moderation_action') {
+      return await handleModerationAction(supabase, channelContext, actionDetails)
+    } else {
+      // Default: chat mode
+      return await handleChatMode(supabase, messages, channelContext, GEMINI_API_KEY)
+    }
 
   } catch (error) {
     console.error('❌ Error:', error)
