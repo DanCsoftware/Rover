@@ -2202,6 +2202,69 @@ All Discord Terms of Service apply here.
         isBot: false,
         hasReactions: true,
         reactions: [{ emoji: '🤔', count: 89 }]
+      },
+      {
+        id: 10,
+        user: 'SpamBot2024',
+        time: '11:10 AM',
+        content: '🚀🚀🚀 GUYS CHECK THIS OUT!!! 100x GUARANTEED!!! New token launching in 5 mins! Don\'t miss the next PEPE! 🔥🔥🔥 BUY NOW: https://bit.ly/malware-token',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚠️', count: 23 }, { emoji: '🚫', count: 15 }]
+      },
+      {
+        id: 11,
+        user: 'SafetyFirst',
+        time: '11:11 AM',
+        content: '@SpamBot2024 This looks like a scam. That link is suspicious. Mods please check this out!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👍', count: 45 }]
+      },
+      {
+        id: 12,
+        user: 'SpamBot2024',
+        time: '11:12 AM',
+        content: 'FREE CRYPTO GIVEAWAY!!! Send 0.1 ETH to this wallet and get 1 ETH back!!! TRUST ME BRO 💰💰💰 Wallet: 0x742d35Cc6634C0532925a3b844Bc9e7595f... DM ME NOW!!!',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🚨', count: 67 }, { emoji: '💀', count: 34 }]
+      },
+      {
+        id: 13,
+        user: 'SpamBot2024',
+        time: '11:13 AM',
+        content: 'I\'M A PROFESSIONAL CRYPTO ADVISOR WITH 10 YEARS EXPERIENCE!!! I can guarantee 500% returns on your investment. DM me your seed phrase and I\'ll multiply your holdings! 📈📈📈',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '⚠️', count: 89 }, { emoji: '🤡', count: 56 }]
+      },
+      {
+        id: 14,
+        user: 'SpamBot2024',
+        time: '11:14 AM',
+        content: 'JOIN MY PUMP GROUP NOW!!! We pump coins at 3PM EST every day! Last pump we did 400%! Link: https://suspicious-discord.gg/pump 🚀🚀🚀',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '🚫', count: 78 }, { emoji: '⚠️', count: 45 }]
+      },
+      {
+        id: 15,
+        user: 'CryptoMod',
+        time: '11:15 AM',
+        content: '🚨 **MODERATOR NOTICE** 🚨\n\n@SpamBot2024 has been flagged for multiple violations:\n- **Rule 2:** Scam Promotion (suspicious links)\n- **Rule 3:** Pump & Dump Schemes\n- **Rule 5:** Spam (5 messages in 5 minutes)\n- **Rule 7:** Requesting seed phrases\n- **Rule 9:** Solicitation\n\nThis user is under review. Please report any DMs from this account.',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '👍', count: 234 }, { emoji: '🛡️', count: 156 }]
+      },
+      {
+        id: 16,
+        user: 'HODLer',
+        time: '11:20 AM',
+        content: 'Glad the mods are on it. These scammers are getting bolder every day 😤',
+        isBot: false,
+        hasReactions: true,
+        reactions: [{ emoji: '💯', count: 89 }]
       }
     ]
   },
