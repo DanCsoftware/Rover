@@ -5,6 +5,7 @@ interface RoverAvatarProps {
   size?: "sm" | "md" | "lg";
   isThinking?: boolean;
   showVerified?: boolean;
+  orangeTint?: boolean;
   className?: string;
 }
 
@@ -12,6 +13,7 @@ const RoverAvatar = ({
   size = "md", 
   isThinking = false, 
   showVerified = true,
+  orangeTint = false,
   className 
 }: RoverAvatarProps) => {
   const sizeClasses = {
@@ -34,6 +36,7 @@ const RoverAvatar = ({
           src="/lovable-uploads/discord-new-logo-2.webp"
           alt="ROVER"
           className="w-full h-full object-cover"
+          style={orangeTint ? { filter: 'sepia(1) saturate(5) hue-rotate(-5deg) brightness(0.95)' } : undefined}
         />
       </div>
 

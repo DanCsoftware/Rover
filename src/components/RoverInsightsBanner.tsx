@@ -40,7 +40,7 @@ const RoverInsightsBanner = ({
         }}
       >
         <div className="flex items-center gap-2">
-          <RoverAvatar size="sm" showVerified={false} />
+          <RoverAvatar size="sm" showVerified={false} orangeTint={true} />
           <span className="text-xs font-medium" style={{ color: 'hsl(var(--discord-text-muted))' }}>
             ROVER Insights (Admin)
           </span>
@@ -60,7 +60,7 @@ const RoverInsightsBanner = ({
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <RoverAvatar size="sm" showVerified={true} />
+          <RoverAvatar size="sm" showVerified={true} orangeTint={true} />
           <div>
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold" style={{ color: 'hsl(var(--discord-text-normal))' }}>
@@ -134,15 +134,6 @@ const RoverInsightsBanner = ({
             />
           </SheetContent>
         </Sheet>
-      </div>
-
-      {/* Quick tip */}
-      <div 
-        className="mt-3 text-xs flex items-center gap-1.5"
-        style={{ color: 'hsl(var(--discord-text-muted))' }}
-      >
-        <span>💡</span>
-        <span>Type <code className="px-1 py-0.5 rounded" style={{ backgroundColor: 'hsl(var(--discord-bg-quaternary))' }}>@rover moderation</code> for quick analysis</span>
       </div>
     </div>
   );
