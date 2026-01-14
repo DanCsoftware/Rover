@@ -1,5 +1,5 @@
-import { Message, User, Server } from '@/data/discordData';
-import { UserBehaviorAnalyzer, UserRiskProfile, userBehaviorAnalyzer } from './userBehaviorAnalyzer';
+import { Message, User, Server, cryptoCentralRules, ServerRule } from '@/data/discordData';
+import { UserBehaviorAnalyzer, UserRiskProfile, userBehaviorAnalyzer, Violation } from './userBehaviorAnalyzer';
 import { ChannelAnalyzer, ChannelHealth, ServerOptimization, channelAnalyzer } from './channelAnalyzer';
 // Import statement removed - functionality will be integrated directly
 
@@ -466,6 +466,17 @@ export class ModerationEngine {
       data.userProfiles.slice(0, 3).forEach((profile: UserRiskProfile, index: number) => {
         details += `\n**${index + 1}. ${profile.username}** - Risk Score: ${profile.riskScore}/100\n`;
         details += `   • ${profile.violations.length} violations detected\n`;
+        
+        // Show rule violations with cross-references
+        profile.violations.slice(0, 2).forEach((violation: Violation) => {
+          const ruleRef = this.mapViolationToRule(violation.type);
+          if (ruleRef) {
+            details += `   • **Rule #${ruleRef.ruleNumber}** (${ruleRef.ruleName}): ${violation.description}\n`;
+          } else {
+            details += `   • ${violation.type}: ${violation.description}\n`;
+          }
+        });
+        
         details += `   • Active in ${profile.channelsActive.length} channels\n`;
         details += `   • **Recommended Action:** ${profile.recommendedAction.action}\n`;
       });
@@ -488,6 +499,25 @@ export class ModerationEngine {
     }
     
     return details;
+  }
+
+  // Map violation types to server rules for cross-referencing
+  private mapViolationToRule(violationType: string): { ruleNumber: number; ruleName: string } | null {
+    const matchingRule = cryptoCentralRules.find(rule => 
+      rule.violationTypes.includes(violationType as any)
+    );
+    
+    if (matchingRule) {
+      return { ruleNumber: matchingRule.ruleNumber, ruleName: matchingRule.title };
+    }
+    return null;
+  }
+
+  // Get all applicable rules for a violation
+  getApplicableRules(violation: Violation): ServerRule[] {
+    return cryptoCentralRules.filter(rule => 
+      rule.violationTypes.includes(violation.type)
+    );
   }
 }
 

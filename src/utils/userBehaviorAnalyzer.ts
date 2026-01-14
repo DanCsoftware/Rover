@@ -23,6 +23,8 @@ export interface Violation {
   channel: string;
   reportedBy?: string;
   resolved: boolean;
+  ruleViolated?: number;    // Which rule number was violated
+  ruleName?: string;        // Rule title for display
 }
 
 export interface BehaviorPattern {

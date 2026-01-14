@@ -2026,8 +2026,80 @@ const movieChannels: Channel[] = [
   }
 ];
 
+// Server rules mapping for ROVER moderation cross-reference
+export interface ServerRule {
+  ruleNumber: number;
+  title: string;
+  description: string;
+  violationTypes: ('harassment' | 'spam' | 'toxicity' | 'inappropriate_content' | 'rule_violation' | 'suspicious_links')[];
+  severity: 'low' | 'medium' | 'high' | 'critical';
+}
+
+export const cryptoCentralRules: ServerRule[] = [
+  { ruleNumber: 1, title: 'No Financial Advice Impersonation', description: 'Do not claim to be a certified financial advisor', violationTypes: ['rule_violation'], severity: 'high' },
+  { ruleNumber: 2, title: 'No Scam Promotion', description: 'Zero tolerance for scams, phishing, rug pulls', violationTypes: ['suspicious_links', 'spam'], severity: 'critical' },
+  { ruleNumber: 3, title: 'No Pump & Dump Schemes', description: 'Coordinated price manipulation is prohibited', violationTypes: ['spam', 'rule_violation'], severity: 'critical' },
+  { ruleNumber: 4, title: 'Respect All Members', description: 'No harassment, hate speech, or personal attacks', violationTypes: ['harassment', 'toxicity'], severity: 'high' },
+  { ruleNumber: 5, title: 'No Spam or Self-Promotion', description: 'No excessive posting or unauthorized promotions', violationTypes: ['spam'], severity: 'medium' },
+  { ruleNumber: 6, title: 'Verify Information', description: 'Don\'t spread FUD or unverified rumors', violationTypes: ['rule_violation'], severity: 'medium' },
+  { ruleNumber: 7, title: 'Security First', description: 'Never share private keys or seed phrases', violationTypes: ['suspicious_links', 'rule_violation'], severity: 'critical' },
+  { ruleNumber: 8, title: 'Use Appropriate Channels', description: 'Keep discussions in relevant channels', violationTypes: ['rule_violation'], severity: 'low' },
+  { ruleNumber: 9, title: 'No Begging or Solicitation', description: 'Don\'t ask for donations or free crypto', violationTypes: ['spam'], severity: 'medium' },
+  { ruleNumber: 10, title: 'Follow Discord TOS', description: 'All Discord Terms of Service apply', violationTypes: ['harassment', 'toxicity', 'inappropriate_content'], severity: 'high' }
+];
+
 // Server 9 - Crypto & Finance
 const cryptoChannels: Channel[] = [
+  {
+    id: 'crypto-rules',
+    name: '📜-rules',
+    type: 'text',
+    serverId: 9,
+    description: 'Server rules and community guidelines',
+    messages: [
+      {
+        id: 1,
+        user: 'CryptoAdmin',
+        time: '12:00 AM',
+        content: `📜 **CRYPTO CENTRAL SERVER RULES** 📜
+
+**Rule 1: No Financial Advice Impersonation**
+Do not claim to be a certified financial advisor or give advice that could be interpreted as professional guidance. Always include disclaimers.
+
+**Rule 2: No Scam Promotion**
+Zero tolerance for promoting scams, phishing links, rug pulls, or suspicious projects. Immediate ban.
+
+**Rule 3: No Pump & Dump Schemes**
+Coordinated price manipulation discussions or calls to action are strictly prohibited.
+
+**Rule 4: Respect All Members**
+No harassment, hate speech, discrimination, or personal attacks. Keep discussions civil.
+
+**Rule 5: No Spam or Self-Promotion**
+No excessive posting, repetitive content, or unauthorized promotions. Ask mods before sharing links.
+
+**Rule 6: Verify Information**
+Don't spread FUD or unverified rumors. Cite sources for major claims.
+
+**Rule 7: Security First**
+Never share private keys, seed phrases, or wallet passwords. Report suspicious DMs.
+
+**Rule 8: Use Appropriate Channels**
+Keep discussions in relevant channels. Trading in trading, security in security.
+
+**Rule 9: No Begging or Solicitation**
+Don't ask for donations, airdrops, or free crypto.
+
+**Rule 10: Follow Discord TOS**
+All Discord Terms of Service apply here.
+
+⚠️ Violations will result in warnings, mutes, or bans depending on severity.`,
+        isBot: true,
+        hasReactions: true,
+        reactions: [{ emoji: '📜', count: 1234 }, { emoji: '✅', count: 890 }]
+      }
+    ]
+  },
   {
     id: 'crypto-announcements',
     name: '📢-announcements',
