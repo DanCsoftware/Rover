@@ -61,14 +61,23 @@ const RoverRecommendationCard = ({
       <div className="relative h-24 overflow-hidden">
         <img 
           src={discoveryMeta.bannerImage} 
-          alt={server.name}
+          alt=""
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          onError={(e) => {
+            // Hide broken image and show gradient fallback
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+        {/* Gradient fallback background */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500"
+          style={{ zIndex: -1 }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         
         {/* Match Score Badge */}
         <div 
-          className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${matchBadge.color} shadow-lg`}
+          className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${matchBadge.color} shadow-lg whitespace-nowrap`}
         >
           {matchBadge.label}
         </div>
@@ -96,31 +105,29 @@ const RoverRecommendationCard = ({
 
       {/* Content */}
       <div className="p-4 pt-2 flex-1 flex flex-col">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-2">
-          <div>
-            <h3 
-              className="font-bold text-base leading-tight"
-              style={{ color: 'hsl(var(--discord-text-normal))' }}
-            >
-              {server.name}
-            </h3>
-            <div className="flex items-center gap-2 mt-1">
-              {extendedMeta?.category && (
-                <span 
-                  className="text-xs px-2 py-0.5 rounded-full"
-                  style={{ 
-                    backgroundColor: 'hsl(var(--discord-bg-tertiary))',
-                    color: 'hsl(var(--discord-text-muted))'
-                  }}
-                >
-                  {extendedMeta.category}
-                </span>
-              )}
-              <span className={`text-xs px-2 py-0.5 rounded-full ${activityBadge.color}`}>
-                {activityBadge.label}
+        {/* Header - Fixed height for alignment */}
+        <div className="mb-2">
+          <h3 
+            className="font-bold text-base leading-tight line-clamp-2 min-h-[2.5rem]"
+            style={{ color: 'hsl(var(--discord-text-normal))' }}
+          >
+            {server.name}
+          </h3>
+          <div className="flex items-center gap-2 mt-1 min-h-[1.5rem] flex-wrap">
+            {extendedMeta?.category && (
+              <span 
+                className="text-xs px-2 py-0.5 rounded-full whitespace-nowrap"
+                style={{ 
+                  backgroundColor: 'hsl(var(--discord-bg-tertiary))',
+                  color: 'hsl(var(--discord-text-muted))'
+                }}
+              >
+                {extendedMeta.category}
               </span>
-            </div>
+            )}
+            <span className={`text-xs px-2 py-0.5 rounded-full whitespace-nowrap ${activityBadge.color}`}>
+              {activityBadge.label}
+            </span>
           </div>
         </div>
 
@@ -136,8 +143,8 @@ const RoverRecommendationCard = ({
           </div>
         </div>
 
-        {/* Why You'll Love It */}
-        <div className="mb-3 flex-1">
+        {/* Why You'll Love It - Fixed height for alignment */}
+        <div className="mb-3 min-h-[5.5rem]">
           <p 
             className="text-xs font-semibold mb-2 flex items-center gap-1"
             style={{ color: '#a78bfa' }}
@@ -149,33 +156,31 @@ const RoverRecommendationCard = ({
             {(extendedMeta?.whyJoin || matchReasons).slice(0, 3).map((reason, idx) => (
               <li 
                 key={idx}
-                className="text-xs flex items-start gap-2"
+                className="text-xs flex items-start gap-2 line-clamp-2"
                 style={{ color: 'hsl(var(--discord-text-muted))' }}
               >
                 <Zap className="w-3 h-3 mt-0.5 flex-shrink-0 text-yellow-500" />
-                <span>{reason}</span>
+                <span className="line-clamp-2">{reason}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Tags */}
-        {extendedMeta?.tags && (
-          <div className="flex flex-wrap gap-1 mb-3 flex-shrink-0">
-            {extendedMeta.tags.slice(0, 4).map((tag, idx) => (
-              <span 
-                key={idx}
-                className="text-xs px-2 py-0.5 rounded-full"
-                style={{ 
-                  backgroundColor: 'rgba(88, 101, 242, 0.2)',
-                  color: '#8b9dff'
-                }}
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
+        {/* Tags - Fixed height for alignment */}
+        <div className="flex flex-wrap gap-1 mb-3 min-h-[3rem] content-start">
+          {extendedMeta?.tags?.slice(0, 5).map((tag, idx) => (
+            <span 
+              key={idx}
+              className="text-xs px-2 py-0.5 rounded-full h-fit"
+              style={{ 
+                backgroundColor: 'rgba(88, 101, 242, 0.2)',
+                color: '#8b9dff'
+              }}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
 
         {/* Explore Button */}
         <button
