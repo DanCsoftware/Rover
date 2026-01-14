@@ -8,6 +8,7 @@ import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
 import RoverAvatar from "./RoverAvatar";
 import RoverInsightsBanner from "./RoverInsightsBanner";
+import RoverHintCarousel from "./RoverHintCarousel";
 import { NavigationHelper } from "./NavigationHelper";
 import { ServerRecommendations } from "./ServerRecommendations";
 import { FactCheckResults } from "./FactCheckResults";
@@ -889,17 +890,8 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
             </div>
           </div>
           
-          {/* Enhanced hint for @rover with ROVER branding */}
-          {message.toLowerCase().includes('@rover') && (
-            <div className="mt-2 text-xs flex items-center space-x-2 p-2 rounded border-l-2 rover-glow" style={{ 
-              backgroundColor: 'hsl(var(--discord-bg-secondary))',
-              borderColor: 'hsl(var(--rover-primary))',
-              color: 'hsl(var(--discord-text-muted))'
-            }}>
-              <RoverAvatar size="sm" showVerified={false} />
-              <span><strong style={{ color: 'hsl(var(--rover-primary))' }}>ROVER</strong> Enhanced Navigation — try: "help me navigate to privacy settings" or "find notification options"</span>
-            </div>
-          )}
+          {/* Dynamic ROVER hints carousel */}
+          <RoverHintCarousel />
         </div>
       </div>
 
