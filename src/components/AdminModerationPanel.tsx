@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { Message } from '@/data/discordData';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useModerationAnalysis, FlaggedUser, Violation } from '@/hooks/useModerationAnalysis';
+import { ModerationAnalysis, FlaggedUser, Violation } from '@/hooks/useModerationAnalysis';
 import { toast } from '@/hooks/use-toast';
 import {
   AlertDialog,
@@ -34,6 +34,11 @@ interface AdminModerationPanelProps {
   serverName: string;
   serverId: number;
   messages: Message[];
+  analysis: ModerationAnalysis | null;
+  isAnalyzing: boolean;
+  error: string | null;
+  onRefresh: () => Promise<void>;
+  onAction: (username: string, severity: string, action: 'ban' | 'timeout' | 'warn' | 'dismiss') => Promise<any>;
 }
 
 type RiskFilter = 'all' | 'critical' | 'high' | 'medium' | 'low';
@@ -44,16 +49,16 @@ interface ActionConfirmation {
   action: 'ban' | 'timeout' | 'warn' | 'dismiss';
 }
 
-const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModerationPanelProps) => {
-  const {
-    analysis,
-    isAnalyzing,
-    error,
-    analyzeServer,
-    handleAction,
-    refreshAnalysis,
-  } = useModerationAnalysis(serverId);
-
+const AdminModerationPanel = ({ 
+  serverName, 
+  serverId, 
+  messages,
+  analysis,
+  isAnalyzing,
+  error,
+  onRefresh,
+  onAction
+}: AdminModerationPanelProps) => {
   const [expandedUser, setExpandedUser] = useState<string | null>(null);
   const [riskFilter, setRiskFilter] = useState<RiskFilter>('all');
   const [viewingContext, setViewingContext] = useState<string | null>(null);
@@ -61,11 +66,6 @@ const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModeratio
   const [animatingScore, setAnimatingScore] = useState(false);
   const [actionConfirmation, setActionConfirmation] = useState<ActionConfirmation | null>(null);
   const [processingAction, setProcessingAction] = useState(false);
-
-  // Auto-trigger analysis when panel opens
-  useEffect(() => {
-    analyzeServer();
-  }, [analyzeServer]);
 
   // Animate score changes
   useEffect(() => {
@@ -117,7 +117,7 @@ const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModeratio
     const { username, severity, action } = actionConfirmation;
     
     try {
-      const result = await handleAction(username, severity, action);
+      const result = await onAction(username, severity, action);
       
       if (result.success) {
         toast({
@@ -219,7 +219,7 @@ const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModeratio
           </p>
         </div>
         <button
-          onClick={refreshAnalysis}
+          onClick={onRefresh}
           disabled={isAnalyzing}
           className="p-2 rounded-lg transition-colors hover:bg-white/10 disabled:opacity-50"
           title="Refresh Analysis"
@@ -262,7 +262,7 @@ const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModeratio
               <p className="text-xs" style={{ color: 'hsl(var(--discord-text-muted))' }}>{error}</p>
             </div>
             <button
-              onClick={refreshAnalysis}
+              onClick={onRefresh}
               className="px-3 py-1 rounded text-xs font-medium transition-colors"
               style={{ backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#ef4444' }}
             >
