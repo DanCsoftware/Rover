@@ -358,3 +358,24 @@ export const generateSmartLinkResponse = (userQuery: string, links: string[]): s
 
   return response;
 };
+
+/**
+ * Parse links in content and convert them to clickable HTML anchor tags
+ * Handles both markdown-style links [text](url) and raw URLs
+ */
+export const parseLinksInContent = (content: string): string => {
+  // First, handle markdown-style links [text](url)
+  let result = content.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+    '<a href="$2" class="text-[#00AFF4] hover:underline cursor-pointer" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
+  
+  // Then, handle raw URLs that aren't already in anchor tags
+  // Match URLs that aren't preceded by href=" or ">
+  result = result.replace(
+    /(?<!href="|">)(https?:\/\/[^\s<>"]+)/g,
+    '<a href="$1" class="text-[#00AFF4] hover:underline cursor-pointer" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
+  
+  return result;
+};

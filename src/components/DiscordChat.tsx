@@ -12,7 +12,7 @@ import RoverHintCarousel from "./RoverHintCarousel";
 import { NavigationHelper } from "./NavigationHelper";
 import { ServerRecommendations } from "./ServerRecommendations";
 import { FactCheckResults } from "./FactCheckResults";
-import { extractLinksFromText, generateSafetyReport, LinkSafetyReport, generateSmartLinkResponse } from "@/utils/linkSafetyAnalyzer";
+import { extractLinksFromText, generateSafetyReport, LinkSafetyReport, generateSmartLinkResponse, parseLinksInContent } from "@/utils/linkSafetyAnalyzer";
 import { 
   parseSummaryRequest, 
   generateSummary, 
@@ -299,13 +299,16 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
       });
     }
     
-    // Special styling for ROVER messages
+    // Special styling for ROVER messages with clickable links
     if (msg.user === 'ROVER') {
+      // Parse markdown links and raw URLs into clickable anchor tags
+      const parsedContent = parseLinksInContent(content);
+      
       return (
         <div className="bg-gradient-to-r from-blue-50/10 to-purple-50/10 border border-blue-500/20 rounded-lg p-4 mt-2">
           <div 
             className="text-gray-200 text-sm leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br/>') }}
+            dangerouslySetInnerHTML={{ __html: parsedContent.replace(/\n/g, '<br/>') }}
           />
         </div>
       );
