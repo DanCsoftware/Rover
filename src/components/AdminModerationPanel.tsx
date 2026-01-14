@@ -15,12 +15,18 @@ import {
 import { Message } from '@/data/discordData';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
+interface RuleViolation {
+  ruleNumber: number;
+  ruleName: string;
+  evidence: string;
+}
+
 interface FlaggedUser {
   id: string;
   username: string;
   avatar: string;
   riskLevel: 'critical' | 'high' | 'medium' | 'low';
-  violations: string[];
+  violations: RuleViolation[];
   lastActive: string;
   messageCount: number;
 }
@@ -37,7 +43,13 @@ const mockFlaggedUsers: FlaggedUser[] = [
     username: 'SpamBot2024',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
     riskLevel: 'critical',
-    violations: ['Spam messages (12 in 1hr)', 'Suspicious links', 'New account', 'Requesting seed phrases'],
+    violations: [
+      { ruleNumber: 2, ruleName: 'No Scam Promotion', evidence: 'Posted malicious link: bit.ly/malware-token' },
+      { ruleNumber: 3, ruleName: 'No Pump & Dump', evidence: '"JOIN MY PUMP GROUP NOW!!!"' },
+      { ruleNumber: 5, ruleName: 'No Spam or Self-Promotion', evidence: '5 messages in 5 minutes' },
+      { ruleNumber: 7, ruleName: 'Security First', evidence: '"DM me your seed phrase for verification"' },
+      { ruleNumber: 9, ruleName: 'No Begging or Solicitation', evidence: '"DM ME NOW!!!" - soliciting users' }
+    ],
     lastActive: '2 min ago',
     messageCount: 47
   },
@@ -46,7 +58,10 @@ const mockFlaggedUsers: FlaggedUser[] = [
     username: 'CryptoScammer',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
     riskLevel: 'high',
-    violations: ['Promotional content', 'DM solicitation reports'],
+    violations: [
+      { ruleNumber: 5, ruleName: 'No Spam or Self-Promotion', evidence: 'Repeated promotional content about external service' },
+      { ruleNumber: 9, ruleName: 'No Begging or Solicitation', evidence: '3 reports of unsolicited DM contact' }
+    ],
     lastActive: '15 min ago',
     messageCount: 23
   },
@@ -55,7 +70,10 @@ const mockFlaggedUsers: FlaggedUser[] = [
     username: 'ToxicGamer99',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=32&h=32&fit=crop&crop=face',
     riskLevel: 'medium',
-    violations: ['Mild harassment', 'Excessive caps'],
+    violations: [
+      { ruleNumber: 1, ruleName: 'Respect Everyone', evidence: 'Hostile language toward new members' },
+      { ruleNumber: 4, ruleName: 'Quality Over Quantity', evidence: 'Excessive caps usage in messages' }
+    ],
     lastActive: '1 hr ago',
     messageCount: 156
   }
@@ -274,7 +292,7 @@ const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModeratio
                           </span>
                         </div>
                         <p className="text-xs truncate" style={{ color: 'hsl(var(--discord-text-muted))' }}>
-                          {user.violations[0]}
+                          Rule {user.violations[0].ruleNumber}: {user.violations[0].ruleName}
                         </p>
                       </div>
                       {expandedUser === user.id ? (
@@ -295,18 +313,28 @@ const AdminModerationPanel = ({ serverName, serverId, messages }: AdminModeratio
                         <p className="text-xs font-medium mb-2" style={{ color: 'hsl(var(--discord-text-muted))' }}>
                           Violations:
                         </p>
-                        <ul className="space-y-1 mb-3">
+                        <div className="space-y-2 mb-3">
                           {user.violations.map((v, i) => (
-                            <li 
+                            <div 
                               key={i}
-                              className="text-xs flex items-center gap-2"
-                              style={{ color: 'hsl(var(--discord-text-normal))' }}
+                              className="p-2 rounded text-xs"
+                              style={{ 
+                                backgroundColor: 'hsl(var(--discord-bg-primary))',
+                                borderLeft: `3px solid ${getRiskColor(user.riskLevel)}`
+                              }}
                             >
-                              <span style={{ color: getRiskColor(user.riskLevel) }}>•</span>
-                              {v}
-                            </li>
+                              <div className="flex items-center gap-2 mb-1">
+                                <AlertTriangle className="w-3 h-3" style={{ color: getRiskColor(user.riskLevel) }} />
+                                <span className="font-medium" style={{ color: 'hsl(var(--discord-text-normal))' }}>
+                                  Rule {v.ruleNumber}: {v.ruleName}
+                                </span>
+                              </div>
+                              <p style={{ color: 'hsl(var(--discord-text-muted))' }}>
+                                {v.evidence}
+                              </p>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                         
                         <div className="flex items-center gap-2 text-xs mb-3" style={{ color: 'hsl(var(--discord-text-muted))' }}>
                           <span>Last active: {user.lastActive}</span>

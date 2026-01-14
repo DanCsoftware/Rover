@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { Send, Plus, Gift, Smile, Search, ExternalLink, MessageSquare, Server, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Message, getServerMembers } from "@/data/discordData";
+import { Message, getServerMembers, servers } from "@/data/discordData";
 import { AIAssistant } from "./AIAssistant";
 import DiscordChannelHeader from "./DiscordChannelHeader";
 import DiscordUserList from "./DiscordUserList";
@@ -707,7 +707,12 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
           <RoverInsightsBanner 
             serverName={serverName}
             serverId={activeServerId || 0}
-            messages={chatMessages}
+            messages={(() => {
+              // Get all messages from all channels in the current server
+              const server = servers.find(s => s.id === activeServerId);
+              if (!server) return chatMessages;
+              return server.textChannels.flatMap(channel => channel.messages);
+            })()}
           />
         )}
 
