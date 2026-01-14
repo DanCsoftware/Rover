@@ -890,8 +890,10 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
             </div>
           </div>
           
-          {/* Dynamic ROVER hints carousel */}
-          <RoverHintCarousel />
+          {/* Dynamic ROVER hints carousel - only show when user types @rover */}
+          {message.toLowerCase().includes('@rover') && (
+            <RoverHintCarousel />
+          )}
         </div>
       </div>
 
