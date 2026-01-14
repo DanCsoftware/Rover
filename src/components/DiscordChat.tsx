@@ -41,8 +41,17 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
   const [showUserList, setShowUserList] = useState(true);
   const [searchResults, setSearchResults] = useState<SearchResponse | null>(null);
   const streamingMessageIdRef = useRef<number | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const { streamingResponse, isStreaming, error: roverError, sendMessage: sendRoverMessage } = useRoverChat();
+
+  // Scroll to bottom of chat
+  const scrollToBottom = (smooth = true) => {
+    messagesEndRef.current?.scrollIntoView({ 
+      behavior: smooth ? 'smooth' : 'auto',
+      block: 'end'
+    });
+  };
 
   // Update chatMessages when messages prop changes (channel switching)
   useEffect(() => {
@@ -61,6 +70,21 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
       );
     }
   }, [streamingResponse, isStreaming]);
+
+  // Auto-scroll when ROVER is streaming
+  useEffect(() => {
+    if (isStreaming) {
+      scrollToBottom();
+    }
+  }, [isStreaming, streamingResponse]);
+
+  // Scroll when a new ROVER message is added
+  useEffect(() => {
+    const lastMessage = chatMessages[chatMessages.length - 1];
+    if (lastMessage?.user === 'ROVER') {
+      scrollToBottom();
+    }
+  }, [chatMessages.length]);
 
   // Get server members using the unified function
   const channelUsers = useMemo(() => {
@@ -853,6 +877,9 @@ const DiscordChat = ({ channelName, messages, activeUser, channelType, activeSer
                   }}
                 />
               )}
+
+              {/* Auto-scroll anchor */}
+              <div ref={messagesEndRef} />
             </div>
           </ScrollArea>
         </div>
