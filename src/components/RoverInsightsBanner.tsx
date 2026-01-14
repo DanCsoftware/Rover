@@ -1,33 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Shield, 
   ChevronDown, 
   ChevronUp, 
   Activity, 
   AlertTriangle, 
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import AdminModerationPanel from './AdminModerationPanel';
 import RoverAvatar from './RoverAvatar';
 import { Message } from '@/data/discordData';
+import { useModerationAnalysis } from '@/hooks/useModerationAnalysis';
 
 interface RoverInsightsBannerProps {
   serverName: string;
   serverId: number;
   messages: Message[];
-  healthScore?: number;
-  flaggedCount?: number;
 }
 
 const RoverInsightsBanner = ({ 
   serverName, 
   serverId, 
   messages,
-  healthScore = 87,
-  flaggedCount = 3
 }: RoverInsightsBannerProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  
+  // Use the moderation analysis hook at the banner level
+  const {
+    analysis,
+    isAnalyzing,
+    error,
+    analyzeServer,
+    handleAction,
+    refreshAnalysis,
+  } = useModerationAnalysis(serverId);
+
+  // Trigger analysis on mount
+  useEffect(() => {
+    analyzeServer();
+  }, [analyzeServer]);
+
+  // Get real values from analysis
+  const healthScore = analysis?.healthScore ?? null;
+  const flaggedCount = analysis?.flaggedUsers?.length ?? null;
 
   if (isCollapsed) {
     return (
@@ -89,9 +106,13 @@ const RoverInsightsBanner = ({
       <div className="flex items-center gap-4">
         {/* Health Score */}
         <div className="flex items-center gap-2">
-          <Activity className="w-4 h-4" style={{ color: healthScore > 70 ? '#22c55e' : healthScore > 40 ? '#eab308' : '#ef4444' }} />
+          {isAnalyzing && healthScore === null ? (
+            <Loader2 className="w-4 h-4 animate-spin" style={{ color: 'hsl(var(--discord-text-muted))' }} />
+          ) : (
+            <Activity className="w-4 h-4" style={{ color: (healthScore ?? 0) > 70 ? '#22c55e' : (healthScore ?? 0) > 40 ? '#eab308' : '#ef4444' }} />
+          )}
           <span className="text-sm" style={{ color: 'hsl(var(--discord-text-normal))' }}>
-            Health: <strong>{healthScore}/100</strong>
+            Health: <strong>{healthScore !== null ? `${healthScore}/100` : isAnalyzing ? 'Analyzing...' : 'N/A'}</strong>
           </span>
         </div>
 
@@ -99,9 +120,13 @@ const RoverInsightsBanner = ({
 
         {/* Flagged Users */}
         <div className="flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4" style={{ color: flaggedCount > 0 ? '#f97316' : '#22c55e' }} />
+          {isAnalyzing && flaggedCount === null ? (
+            <Loader2 className="w-4 h-4 animate-spin" style={{ color: 'hsl(var(--discord-text-muted))' }} />
+          ) : (
+            <AlertTriangle className="w-4 h-4" style={{ color: (flaggedCount ?? 0) > 0 ? '#f97316' : '#22c55e' }} />
+          )}
           <span className="text-sm" style={{ color: 'hsl(var(--discord-text-normal))' }}>
-            <strong>{flaggedCount}</strong> users flagged
+            <strong>{flaggedCount !== null ? flaggedCount : isAnalyzing ? '...' : '0'}</strong> users flagged
           </span>
         </div>
 
@@ -131,6 +156,11 @@ const RoverInsightsBanner = ({
               serverName={serverName}
               serverId={serverId}
               messages={messages}
+              analysis={analysis}
+              isAnalyzing={isAnalyzing}
+              error={error}
+              onRefresh={refreshAnalysis}
+              onAction={handleAction}
             />
           </SheetContent>
         </Sheet>
