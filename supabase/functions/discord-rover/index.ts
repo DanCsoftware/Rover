@@ -74,7 +74,6 @@ const SCORE_ADJUSTMENTS: Record<string, Record<string, number>> = {
 async function handleModerationAnalysis(supabase: any, channelContext: any, apiKey: string) {
   console.log('🔍 Starting moderation analysis...')
   
-  // Create a run record
   const { data: run, error: runError } = await supabase
     .from('rover_runs')
     .insert({
@@ -92,7 +91,6 @@ async function handleModerationAnalysis(supabase: any, channelContext: any, apiK
   const runId = run?.id
   console.log('✅ Created moderation run:', runId)
 
-  // Record evidence from channel messages
   if (runId && channelContext?.messages) {
     console.log(`📝 Recording evidence for ${channelContext.messages.length} messages`)
     
@@ -116,7 +114,6 @@ async function handleModerationAnalysis(supabase: any, channelContext: any, apiK
     }
   }
 
-  // Build the analysis prompt
   const messagesText = channelContext?.messages?.map((msg: any) => 
     `[${msg.time}] ${msg.user}: ${msg.content}`
   ).join('\n') || 'No messages available'
@@ -133,9 +130,8 @@ Analyze these messages and identify any rule violations. Return the analysis thr
 
   console.log('🤖 Calling Gemini API for moderation analysis...')
 
-  // Use tool calling for structured output
   const geminiResponse = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -208,7 +204,6 @@ Analyze these messages and identify any rule violations. Return the analysis thr
   const geminiData = await geminiResponse.json()
   console.log('📊 Gemini response received')
 
-  // Extract the function call result
   let analysisResult = { healthScore: 85, flaggedUsers: [] }
   
   try {
@@ -217,11 +212,9 @@ Analyze these messages and identify any rule violations. Return the analysis thr
       analysisResult = functionCall.args
       console.log('✅ Extracted analysis:', JSON.stringify(analysisResult).substring(0, 200))
     } else {
-      // Fallback: try to parse from text
       const textContent = geminiData.candidates?.[0]?.content?.parts?.[0]?.text
       if (textContent) {
         console.log('⚠️ No function call, attempting text parse')
-        // Try to extract JSON from text
         const jsonMatch = textContent.match(/\{[\s\S]*\}/)
         if (jsonMatch) {
           analysisResult = JSON.parse(jsonMatch[0])
@@ -232,7 +225,6 @@ Analyze these messages and identify any rule violations. Return the analysis thr
     console.error('❌ Parse error:', parseError)
   }
 
-  // Update run status
   if (runId) {
     await supabase
       .from('rover_runs')
@@ -256,11 +248,9 @@ async function handleModerationAction(supabase: any, channelContext: any, action
   
   const { username, severity, action, currentHealthScore } = actionDetails
   
-  // Calculate new health score
   const adjustment = SCORE_ADJUSTMENTS[action]?.[severity] ?? 0
   const newHealthScore = Math.min(100, Math.max(0, currentHealthScore + adjustment))
   
-  // Create a run record for the action
   const { data: run, error: runError } = await supabase
     .from('rover_runs')
     .insert({
@@ -278,7 +268,6 @@ async function handleModerationAction(supabase: any, channelContext: any, action
   } else {
     console.log('✅ Created action run:', run?.id)
 
-    // Record the action as evidence
     if (run?.id) {
       await supabase
         .from('rover_run_evidence')
@@ -311,51 +300,62 @@ async function handleModerationAction(supabase: any, channelContext: any, action
   )
 }
 
-async function handleServerDiscovery(channelContext: any, apiKey: string) {
+async function handleServerDiscovery(supabase: any, channelContext: any, apiKey: string) {
   console.log('🔍 Starting server discovery analysis...')
   
-  const { query, servers } = channelContext
+  const userQuery = channelContext?.query || 'gaming servers'
+  const servers = channelContext?.servers || []
   
-  if (!query || !servers || servers.length === 0) {
-    return new Response(
-      JSON.stringify({ matches: [] }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
+  console.log(`📝 Query: "${userQuery}", Servers: ${servers.length}`)
+  
+  const { data: run, error: runError } = await supabase
+    .from('rover_runs')
+    .insert({
+      guild_id: 'server-discovery',
+      channel_id: 'discovery',
+      command_type: 'server_discovery',
+    })
+    .select()
+    .single()
+
+  if (runError) {
+    console.error('Failed to create discovery run:', runError)
   }
 
-  // Build the discovery prompt
-  const serversList = servers.map((s: any) => 
-    `- ID: ${s.id}, Name: "${s.name}", Category: ${s.category || 'General'}, Tags: [${(s.tags || []).join(', ')}], Description: ${s.description || 'No description'}, Experience Level: ${s.experienceLevel || 'all'}, Activity: ${s.activityLevel || 'medium'}, Members: ${s.memberCount || 0}`
-  ).join('\n')
+  const runId = run?.id
+  console.log('✅ Created discovery run:', runId)
 
-  const discoveryPrompt = `You are ROVER's server discovery system. Analyze the user's query and score each server based on relevance.
+  const serversText = servers.map((s: any) => 
+    `- ID: ${s.id}\n  Name: "${s.name}"\n  Category: ${s.category}\n  Tags: [${s.tags?.join(', ') || 'none'}]\n  Description: ${s.description}\n  Experience: ${s.experienceLevel || 'all levels'}\n  Members: ${s.memberCount || 'unknown'}`
+  ).join('\n\n')
 
-USER QUERY: "${query}"
+  const discoveryPrompt = `You are analyzing Discord servers to find the best matches for a user's query.
+
+USER QUERY: "${userQuery}"
 
 AVAILABLE SERVERS:
-${serversList}
+${serversText}
 
-SCORING RULES:
-1. Score from 0-100 based on query relevance
-2. Direct keyword matches in name/tags = HIGH score (85-100)
-3. Related category/topic = MEDIUM score (60-84)
-4. Tangentially related = LOW score (40-59)
-5. Unrelated servers = VERY LOW (0-39)
+For each server, calculate a match score (0-100) based on:
+1. **Semantic relevance** to the query (not just keyword matching)
+2. **Category and tag alignment** with query intent
+3. **Experience level match** (if mentioned in query: "beginner", "advanced", etc.)
+4. **Description quality** - how well it matches what the user wants
 
-IMPORTANT:
-- "dungeons and dragons" queries should ONLY highly match D&D/TTRPG servers
-- "League of Legends" should NOT match D&D queries (different games entirely)
-- Experience level keywords ("beginner", "advanced", "newbie") should boost matching servers
-- Be STRICT - unrelated servers should score below 30
+STRICT SCORING GUIDELINES:
+- 90-100: Perfect match (exactly what user wants, all criteria met)
+- 75-89: Excellent match (highly relevant, minor gaps)
+- 60-74: Good match (relevant but not perfect fit)
+- 40-59: Moderate match (some relevance)
+- 20-39: Weak match (barely relevant)
+- 0-19: Poor match (wrong topic/category)
 
-For each server, provide 2-3 specific reasons why it matches (or doesn't match) the query.
-
-Return the analysis through the provided function.`
+Return scores for ALL servers through the provided function.`
 
   console.log('🤖 Calling Gemini API for server discovery...')
 
   const geminiResponse = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -364,24 +364,31 @@ Return the analysis through the provided function.`
         tools: [{
           functionDeclarations: [{
             name: 'submit_server_matches',
-            description: 'Submit the server match scores and reasons',
+            description: 'Submit server match scores for all servers',
             parameters: {
               type: 'object',
               properties: {
                 matches: {
                   type: 'array',
+                  description: 'Array of server matches with scores for ALL servers provided',
                   items: {
                     type: 'object',
                     properties: {
-                      serverId: { type: 'number', description: 'Server ID' },
-                      matchScore: { type: 'number', description: 'Match score 0-100' },
-                      matchReasons: { 
-                        type: 'array', 
-                        items: { type: 'string' },
-                        description: 'Reasons for the match score'
+                      serverId: { 
+                        type: 'number',
+                        description: 'Server ID from the input list'
+                      },
+                      matchScore: { 
+                        type: 'number',
+                        description: 'Match score from 0-100'
+                      },
+                      reasons: { 
+                        type: 'array',
+                        description: 'Brief reasons for the score',
+                        items: { type: 'string' }
                       }
                     },
-                    required: ['serverId', 'matchScore', 'matchReasons']
+                    required: ['serverId', 'matchScore', 'reasons']
                   }
                 }
               },
@@ -396,10 +403,9 @@ Return the analysis through the provided function.`
           }
         },
         generationConfig: {
-          temperature: 0.2,
+          temperature: 0.3,
           topK: 40,
           topP: 0.95,
-          maxOutputTokens: 4096,
         },
       }),
     }
@@ -414,37 +420,54 @@ Return the analysis through the provided function.`
   const geminiData = await geminiResponse.json()
   console.log('📊 Gemini discovery response received')
 
-  // Extract the function call result
   let discoveryResult = { matches: [] }
   
   try {
     const functionCall = geminiData.candidates?.[0]?.content?.parts?.[0]?.functionCall
     if (functionCall && functionCall.name === 'submit_server_matches') {
       discoveryResult = functionCall.args
-      console.log('✅ Extracted discovery matches:', discoveryResult.matches?.length || 0)
+      console.log('✅ Extracted matches:', JSON.stringify(discoveryResult.matches).substring(0, 300))
     } else {
-      // Fallback: try to parse from text
-      const textContent = geminiData.candidates?.[0]?.content?.parts?.[0]?.text
-      if (textContent) {
-        console.log('⚠️ No function call, attempting text parse')
-        const jsonMatch = textContent.match(/\{[\s\S]*\}/)
-        if (jsonMatch) {
-          discoveryResult = JSON.parse(jsonMatch[0])
-        }
-      }
+      console.warn('⚠️ No function call in response')
     }
   } catch (parseError) {
     console.error('❌ Parse error:', parseError)
   }
 
+  if (runId && servers.length > 0) {
+    const evidenceRecords = servers.map((server: any) => ({
+      run_id: runId,
+      message_id: `server-${server.id}`,
+      channel_id: 'discovery',
+      excerpt: `${server.name}: ${server.description?.substring(0, 200)}`,
+      reason: 'server_candidate',
+      confidence: 1.0,
+    }))
+
+    await supabase
+      .from('rover_run_evidence')
+      .insert(evidenceRecords)
+  }
+
+  if (runId) {
+    await supabase
+      .from('rover_runs')
+      .update({ 
+        status: 'completed', 
+        completed_at: new Date().toISOString(),
+      })
+      .eq('id', runId)
+  }
+
   return new Response(
     JSON.stringify(discoveryResult),
-    { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    { 
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+    }
   )
 }
 
 async function handleChatMode(supabase: any, messages: any[], channelContext: any, apiKey: string) {
-  // Create a run record
   const { data: run, error: runError } = await supabase
     .from('rover_runs')
     .insert({
@@ -463,7 +486,6 @@ async function handleChatMode(supabase: any, messages: any[], channelContext: an
   const runId = run?.id
   console.log('✅ Created run:', runId)
 
-  // Record evidence from channel messages
   if (runId && channelContext?.messages) {
     console.log(`📝 Recording evidence for ${channelContext.messages.length} messages`)
     
@@ -489,7 +511,6 @@ async function handleChatMode(supabase: any, messages: any[], channelContext: an
     console.log('⚠️ No evidence to record:', { runId, hasMessages: !!channelContext?.messages })
   }
 
-  // Build context from channel messages
   let contextPrompt = ""
   if (channelContext) {
     contextPrompt = `\n\n**CURRENT CONTEXT:**
@@ -505,7 +526,6 @@ ${channelContext.messages?.slice(-30).map((msg: any) =>
 
   const systemMessage = ROVER_SYSTEM_PROMPT + contextPrompt
 
-  // Call Gemini directly
   const geminiMessages = [
     { role: "user", parts: [{ text: systemMessage }] },
     ...messages.map((msg: any) => ({
@@ -517,7 +537,7 @@ ${channelContext.messages?.slice(-30).map((msg: any) =>
   console.log('🤖 Calling Gemini API...')
   
   const geminiResponse = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:streamGenerateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -539,7 +559,6 @@ ${channelContext.messages?.slice(-30).map((msg: any) =>
     throw new Error(`Gemini API error: ${geminiResponse.status}`)
   }
 
-  // Mark run as completed
   if (runId) {
     await supabase
       .from('rover_runs')
@@ -547,7 +566,6 @@ ${channelContext.messages?.slice(-30).map((msg: any) =>
       .eq('id', runId)
   }
 
-  // Stream the response back
   return new Response(geminiResponse.body, {
     headers: {
       ...corsHeaders,
@@ -564,27 +582,23 @@ serve(async (req) => {
   try {
     const { messages, channelContext, requestType, actionDetails } = await req.json()
     
-    // Initialize Supabase client
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // Get Gemini API key
     const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY')
     if (!GEMINI_API_KEY) {
       throw new Error('GEMINI_API_KEY not configured')
     }
 
-    // Handle different request types
     if (requestType === 'moderation_analysis') {
       return await handleModerationAnalysis(supabase, channelContext, GEMINI_API_KEY)
     } else if (requestType === 'moderation_action') {
       return await handleModerationAction(supabase, channelContext, actionDetails)
     } else if (requestType === 'server_discovery') {
-      return await handleServerDiscovery(channelContext, GEMINI_API_KEY)
+      return await handleServerDiscovery(supabase, channelContext, GEMINI_API_KEY)
     } else {
-      // Default: chat mode
       return await handleChatMode(supabase, messages, channelContext, GEMINI_API_KEY)
     }
 
