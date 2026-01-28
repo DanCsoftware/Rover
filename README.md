@@ -1,49 +1,33 @@
-# Rover 🤖  
-AI assistant concept for Discord communities
+# Rover - AI-Powered Discord Assistant
 
-## Overview
-**Rover** is a conceptual AI assistant designed to live inside Discord communities and reduce friction for both moderators and members.
+Making Discord servers navigable. Rover helps users find information, summarize conversations, and discover relevant channels without getting lost.
 
-The project explores how AI can support **contextual help**, not replace human interaction.
+## The Problem
+Discord servers with 100+ channels are overwhelming. New members can't find information. Power users waste time scrolling through chat history. Critical updates get buried.
 
-## Problem
-Discord communities struggle with:
-- Repeated questions
-- Poor onboarding for new members
-- Moderator burnout
-- Information scattered across channels
+## The Solution
+Rover adds intelligent assistance:
+- **Smart Navigation**: "Where do people discuss X?" → Rover finds the right channel
+- **Conversation Summaries**: "What did I miss?" → Rover summarizes key points
+- **Link Safety**: Automatic scanning for phishing/malware
+- **Channel Discovery**: Suggests relevant channels based on your interests
 
-Most bots are command-driven and brittle.
-
-## Solution
-Rover acts as:
-- A conversational AI embedded directly in community channels
-- A contextual assistant that responds based on conversation flow
-- A lightweight layer on top of existing community dynamics
-
-The focus is **augmentation, not automation**.
-
-## Key Features
-- Conversational AI interactions
-- Context-aware responses within threads
-- Designed to reduce repetitive moderator tasks
-- Community-first UX approach
+## Real Usage
+- [Link to demo server]
+- [Screenshots of key features]
 
 ## Tech Stack
-- Platform: Discord
-- Frontend: React (Lovable)
-- AI: LLM-based conversational logic
-- State: Prototype-level implementation
+- React + TypeScript frontend
+- Supabase backend
+- Discord API integration
+- AI for natural language understanding
 
-## Product Lens
-Rover was built to explore:
-- Where AI fits naturally in social spaces
-- Trust boundaries in community-driven products
-- The tradeoffs between automation and authenticity
+## What I Learned
+- Designing conversational AI interfaces
+- Managing Discord API rate limits
+- Building trust-sensitive features (link safety)
 
-## Status
-Conceptual prototype  
-Not deployed to live communities
+## Try It
+[Add Rover to your server] | [Join demo server]
 
-## Author
-Built by **Daniel Cha** — Product Manager exploring AI-native social tools.
+Built to explore AI-powered community management tools.
